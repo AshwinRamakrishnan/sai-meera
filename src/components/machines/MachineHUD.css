@@ -1,0 +1,89 @@
+.hudPanel {
+  width: 100%;
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.hudHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.machineId {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.machineName {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.statusSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.statusLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.statusIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.statusStandby { color: rgba(255, 255, 255, 0.6); }
+.statusStandby .statusDot { background: rgba(255, 255, 255, 0.6); }
+
+.statusOperating { color: var(--green, #00ff94); }
+.statusOperating .statusDot { 
+  background: var(--green, #00ff94); 
+  animation: pulse-green 1.5s infinite;
+}
+
+.statusComplete { color: var(--gold, #f5a623); }
+.statusComplete .statusDot { background: var(--gold, #f5a623); }
+
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 148, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(0, 255, 148, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 148, 0); }
+}
+
+.meterSection {
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,43 @@
+.glass-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.glass-content {
+  position: relative;
+  z-index: 2;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.glass-card.accent-cyan::before { background-color: var(--cyan, #00d4ff); }
+.glass-card.accent-gold::before { background-color: var(--gold, #f5a623); }
+.glass-card.accent-green::before { background-color: var(--green, #00ff94); }
+.glass-card.accent-orange::before { background-color: var(--orange, #ff6a00); }
+
+.glass-card.hover-effect:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card.hover-effect.accent-cyan:hover { box-shadow: 0 10px 30px -10px rgba(0, 212, 255, 0.2); }
+.glass-card.hover-effect.accent-gold:hover { box-shadow: 0 10px 30px -10px rgba(245, 166, 35, 0.2); }
+.glass-card.hover-effect.accent-green:hover { box-shadow: 0 10px 30px -10px rgba(0, 255, 148, 0.2); }
+.glass-card.hover-effect.accent-orange:hover { box-shadow: 0 10px 30px -10px rgba(255, 106, 0, 0.2); }

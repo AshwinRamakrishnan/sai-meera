@@ -1,0 +1,28 @@
+.hero-particles-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatParticle 10s ease-in-out infinite;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(10px) translateX(20px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+}

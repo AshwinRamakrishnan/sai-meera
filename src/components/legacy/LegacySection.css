@@ -1,0 +1,68 @@
+.legacy-section {
+  padding: 6rem 1rem;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(10, 10, 15, 0.95) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.legacy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.legacy-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.legacy-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cyan);
+  font-size: 0.875rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.legacy-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: white;
+  line-height: 1.2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.legacy-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.legacy-middle-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .legacy-middle-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .legacy-experience {
+    flex: 1;
+  }
+  
+  .legacy-core {
+    flex: 0 0 300px;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,443 @@
+/* ═══════════════════════════════════════════════════════════════
+   MACHINE SECTION — PREMIUM FULL-BLEED LAYOUT
+   The 3D canvas fills the entire viewport. HUD elements overlay
+   on top like a cinema-style HUD, never competing with the machine.
+   ═══════════════════════════════════════════════════════════════ */
+
+.machineSection {
+  position: relative;
+  height: 300vh;
+  width: 100%;
+  background: #0a0a0f;
+  color: white;
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Full-bleed 3D Canvas ── */
+.canvasArea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: #0a0a0f;
+}
+
+.canvasArea canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Machine Number Badge — ghosted watermark ── */
+.badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10rem;
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.04);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+}
+
+/* ── HUD Overlay Container ── */
+.hudOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  padding: 0;
+}
+
+/* ── Left Side: Machine title + description ── */
+.hudLeft {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  max-width: 380px;
+  pointer-events: auto;
+}
+
+.machineLabel {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color, var(--cyan, #00d4ff));
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+
+.machineTitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #f0ede8;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+.machineDescription {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(240, 237, 232, 0.65);
+  margin-bottom: 1.2rem;
+  max-width: 340px;
+}
+
+/* ── Spec Badges Row ── */
+.specBadgesRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.specBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(240, 237, 232, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+}
+
+.specBadge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-color, var(--cyan));
+  box-shadow: 0 0 6px var(--accent-color, var(--cyan));
+}
+
+/* ── Meter Bar ── */
+.meterContainer {
+  margin-top: 0.5rem;
+}
+
+.meterLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(240, 237, 232, 0.5);
+  margin-bottom: 0.3rem;
+}
+
+.meterTrack {
+  width: 100%;
+  max-width: 260px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.meterFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color, var(--cyan)), rgba(255, 255, 255, 0.3));
+  border-radius: 2px;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 8px var(--accent-color, var(--cyan));
+}
+
+/* ── Right Side: Console (Press Console) ── */
+.hudRight {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  max-width: 300px;
+  pointer-events: auto;
+}
+
+.consolePanel {
+  background: rgba(10, 10, 15, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.consolePanel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, var(--cyan)), transparent);
+  opacity: 0.4;
+}
+
+.consoleScanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, var(--cyan)), transparent);
+  opacity: 0.15;
+  animation: consoleScan 4s linear infinite;
+}
+
+@keyframes consoleScan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(200px); }
+}
+
+.consoleTitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color, var(--cyan));
+  margin-bottom: 0.6rem;
+  opacity: 0.8;
+}
+
+.consoleLine {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  line-height: 1.8;
+  color: rgba(240, 237, 232, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.consoleLine .prefix {
+  color: var(--accent-color, var(--cyan));
+  margin-right: 0.3rem;
+}
+
+.consoleLine .highlight {
+  color: var(--accent-color, var(--cyan));
+  font-weight: 600;
+}
+
+/* ── Status Indicator (top-left) ── */
+.statusIndicator {
+  position: absolute;
+  top: 2rem;
+  left: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-color, var(--cyan));
+  box-shadow: 0 0 8px var(--accent-color, var(--cyan));
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.statusText {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.5);
+}
+
+.statusValue {
+  color: var(--accent-color, var(--cyan));
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET (max-width: 1024px)
+   Machine stays full-bleed. HUD elements shrink and reposition.
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .badge {
+    font-size: 6rem;
+    top: 1rem;
+    right: 1.5rem;
+  }
+  
+  .hudLeft {
+    bottom: 2rem;
+    left: 2rem;
+    max-width: 320px;
+  }
+  
+  .machineTitle {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+  }
+  
+  .machineDescription {
+    font-size: 0.78rem;
+    max-width: 280px;
+  }
+  
+  .hudRight {
+    bottom: 2rem;
+    right: 1.5rem;
+    max-width: 240px;
+  }
+  
+  .consolePanel {
+    padding: 0.8rem 1rem;
+  }
+  
+  .consoleLine {
+    font-size: 0.58rem;
+  }
+  
+  .statusIndicator {
+    left: 2rem;
+    top: 1.5rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE (max-width: 768px)
+   Vertical stacking: Status → Machine title → Canvas → Specs.
+   The Canvas takes up the majority of viewport height.
+   HUD elements sit in designated zones to prevent overlap.
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .machineSection {
+    height: 250vh; /* Shorter scroll distance on mobile */
+  }
+
+  .badge {
+    font-size: 4rem;
+    top: 0.5rem;
+    right: 1rem;
+    -webkit-text-stroke-width: 1px;
+  }
+  
+  /* HUD stacks vertically on mobile */
+  .hudLeft {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    padding: 1rem 1.2rem 1.2rem;
+    background: linear-gradient(to top, rgba(10, 10, 15, 0.92) 0%, rgba(10, 10, 15, 0.7) 60%, transparent 100%);
+    backdrop-filter: blur(8px);
+  }
+  
+  .machineTitle {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .machineDescription {
+    display: none; /* Save space on mobile */
+  }
+  
+  .specBadgesRow {
+    gap: 0.35rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .specBadge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  .meterLabel {
+    font-size: 0.6rem;
+  }
+  
+  .meterTrack {
+    max-width: 180px;
+  }
+  
+  /* Console moves to top-right on mobile, very compact */
+  .hudRight {
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    right: 0.8rem;
+    top: 3.5rem;
+    max-width: 180px;
+  }
+  
+  .consolePanel {
+    padding: 0.5rem 0.7rem;
+    background: rgba(10, 10, 15, 0.8);
+  }
+  
+  .consoleTitle {
+    font-size: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .consoleLine {
+    font-size: 0.5rem;
+    line-height: 1.6;
+  }
+  
+  .statusIndicator {
+    left: 1rem;
+    top: 0.8rem;
+  }
+  
+  .statusText {
+    font-size: 0.5rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SMALL MOBILE (max-width: 480px)
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .machineSection {
+    height: 220vh;
+  }
+
+  .badge {
+    font-size: 3rem;
+  }
+  
+  .hudLeft {
+    padding: 0.8rem 1rem 1rem;
+  }
+  
+  .machineTitle {
+    font-size: 1.35rem;
+  }
+  
+  .machineLabel {
+    font-size: 0.55rem;
+  }
+  
+  /* Hide console on very small screens */
+  .hudRight {
+    display: none;
+  }
+}

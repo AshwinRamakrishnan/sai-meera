@@ -1,0 +1,77 @@
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.exp-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 3px solid;
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.exp-card:hover {
+  transform: translateY(-5px);
+}
+
+.exp-card:hover::after {
+  opacity: 1;
+}
+
+.exp-cyan { border-top-color: var(--cyan); }
+.exp-cyan:hover { box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1); }
+.exp-cyan .exp-icon { color: var(--cyan); }
+
+.exp-gold { border-top-color: var(--gold); }
+.exp-gold:hover { box-shadow: 0 10px 30px rgba(245, 166, 35, 0.1); }
+.exp-gold .exp-icon { color: var(--gold); }
+
+.exp-green { border-top-color: var(--green); }
+.exp-green:hover { box-shadow: 0 10px 30px rgba(0, 255, 148, 0.1); }
+.exp-green .exp-icon { color: var(--green); }
+
+.exp-orange { border-top-color: var(--orange); }
+.exp-orange:hover { box-shadow: 0 10px 30px rgba(255, 106, 0, 0.1); }
+.exp-orange .exp-icon { color: var(--orange); }
+
+.exp-icon {
+  margin-bottom: 1rem;
+}
+
+.exp-title {
+  font-family: 'Outfit', sans-serif;
+  color: white;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.exp-description {
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 640px) {
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

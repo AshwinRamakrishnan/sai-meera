@@ -1,0 +1,13 @@
+.gold-divider {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}

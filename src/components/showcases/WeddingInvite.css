@@ -1,0 +1,200 @@
+.wedding-section {
+  padding: 6rem 1rem;
+  background-color: var(--bg-primary);
+  color: #fff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.label {
+  display: inline-block;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.invite-card-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.invite-card {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 3/4;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.shimmer-effect {
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 50%;
+  height: 400%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 166, 35, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shimmer 6s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { transform: rotate(45deg) translateY(-100%); }
+  100% { transform: rotate(45deg) translateY(200%); }
+}
+
+.invite-border {
+  height: 100%;
+  border: 2px solid rgba(245, 166, 35, 0.4);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.invite-content {
+  height: 100%;
+  border: 1px solid rgba(245, 166, 35, 0.2);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.invite-intro {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.invite-names {
+  font-family: 'Playfair Display', serif; /* Or similar elegant font */
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(245, 166, 35, 0.2);
+}
+
+.ampersand {
+  font-size: 2rem;
+  font-style: italic;
+  opacity: 0.8;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  margin: 2rem 0;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  margin: 0 1rem;
+}
+
+.invite-details {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .specs-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.spec-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--accent-color);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.spec-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.spec-info h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: #fff;
+}
+
+.spec-info p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}

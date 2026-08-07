@@ -1,0 +1,153 @@
+.contact-section {
+  position: relative;
+  padding: 8rem 2rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.contact-header {
+  text-align: center;
+}
+
+.contact-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cyan);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.contact-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.contact-glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.contact-ctas {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2.5rem;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.whatsapp-btn {
+  background-color: #25D366;
+  color: #ffffff;
+  border: none;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebd5a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+}
+
+.upload-btn {
+  background-color: transparent;
+  color: var(--cyan);
+  border: 2px solid var(--cyan);
+}
+
+.upload-btn:hover {
+  background-color: rgba(0, 212, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1);
+}
+
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(245, 166, 35, 0.1);
+  color: var(--gold);
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .contact-glass-card {
+    padding: 2rem;
+  }
+  
+  .contact-info-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,266 @@
+/* GreetingCardsPage.css */
+.greeting-cards-page {
+  background-color: #0a0a0f;
+  color: #f0ede8;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, rgba(0, 255, 148, 0.1) 0%, #0a0a0f 100%);
+}
+
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 3.5rem;
+  color: #00ff94;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #a0a0a5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gallery-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.card-flip {
+  perspective: 1000px;
+  height: 300px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card-flip:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-front {
+  color: #00ff94;
+}
+
+.card-front-icon {
+  margin-bottom: 1rem;
+  color: #00ff94;
+}
+
+.card-front-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #f0ede8;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: #a0a0a5;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: rgba(0, 255, 148, 0.1);
+  border-color: rgba(0, 255, 148, 0.2);
+  color: #f0ede8;
+}
+
+.card-back-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.customization-section {
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.customization-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #f0ede8;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.option-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.option-icon {
+  color: #00ff94;
+  margin-bottom: 1rem;
+}
+
+.option-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #f0ede8;
+}
+
+.option-desc {
+  font-size: 0.9rem;
+  color: #a0a0a5;
+  line-height: 1.5;
+}
+
+.pricing-section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.pricing-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.pricing-card:nth-child(2) {
+  border-color: #00ff94;
+  transform: translateY(-10px);
+}
+
+.pricing-tier {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00ff94;
+}
+
+.pricing-price {
+  font-size: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 0.5rem;
+  color: #f0ede8;
+}
+
+.pricing-desc {
+  font-size: 0.9rem;
+  color: #a0a0a5;
+}
+
+.cta-section {
+  padding: 6rem 2rem;
+  text-align: center;
+  background: linear-gradient(0deg, rgba(0, 255, 148, 0.1) 0%, #0a0a0f 100%);
+}
+
+.cta-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #f0ede8;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #00ff94;
+  color: #0a0a0f;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.cta-button:hover {
+  background: #00e685;
+  transform: translateY(-2px);
+}
+
+.cta-phone {
+  display: block;
+  color: #a0a0a5;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid,
+  .options-grid,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .pricing-card:nth-child(2) {
+    transform: none;
+  }
+  .hero-title {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,125 @@
+.timeline-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(245, 166, 35, 0.1), var(--gold), rgba(245, 166, 35, 0.1));
+}
+
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 60px;
+  width: 100%;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 14px;
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+  z-index: 2;
+}
+
+.timeline-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.timeline-item:hover .timeline-card {
+  transform: translateX(10px);
+  border-color: rgba(245, 166, 35, 0.3);
+}
+
+.timeline-item:hover .timeline-dot {
+  background: var(--gold);
+}
+
+.timeline-year {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--gold);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background: rgba(245, 166, 35, 0.1);
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.timeline-title {
+  font-family: 'Outfit', sans-serif;
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-desc {
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .timeline-container {
+    padding: 4rem 0;
+  }
+  
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .timeline-item {
+    width: 50%;
+    padding: 0;
+  }
+  
+  .timeline-item:nth-child(odd) {
+    align-self: flex-start;
+    padding-right: 40px;
+    text-align: right;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-dot {
+    left: auto;
+    right: -7px;
+  }
+  
+  .timeline-item:nth-child(even) {
+    align-self: flex-end;
+    padding-left: 40px;
+  }
+  
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: -7px;
+  }
+  
+  .timeline-item:nth-child(odd):hover .timeline-card {
+    transform: translateX(-10px);
+  }
+}
