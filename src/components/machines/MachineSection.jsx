@@ -101,9 +101,12 @@ const MachineSection = React.memo(function MachineSection({
             >
               <color attach="background" args={['#0a0a0f']} />
               <Suspense fallback={null}>
-                {/* Environment for realistic reflections on metallic surfaces */}
-                <Environment preset="city" />
+                {/* Render the machine immediately since it's procedural */}
                 {SceneComponent && <SceneComponent scrollRatio={scrollRatio} />}
+              </Suspense>
+              <Suspense fallback={null}>
+                {/* Environment downloads an HDRI, wrap in own Suspense so it doesn't block */}
+                <Environment preset="city" />
               </Suspense>
             </Canvas>
           )}
