@@ -31,7 +31,7 @@ const Navbar = () => {
     { name: 'Contact', to: '/contact', hash: false },
   ];
 
-  // Page links for dedicated pages
+  // Product/Service page links
   const pageLinks = [
     { name: 'Invitations', to: '/invitations' },
     { name: 'Flex Banners', to: '/flex-banners' },
@@ -39,11 +39,9 @@ const Navbar = () => {
   ];
 
   const handleHashClick = (e, to) => {
-    // If we are already on the home page, let Lenis or native smooth scroll handle it
     if (location.pathname === '/') {
-      return; // Link component will just update hash, and native scroll kicks in
+      return;
     }
-    // If we are navigating from another page to home page, the Link will handle the route change
   };
 
   return (

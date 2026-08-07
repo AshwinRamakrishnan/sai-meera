@@ -14,7 +14,6 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const InvitationsPage = lazy(() => import('./pages/InvitationsPage'));
 const FlexBannersPage = lazy(() => import('./pages/FlexBannersPage'));
 const GreetingCardsPage = lazy(() => import('./pages/GreetingCardsPage'));
-
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 // Page loading fallback
@@ -52,7 +51,6 @@ function App() {
   // Scroll to hash on route change
   useEffect(() => {
     if (location.hash && lenis) {
-      // Small delay to ensure the page is rendered (especially after Suspense)
       setTimeout(() => {
         const target = document.querySelector(location.hash);
         if (target) {
@@ -60,7 +58,6 @@ function App() {
         }
       }, 100);
     } else if (location.pathname !== '/' && lenis) {
-      // Scroll to top when navigating to a new page without a hash
       lenis.scrollTo(0, { immediate: true });
     }
   }, [location, lenis]);

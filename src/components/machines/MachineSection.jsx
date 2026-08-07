@@ -1,19 +1,30 @@
 import React, { useRef, useState, useEffect, Suspense, useMemo } from 'react';
 import { useScroll } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import './MachineSection.css';
-import { Environment } from '@react-three/drei';
+import SharedLighting from '../../scenes/SharedLighting';
 
 /**
- * MachineSection — Premium full-bleed layout with performance optimizations.
- *
- * Performance features:
- * - IntersectionObserver pauses Canvas rendering when off-screen
- * - DPR capped at 1.5 to prevent WebGL context loss on mobile
- * - React.memo prevents unnecessary re-renders
- *
- * Layout: Full-bleed 3D Canvas with HUD overlay (Apple keynote style).
+ * SceneBridge — lives INSIDE the Canvas.
+ * Reads scrollRatioRef every animation frame (60fps) via useFrame.
+ * This bypasses React's render cycle entirely → zero lag, frame-perfect animation.
  */
+function SceneBridge({ scrollRef, Component }) {
+  const [scrollRatio, setScrollRatio] = useState(0);
+  const lastRef = useRef(0);
+
+  useFrame(() => {
+    const next = scrollRef.current;
+    // Only trigger re-render when value changes meaningfully
+    if (Math.abs(next - lastRef.current) > 0.0008) {
+      lastRef.current = next;
+      setScrollRatio(next);
+    }
+  });
+
+  if (!Component) return null;
+  return <Component scrollRatio={scrollRatio} />;
+}
 
 const MachineSection = React.memo(function MachineSection({
   id,
@@ -31,34 +42,31 @@ const MachineSection = React.memo(function MachineSection({
   customLighting = true,
 }) {
   const sectionRef = useRef(null);
-  const [scrollRatio, setScrollRatio] = useState(0);
-  const [isInView, setIsInView] = useState(false);
 
-  // ─── IntersectionObserver: Pause Canvas when off-screen ───
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
+  // ─── scrollRatio as a REF (no React re-render on scroll) ───
+  const scrollRatioRef = useRef(0);
+  // Separate state only for the HUD overlay (UI updates at lower frequency)
+  const [hudRatio, setHudRatio] = useState(0);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsInView(entry.isIntersecting);
-      },
-      { rootMargin: '200px 0px', threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  // Mount Canvas immediately — pre-compiles shaders while user reads hero section
+  const isInView = true;
 
-  // ─── Scroll tracking via Framer Motion ───
+  // ─── Scroll tracking: write to ref (instant), throttle HUD updates ───
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end end"]
+    offset: ['start start', 'end end'],
   });
 
   useEffect(() => {
-    return scrollYProgress.on("change", (latest) => {
-      setScrollRatio(latest);
+    let rafId;
+    const unsub = scrollYProgress.on('change', (latest) => {
+      // Write to ref INSTANTLY — no React delay
+      scrollRatioRef.current = latest;
+      // Throttle HUD DOM updates via rAF (smooth but not every pixel)
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => setHudRatio(latest));
     });
+    return () => { unsub(); cancelAnimationFrame(rafId); };
   }, [scrollYProgress]);
 
   // ─── Derived values ───
@@ -69,9 +77,9 @@ const MachineSection = React.memo(function MachineSection({
     return '#00d4ff';
   }, [accentColor]);
 
-  const status = scrollRatio < 0.1 ? 'STANDBY' : scrollRatio < 0.85 ? 'OPERATING' : 'COMPLETE';
-  const visibleLines = Math.floor(scrollRatio * consoleLines.length);
-  const meterPct = Math.round(scrollRatio * 100);
+  const status = hudRatio < 0.1 ? 'STANDBY' : hudRatio < 0.85 ? 'OPERATING' : 'COMPLETE';
+  const visibleLines = Math.floor(hudRatio * consoleLines.length);
+  const meterPct = Math.round(hudRatio * 100);
 
   return (
     <section id={id} ref={sectionRef} className="machineSection" style={{ '--accent-color': accentColor }}>
@@ -80,11 +88,11 @@ const MachineSection = React.memo(function MachineSection({
         <div className="canvasArea">
           {isInView && (
             <Canvas
-              dpr={[1, Math.min(window.devicePixelRatio, 1.5)]}
+              dpr={[1, Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.0 : 1.5)]}
               gl={{
-                antialias: true,
+                antialias: window.innerWidth >= 768,
                 toneMapping: 6, // ACESFilmicToneMapping
-                toneMappingExposure: 1.8,
+                toneMappingExposure: 1.6,
                 alpha: false,
                 powerPreference: 'high-performance',
                 stencil: false,
@@ -92,7 +100,7 @@ const MachineSection = React.memo(function MachineSection({
               }}
               camera={{
                 position: cameraPosition || [9, 6, 12],
-                fov: cameraFov || 42,
+                fov: window.innerWidth < 768 ? (cameraFov || 42) + 18 : (cameraFov || 42),
                 near: 0.1,
                 far: 200,
               }}
@@ -100,13 +108,10 @@ const MachineSection = React.memo(function MachineSection({
               performance={{ min: 0.5 }}
             >
               <color attach="background" args={['#0a0a0f']} />
+              <SharedLighting accentColor={r3fAccent} />
               <Suspense fallback={null}>
-                {/* Render the machine immediately since it's procedural */}
-                {SceneComponent && <SceneComponent scrollRatio={scrollRatio} />}
-              </Suspense>
-              <Suspense fallback={null}>
-                {/* Environment downloads an HDRI, wrap in own Suspense so it doesn't block */}
-                <Environment preset="city" />
+                {/* SceneBridge reads scrollRatioRef via useFrame — frame-perfect, zero React lag */}
+                <SceneBridge scrollRef={scrollRatioRef} Component={SceneComponent} />
               </Suspense>
             </Canvas>
           )}
@@ -128,7 +133,7 @@ const MachineSection = React.memo(function MachineSection({
             <div className="machineLabel">MACHINE {machineNumber} · {serialNumber}</div>
             <h2 className="machineTitle">{machineName}</h2>
             {description && <p className="machineDescription">{description}</p>}
-            
+
             <div className="specBadgesRow">
               {specs.map((spec, i) => (
                 <div key={i} className="specBadge">
