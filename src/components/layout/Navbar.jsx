@@ -95,7 +95,7 @@ const Navbar = () => {
           {/* Divider */}
           <div className="nav-divider" />
 
-          {/* ── Print Services Mega-Menu Trigger ── */}
+            {/* ── Print Services Mega-Menu Trigger ── */}
           <div
             className={`nav-services-trigger ${isServicesActive ? 'active' : ''} ${servicesOpen ? 'open' : ''}`}
             ref={servicesRef}
@@ -125,7 +125,7 @@ const Navbar = () => {
               </span>
             </button>
 
-            {/* ── Mega-Menu Dropdown ── */}
+            {/* ── 4-Column Mega-Menu Dropdown ── */}
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div
@@ -136,35 +136,63 @@ const Navbar = () => {
                   transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="mega-menu-inner">
-                    {PRINT_SERVICES_MENU.map((group) => (
-                      <div key={group.group} className="mega-menu-group">
-                        <div className="mega-menu-group-label">{group.group}</div>
-                        {group.items.map((item) => {
-                          const itemActive = location.pathname === item.to || location.pathname.startsWith(item.to + '/');
-                          return (
+                    <div className="mega-menu-columns">
+                      {PRINT_SERVICES_MENU.map((group) => (
+                        <div key={group.group} className="mega-menu-col">
+                          <div
+                            className="mega-menu-group-label"
+                            style={{ '--group-accent': group.accentColor }}
+                          >
+                            <span
+                              className="mega-group-dot"
+                              style={{ background: group.accentColor }}
+                            />
+                            {group.group}
+                          </div>
+                          {group.items.map((item) => {
+                            const itemActive = location.pathname === item.to || location.pathname.startsWith(item.to + '/');
+                            return (
+                              <NavLink
+                                key={item.to}
+                                to={item.to}
+                                className={`mega-menu-item ${itemActive ? 'mega-active' : ''}`}
+                                style={{ '--group-accent': group.accentColor }}
+                                onClick={() => setServicesOpen(false)}
+                              >
+                                <span className="mega-item-name">{item.name}</span>
+                                <span className="mega-item-desc">{item.desc}</span>
+                              </NavLink>
+                            );
+                          })}
+                          {group.moreCount > 0 && (
                             <NavLink
-                              key={item.to}
-                              to={item.to}
-                              className={`mega-menu-item ${itemActive ? 'mega-active' : ''}`}
+                              to={group.moreLink}
+                              className="mega-menu-more-link"
+                              style={{ color: group.accentColor }}
                               onClick={() => setServicesOpen(false)}
                             >
-                              <span className="mega-item-name">{item.name}</span>
-                              <span className="mega-item-desc">{item.desc}</span>
+                              +{group.moreCount} more →
                             </NavLink>
-                          );
-                        })}
-                      </div>
-                    ))}
+                          )}
+                        </div>
+                      ))}
+                    </div>
 
                     {/* Bottom CTA strip */}
                     <div className="mega-menu-cta-strip">
-                      <span className="mega-cta-text">Need a custom quote?</span>
+                      <Link
+                        to="/products"
+                        className="mega-cta-browse"
+                        onClick={() => setServicesOpen(false)}
+                      >
+                        Browse full catalogue →
+                      </Link>
                       <Link
                         to="/contact"
                         className="mega-cta-btn"
                         onClick={() => setServicesOpen(false)}
                       >
-                        Contact Us →
+                        Get a Quote
                       </Link>
                     </div>
                   </div>
