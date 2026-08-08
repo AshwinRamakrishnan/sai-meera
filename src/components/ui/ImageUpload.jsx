@@ -3,12 +3,11 @@
  *
  * Client-side drag-and-drop image upload component.
  * - Accepts JPEG, PNG, WEBP, HEIC
- * - Max 5 files, max 10 MB each
- * - Local preview only (no server upload yet — stub submit logs to console)
+ * - Configurable max files and max size via props
+ * - Local preview with HEIC placeholder for Chrome/Firefox/Edge
  * - Full keyboard + aria support
  * - prefers-reduced-motion respected via CSS
- *
- * TODO (Phase E-commerce): wire onSubmit to Supabase Storage upload
+ * - onFilesChange callback notifies parent of current file list
  */
 
 import React, { useCallback, useRef, useState } from 'react';
@@ -74,7 +73,10 @@ function validateFiles(incoming, existing) {
 export default function ImageUpload({
   label       = 'Upload Your Photos',
   hint        = 'Your photos will be used to personalise your invitation design.',
-  onSubmit,               // optional: (files: File[]) => void — for future backend wiring
+  onSubmit,               // optional: (files: File[]) => void — for legacy compatibility
+  onFilesChange,          // (previews: [{ file, url, id }]) => void — notifies parent of current files
+  maxFiles    = MAX_FILES,
+  maxSizeMb   = MAX_SIZE_MB,
   accentColor,            // pass --cat-accent for per-category tinting
 }) {
   const inputRef           = useRef(null);
@@ -98,8 +100,13 @@ export default function ImageUpload({
       id: `${file.name}-${file.size}-${Date.now()}`,
     }));
 
-    setPreviews((prev) => [...prev, ...newPreviews]);
-  }, [previews]);
+    setPreviews((prev) => {
+      const updated = [...prev, ...newPreviews];
+      // Notify parent of current file list
+      if (onFilesChange) onFilesChange(updated);
+      return updated;
+    });
+  }, [previews, onFilesChange]);
 
   /* Input change */
   const handleInputChange = (e) => {
@@ -124,6 +131,8 @@ export default function ImageUpload({
       // Revoke the blob URL to free memory
       const removed = prev.find((p) => p.id === id);
       if (removed) URL.revokeObjectURL(removed.url);
+      // Notify parent of updated file list
+      if (onFilesChange) onFilesChange(updated);
       return updated;
     });
     setSubmitted(false);
