@@ -58,13 +58,14 @@
 /* Newsletter Input */
 .newsletter-form {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
   margin-top: var(--space-4);
   max-width: 400px;
 }
 
 .newsletter-input {
-  flex: 1;
+  flex: 1 1 200px;
   background: var(--bg-card);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-full);
@@ -82,10 +83,15 @@
 }
 
 .newsletter-btn {
+  flex: 1 1 auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--text-primary);
   color: var(--bg-primary);
   border-radius: var(--radius-full);
-  padding: 0 var(--space-6);
+  padding: var(--space-3) var(--space-6);
   font-weight: 600;
   font-size: var(--text-sm);
   transition: transform var(--transition-fast), opacity var(--transition-fast);
@@ -133,10 +139,11 @@
   padding: var(--space-6) var(--space-6) 0;
   border-top: 1px solid var(--glass-border);
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-6);
   position: relative;
   z-index: 2;
 }
@@ -144,6 +151,8 @@
 @media (min-width: 768px) {
   .footer-bottom {
     flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 }
 

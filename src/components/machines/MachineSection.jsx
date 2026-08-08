@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, Suspense, useMemo } from 'react';
-import { useScroll } from 'framer-motion';
+import { useScroll, useInView } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import './MachineSection.css';
 import SharedLighting from '../../scenes/SharedLighting';
@@ -26,6 +26,13 @@ function SceneBridge({ scrollRef, Component }) {
   return <Component scrollRatio={scrollRatio} />;
 }
 
+function ModelLoadNotifier({ onLoaded }) {
+  useEffect(() => {
+    onLoaded();
+  }, [onLoaded]);
+  return null;
+}
+
 const MachineSection = React.memo(function MachineSection({
   id,
   machineNumber,
@@ -48,8 +55,14 @@ const MachineSection = React.memo(function MachineSection({
   // Separate state only for the HUD overlay (UI updates at lower frequency)
   const [hudRatio, setHudRatio] = useState(0);
 
-  // Mount Canvas immediately — pre-compiles shaders while user reads hero section
-  const isInView = true;
+  // ─── 1. LAZY MOUNT (Mount Canvas slightly before it enters view) ───
+  const hasMountedCanvas = useInView(sectionRef, { once: true, margin: "300px" });
+
+  // ─── 2. PAUSE RENDER LOOP (Pause when completely out of view) ───
+  const isRenderingActive = useInView(sectionRef, { margin: "100px" });
+
+  // ─── 3. LOAD NOTIFIER (Fade out placeholder when 3D assets are ready) ───
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // ─── Scroll tracking: write to ref (instant), throttle HUD updates ───
   const { scrollYProgress } = useScroll({
@@ -86,9 +99,19 @@ const MachineSection = React.memo(function MachineSection({
       <div className="stickyContainer">
         {/* ── Full-bleed 3D Canvas ── */}
         <div className="canvasArea">
-          {isInView && (
+          {/* Loading Placeholder */}
+          <div className={`machine-loading-overlay ${isLoaded ? 'loaded' : ''}`}>
+            <div className="loading-spinner"></div>
+            <div className="loading-text">
+              <span className="loading-label">MACHINE {machineNumber}</span>
+              LOADING PRINT SYSTEM...
+            </div>
+          </div>
+
+          {hasMountedCanvas && (
             <Canvas
-              dpr={[1, Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.0 : 1.5)]}
+              frameloop={isRenderingActive ? 'always' : 'demand'}
+              dpr={[1, Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.0 : 1.5)]}
               gl={{
                 antialias: window.innerWidth >= 768,
                 toneMapping: 6, // ACESFilmicToneMapping
@@ -112,6 +135,7 @@ const MachineSection = React.memo(function MachineSection({
               <Suspense fallback={null}>
                 {/* SceneBridge reads scrollRatioRef via useFrame — frame-perfect, zero React lag */}
                 <SceneBridge scrollRef={scrollRatioRef} Component={SceneComponent} />
+                <ModelLoadNotifier onLoaded={() => setIsLoaded(true)} />
               </Suspense>
             </Canvas>
           )}
