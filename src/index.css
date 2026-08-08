@@ -1,6 +1,9 @@
 /* Tamil Design System — imported first so tokens are available everywhere */
 @import './styles/tamil-design.css';
 
+/* Phase 5: GSAP ScrollTrigger initial states + prefers-reduced-motion guards */
+@import './styles/scroll-choreography.css';
+
 /* ===== CSS Custom Properties ===== */
 :root {
   /* Core palette - Apple/Vercel inspired deep graphite */

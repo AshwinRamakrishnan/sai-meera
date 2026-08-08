@@ -10,6 +10,7 @@ import PhotoFrames from '../components/showcases/PhotoFrames';
 import BusinessCards from '../components/showcases/BusinessCards';
 import ServicesGrid from '../components/showcases/ServicesGrid';
 import ContactSection from '../components/contact/ContactSection';
+import { useScrollChoreography } from '../hooks/useScrollChoreography';
 
 // 3D Scene Components
 import OffsetPress from '../scenes/OffsetPress';
@@ -18,6 +19,9 @@ import PhotoshopStation from '../scenes/PhotoshopStation';
 import HydraulicCutter from '../scenes/HydraulicCutter';
 
 export default function HomePage() {
+  // Phase 5: GSAP ScrollTrigger choreography (HUD entrances, dividers, showcases)
+  useScrollChoreography();
+
   return (
     <>
       <Helmet>
