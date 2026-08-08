@@ -10,24 +10,19 @@ const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 };
-
 const stagger = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.12 } },
 };
 
-/* ── AnimatedSection: scroll-triggered stagger container ── */
-function AnimatedSection({ children, className, tone }) {
+/* ── Tone-aware wrappers ── */
+function AnimatedSection({ children, tone }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-8%' });
-  // Respectful tone: no stagger animation — render statically
-  if (tone === 'respectful') {
-    return <div ref={ref} className={className}>{children}</div>;
-  }
+  if (tone === 'respectful') return <div ref={ref}>{children}</div>;
   return (
     <motion.div
       ref={ref}
-      className={className}
       variants={stagger}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
@@ -37,41 +32,60 @@ function AnimatedSection({ children, className, tone }) {
   );
 }
 
-/* ── Animated item wrapper ── */
-function AnimItem({ children, tone }) {
+function FadeItem({ children, tone }) {
   if (tone === 'respectful') return <>{children}</>;
   return <motion.div variants={fadeUp}>{children}</motion.div>;
 }
 
-/* ── Hero wrapper: respectful = no motion ── */
-function HeroWrapper({ children, tone }) {
-  if (tone === 'respectful') {
-    return <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>;
-  }
+function HeroMotion({ children, tone }) {
+  if (tone === 'respectful') return <div>{children}</div>;
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
   );
 }
 
-/* ── Group label map ── */
+/* ── Tamil ornamental divider component ── */
+function TamilDivider() {
+  return (
+    <div className="tamil-divider" aria-hidden="true">
+      <div className="tamil-divider-center">
+        <div className="tamil-divider-dot" />
+        <div className="tamil-divider-gem" />
+        <div className="tamil-divider-dot" />
+      </div>
+    </div>
+  );
+}
+
+/* ── Group name lookup ── */
 const GROUP_NAMES = {
   invitations: 'Invitations',
-  flex: 'Flex & Banners',
-  cards: 'Cards & Stationery',
-  business: 'Business Print',
+  flex:        'Flex & Banners',
+  cards:       'Cards & Stationery',
+  business:    'Business Print',
 };
 
-/* ── CategoryPage ── */
+/* ── Placeholder icon per tone ── */
+const PLACEHOLDER_ICON = {
+  festive:      '🖨️',
+  professional: '📋',
+  respectful:   '🕊️',
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAIN COMPONENT
+═══════════════════════════════════════════════════════════════════════════ */
 export default function CategoryPage() {
   const { slug } = useParams();
   const cat = getCategoryBySlug(slug);
 
+  /* 404 */
   if (!cat) {
     return (
       <div className="cat-notfound">
@@ -86,8 +100,10 @@ export default function CategoryPage() {
     );
   }
 
-  const tone = cat.tone || 'festive';
-  const groupName = GROUP_NAMES[cat.group] || 'Products';
+  const tone       = cat.tone || 'festive';
+  const groupName  = GROUP_NAMES[cat.group] || 'Products';
+  const isFestive  = tone === 'festive';
+  const isRespect  = tone === 'respectful';
 
   return (
     <div
@@ -95,7 +111,7 @@ export default function CategoryPage() {
       data-tone={tone}
       style={{ '--cat-accent': cat.accentColor }}
     >
-      {/* SEO */}
+      {/* ── SEO ── */}
       <Helmet>
         <title>{cat.name} — Sai Meera Printing</title>
         <meta name="description" content={cat.description} />
@@ -103,7 +119,7 @@ export default function CategoryPage() {
         <meta property="og:description" content={cat.description} />
       </Helmet>
 
-      {/* Breadcrumb */}
+      {/* ── Breadcrumb ── */}
       <nav className="cat-breadcrumb" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <span className="cat-breadcrumb-sep">›</span>
@@ -112,53 +128,91 @@ export default function CategoryPage() {
         <span className="cat-breadcrumb-current">{cat.name}</span>
       </nav>
 
-      {/* Political disclaimer */}
+      {/* ── Political disclaimer ── */}
       {cat.disclaimer && (
-        <div className="cat-disclaimer">
+        <div className="cat-disclaimer" role="note">
           <span className="cat-disclaimer-icon">⚠️</span>
           <span>{cat.disclaimer}</span>
         </div>
       )}
 
-      {/* Hero */}
-      <section className="cat-hero">
-        <HeroWrapper tone={tone}>
-          <div className="cat-hero-label">{cat.heroLabel}</div>
-          <h1 className="cat-hero-title">{cat.name}</h1>
+      {/* ══════════════════════════════════════
+          HERO
+      ══════════════════════════════════════ */}
+      <section className={`cat-hero kolam-hero-bg${isFestive ? ' kolam-corner' : ''}`}>
+        <HeroMotion tone={tone}>
+          {/* Tamil badge */}
+          <div className={`cat-hero-label${isFestive ? ' kolam-ring' : ''}`}>
+            {cat.heroLabel}
+          </div>
+
+          {/* Title */}
+          <h1 className={`cat-hero-title${isFestive ? ' gold-shimmer' : ''}`}>
+            {cat.name}
+          </h1>
+
           <div className="cat-hero-subtitle">{cat.subtitle}</div>
           <p className="cat-hero-desc">{cat.description}</p>
-          <Link to="/contact" className="cat-hero-cta">
-            {tone === 'respectful' ? 'Contact Us Discretely' : 'Get a Free Quote →'}
-          </Link>
-        </HeroWrapper>
+
+          <div className="cat-hero-actions">
+            <Link to="/contact" className="cat-hero-cta cat-cta-primary-btn">
+              {isRespect ? 'Contact Us Discretely' : 'Get a Free Quote →'}
+            </Link>
+            <Link to="/products" className="cat-hero-cta-ghost">
+              ← All Products
+            </Link>
+          </div>
+        </HeroMotion>
       </section>
 
-      {/* Styles / Designs */}
+      {/* ── Toran divider (festive only) ── */}
+      {isFestive && (
+        <div className="cat-toran-strip" aria-hidden="true">
+          <div className="toran-border" />
+          <img
+            src="/tamil-divider.jpg"
+            alt=""
+            className="tamil-section-divider-img"
+            loading="lazy"
+          />
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          STYLES / DESIGNS
+      ══════════════════════════════════════ */}
       <section className="cat-section">
         <AnimatedSection tone={tone}>
-          <AnimItem tone={tone}>
-            <div className="cat-section-label">Design Styles</div>
+          <FadeItem tone={tone}>
+            <div className="temple-label cat-section-label-wrap">
+              <span className="temple-label-text">Design Styles</span>
+            </div>
             <h2 className="cat-section-title">
-              {tone === 'respectful' ? 'Our Designs' : 'Choose Your Look'}
+              {isRespect ? 'Our Designs' : 'Choose Your Look'}
             </h2>
             <p className="cat-section-sub">
-              {tone === 'respectful'
+              {isRespect
                 ? 'Each design is handled with care and dignity.'
                 : 'Every style is printed on premium stock with attention to every detail.'}
             </p>
-          </AnimItem>
+          </FadeItem>
 
           <div className="cat-styles-grid">
             {cat.styles.map((style) => (
-              <AnimItem key={style.id} tone={tone}>
-                <div className="cat-style-card">
-                  {/* TODO: Replace with real product photography — Phase X */}
-                  <div className="cat-style-placeholder">
-                    <span className="cat-placeholder-icon">
-                      {tone === 'respectful' ? '🕊️' : '🖨️'}
-                    </span>
-                    <span className="cat-placeholder-text">Photo — TODO</span>
+              <FadeItem key={style.id} tone={tone}>
+                <div className={`cat-style-card tamil-card`}>
+                  {/* ── Tamil-styled placeholder ── */}
+                  <div className="tamil-placeholder">
+                    <div className="tamil-placeholder-label">
+                      <span className="tamil-placeholder-icon">
+                        {PLACEHOLDER_ICON[tone]}
+                      </span>
+                      <span className="tamil-placeholder-text">{style.name}</span>
+                      {/* TODO: Replace with real product photo — Phase X */}
+                      <span className="tamil-placeholder-sub">Photo coming soon</span>
+                    </div>
                   </div>
+
                   <h3 className="cat-style-name">{style.name}</h3>
                   <p className="cat-style-desc">{style.desc}</p>
                   <div className="cat-style-specs">
@@ -167,31 +221,44 @@ export default function CategoryPage() {
                     ))}
                   </div>
                 </div>
-              </AnimItem>
+              </FadeItem>
             ))}
           </div>
         </AnimatedSection>
       </section>
 
-      {/* Pricing */}
-      <section className="cat-section">
+      {/* Ornamental divider between sections */}
+      {!isRespect && (
+        <div className="cat-divider-wrap">
+          <TamilDivider />
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          PRICING
+      ══════════════════════════════════════ */}
+      <section className="cat-section cat-section-pricing">
         <AnimatedSection tone={tone}>
-          <AnimItem tone={tone}>
-            <div className="cat-section-label">Pricing</div>
+          <FadeItem tone={tone}>
+            <div className="temple-label cat-section-label-wrap">
+              <span className="temple-label-text">Pricing</span>
+            </div>
             <h2 className="cat-section-title">Transparent Packages</h2>
             <p className="cat-section-sub">No hidden costs. Quality materials at every tier.</p>
-          </AnimItem>
+          </FadeItem>
 
           <div className="cat-pricing-grid">
             {cat.pricing.map((tier) => (
-              <AnimItem key={tier.name} tone={tone}>
+              <FadeItem key={tier.name} tone={tone}>
                 <div className={`cat-pricing-card${tier.popular ? ' popular' : ''}`}>
                   {tier.popular && (
                     <div className="cat-popular-badge">Most Popular</div>
                   )}
                   <div className="cat-pricing-name">{tier.name}</div>
-                  <div>
-                    <span className="cat-pricing-price">{tier.price}</span>
+                  <div className="cat-pricing-price-row">
+                    <span className={`cat-pricing-price${isFestive ? ' tamil-gold-text' : ''}`}>
+                      {tier.price}
+                    </span>
                     {tier.unit && (
                       <span className="cat-pricing-unit">{tier.unit}</span>
                     )}
@@ -206,63 +273,81 @@ export default function CategoryPage() {
                     ))}
                   </div>
                 </div>
-              </AnimItem>
+              </FadeItem>
             ))}
           </div>
         </AnimatedSection>
       </section>
 
-      {/* Process */}
-      <section className="cat-section">
+      {!isRespect && (
+        <div className="cat-divider-wrap">
+          <TamilDivider />
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          PROCESS
+      ══════════════════════════════════════ */}
+      <section className="cat-section cat-section-process">
         <AnimatedSection tone={tone}>
-          <AnimItem tone={tone}>
-            <div className="cat-section-label">How It Works</div>
+          <FadeItem tone={tone}>
+            <div className="temple-label cat-section-label-wrap">
+              <span className="temple-label-text">How It Works</span>
+            </div>
             <h2 className="cat-section-title">Our Process</h2>
             <p className="cat-section-sub">
-              {tone === 'respectful'
+              {isRespect
                 ? 'We handle every step with care and discretion.'
                 : 'From brief to delivery — a smooth, premium experience.'}
             </p>
-          </AnimItem>
+          </FadeItem>
 
           <div className="cat-process-grid">
             {cat.process.map((step) => (
-              <AnimItem key={step.n} tone={tone}>
+              <FadeItem key={step.n} tone={tone}>
                 <div className="cat-process-step">
                   <div className="cat-step-num">{step.n}</div>
                   <h3 className="cat-step-title">{step.title}</h3>
                   <p className="cat-step-desc">{step.desc}</p>
                 </div>
-              </AnimItem>
+              </FadeItem>
             ))}
           </div>
         </AnimatedSection>
       </section>
 
-      {/* CTA */}
-      <div className="cat-cta">
+      {/* ══════════════════════════════════════
+          CTA BANNER
+      ══════════════════════════════════════ */}
+      <div className={`cat-cta${isRespect ? ' cat-cta-respectful' : ''}`}>
+        {/* Bottom toran strip for festive */}
+        {isFestive && <div className="cat-cta-toran toran-border" aria-hidden="true" />}
+
         <motion.div
-          initial={tone === 'respectful' ? false : { opacity: 0, y: 20 }}
-          whileInView={tone === 'respectful' ? undefined : { opacity: 1, y: 0 }}
+          initial={isRespect ? false : { opacity: 0, y: 20 }}
+          whileInView={isRespect ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="cat-cta-inner"
         >
+          {!isRespect && <TamilDivider />}
+
           <h2 className="cat-cta-title">
-            {tone === 'respectful'
+            {isRespect
               ? 'We Are Here to Help'
-              : `Ready to Order Your ${cat.name}?`}
+              : `Ready to Order Your ${cat.name.split(' ').slice(-2).join(' ')}?`}
           </h2>
           <p className="cat-cta-sub">
-            {tone === 'respectful'
-              ? 'Our team handles all memorial printing with care, discretion, and priority.'
-              : 'Contact us with your details and we\'ll get you a quote within 24 hours.'}
+            {isRespect
+              ? 'Our team handles all memorial printing with care, discretion, and priority turnaround.'
+              : "Contact us with your details and we'll get you a free quote within 24 hours."}
           </p>
           <div className="cat-cta-btns">
-            <Link to="/contact" className="cat-cta-primary">
-              {tone === 'respectful' ? 'Contact Us' : 'Get a Free Quote →'}
+            <Link to="/contact" className={`cat-cta-primary${isRespect ? '' : ''}`}>
+              {isRespect ? 'Contact Us' : 'Get a Free Quote →'}
             </Link>
             <Link to="/products" className="cat-cta-secondary">
-              ← Browse All Products
+              ← All Products
             </Link>
           </div>
         </motion.div>

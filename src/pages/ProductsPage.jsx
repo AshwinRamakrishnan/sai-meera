@@ -85,14 +85,17 @@ export default function ProductsPage() {
       </Helmet>
 
       {/* Hero */}
-      <section className="products-hero">
+      <section className="products-hero kolam-hero-bg">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{ position: 'relative', zIndex: 2 }}
         >
-          <div className="products-hero-label">// COMPLETE PRINT CATALOGUE</div>
-          <h1>All Print Services</h1>
+          <div className="products-hero-label">
+            // COMPLETE PRINT CATALOGUE
+          </div>
+          <h1 className="gold-shimmer">All Print Services</h1>
           <p>
             From sacred ceremonies to commercial signage — 29 categories of premium
             printing, all under one roof. Every print job handled with expertise and care.

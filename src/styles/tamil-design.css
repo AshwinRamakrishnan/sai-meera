@@ -1,0 +1,429 @@
+/* ==========================================================================
+   TAMIL DESIGN SYSTEM — Sai Meera Printing
+   ==========================================================================
+
+   A layer of Tamil/South Indian design language on top of the base dark theme.
+   Applies to: CategoryPage, ProductsPage, and any page that imports this file.
+
+   Design language:
+   ─ Kolam-grid dot patterns (pure CSS, no images for the grid itself)
+   ─ Temple-arch section framing
+   ─ Mango-leaf toran ornamental border (CSS SVG data-uri)
+   ─ Gold-maroon-green Tamil colour palette
+   ─ Foil-gradient gold text
+   ─ Ornamental section dividers
+   ========================================================================== */
+
+/* ── Tamil Colour Tokens ──────────────────────────────────────────────────── */
+:root {
+  /* Core Tamil palette */
+  --tamil-gold:          #f5a623;
+  --tamil-gold-light:    #ffd17a;
+  --tamil-gold-dark:     #c8960c;
+  --tamil-gold-foil:     linear-gradient(135deg, #ffd17a 0%, #f5a623 40%, #c8960c 70%, #f5a623 100%);
+
+  --tamil-maroon:        #7a1a1a;
+  --tamil-maroon-mid:    #a02020;
+  --tamil-maroon-light:  rgba(122, 26, 26, 0.15);
+
+  --tamil-banana-green:  #2a5c24;
+  --tamil-turmeric:      #e8a020;
+  --tamil-turmeric-pale: rgba(232, 160, 32, 0.08);
+  --tamil-kumkum:        #c41e3a;
+  --tamil-indigo:        #2c3e7a;
+  --tamil-peacock-teal:  #0e7c7b;
+
+  /* Kolam pattern parameters */
+  --kolam-dot:           rgba(245, 166, 35, 0.10);
+  --kolam-dot-sm:        rgba(245, 166, 35, 0.06);
+  --kolam-size:          28px;
+
+  /* Mango-leaf SVG toran (original design) */
+  --mango-leaf-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='32' viewBox='0 0 60 32'%3E%3Cg fill='none' stroke='%23f5a623' stroke-width='1.2' opacity='0.55'%3E%3Cellipse cx='30' cy='10' rx='7' ry='12' transform='rotate(-20 30 10)'/%3E%3Cellipse cx='30' cy='10' rx='7' ry='12' transform='rotate(20 30 10)'/%3E%3Ccircle cx='30' cy='26' r='3' fill='%23f5a623' opacity='0.7'/%3E%3Cline x1='0' y1='16' x2='23' y2='16' stroke-width='0.8'/%3E%3Cline x1='37' y1='16' x2='60' y2='16' stroke-width='0.8'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* Temple arch clip (used as clip-path shorthand) */
+  --temple-arch: polygon(0% 100%, 0% 35%, 5% 20%, 12% 8%, 20% 2%, 30% 0%, 50% 0%, 70% 0%, 80% 2%, 88% 8%, 95% 20%, 100% 35%, 100% 100%);
+}
+
+/* ── Kolam Dot-Grid Patterns ─────────────────────────────────────────────── */
+
+/* Standard kolam grid — 28px pitch */
+.kolam-bg {
+  background-image:
+    radial-gradient(circle, var(--kolam-dot) 1.5px, transparent 1.5px),
+    radial-gradient(circle, var(--kolam-dot-sm) 1px, transparent 1px);
+  background-size: var(--kolam-size) var(--kolam-size), calc(var(--kolam-size) / 2) calc(var(--kolam-size) / 2);
+  background-position: 0 0, calc(var(--kolam-size) / 4) calc(var(--kolam-size) / 4);
+}
+
+/* Diamond-grid kolam variant */
+.kolam-diamond {
+  background-image:
+    radial-gradient(circle, rgba(245,166,35,0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+  transform: rotate(45deg) scale(1.4);
+}
+
+/* Kolam corner ornament — absolute-positioned pseudo-element helper */
+.kolam-corner::before,
+.kolam-corner::after {
+  content: '';
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  background-image:
+    radial-gradient(circle, rgba(245,166,35,0.18) 2px, transparent 2px),
+    radial-gradient(circle, rgba(245,166,35,0.09) 1px, transparent 1px);
+  background-size: 16px 16px, 8px 8px;
+  background-position: 0 0, 4px 4px;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+.kolam-corner::before {
+  top: 1.5rem;
+  left: 1.5rem;
+  mask-image: radial-gradient(circle at top left, black 40%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at top left, black 40%, transparent 75%);
+}
+
+.kolam-corner::after {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  mask-image: radial-gradient(circle at bottom right, black 40%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at bottom right, black 40%, transparent 75%);
+}
+
+/* ── Tamil Ornamental Divider ─────────────────────────────────────────────── */
+
+.tamil-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  width: 100%;
+}
+
+.tamil-divider::before,
+.tamil-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 166, 35, 0.5) 40%,
+    rgba(245, 166, 35, 0.7) 70%,
+    rgba(245, 166, 35, 0.2)
+  );
+}
+
+.tamil-divider::after {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 166, 35, 0.2),
+    rgba(245, 166, 35, 0.7) 30%,
+    rgba(245, 166, 35, 0.5) 60%,
+    transparent
+  );
+}
+
+.tamil-divider-center {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+/* The central lotus diamond motif */
+.tamil-divider-gem {
+  width: 10px;
+  height: 10px;
+  background: var(--tamil-gold);
+  transform: rotate(45deg);
+  opacity: 0.85;
+  box-shadow: 0 0 8px rgba(245, 166, 35, 0.5);
+}
+
+.tamil-divider-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(245, 166, 35, 0.5);
+}
+
+/* ── Temple Arch Section Label ───────────────────────────────────────────── */
+
+.temple-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+/* Left "pillar" line */
+.temple-label::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 1.4em;
+  background: linear-gradient(to bottom, var(--tamil-gold), transparent);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.temple-label-text {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--tamil-gold);
+}
+
+/* ── Foil-Gradient Gold Text ─────────────────────────────────────────────── */
+
+.tamil-gold-text {
+  background: var(--tamil-gold-foil);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Toran Mango-Leaf Border (top of festive sections) ───────────────────── */
+
+.toran-border {
+  position: relative;
+}
+
+.toran-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  background-image: var(--mango-leaf-svg);
+  background-repeat: repeat-x;
+  background-size: 60px 32px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Kolam Hero Background (for page heroes) ──────────────────────────────── */
+
+.kolam-hero-bg {
+  position: relative;
+}
+
+.kolam-hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Layered radial accents */
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(245,166,35,0.13) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 15% 80%, rgba(122,26,26,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 30% 25% at 85% 75%, rgba(42,92,36,0.08) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Kolam dot overlay on hero */
+.kolam-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(245,166,35,0.10) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(245,166,35,0.05) 1px, transparent 1px);
+  background-size: 28px 28px, 14px 14px;
+  background-position: 0 0, 7px 7px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, black 30%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 90%);
+}
+
+/* ── Card Tamil Accent Corner ─────────────────────────────────────────────── */
+
+/* Adds a tiny kolam-corner ornament to cards on hover */
+.tamil-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.tamil-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 64px;
+  background-image:
+    radial-gradient(circle, rgba(245,166,35,0.22) 2px, transparent 2px);
+  background-size: 12px 12px;
+  mask-image: radial-gradient(circle at top right, black 40%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at top right, black 40%, transparent 72%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tamil-card:hover::after { opacity: 1; }
+
+/* ── Palette Overrides per category tone ──────────────────────────────────── */
+
+/* Professional tone overrides kolam to a more muted version */
+[data-tone='professional'] {
+  --kolam-dot: rgba(255,255,255,0.04);
+  --kolam-dot-sm: rgba(255,255,255,0.02);
+}
+
+/* Respectful tone — no kolam patterns at all */
+[data-tone='respectful'] {
+  --kolam-dot: transparent;
+  --kolam-dot-sm: transparent;
+}
+
+/* ── Photo Placeholder Tamil Style ───────────────────────────────────────── */
+
+.tamil-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: url('/tamil-hero-pattern.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tamil-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(9,9,11,0.65) 0%,
+    rgba(9,9,11,0.45) 100%
+  );
+}
+
+/* Inner border frame — simulates a card border */
+.tamil-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(245,166,35,0.25);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+}
+
+.tamil-placeholder-label {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.tamil-placeholder-icon {
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.tamil-placeholder-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,166,35,0.7);
+}
+
+.tamil-placeholder-sub {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── Section Image Divider (generated asset) ─────────────────────────────── */
+
+.tamil-section-divider-img {
+  width: 100%;
+  max-height: 48px;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.55;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ── Keyframes for subtle gold shimmer ───────────────────────────────────── */
+
+@keyframes goldShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--tamil-gold-dark) 0%,
+    var(--tamil-gold-light) 40%,
+    var(--tamil-gold-dark) 60%,
+    var(--tamil-gold-light) 100%
+  );
+  background-size: 200% auto;
+  animation: goldShimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Kolam Ring ornament (for the hero badge) ─────────────────────────────── */
+
+.kolam-ring {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  position: relative;
+}
+
+.kolam-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--tamil-gold);
+  opacity: 0.35;
+}
+
+/* Decorative dots at 3 o'clock and 9 o'clock positions */
+.kolam-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  border: 1px dashed rgba(245,166,35,0.18);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .kolam-corner::before,
+  .kolam-corner::after {
+    width: 64px;
+    height: 64px;
+  }
+}

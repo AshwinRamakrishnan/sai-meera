@@ -1,5 +1,6 @@
 /* ProductsPage.css
  * Full catalogue overview — grid of all 29 categories grouped into 4 sections.
+ * Uses classes from tamil-design.css imported via index.css.
  */
 
 .products-page {
@@ -16,25 +17,16 @@
   overflow: hidden;
 }
 
-.products-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(245,166,35,0.14), transparent 65%),
-    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(0,212,255,0.06), transparent 60%);
-  pointer-events: none;
-}
-
-/* Subtle dot grid */
+/* kolam-hero-bg class from tamil-design.css handles the gradient + dot grid.
+   We add a second accent here for the cyan splash */
 .products-hero::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.4;
+  bottom: 0; right: 5%;
+  width: 300px; height: 200px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.05), transparent 70%);
   pointer-events: none;
+  z-index: 0;
 }
 
 .products-hero-label {

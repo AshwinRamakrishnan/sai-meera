@@ -1,3 +1,6 @@
+/* Tamil Design System — imported first so tokens are available everywhere */
+@import './styles/tamil-design.css';
+
 /* ===== CSS Custom Properties ===== */
 :root {
   /* Core palette - Apple/Vercel inspired deep graphite */
