@@ -373,3 +373,21 @@ ul, ol {
     display: none;
   }
 }
+
+/* ===== Global prefers-reduced-motion =====
+   Kills all CSS animation durations and transition durations for
+   users who have enabled "Reduce Motion" in their OS/browser settings.
+   This covers: goldShimmer, pulse-glow, float, shimmer, fadeUp,
+   slideInLeft, slideInRight, spin-slow, and any future keyframes.
+   Framer Motion is separately covered via <MotionConfig> in App.jsx.
+===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+}

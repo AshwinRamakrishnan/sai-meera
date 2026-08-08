@@ -60,35 +60,37 @@ const FlexBannersPage = () => {
       <section className="flex-section">
         <h2 className="flex-section-title">Material <span>Specifications</span></h2>
         <p className="flex-section-sub">Choose the right material for your specific use case.</p>
-        <div className="flex-glass-card" style={{ padding: '0', overflow: 'hidden' }}>
-          <table className="flex-size-table">
-            <thead>
-              <tr>
-                <th>Material</th>
-                <th>GSM</th>
-                <th>Weather Rating</th>
-                <th>Usage</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ['Star Flex', '280gsm', '★★★★★', 'Outdoor', '₹12/sqft'],
-                ['Vinyl', '120gsm', '★★★★☆', 'Indoor & Outdoor', '₹18/sqft'],
-                ['Backlit Flex', '440gsm', '★★★★★', 'Outdoor (LED)', '₹22/sqft'],
-                ['Canvas', '380gsm', '★★★☆☆', 'Indoor / Decor', '₹35/sqft'],
-                ['One-Way Vision', '140gsm', '★★★★☆', 'Glass Windows', '₹28/sqft'],
-              ].map(([mat, gsm, rating, use, price]) => (
-                <tr key={mat}>
-                  <td style={{ color: '#fff', fontWeight: 600 }}>{mat}</td>
-                  <td>{gsm}</td>
-                  <td style={{ color: '#00d4ff' }}>{rating}</td>
-                  <td>{use}</td>
-                  <td style={{ color: '#00d4ff', fontWeight: 600 }}>{price}</td>
+        <div className="flex-table-scroll">
+          <div className="flex-glass-card" style={{ padding: '0', overflow: 'hidden' }}>
+            <table className="flex-size-table">
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>GSM</th>
+                  <th>Weather Rating</th>
+                  <th>Usage</th>
+                  <th>Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {[
+                  ['Star Flex', '280gsm', '★★★★★', 'Outdoor', '₹12/sqft'],
+                  ['Vinyl', '120gsm', '★★★★☆', 'Indoor & Outdoor', '₹18/sqft'],
+                  ['Backlit Flex', '440gsm', '★★★★★', 'Outdoor (LED)', '₹22/sqft'],
+                  ['Canvas', '380gsm', '★★★☆☆', 'Indoor / Decor', '₹35/sqft'],
+                  ['One-Way Vision', '140gsm', '★★★★☆', 'Glass Windows', '₹28/sqft'],
+                ].map(([mat, gsm, rating, use, price]) => (
+                  <tr key={mat}>
+                    <td style={{ color: '#fff', fontWeight: 600 }}>{mat}</td>
+                    <td>{gsm}</td>
+                    <td style={{ color: '#00d4ff' }}>{rating}</td>
+                    <td>{use}</td>
+                    <td style={{ color: '#00d4ff', fontWeight: 600 }}>{price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

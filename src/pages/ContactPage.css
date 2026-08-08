@@ -12,7 +12,7 @@
   color: var(--text-primary);
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  padding: 80px 20px;
+  padding: clamp(5rem, 12vw, 7rem) clamp(1rem, 5vw, 2rem);
   overflow: hidden;
 }
 
@@ -25,7 +25,7 @@
 
 .contact-title {
   font-family: 'Outfit', sans-serif;
-  font-size: 3rem;
+  font-size: clamp(1.75rem, 6vw, 3rem);
   color: var(--cyan);
   margin-bottom: 20px;
   text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
@@ -247,4 +247,22 @@
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(50px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Mobile (<480px) ── */
+@media (max-width: 480px) {
+  .contact-container  { padding-top: 5rem; }
+  .contact-form-wrapper { padding: 1.5rem 1rem; }
+  .info-card          { padding: 1rem; gap: 1rem; }
+  .map-placeholder    { height: 180px; }
+  .contact-title      { font-size: clamp(1.5rem, 8vw, 2rem); }
+}
+
+/* ── prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .contact-hero,
+  .contact-form-wrapper,
+  .contact-info-wrapper { animation: none !important; }
+  .info-card:hover      { transform: none !important; }
+  .submit-btn:hover     { transform: none !important; }
 }

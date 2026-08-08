@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import { useLenis } from './hooks/useLenis';
 import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
@@ -64,7 +65,7 @@ function App() {
   }, [location, lenis]);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Preloader isLoading={isLoading} onLoadComplete={() => setIsLoading(false)} />
       <CustomCursor />
       <ScrollProgress />
@@ -95,7 +96,7 @@ function App() {
         </Suspense>
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }
 

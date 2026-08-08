@@ -1,0 +1,260 @@
+/* ============================================================
+   ImageUpload.css — Drag-and-drop photo upload component
+   Used by CategoryPage for personalized invitation photos.
+   Client-side only: preview + validation, stub submit.
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.img-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.img-upload-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 0.25rem;
+}
+
+/* ── Drop zone ── */
+.img-dropzone {
+  position: relative;
+  width: 100%;
+  min-height: 160px;
+  border: 2px dashed var(--glass-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--glass-bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease-out), background 0.2s;
+  text-align: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hidden file input — entire zone is clickable */
+.img-dropzone-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.img-dropzone:hover,
+.img-dropzone:focus-within,
+.img-dropzone[data-active='true'] {
+  border-color: var(--cat-accent, var(--gold));
+  background: color-mix(in srgb, var(--cat-accent, var(--gold)) 5%, var(--glass-bg-card));
+}
+
+/* Drag-over state */
+.img-dropzone[data-dragover='true'] {
+  border-color: var(--cat-accent, var(--gold));
+  background: color-mix(in srgb, var(--cat-accent, var(--gold)) 10%, var(--glass-bg-card));
+  transform: scale(1.01);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cat-accent, var(--gold)) 15%, transparent);
+}
+
+.img-dropzone-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  opacity: 0.55;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.img-dropzone[data-dragover='true'] .img-dropzone-icon {
+  opacity: 0.9;
+  transform: scale(1.12);
+}
+
+.img-dropzone-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.img-dropzone-sub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.img-dropzone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--cat-accent, var(--gold)) 45%, transparent);
+  background: color-mix(in srgb, var(--cat-accent, var(--gold)) 8%, transparent);
+  color: var(--cat-accent, var(--gold));
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+  z-index: 3; /* above the hidden file input */
+  pointer-events: none; /* let the overlay input handle clicks */
+}
+
+/* ── Error message ── */
+.img-upload-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #f87171;
+  letter-spacing: 0.03em;
+}
+
+.img-upload-error-icon { flex-shrink: 0; }
+
+/* ── Preview grid ── */
+.img-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .img-preview-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.img-preview-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: var(--bg-tertiary);
+}
+
+.img-preview-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Remove button */
+.img-preview-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  z-index: 2;
+}
+
+.img-preview-remove:hover { background: rgba(220, 38, 38, 0.75); }
+
+/* File name + size caption */
+.img-preview-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.25rem 0.35rem;
+  background: rgba(0,0,0,0.6);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Submit row ── */
+.img-upload-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.img-upload-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.img-upload-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 9999px;
+  background: var(--cat-accent, var(--gold));
+  color: var(--bg-primary);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.img-upload-submit-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.img-upload-submit-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── Success state ── */
+.img-upload-success {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 200, 100, 0.08);
+  border: 1px solid rgba(0, 200, 100, 0.25);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #4ade80;
+  letter-spacing: 0.03em;
+}
+
+/* ── prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .img-dropzone,
+  .img-dropzone-icon,
+  .img-upload-submit-btn { transition: none !important; }
+  .img-dropzone[data-dragover='true'] { transform: none; }
+}

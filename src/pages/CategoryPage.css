@@ -626,11 +626,104 @@
 
 .cat-notfound-link:hover { border-color: var(--gold); }
 
-/* ── Responsive ── */
+/* ── Upload section ── */
+.cat-upload-section { padding-top: clamp(2rem, 4vw, 4rem); }
+
+.cat-upload-wrap {
+  max-width: 640px;
+}
+
+/* ── Responsive ──
+   3-tier: desktop (>1024) → tablet (480–768) → mobile (<480)
+
+   Note: auto-fit grids already collapse gracefully via minmax().
+   These breakpoints handle edge cases + font adjustments.
+*/
+
+/* ── Laptop / tablet (max 1024px) ── */
+@media (max-width: 1024px) {
+  .cat-styles-grid  { grid-template-columns: repeat(2, 1fr); }
+  .cat-process-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Tablet (max 768px) ── */
 @media (max-width: 768px) {
-  .cat-hero-title            { font-size: var(--text-4xl); }
+  .cat-hero-title       { font-size: var(--text-4xl); }
+  .cat-hero-actions     { flex-direction: column; align-items: center; width: 100%; }
+  .cat-hero-actions > * { width: 100%; max-width: 360px; justify-content: center; }
+
+  .cat-styles-grid      { grid-template-columns: 1fr; }
+  .cat-pricing-grid     { grid-template-columns: 1fr; }
+  .cat-process-grid     { grid-template-columns: repeat(2, 1fr); }
+
+  .cat-cta              { margin: 0 1rem 3rem; }
+
+  .cat-upload-wrap      { max-width: 100%; }
+}
+
+/* ── Mobile (max 480px) ── */
+@media (max-width: 480px) {
+  /* Hero */
+  .cat-hero             { padding: 7rem 1rem 3rem; }
+  .cat-hero-title       { font-size: clamp(1.75rem, 9vw, 2.5rem); letter-spacing: -0.015em; }
+  .cat-hero-label       { font-size: 0.6rem; padding: 0.3rem 0.9rem; }
+  .cat-hero-desc        { font-size: 0.9rem; }
+
+  /* Grids: all 1-col on phone */
   .cat-styles-grid,
   .cat-pricing-grid,
-  .cat-process-grid          { grid-template-columns: 1fr; }
-  .cat-hero-actions          { flex-direction: column; align-items: center; }
+  .cat-process-grid     { grid-template-columns: 1fr; }
+
+  /* Section padding tighter */
+  .cat-section          { padding: 2.5rem 1rem; }
+  .cat-section-title    { font-size: clamp(1.5rem, 7vw, 2rem); }
+
+  /* Divider simplified */
+  .cat-divider-wrap     { padding: 0 1rem; }
+
+  /* CTA banner */
+  .cat-cta              { margin: 0 0.75rem 2.5rem; }
+  .cat-cta-inner        { padding: 2rem 1.25rem; }
+  .cat-cta-btns         { flex-direction: column; }
+  .cat-cta-btns > *     { width: 100%; justify-content: center; }
+
+  /* Pricing: full card width, price smaller */
+  .cat-pricing-price    { font-size: clamp(1.75rem, 8vw, 2.25rem); }
+
+  /* Breadcrumb: wrap gracefully */
+  .cat-breadcrumb       { flex-wrap: wrap; gap: 0.25rem; }
+
+  /* Disclaimer */
+  .cat-disclaimer       { margin: 0.75rem 0.75rem 0; }
+}
+
+/* ── prefers-reduced-motion ──
+   Suppresses all animations/transitions site-wide on this page.
+   The 'respectful' tone already disables framer-motion animations in JSX;
+   this CSS layer ensures CSS animations and transitions are also off.
+*/
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all transitions */
+  .cat-style-card,
+  .cat-pricing-card,
+  .cat-process-step,
+  .cat-cta-primary,
+  .cat-cta-secondary,
+  .cat-hero-cta-ghost,
+  .cat-cta-primary-btn  { transition: none !important; }
+
+  /* Disable hover transforms */
+  .cat-page:not([data-tone='respectful']) .cat-style-card:hover,
+  .cat-page:not([data-tone='respectful']) .cat-pricing-card:hover,
+  .cat-cta-primary:hover,
+  .cat-cta-primary-btn:hover { transform: none !important; }
+
+  /* Suppress gold shimmer animation */
+  .gold-shimmer {
+    animation: none !important;
+    background: var(--tamil-gold) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
 }

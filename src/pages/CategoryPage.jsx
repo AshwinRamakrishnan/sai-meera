@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, useInView } from 'framer-motion';
 import { getCategoryBySlug } from '../data/categories';
+import ImageUpload from '../components/ui/ImageUpload';
 import './CategoryPage.css';
 
 /* ── Animation variants ── */
@@ -232,6 +233,35 @@ export default function CategoryPage() {
         <div className="cat-divider-wrap">
           <TamilDivider />
         </div>
+      )}
+
+      {/* ══════════════════════
+          PHOTO UPLOAD (invitation/festive categories only)
+      ══════════════════════ */}
+      {isFestive && (
+        <section className="cat-section cat-upload-section">
+          <AnimatedSection tone={tone}>
+            <FadeItem tone={tone}>
+              <div className="temple-label cat-section-label-wrap">
+                <span className="temple-label-text">Personalise</span>
+              </div>
+              <h2 className="cat-section-title">Upload Your Photos</h2>
+              <p className="cat-section-sub">
+                Share your photos with us — couple portraits, family photos, or venue
+                images. We'll incorporate them into your invitation design.
+              </p>
+            </FadeItem>
+            <FadeItem tone={tone}>
+              <div className="cat-upload-wrap">
+                <ImageUpload
+                  label=""
+                  hint="Photos are used only for your design. Max 5 images, 10 MB each. JPEG · PNG · WEBP · HEIC accepted."
+                  accentColor={cat.accentColor}
+                />
+              </div>
+            </FadeItem>
+          </AnimatedSection>
+        </section>
       )}
 
       {/* ══════════════════════════════════════
