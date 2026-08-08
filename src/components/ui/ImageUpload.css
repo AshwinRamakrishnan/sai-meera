@@ -156,6 +156,36 @@
   display: block;
 }
 
+/* HEIC safe-placeholder — shown instead of <img> on Chrome/Firefox/Edge */
+.img-heic-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--cat-accent, var(--gold)) 10%, var(--bg-tertiary)),
+    var(--bg-tertiary)
+  );
+  border: 1px dashed color-mix(in srgb, var(--cat-accent, var(--gold)) 30%, transparent);
+}
+
+.img-heic-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.img-heic-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cat-accent, var(--gold));
+  opacity: 0.8;
+}
+
 /* Remove button */
 .img-preview-remove {
   position: absolute;

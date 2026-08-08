@@ -22,9 +22,22 @@ const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
 /* ── Helpers ─────────────────────────────────────────────────*/
 function formatBytes(bytes) {
-  if (bytes < 1024)       return `${bytes} B`;
+  if (bytes < 1024)        return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+/**
+ * HEIC/HEIF files are natively shot on iPhones.
+ * Chrome/Firefox/Edge cannot decode HEIC blob URLs in <img> — only Safari can.
+ * We detect them to show a safe placeholder instead of a broken image icon.
+ * Detection uses MIME type first, then falls back to file extension (iPhones
+ * sometimes omit the MIME type when sharing via cable / AirDrop).
+ */
+function isHeicFile(file) {
+  if (file.type === 'image/heic' || file.type === 'image/heif') return true;
+  const ext = file.name.split('.').pop().toLowerCase();
+  return ext === 'heic' || ext === 'heif';
 }
 
 function validateFiles(incoming, existing) {
@@ -191,12 +204,24 @@ export default function ImageUpload({
         <div className="img-preview-grid" aria-label="Uploaded images">
           {previews.map((p) => (
             <div key={p.id} className="img-preview-item">
-              <img
-                src={p.url}
-                alt={p.file.name}
-                className="img-preview-thumb"
-                loading="lazy"
-              />
+              {isHeicFile(p.file) ? (
+                /* HEIC/HEIF: Chrome/Firefox/Edge cannot render HEIC blob URLs.
+                   Show a safe icon placeholder — the file itself is valid. */
+                <div
+                  className="img-preview-thumb img-heic-placeholder"
+                  aria-label={`HEIC image: ${p.file.name}`}
+                >
+                  <span className="img-heic-icon" aria-hidden="true">📷</span>
+                  <span className="img-heic-label">HEIC</span>
+                </div>
+              ) : (
+                <img
+                  src={p.url}
+                  alt={p.file.name}
+                  className="img-preview-thumb"
+                  loading="lazy"
+                />
+              )}
               <button
                 className="img-preview-remove"
                 onClick={() => removePreview(p.id)}
