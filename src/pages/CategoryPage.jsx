@@ -160,11 +160,11 @@ export default function CategoryPage() {
         handler: async function (response) {
           try {
             setPaymentLoading(true);
-            const verifyRes = await verifyRazorpayPayment({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature
-            });
+            const verifyRes = await verifyRazorpayPayment(
+              response.razorpay_order_id,
+              response.razorpay_payment_id,
+              response.razorpay_signature
+            );
             if (verifyRes.success) {
               setPaymentSuccess(true);
               setPaymentId(response.razorpay_payment_id);
