@@ -2,9 +2,9 @@
  * ImageUpload.jsx
  *
  * Client-side drag-and-drop image upload component.
- * - Accepts JPEG, PNG, WEBP, HEIC
+ * - Accepts JPEG, PNG, WEBP, HEIC, PDF
  * - Configurable max files and max size via props
- * - Local preview with HEIC placeholder for Chrome/Firefox/Edge
+ * - Local preview with HEIC/PDF placeholder for Chrome/Firefox/Edge
  * - Full keyboard + aria support
  * - prefers-reduced-motion respected via CSS
  * - onFilesChange callback notifies parent of current file list
@@ -14,9 +14,9 @@ import React, { useCallback, useRef, useState } from 'react';
 import './ImageUpload.css';
 
 /* ── Constants ─────────────────────────────────────────────── */
-const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
+const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'application/pdf'];
 const MAX_FILES      = 5;
-const MAX_SIZE_MB    = 10;
+const MAX_SIZE_MB    = 50;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
 /* ── Helpers ─────────────────────────────────────────────────*/
@@ -33,10 +33,27 @@ function formatBytes(bytes) {
  * Detection uses MIME type first, then falls back to file extension (iPhones
  * sometimes omit the MIME type when sharing via cable / AirDrop).
  */
-function isHeicFile(file) {
-  if (file.type === 'image/heic' || file.type === 'image/heif') return true;
-  const ext = file.name.split('.').pop().toLowerCase();
-  return ext === 'heic' || ext === 'heif';
+function FilePreview({ file, url, id, onRemove }) {
+  // Determine if it's HEIC or PDF to show placeholder instead of broken blob image
+  const isHeic = file.type === 'image/heic' || file.type === 'image/heif';
+  const isPdf = file.type === 'application/pdf';
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const showPlaceholder = (isHeic && !isSafari) || isPdf;
+
+  return (
+    <div className="img-preview-item">
+      {showPlaceholder ? (
+        <div className="img-preview-thumb img-heic-placeholder" aria-label={`${isPdf ? 'PDF' : 'HEIC'} file: ${file.name}`}>
+          <span className="img-heic-icon" aria-hidden="true">{isPdf ? '📄' : '📷'}</span>
+          <span className="img-heic-label">{isPdf ? 'PDF' : 'HEIC'}</span>
+        </div>
+      ) : (
+        <img src={url} alt={file.name} className="img-preview-thumb" loading="lazy" />
+      )}
+      <button className="img-preview-remove" onClick={() => onRemove(id)} aria-label={`Remove ${file.name}`} type="button">✕</button>
+      <div className="img-preview-caption" title={file.name}>{file.name} · {formatBytes(file.size)}</div>
+    </div>
+  );
 }
 
 function validateFiles(incoming, existing) {
@@ -45,7 +62,7 @@ function validateFiles(incoming, existing) {
 
   for (const file of incoming) {
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      errors.push(`"${file.name}" is not a supported format (JPEG, PNG, WEBP, HEIC only).`);
+      errors.push(`"${file.name}" is not a supported format (JPEG, PNG, WEBP, HEIC, PDF only).`);
       continue;
     }
     if (file.size > MAX_SIZE_BYTES) {
@@ -62,7 +79,7 @@ function validateFiles(incoming, existing) {
 
   if (existing.length + accepted.length > MAX_FILES) {
     const allowed = MAX_FILES - existing.length;
-    errors.push(`You can upload at most ${MAX_FILES} images. Only the first ${allowed} will be added.`);
+    errors.push(`You can upload at most ${MAX_FILES} images/files. Only the first ${allowed} will be added.`);
     return { accepted: accepted.slice(0, allowed), errors };
   }
 
@@ -180,7 +197,7 @@ export default function ImageUpload({
             ref={inputRef}
             type="file"
             className="img-dropzone-input"
-            accept={ACCEPTED_TYPES.join(',')}
+            accept="image/jpeg, image/png, image/webp, image/heic, image/heif, application/pdf"
             multiple
             onChange={handleInputChange}
             aria-hidden="true"

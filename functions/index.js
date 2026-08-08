@@ -1,21 +1,21 @@
 const { onRequest } = require("firebase-functions/v2/https");
 const { initializeApp } = require("firebase-admin/app");
 const { getFirestore, FieldValue, Timestamp } = require("firebase-admin/firestore");
-const { getStorage } = require("firebase-admin/storage");
 const crypto = require("crypto");
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 // ── Initialize Firebase Admin ────────────────────────────────────
 initializeApp();
 const db = getFirestore();
-const bucket = getStorage().bucket();
 
 // ── Constants ────────────────────────────────────────────────────
 const MAX_ENQUIRIES_PER_HOUR = 5;
 const MAX_UPLOADS_PER_HOUR = 15;
 const MAX_UPLOADS_PER_ENQUIRY = 5;
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
 const ENQUIRY_UPLOAD_WINDOW_MS = 30 * 60 * 1000; // 30 minutes
-const SIGNED_URL_EXPIRY_MS = 15 * 60 * 1000; // 15 minutes
+const SIGNED_URL_EXPIRY_SECONDS = 15 * 60; // 15 minutes
 
 const ALLOWED_MIME_TYPES = new Map([
   ["image/jpeg", "jpg"],
@@ -23,6 +23,7 @@ const ALLOWED_MIME_TYPES = new Map([
   ["image/webp", "webp"],
   ["image/heic", "heic"],
   ["image/heif", "heif"],
+  ["application/pdf", "pdf"],
 ]);
 
 const VALID_SERVICES = new Set([
@@ -350,21 +351,42 @@ exports.authorizeUpload = onRequest(
       // validated (enquiryId is alphanumeric, uuid is from crypto, ext is
       // from a fixed allowlist). No client strings in the path.
 
-      // ── Generate signed upload URL ──
-      const file = bucket.file(storagePath);
-      const expiresAt = Date.now() + SIGNED_URL_EXPIRY_MS;
+      // ── B2 Client Configuration ──
+      const b2Endpoint = process.env.B2_ENDPOINT;
+      const b2Region = process.env.B2_REGION;
+      const b2Bucket = process.env.B2_BUCKET;
+      const b2AccessKeyId = process.env.B2_APPLICATION_KEY_ID;
+      const b2SecretAccessKey = process.env.B2_APPLICATION_KEY;
 
-      const [uploadUrl] = await file.getSignedUrl({
-        version: "v4",
-        action: "write",
-        expires: expiresAt,
-        contentType: contentType,
-        extensionHeaders: {
-          // Server-enforced size limit in the signed URL itself.
-          // GCS rejects the upload if the actual size exceeds this.
-          "x-goog-content-length-range": `1,${MAX_FILE_SIZE}`,
+      if (!b2Endpoint || !b2Region || !b2Bucket || !b2AccessKeyId || !b2SecretAccessKey) {
+        console.error("Missing B2 configuration in environment secrets.");
+        return res.status(500).json({ error: "Storage configuration error." });
+      }
+
+      const s3Client = new S3Client({
+        endpoint: b2Endpoint,
+        region: b2Region,
+        credentials: {
+          accessKeyId: b2AccessKeyId,
+          secretAccessKey: b2SecretAccessKey,
         },
+        // B2 S3 API may not support AWS-specific checksums
+        requestChecksumCalculation: "WHEN_REQUIRED",
+        responseChecksumValidation: "WHEN_REQUIRED",
       });
+
+      // ── Generate signed upload URL ──
+      const command = new PutObjectCommand({
+        Bucket: b2Bucket,
+        Key: storagePath,
+        ContentType: contentType,
+        ContentLength: fileSize,
+      });
+
+      const uploadUrl = await getSignedUrl(s3Client, command, {
+        expiresIn: SIGNED_URL_EXPIRY_SECONDS,
+      });
+      const expiresAt = Date.now() + (SIGNED_URL_EXPIRY_SECONDS * 1000);
 
       // ── Atomically increment upload count ──
       await enquiryRef.update({
