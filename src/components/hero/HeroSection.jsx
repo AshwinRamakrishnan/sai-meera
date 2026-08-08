@@ -1,40 +1,56 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import BackgroundGrid from './BackgroundGrid';
 import HeroParticles from './HeroParticles';
+import { FaArrowRight } from 'react-icons/fa';
 import './HeroSection.css';
 
+const AnimatedCounter = ({ value, duration = 3, delay = 1, decimals = 0 }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const spring = useSpring(0, { duration: duration * 1000, bounce: 0 });
+  const displayValue = useTransform(spring, (current) => 
+    current.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  );
+
+  useEffect(() => {
+    if (isInView) {
+      setTimeout(() => {
+        spring.set(value);
+      }, delay * 1000);
+    }
+  }, [isInView, spring, value, delay]);
+
+  return <motion.span ref={ref}>{displayValue}</motion.span>;
+};
+
 const HeroSection = () => {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+
   const stats = [
-    { value: '1962', label: 'Founded' },
-    { value: '60+', label: 'Years Legacy' },
-    { value: '3.2m', label: 'Print Width' },
-    { value: '1440', label: 'DPI Precision' }
+    { value: 1962, suffix: '', label: 'Founded' },
+    { value: 60, suffix: '+', label: 'Years Legacy' },
+    { value: 3.2, suffix: 'm', label: 'Print Width', decimals: 1 },
+    { value: 1440, suffix: '', label: 'DPI Precision' }
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const textRevealVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 1, ease: 'easeOut', delay: 0.6 }
+      rotateX: 0,
+      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } // Apple-style spring
     }
   };
 
@@ -43,50 +59,73 @@ const HeroSection = () => {
       <BackgroundGrid />
       <HeroParticles />
       
-      <div className="hero-content-wrapper">
+      {/* Subtle Aurora Glow */}
+      <div className="hero-glow hero-glow-cyan" />
+      <div className="hero-glow hero-glow-gold" />
+      
+      <motion.div 
+        className="hero-content-wrapper"
+        style={{ y: y1, opacity }}
+      >
         <motion.div 
-          className="hero-left"
+          className="hero-main-content"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="hero-label" variants={itemVariants}>
-            // INDUSTRIAL PRINTING EXCELLENCE
+          <motion.div className="hero-label-pill" variants={textRevealVariants}>
+            <span className="pulse-dot" /> INDUSTRIAL PRINTING EXCELLENCE
           </motion.div>
           
-          <motion.h1 className="hero-heading" variants={itemVariants}>
-            <span className="hero-heading-line1">Sai Meera</span>
-            <span className="hero-heading-line2">Legacy Printing</span>
-          </motion.h1>
+          <div className="hero-heading-container">
+            <motion.h1 className="hero-heading" variants={textRevealVariants}>
+              Sai Meera
+            </motion.h1>
+            <motion.h1 className="hero-heading hero-heading-accent" variants={textRevealVariants}>
+              Legacy Printing.
+            </motion.h1>
+          </div>
           
-          <motion.p className="hero-description" variants={itemVariants}>
+          <motion.p className="hero-description" variants={textRevealVariants}>
             A 60+ year industrial printing institution built on heritage, craftsmanship, and cinematic precision. From traditional offset to large-format flex — every machine tells a story.
           </motion.p>
           
-          <motion.div className="hero-cta-group" variants={itemVariants}>
-            <button className="hero-btn hero-btn-outline">Explore Legacy</button>
-            <button className="hero-btn hero-btn-filled">Launch Production</button>
+          <motion.div className="hero-cta-group" variants={textRevealVariants}>
+            <a href="#machines" className="hero-btn-primary magnetic">
+              Launch Production <FaArrowRight size={20} />
+            </a>
+            <a href="#legacy" className="hero-btn-secondary magnetic">
+              Explore Legacy
+            </a>
           </motion.div>
         </motion.div>
         
         <motion.div 
-          className="hero-right"
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
+          className="hero-stats-wrapper"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="hero-stats-card">
+          <div className="hero-stats-glass-card">
             <div className="hero-stats-grid">
               {stats.map((stat, index) => (
                 <div key={index} className="hero-stat-item">
-                  <div className="hero-stat-value">{stat.value}</div>
+                  <div className="hero-stat-value">
+                    <AnimatedCounter 
+                      value={stat.value} 
+                      duration={3} 
+                      delay={1}
+                      decimals={stat.decimals || 0}
+                    />
+                    {stat.suffix}
+                  </div>
                   <div className="hero-stat-label">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

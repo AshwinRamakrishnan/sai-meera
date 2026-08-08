@@ -5,47 +5,37 @@
 
 @media (pointer: coarse), (hover: none) {
   .cursor-wrapper {
-    display: none;
+    display: none !important;
   }
 }
 
 .cursor-dot {
   position: fixed;
-  top: -3px;
-  left: -3px;
-  width: 6px;
-  height: 6px;
-  background-color: var(--cyan, #00d4ff);
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--text-primary);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10001;
-  transition: transform 0.1s, background-color 0.3s;
+  /* Mix blend mode for that Awwwards feel */
+  mix-blend-mode: difference;
   will-change: transform;
 }
 
 .cursor-ring {
   position: fixed;
-  top: -18px;
-  left: -18px;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--cyan, #00d4ff);
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s, border-color 0.3s;
-  will-change: transform;
+  mix-blend-mode: difference;
+  will-change: transform, width, height;
 }
 
-.cursor-dot.hovered {
-  background-color: transparent;
-}
-
-.cursor-ring.hovered {
-  width: 56px;
-  height: 56px;
-  top: -28px;
-  left: -28px;
-  border-color: var(--gold, #f5a623);
-  background-color: rgba(245, 166, 35, 0.1);
-}
+/* We handle hover states completely in React with Framer Motion now */

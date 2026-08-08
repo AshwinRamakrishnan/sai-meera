@@ -1,85 +1,116 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './CustomCursor.css';
 
 const CustomCursor = () => {
-  const dotRef = useRef(null);
-  const ringRef = useRef(null);
-  
-  // Keep track of mouse position and delayed ring position
-  const mousePos = useRef({ x: 0, y: 0 });
-  const ringPos = useRef({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  // Motion values for exact mouse position
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Smooth springs for the outer ring trailing effect
+  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) return;
+    // Detect touch device to disable cursor
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      setIsTouch(true);
+      return;
+    }
 
-    const onMouseMove = (e) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
-      
-      // Update dot immediately
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    const moveCursor = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+
+    const handleMouseOver = (e) => {
+      // Find closest interactable element
+      const target = e.target.closest('a, button, input, textarea, select, [role="button"], .magnetic');
+      if (target) {
+        setIsHovered(true);
       }
     };
 
-    const animateRing = () => {
-      const dx = mousePos.current.x - ringPos.current.x;
-      const dy = mousePos.current.y - ringPos.current.y;
-      
-      // Easing factor
-      ringPos.current.x += dx * 0.15;
-      ringPos.current.y += dy * 0.15;
-      
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`;
-      }
-      
-      requestAnimationFrame(animateRing);
-    };
-
-    const onMouseOver = (e) => {
-      if (
-        e.target.tagName.toLowerCase() === 'a' ||
-        e.target.tagName.toLowerCase() === 'button' ||
-        e.target.closest('a') ||
-        e.target.closest('button')
-      ) {
-        if (ringRef.current) ringRef.current.classList.add('hovered');
-        if (dotRef.current) dotRef.current.classList.add('hovered');
+    const handleMouseOut = (e) => {
+      const target = e.target.closest('a, button, input, textarea, select, [role="button"], .magnetic');
+      if (target) {
+        setIsHovered(false);
       }
     };
 
-    const onMouseOut = (e) => {
-      if (
-        e.target.tagName.toLowerCase() === 'a' ||
-        e.target.tagName.toLowerCase() === 'button' ||
-        e.target.closest('a') ||
-        e.target.closest('button')
-      ) {
-        if (ringRef.current) ringRef.current.classList.remove('hovered');
-        if (dotRef.current) dotRef.current.classList.remove('hovered');
-      }
-    };
-
-    window.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseover', onMouseOver);
-    document.addEventListener('mouseout', onMouseOut);
-    
-    // Start animation loop
-    const req = requestAnimationFrame(animateRing);
+    window.addEventListener('mousemove', moveCursor);
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseover', onMouseOver);
-      document.removeEventListener('mouseout', onMouseOut);
-      cancelAnimationFrame(req);
+      window.removeEventListener('mousemove', moveCursor);
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
     };
-  }, []);
+  }, [cursorX, cursorY]);
+
+  if (isTouch) return null;
+
+  // Variants for the outer ring
+  const ringVariants = {
+    default: {
+      width: 40,
+      height: 40,
+      x: "-50%",
+      y: "-50%",
+      backgroundColor: "transparent",
+      borderColor: "rgba(255, 255, 255, 0.4)",
+    },
+    hover: {
+      width: 60,
+      height: 60,
+      x: "-50%",
+      y: "-50%",
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      borderColor: "transparent",
+      mixBlendMode: "difference"
+    }
+  };
+
+  // Variants for the inner dot
+  const dotVariants = {
+    default: {
+      x: "-50%",
+      y: "-50%",
+      opacity: 1
+    },
+    hover: {
+      x: "-50%",
+      y: "-50%",
+      opacity: 0 // Hide inner dot when hovering to let ring become solid
+    }
+  };
 
   return (
     <div className="cursor-wrapper">
-      <div ref={ringRef} className="cursor-ring"></div>
-      <div ref={dotRef} className="cursor-dot"></div>
+      <motion.div
+        className="cursor-ring"
+        variants={ringVariants}
+        animate={isHovered ? "hover" : "default"}
+        style={{
+          left: cursorXSpring,
+          top: cursorYSpring,
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      />
+      <motion.div
+        className="cursor-dot"
+        variants={dotVariants}
+        animate={isHovered ? "hover" : "default"}
+        style={{
+          left: cursorX, // Dot follows exactly (no spring)
+          top: cursorY,
+        }}
+      />
     </div>
   );
 };

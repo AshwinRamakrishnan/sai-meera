@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/hero/HeroSection';
 import LegacySection from '../components/legacy/LegacySection';
 import MachineSection from '../components/machines/MachineSection';
@@ -19,6 +20,11 @@ import HydraulicCutter from '../scenes/HydraulicCutter';
 export default function HomePage() {
   return (
     <>
+      <Helmet>
+        <title>Sai Meera | Industrial Printing Excellence</title>
+        <meta name="description" content="A 60+ year industrial printing institution built on heritage, craftsmanship, and cinematic precision." />
+        <meta name="keywords" content="industrial printing, offset press, flex banner, premium invitations, chennai printing" />
+      </Helmet>
       <HeroSection />
       <div className="gold-divider" />
       <LegacySection />
