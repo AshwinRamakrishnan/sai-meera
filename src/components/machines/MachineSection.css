@@ -328,7 +328,7 @@
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .machineSection {
-    height: 250vh; /* Shorter scroll distance on mobile */
+    height: 120vh; /* Shorter scroll distance on mobile */
   }
 
   .badge {
@@ -362,6 +362,7 @@
   .specBadgesRow {
     gap: 0.35rem;
     margin-bottom: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .specBadge {

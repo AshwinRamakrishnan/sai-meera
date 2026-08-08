@@ -8,6 +8,7 @@ import './Navbar.css';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileExpandedGroup, setMobileExpandedGroup] = useState(null);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef(null);
   const location = useLocation();
@@ -22,6 +23,7 @@ const Navbar = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesOpen(false);
+    setMobileExpandedGroup(null);
   }, [location.pathname]);
 
   // Close dropdown on outside click
@@ -37,8 +39,8 @@ const Navbar = () => {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
   const isActive = (path) => {
@@ -58,7 +60,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={() => setMobileMenuOpen(false)}>
           <span className="logo-main">Sai Meera</span>
@@ -272,18 +274,44 @@ const Navbar = () => {
               transition={{ delay: mainLinks.length * 0.05 + 0.1, duration: 0.28 }}
             >
               <div className="mobile-nav-group-label">Print Services</div>
-              {PRINT_SERVICES_MENU.map((group) =>
-                group.items.map((item, gi) => (
-                  <NavLink
-                    key={item.to}
-                    to={item.to}
-                    className={`mobile-nav-link mobile-nav-sublink ${location.pathname.startsWith(item.to) ? 'active' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
+              {PRINT_SERVICES_MENU.map((group) => (
+                <div key={group.group} className="mobile-nav-accordion-group">
+                  <button 
+                    className="mobile-nav-accordion-btn"
+                    onClick={() => setMobileExpandedGroup(prev => prev === group.group ? null : group.group)}
                   >
-                    {item.name}
-                  </NavLink>
-                ))
-              )}
+                    <span style={{ color: group.accentColor }}>{group.group}</span>
+                    <motion.div
+                      animate={{ rotate: mobileExpandedGroup === group.group ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown size={18} />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {mobileExpandedGroup === group.group && (
+                      <motion.div
+                        className="mobile-nav-accordion-content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      >
+                        {group.items.map((item) => (
+                          <NavLink
+                            key={item.to}
+                            to={item.to}
+                            className={`mobile-nav-sublink ${location.pathname.startsWith(item.to) ? 'active' : ''}`}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.name}
+                          </NavLink>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
             </motion.div>
 
             {/* Contact */}

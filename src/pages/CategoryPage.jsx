@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, useInView } from 'framer-motion';
 import { getCategoryBySlug } from '../data/categories';
 import ImageUpload from '../components/ui/ImageUpload';
+import { submitEnquiry, createRazorpayOrder, verifyRazorpayPayment } from '../lib/api';
 import './CategoryPage.css';
 
 /* ── Animation variants ── */
@@ -85,6 +86,111 @@ const PLACEHOLDER_ICON = {
 export default function CategoryPage() {
   const { slug } = useParams();
   const cat = getCategoryBySlug(slug);
+
+  /* Payment State */
+  const [selectedTier, setSelectedTier] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+  const [checkoutData, setCheckoutData] = useState({ name: '', email: '', phone: '' });
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentId, setPaymentId] = useState('');
+
+  // Reset payment state when category changes
+  useEffect(() => {
+    setSelectedTier('');
+    setQuantity('');
+    setPaymentSuccess(false);
+    setPaymentError('');
+    setCheckoutModalOpen(false);
+  }, [slug]);
+
+  const handleFastCheckoutSubmit = async (e) => {
+    e.preventDefault();
+    if (!checkoutData.name || !checkoutData.email || !checkoutData.phone) {
+      setPaymentError('Please fill all details.');
+      return;
+    }
+    
+    setPaymentLoading(true);
+    setPaymentError('');
+    try {
+      // 1. Create a quick enquiry record
+      const enquiryPayload = {
+        name: checkoutData.name,
+        email: checkoutData.email,
+        phone: checkoutData.phone,
+        service: 'other',
+        categorySlug: slug,
+        message: `Fast Checkout Order: ${cat.name} — ${selectedTier} x ${quantity}`
+      };
+      
+      const enquiryRes = await submitEnquiry(enquiryPayload);
+      if (!enquiryRes.success || !enquiryRes.enquiryId) throw new Error(enquiryRes.error || 'Failed to create order record');
+      
+      const enquiryId = enquiryRes.enquiryId;
+      setCheckoutModalOpen(false);
+
+      // 2. Call Razorpay Edge Function
+      const orderRes = await createRazorpayOrder(
+        enquiryId,
+        slug,
+        selectedTier,
+        Number(quantity)
+      );
+      if (!orderRes.success) throw new Error(orderRes.error || 'Failed to create Razorpay order');
+
+      // 3. Open Razorpay Checkout
+      const options = {
+        key: orderRes.key,
+        amount: orderRes.amount,
+        currency: orderRes.currency,
+        name: 'Sai Meera Printing',
+        description: orderRes.description,
+        order_id: orderRes.orderId,
+        prefill: {
+          name: checkoutData.name,
+          email: checkoutData.email,
+          contact: checkoutData.phone
+        },
+        theme: {
+          color: cat.accentColor || '#eab308'
+        },
+        handler: async function (response) {
+          try {
+            setPaymentLoading(true);
+            const verifyRes = await verifyRazorpayPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            });
+            if (verifyRes.success) {
+              setPaymentSuccess(true);
+              setPaymentId(response.razorpay_payment_id);
+            } else {
+              setPaymentError('Payment verification failed.');
+            }
+          } catch (err) {
+            setPaymentError(err.message);
+          } finally {
+            setPaymentLoading(false);
+          }
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.on('payment.failed', function (response) {
+        setPaymentError(response.error.description);
+        setPaymentLoading(false);
+      });
+      rzp.open();
+
+    } catch (err) {
+      setPaymentError(err.message);
+      setPaymentLoading(false);
+    }
+  };
 
   /* 404 */
   if (!cat) {
@@ -308,6 +414,153 @@ export default function CategoryPage() {
           </div>
         </AnimatedSection>
       </section>
+
+      {/* ══════════════════════════════════════
+          FAST CHECKOUT MODAL
+      ══════════════════════════════════════ */}
+      {checkoutModalOpen && (
+        <div className="cat-modal-overlay">
+          <div className="cat-modal-content">
+            <h3 className="cat-modal-title">Fast Checkout</h3>
+            <p className="cat-modal-sub">Please provide your details to proceed with payment.</p>
+            
+            <form onSubmit={handleFastCheckoutSubmit} className="cat-modal-form">
+              <div className="cat-form-group">
+                <label>Name</label>
+                <input 
+                  type="text" 
+                  required 
+                  value={checkoutData.name} 
+                  onChange={e => setCheckoutData({...checkoutData, name: e.target.value})} 
+                />
+              </div>
+              <div className="cat-form-group">
+                <label>Email</label>
+                <input 
+                  type="email" 
+                  required 
+                  value={checkoutData.email} 
+                  onChange={e => setCheckoutData({...checkoutData, email: e.target.value})} 
+                />
+              </div>
+              <div className="cat-form-group">
+                <label>Phone Number</label>
+                <input 
+                  type="tel" 
+                  required 
+                  value={checkoutData.phone} 
+                  onChange={e => setCheckoutData({...checkoutData, phone: e.target.value})} 
+                />
+              </div>
+
+              {paymentError && <div className="cat-payment-error">{paymentError}</div>}
+
+              <div className="cat-modal-actions">
+                <button 
+                  type="button" 
+                  className="cat-modal-cancel" 
+                  onClick={() => setCheckoutModalOpen(false)}
+                  disabled={paymentLoading}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="cat-modal-submit"
+                  disabled={paymentLoading}
+                >
+                  {paymentLoading ? 'Processing...' : 'Proceed to Pay'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          PAYMENT SECTION (Only if fixed pricing exists)
+      ══════════════════════════════════════ */}
+      {cat.pricing && typeof cat.pricing[0]?.price === 'string' && cat.pricing[0].price.includes('₹') && (
+        <section className="cat-section cat-section-payment">
+          <AnimatedSection tone={tone}>
+            <div className="cat-payment-container">
+              {paymentSuccess ? (
+                <div className="cat-payment-success-box">
+                  <div className="cat-success-icon">✓</div>
+                  <h3>Payment Successful!</h3>
+                  <p>Your order has been placed. Payment ID: {paymentId}</p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="cat-payment-title">Order Online</h3>
+                  <div className="cat-payment-controls">
+                    <div className="cat-payment-group">
+                      <label>Select Tier</label>
+                      <select 
+                        value={selectedTier} 
+                        onChange={(e) => setSelectedTier(e.target.value)}
+                        className="cat-payment-select"
+                      >
+                        <option value="">-- Choose Tier --</option>
+                        {cat.pricing.map(t => (
+                          <option key={t.name} value={t.name}>
+                            {t.name} — {t.price}{t.unit} ({t.minQty})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="cat-payment-group">
+                      <label>Quantity</label>
+                      <input 
+                        type="number" 
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        className="cat-payment-input"
+                        placeholder="e.g. 100"
+                        min="1"
+                      />
+                    </div>
+                  </div>
+
+                  {selectedTier && quantity && (
+                    <div className="cat-payment-summary">
+                      <span className="cat-summary-label">Estimated Total:</span>
+                      <span className="cat-summary-val">
+                        ₹{(() => {
+                          const tierData = cat.pricing.find(t => t.name === selectedTier);
+                          if (!tierData) return 0;
+                          const priceNum = parseInt(tierData.price.replace(/\D/g, ''));
+                          return (priceNum * Number(quantity)).toLocaleString('en-IN');
+                        })()}
+                      </span>
+                    </div>
+                  )}
+
+                  {paymentError && !checkoutModalOpen && <div className="cat-payment-error">{paymentError}</div>}
+
+                  <button 
+                    className="cat-hero-cta"
+                    style={{ marginTop: '1.5rem', width: '100%', justifyContent: 'center' }}
+                    onClick={() => {
+                      const tierData = cat.pricing.find(t => t.name === selectedTier);
+                      const minQ = tierData ? parseInt(tierData.minQty.replace(/\D/g, '')) : 1;
+                      if (!selectedTier || !quantity || Number(quantity) < minQ) {
+                        setPaymentError(`Please select a tier and enter a minimum quantity of ${minQ}`);
+                        return;
+                      }
+                      setPaymentError('');
+                      setCheckoutModalOpen(true);
+                    }}
+                  >
+                    Pay Now
+                  </button>
+                </>
+              )}
+            </div>
+          </AnimatedSection>
+        </section>
+      )}
 
       {!isRespect && (
         <div className="cat-divider-wrap">

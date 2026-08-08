@@ -8,6 +8,7 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  padding-top: 80px;
 }
 
 /* ── Breadcrumb ── */
@@ -591,6 +592,258 @@
 .cat-cta-secondary:hover {
   border-color: color-mix(in srgb, var(--cat-accent, var(--gold)) 50%, transparent);
   color: var(--text-primary);
+}
+
+/* ── Payment Section ── */
+.cat-payment-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--glass-bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.cat-payment-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.cat-payment-controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .cat-payment-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.cat-payment-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cat-payment-group label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cat-payment-select,
+.cat-payment-input {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  transition: border-color 0.2s;
+}
+
+.cat-payment-select:focus,
+.cat-payment-input:focus {
+  outline: none;
+  border-color: var(--cat-accent, var(--gold));
+}
+
+.cat-payment-select option {
+  background: #101015;
+  color: var(--text-primary);
+}
+
+.cat-payment-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 0.5rem;
+}
+
+.cat-summary-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.cat-summary-val {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cat-accent, var(--gold));
+}
+
+.cat-payment-error {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  color: #ef4444;
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.cat-payment-success-box {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.cat-success-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.cat-payment-success-box h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cat-payment-success-box p {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* ── Fast Checkout Modal ── */
+.cat-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.cat-modal-content {
+  background: #14141a;
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.cat-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cat-modal-sub {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.cat-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cat-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cat-form-group label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.cat-form-group input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  transition: border-color 0.2s;
+}
+
+.cat-form-group input:focus {
+  outline: none;
+  border-color: var(--cat-accent, var(--gold));
+}
+
+.cat-modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.cat-modal-cancel {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid var(--glass-border-strong);
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cat-modal-cancel:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.cat-modal-submit {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--cat-accent, var(--gold));
+  border: none;
+  color: var(--bg-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.cat-modal-submit:hover {
+  filter: brightness(1.1);
+}
+
+.cat-modal-submit:disabled,
+.cat-modal-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* ── 404 Not Found ── */

@@ -100,7 +100,6 @@ export default function ImageUpload({
   const [previews, setPreviews] = useState([]); // [{ file, url, id }]
   const [dragover, setDragover] = useState(false);
   const [error, setError]       = useState('');
-  const [submitted, setSubmitted] = useState(false);
 
   /* Process validated files into preview objects */
   const addFiles = useCallback((fileList) => {
@@ -119,11 +118,9 @@ export default function ImageUpload({
 
     setPreviews((prev) => {
       const updated = [...prev, ...newPreviews];
-      // Notify parent of current file list
-      if (onFilesChange) onFilesChange(updated);
       return updated;
     });
-  }, [previews, onFilesChange]);
+  }, [previews]);
 
   /* Input change */
   const handleInputChange = (e) => {
@@ -148,26 +145,21 @@ export default function ImageUpload({
       // Revoke the blob URL to free memory
       const removed = prev.find((p) => p.id === id);
       if (removed) URL.revokeObjectURL(removed.url);
-      // Notify parent of updated file list
-      if (onFilesChange) onFilesChange(updated);
       return updated;
     });
-    setSubmitted(false);
-  };
-
-  /* Submit (stub — logs files, calls onSubmit prop if provided) */
-  const handleSubmit = () => {
-    const files = previews.map((p) => p.file);
-    // TODO: wire to Supabase Storage — Phase E-commerce
-    console.info('[ImageUpload] stub submit — files ready for upload:', files);
-    if (typeof onSubmit === 'function') onSubmit(files);
-    setSubmitted(true);
   };
 
   /* Cleanup blob URLs on unmount */
   React.useEffect(() => {
     return () => previews.forEach((p) => URL.revokeObjectURL(p.url));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /* Notify parent of changes */
+  React.useEffect(() => {
+    if (onFilesChange) {
+      onFilesChange(previews);
+    }
+  }, [previews, onFilesChange]);
 
   const hasFiles = previews.length > 0;
 
@@ -200,7 +192,6 @@ export default function ImageUpload({
             accept="image/jpeg, image/png, image/webp, image/heic, image/heif, application/pdf"
             multiple
             onChange={handleInputChange}
-            aria-hidden="true"
             tabIndex={-1}
           />
 
@@ -229,37 +220,13 @@ export default function ImageUpload({
       {hasFiles && (
         <div className="img-preview-grid" aria-label="Uploaded images">
           {previews.map((p) => (
-            <div key={p.id} className="img-preview-item">
-              {isHeicFile(p.file) ? (
-                /* HEIC/HEIF: Chrome/Firefox/Edge cannot render HEIC blob URLs.
-                   Show a safe icon placeholder — the file itself is valid. */
-                <div
-                  className="img-preview-thumb img-heic-placeholder"
-                  aria-label={`HEIC image: ${p.file.name}`}
-                >
-                  <span className="img-heic-icon" aria-hidden="true">📷</span>
-                  <span className="img-heic-label">HEIC</span>
-                </div>
-              ) : (
-                <img
-                  src={p.url}
-                  alt={p.file.name}
-                  className="img-preview-thumb"
-                  loading="lazy"
-                />
-              )}
-              <button
-                className="img-preview-remove"
-                onClick={() => removePreview(p.id)}
-                aria-label={`Remove ${p.file.name}`}
-                type="button"
-              >
-                ✕
-              </button>
-              <div className="img-preview-caption" title={p.file.name}>
-                {p.file.name} · {formatBytes(p.file.size)}
-              </div>
-            </div>
+            <FilePreview
+              key={p.id}
+              file={p.file}
+              url={p.url}
+              id={p.id}
+              onRemove={removePreview}
+            />
           ))}
         </div>
       )}
@@ -277,30 +244,6 @@ export default function ImageUpload({
         </p>
       )}
 
-      {/* Submit row */}
-      {hasFiles && !submitted && (
-        <div className="img-upload-submit">
-          <span className="img-upload-count">
-            {previews.length} of {MAX_FILES} images selected
-          </span>
-          <button
-            type="button"
-            className="img-upload-submit-btn"
-            onClick={handleSubmit}
-            disabled={previews.length === 0}
-          >
-            {/* TODO: replace with real upload handler */}
-            Attach to Enquiry →
-          </button>
-        </div>
-      )}
-
-      {/* Success feedback */}
-      {submitted && (
-        <div className="img-upload-success" role="status" aria-live="polite">
-          ✓ &nbsp;Photos attached — they'll be included with your enquiry.
-        </div>
-      )}
     </div>
   );
 }

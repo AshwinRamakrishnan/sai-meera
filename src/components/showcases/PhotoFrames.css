@@ -10,11 +10,11 @@
 .frames-section::before {
   content: '';
   position: absolute;
-  top: 50%;
+  top: -20%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 500px;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
   background: radial-gradient(circle at center, rgba(245, 166, 35, 0.15), transparent 70%);
   opacity: 0.5;
   pointer-events: none;

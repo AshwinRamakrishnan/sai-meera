@@ -11,79 +11,40 @@
  *   - Other users' data
  */
 
-import { isFirebaseConfigured, FIREBASE_REGION } from './firebase';
+import { supabase, isSupabaseConfigured } from './supabase';
 
-const REQUEST_TIMEOUT_MS = 20_000; // 20 seconds
-
-/**
- * Construct the Cloud Function URL.
- * In production, functions are at:
- *   https://{region}-{projectId}.cloudfunctions.net/{functionName}
- *
- * For local development with Firebase Emulator:
- *   http://localhost:5001/{projectId}/{region}/{functionName}
- */
-function getFunctionUrl(functionName) {
-  const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
-
-  // Check for emulator
-  if (import.meta.env.DEV && import.meta.env.VITE_FIREBASE_EMULATOR === 'true') {
-    return `http://localhost:5001/${projectId}/${FIREBASE_REGION}/${functionName}`;
+async function invokeFunction(functionName, body) {
+  if (!isSupabaseConfigured) {
+    throw new Error('Supabase is not configured. Please set up VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in .env.local.');
   }
 
-  return `https://${FIREBASE_REGION}-${projectId}.cloudfunctions.net/${functionName}`;
-}
+  const { data, error } = await supabase.functions.invoke(functionName, {
+    body: body,
+  });
 
-/**
- * Call a Cloud Function with JSON body.
- * Handles timeout, HTTP errors, and JSON parsing.
- * Never exposes raw error details to the caller.
- *
- * @param {string} functionName - Cloud Function name.
- * @param {Object} body - JSON body to send.
- * @returns {Promise<Object>} Parsed JSON response.
- * @throws {Error} With user-friendly message.
- */
-async function callFunction(functionName, body) {
-  if (!isFirebaseConfigured) {
-    throw new Error(
-      'Firebase is not configured. Please set up .env.local with your Firebase project credentials.'
-    );
+  if (error) {
+    // Attempt to parse standard Edge Function error format
+    let errorMessage = 'Request failed. Please try again.';
+    try {
+      const errObj = JSON.parse(error.message);
+      if (errObj.error) errorMessage = errObj.error;
+    } catch (e) {
+      errorMessage = error.message || errorMessage;
+    }
+    throw new Error(errorMessage);
   }
 
-  const url = getFunctionUrl(functionName);
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-      signal: controller.signal,
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      // Use server-provided error message (already generic) or fallback
-      throw new Error(data.error || 'Request failed. Please try again.');
+  // Edge Functions without an explicit Content-Type: application/json header
+  // will be returned as a raw string by the Supabase client.
+  if (typeof data === 'string') {
+    try {
+      return JSON.parse(data);
+    } catch (e) {
+      return data;
     }
-
-    return data;
-  } catch (err) {
-    if (err.name === 'AbortError') {
-      throw new Error('Request timed out. Please check your connection and try again.');
-    }
-    // Re-throw if it's our own error (from the !response.ok block)
-    if (err.message && !err.message.includes('fetch')) {
-      throw err;
-    }
-    // Network error
-    throw new Error('Unable to connect. Please check your internet connection.');
-  } finally {
-    clearTimeout(timeout);
   }
+
+  return data;
 }
 
 // ── Public API ───────────────────────────────────────────────────
@@ -94,7 +55,7 @@ async function callFunction(functionName, body) {
  * @returns {Promise<{ success: boolean, enquiryId: string }>}
  */
 export async function submitEnquiry(formData) {
-  return callFunction('submitEnquiry', formData);
+  return invokeFunction('submit-enquiry', formData);
 }
 
 /**
@@ -104,21 +65,26 @@ export async function submitEnquiry(formData) {
  * @param {number} fileSize - File size in bytes.
  * @returns {Promise<{ success: boolean, uploadUrl: string, storagePath: string, expiresAt: number }>}
  */
-export async function authorizeUpload(enquiryId, contentType, fileSize) {
-  return callFunction('authorizeUpload', { enquiryId, contentType, fileSize });
+export async function authorizeUpload(enquiryId, file) {
+  return invokeFunction('authorize-upload', { 
+    enquiryId, 
+    fileName: file.name,
+    contentType: file.type, 
+    fileSize: file.size 
+  });
 }
 
 /**
  * Upload a file to a signed URL.
  * Uses XMLHttpRequest for upload progress reporting.
  *
- * @param {string} uploadUrl - Signed URL from authorizeUpload.
+ * @param {Object} authData - The authorization object { signedUrl, token }
  * @param {File} file - The file to upload.
  * @param {string} contentType - MIME type (must match what was authorized).
  * @param {Function} [onProgress] - Callback: (percent: number) => void
  * @returns {Promise<void>}
  */
-export function uploadFile(uploadUrl, file, contentType, onProgress) {
+export function uploadFile(authData, file, contentType, onProgress) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
 
@@ -129,14 +95,16 @@ export function uploadFile(uploadUrl, file, contentType, onProgress) {
     });
 
     xhr.addEventListener('load', () => {
+      console.log('[UPLOAD 8] XHR status:', xhr.status);
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve();
       } else {
-        reject(new Error('Upload failed. Please try again.'));
+        reject(new Error(`Upload failed with status ${xhr.status}`));
       }
     });
 
     xhr.addEventListener('error', () => {
+      console.error('[UPLOAD 8] XHR network error');
       reject(new Error('Upload failed. Please check your connection.'));
     });
 
@@ -144,8 +112,47 @@ export function uploadFile(uploadUrl, file, contentType, onProgress) {
       reject(new Error('Upload was cancelled.'));
     });
 
-    xhr.open('PUT', uploadUrl);
+    console.log('[UPLOAD 7] XHR PUT started to:', authData.signedUrl);
+    xhr.open('PUT', authData.signedUrl, true);
+    
+    // Supabase createSignedUploadUrl requires the token in the Authorization header
+    if (authData.token) {
+      xhr.setRequestHeader('Authorization', `Bearer ${authData.token}`);
+    }
     xhr.setRequestHeader('Content-Type', contentType);
+
     xhr.send(file);
+  });
+}
+
+// ── Razorpay Payment API ─────────────────────────────────────────
+
+/**
+ * Create a Razorpay order via Edge Function.
+ * The server looks up the price — never send a raw amount.
+ *
+ * @param {string} enquiryId - UUID from a successful submitEnquiry call.
+ * @param {string} categorySlug - Product slug (e.g. 'hindu-wedding').
+ * @param {string} tier - Pricing tier name (e.g. 'Premium').
+ * @param {number} quantity - Number of units.
+ * @returns {Promise<{ success, orderId, razorpayOrderId, amount, currency, key, description }>}
+ */
+export async function createRazorpayOrder(enquiryId, categorySlug, tier, quantity) {
+  return invokeFunction('create-razorpay-order', {
+    enquiryId, categorySlug, tier, quantity,
+  });
+}
+
+/**
+ * Verify a Razorpay payment signature server-side.
+ *
+ * @param {string} razorpay_order_id
+ * @param {string} razorpay_payment_id
+ * @param {string} razorpay_signature
+ * @returns {Promise<{ success, paymentId }>}
+ */
+export async function verifyRazorpayPayment(razorpay_order_id, razorpay_payment_id, razorpay_signature) {
+  return invokeFunction('verify-razorpay-payment', {
+    razorpay_order_id, razorpay_payment_id, razorpay_signature,
   });
 }
