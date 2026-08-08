@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import { motion, useInView } from 'framer-motion';
 import { getCategoryBySlug } from '../data/categories';
 import ImageUpload from '../components/ui/ImageUpload';
-import { submitEnquiry, createRazorpayOrder, verifyRazorpayPayment } from '../lib/api';
+import { submitEnquiry } from '../lib/api';
+import { useRazorpayCheckout } from '../hooks/useRazorpayCheckout';
 import './CategoryPage.css';
 
 /* ── Animation variants ── */
@@ -92,17 +93,23 @@ export default function CategoryPage() {
   const [quantity, setQuantity] = useState('');
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
   const [checkoutData, setCheckoutData] = useState({ name: '', email: '', phone: '' });
-  const [paymentLoading, setPaymentLoading] = useState(false);
-  const [paymentError, setPaymentError] = useState('');
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [paymentId, setPaymentId] = useState('');
+
+  const {
+    initiateCheckout,
+    paymentLoading,
+    setPaymentLoading,
+    paymentError,
+    paymentSuccess,
+    paymentId,
+    setPaymentError,
+    resetPaymentState
+  } = useRazorpayCheckout();
 
   // Reset payment state when category changes
   useEffect(() => {
     setSelectedTier('');
     setQuantity('');
-    setPaymentSuccess(false);
-    setPaymentError('');
+    resetPaymentState();
     setCheckoutModalOpen(false);
   }, [slug]);
 
@@ -132,59 +139,15 @@ export default function CategoryPage() {
       const enquiryId = enquiryRes.enquiryId;
       setCheckoutModalOpen(false);
 
-      // 2. Call Razorpay Edge Function
-      const orderRes = await createRazorpayOrder(
+      // 2. Delegate to hook
+      await initiateCheckout({
         enquiryId,
-        slug,
-        selectedTier,
-        Number(quantity)
-      );
-      if (!orderRes.success) throw new Error(orderRes.error || 'Failed to create Razorpay order');
-
-      // 3. Open Razorpay Checkout
-      const options = {
-        key: orderRes.key,
-        amount: orderRes.amount,
-        currency: orderRes.currency,
-        name: 'Sai Meera Printing',
-        description: orderRes.description,
-        order_id: orderRes.orderId,
-        prefill: {
-          name: checkoutData.name,
-          email: checkoutData.email,
-          contact: checkoutData.phone
-        },
-        theme: {
-          color: cat.accentColor || '#eab308'
-        },
-        handler: async function (response) {
-          try {
-            setPaymentLoading(true);
-            const verifyRes = await verifyRazorpayPayment(
-              response.razorpay_order_id,
-              response.razorpay_payment_id,
-              response.razorpay_signature
-            );
-            if (verifyRes.success) {
-              setPaymentSuccess(true);
-              setPaymentId(response.razorpay_payment_id);
-            } else {
-              setPaymentError('Payment verification failed.');
-            }
-          } catch (err) {
-            setPaymentError(err.message);
-          } finally {
-            setPaymentLoading(false);
-          }
-        }
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.on('payment.failed', function (response) {
-        setPaymentError(response.error.description);
-        setPaymentLoading(false);
+        categorySlug: slug,
+        tier: selectedTier,
+        quantity,
+        customerDetails: checkoutData,
+        accentColor: cat.accentColor
       });
-      rzp.open();
 
     } catch (err) {
       setPaymentError(err.message);

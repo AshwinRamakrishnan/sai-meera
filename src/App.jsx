@@ -70,7 +70,7 @@ function App() {
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* ── Canonical routes ── */}

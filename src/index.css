@@ -131,6 +131,31 @@ button {
   color: inherit;
 }
 
+/* ===== Accessibility: Focus Visible ===== */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+/* ===== Accessibility: Skip to Content ===== */
+.skip-to-content {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  background: var(--cyan);
+  color: var(--bg-primary);
+  padding: 12px 24px;
+  z-index: 10000;
+  transition: top 0.2s var(--ease-out);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  border-bottom-right-radius: var(--radius-sm);
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
 ul, ol {
   list-style: none;
 }

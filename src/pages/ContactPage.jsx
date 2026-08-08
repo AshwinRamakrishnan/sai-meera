@@ -2,7 +2,8 @@ import React, { useState, useRef, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, Loader2, CheckCircle, AlertCircle, CreditCard, IndianRupee } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { submitEnquiry, authorizeUpload, uploadFile, createRazorpayOrder, verifyRazorpayPayment } from '../lib/api';
+import { submitEnquiry, authorizeUpload, uploadFile } from '../lib/api';
+import { useRazorpayCheckout } from '../hooks/useRazorpayCheckout';
 import { isSupabaseConfigured } from '../lib/supabase';
 import { ALL_CATEGORIES } from '../data/categories';
 import ImageUpload from '../components/ui/ImageUpload';
@@ -69,9 +70,19 @@ const ContactPage = () => {
   const [paymentCategorySlug, setPaymentCategorySlug] = useState(rawCategory || '');
   const [paymentTier, setPaymentTier] = useState('');
   const [paymentQuantity, setPaymentQuantity] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState(null); // null | 'processing' | 'success' | 'failed'
-  const [paymentId, setPaymentId] = useState(null);
-  const [paymentError, setPaymentError] = useState(null);
+
+  const {
+    initiateCheckout,
+    paymentLoading,
+    paymentError,
+    paymentSuccess,
+    paymentId,
+    setPaymentError,
+    setPaymentStatus
+  } = useRazorpayCheckout();
+
+  // Map hook states to the old UI status
+  const paymentStatus = paymentSuccess ? 'success' : (paymentError ? 'failed' : (paymentLoading ? 'processing' : null));
 
   const formRef = useRef(null);
 
@@ -246,77 +257,24 @@ const ContactPage = () => {
       }
     }
 
-    setPaymentStatus('processing');
-    setPaymentError(null);
+    setPaymentStatus(null);
+    setPaymentError('');
 
     try {
-      // Step 1: Create order on server (server computes price)
-      const order = await createRazorpayOrder(
-        submitResult.enquiryId,
-        paymentCategorySlug,
-        paymentTier,
-        qty
-      );
-
-      if (!order.success || !order.razorpayOrderId) {
-        throw new Error(order.error || 'Failed to create payment order.');
-      }
-
-      // Step 2: Open Razorpay Checkout
-      const options = {
-        key: order.key,
-        amount: order.amount,
-        currency: order.currency,
-        name: 'Sai Meera Printing',
-        description: order.description || `${paymentCategorySlug} × ${qty}`,
-        order_id: order.razorpayOrderId,
-        handler: async (response) => {
-          try {
-            // Step 3: Verify payment server-side
-            const verification = await verifyRazorpayPayment(
-              response.razorpay_order_id,
-              response.razorpay_payment_id,
-              response.razorpay_signature
-            );
-            if (verification.success) {
-              setPaymentStatus('success');
-              setPaymentId(response.razorpay_payment_id);
-            } else {
-              throw new Error('Payment verification failed.');
-            }
-          } catch (verifyErr) {
-            // Payment may still be captured by webhook
-            console.error('Client-side verify failed:', verifyErr);
-            setPaymentStatus('success');
-            setPaymentId(response.razorpay_payment_id);
-          }
-        },
-        modal: {
-          ondismiss: () => {
-            setPaymentStatus(null);
-            setPaymentError('Payment was cancelled.');
-          },
-        },
-        prefill: {
+      await initiateCheckout({
+        enquiryId: submitResult.enquiryId,
+        categorySlug: paymentCategorySlug,
+        tier: paymentTier,
+        quantity: qty,
+        customerDetails: {
           name: formData.name,
           email: formData.email,
-          contact: formData.phone,
+          phone: formData.phone
         },
-        theme: {
-          color: '#00d4ff',
-        },
-      };
-
-      const rzp = new window.Razorpay(options);
-      rzp.on('payment.failed', (response) => {
-        setPaymentStatus('failed');
-        setPaymentError(response.error?.description || 'Payment failed. Please try again.');
+        accentColor: '#00d4ff'
       });
-      rzp.open();
     } catch (err) {
       console.error('Payment error:', err);
-      setPaymentStatus('failed');
-      setPaymentError(err.message || 'Payment failed. Please try again.');
     }
   };
 
