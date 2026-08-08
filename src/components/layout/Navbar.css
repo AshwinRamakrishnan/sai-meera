@@ -24,7 +24,8 @@
 .nav-logo {
   display: flex;
   flex-direction: column;
-  z-index: 101; /* Keep above mobile menu */
+  z-index: 101;
+  text-decoration: none;
 }
 
 .logo-main {
@@ -43,7 +44,7 @@
   letter-spacing: 0.1em;
 }
 
-/* Floating Glass Pill Background for Desktop Links */
+/* ── Floating Glass Pill Nav Container (Desktop) ── */
 .desktop-nav-container {
   display: none;
 }
@@ -51,6 +52,7 @@
 @media (min-width: 1024px) {
   .desktop-nav-container {
     display: flex;
+    align-items: center;
     background: var(--glass-bg-card);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -72,9 +74,14 @@
   transition: color var(--transition-fast);
   cursor: pointer;
   z-index: 2;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-family: inherit;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--text-primary);
 }
 
@@ -82,19 +89,175 @@
   font-weight: 600;
 }
 
-/* The Animated Pill / Underline */
+/* Animated active pill */
 .nav-active-pill {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--glass-border-strong);
   border-radius: var(--radius-full);
   z-index: 1;
 }
 
-/* Mobile Menu Button */
+/* Vertical divider between link groups */
+.nav-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--glass-border);
+  margin: 0 6px;
+  flex-shrink: 0;
+}
+
+/* Contact CTA button */
+.nav-contact-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-full) !important;
+  border: 1px solid var(--glass-border-strong);
+  margin-left: 4px;
+  transition: background var(--transition-fast), color var(--transition-fast) !important;
+}
+
+.nav-contact-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary) !important;
+}
+
+/* ── Print Services Dropdown Trigger ── */
+.nav-services-trigger {
+  position: relative;
+  z-index: 200;
+}
+
+.nav-services-btn {
+  /* inherits .nav-link styles */
+  display: flex;
+  align-items: center;
+}
+
+/* ── Mega-Menu Dropdown ── */
+.nav-mega-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 480px;
+  background: #101015;
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.7),
+    0 0 0 0.5px rgba(255,255,255,0.04) inset;
+  overflow: hidden;
+  z-index: 300;
+}
+
+/* Small upward arrow pointer */
+.nav-mega-menu::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: #101015;
+  border-left: 1px solid var(--glass-border-strong);
+  border-top: 1px solid var(--glass-border-strong);
+  rotate: 45deg;
+}
+
+.mega-menu-inner {
+  padding: 1.25rem 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Group header */
+.mega-menu-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 0.25rem 0.75rem 0.5rem;
+}
+
+/* Individual mega-menu items */
+.mega-menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s;
+  margin-bottom: 0.15rem;
+}
+
+.mega-menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mega-menu-item.mega-active {
+  background: rgba(245, 166, 35, 0.08);
+}
+
+.mega-item-name {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color 0.18s;
+}
+
+.mega-menu-item:hover .mega-item-name,
+.mega-menu-item.mega-active .mega-item-name {
+  color: var(--gold);
+}
+
+.mega-item-desc {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.03em;
+}
+
+/* Divider between groups */
+.mega-menu-group + .mega-menu-group {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Bottom CTA strip */
+.mega-menu-cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0.75rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mega-cta-text {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.mega-cta-btn {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.mega-cta-btn:hover {
+  color: #ffd17a;
+}
+
+/* ── Mobile Menu Button ── */
 .mobile-menu-btn {
   display: flex;
   align-items: center;
@@ -122,21 +285,22 @@
   }
 }
 
-/* Cinematic Mobile Menu */
+/* ── Mobile Menu Overlay ── */
 .mobile-nav-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100svh; /* Use svh for correct mobile height */
   background: var(--bg-primary);
   z-index: 100;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--space-8);
-  gap: var(--space-6);
+  padding: var(--space-8) var(--space-6);
+  gap: var(--space-2);
+  overflow-y: auto;
 }
 
 .mobile-nav-link {
@@ -147,8 +311,52 @@
   text-decoration: none;
   letter-spacing: -0.02em;
   transition: color var(--transition-fast);
+  text-align: center;
+  padding: 0.25rem 0;
 }
 
-.mobile-nav-link:hover, .mobile-nav-link.active {
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
   color: var(--text-primary);
+}
+
+/* Group label in mobile menu */
+.mobile-nav-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.75rem 0 0.25rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* Sub-links in mobile (smaller than main links) */
+.mobile-nav-sublink {
+  font-size: var(--text-xl) !important;
+  font-weight: 500 !important;
+  color: var(--text-tertiary) !important;
+}
+
+.mobile-nav-sublink:hover,
+.mobile-nav-sublink.active {
+  color: var(--gold) !important;
+}
+
+/* Contact button in mobile */
+.mobile-nav-contact {
+  margin-top: 1rem;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius-full);
+  color: var(--text-primary) !important;
+  font-size: var(--text-base) !important;
+  font-weight: 600 !important;
+  transition: border-color 0.2s, color 0.2s !important;
+}
+
+.mobile-nav-contact:hover {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
 }

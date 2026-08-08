@@ -12,6 +12,7 @@ import './App.css';
 // Lazy-load pages for code-splitting
 const HomePage = lazy(() => import('./pages/HomePage'));
 const InvitationsPage = lazy(() => import('./pages/InvitationsPage'));
+const InvitationCategoryPage = lazy(() => import('./pages/InvitationCategoryPage'));
 const FlexBannersPage = lazy(() => import('./pages/FlexBannersPage'));
 const GreetingCardsPage = lazy(() => import('./pages/GreetingCardsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -73,6 +74,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/invitations" element={<InvitationsPage />} />
+            <Route path="/invitations/:category" element={<InvitationCategoryPage />} />
             <Route path="/flex-banners" element={<FlexBannersPage />} />
             <Route path="/greeting-cards" element={<GreetingCardsPage />} />
             <Route path="/contact" element={<ContactPage />} />

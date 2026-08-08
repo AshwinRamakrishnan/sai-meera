@@ -1,10 +1,17 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import './ContactPage.css';
 
 const ContactPage = () => {
     return (
         <div className="contact-container">
+            <Helmet>
+              <title>Contact Us — Sai Meera Printing</title>
+              <meta name="description" content="Get in touch with Sai Meera for a free quote on offset printing, flex banners, invitations, greeting cards, or photoshop editing services in Chennai." />
+              <meta property="og:title" content="Contact Sai Meera Printing" />
+              <meta property="og:description" content="Reach out for a free quote on premium printing services — invitations, banners, cards, and more." />
+            </Helmet>
             <section className="contact-hero">
                 <h1 className="contact-title">Get in Touch</h1>
                 <p className="contact-subtitle">Have a project in mind? Let's bring your ideas to life with our premium printing solutions.</p>

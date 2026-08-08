@@ -364,6 +364,84 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
   font-size: 0.9rem;
 }
 
+/* ── 2-column grid (overview hub) ── */
+.inv-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* ── Overview cards (invitation hub page) ── */
+.inv-overview-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  padding: 2rem !important;
+  border-radius: var(--radius-lg) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  transition: transform 0.25s var(--ease-out), filter 0.25s;
+}
+
+.inv-overview-card:hover {
+  transform: translateY(-6px);
+  filter: brightness(1.04);
+}
+
+.inv-overview-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.inv-overview-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inv-overview-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.inv-overview-subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.inv-overview-styles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.inv-overview-style-tag {
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.04);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.inv-overview-cta {
+  margin-top: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--cat-dot, var(--gold));
+  font-weight: 600;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .inv-grid-3 { grid-template-columns: repeat(2, 1fr); }
@@ -373,6 +451,13 @@ h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
 
 @media (max-width: 768px) {
   .inv-grid-3,
+  .inv-grid-2,
   .inv-process-grid,
   .inv-pricing-grid { grid-template-columns: 1fr; }
+
+  .inv-overview-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
+

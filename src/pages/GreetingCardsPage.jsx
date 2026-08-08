@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { PartyPopper, Sparkles, Wheat, Trees, HeartHandshake, Briefcase, Rocket, Heart, Palette, Droplets, Wand2, Maximize, ArrowRight, Phone } from 'lucide-react';
 import './GreetingCardsPage.css';
 
@@ -30,6 +31,12 @@ const GreetingCardsPage = () => {
 
   return (
     <div className="greet-page">
+      <Helmet>
+        <title>Greeting Card Printing — Sai Meera</title>
+        <meta name="description" content="Custom greeting card printing for birthdays, Diwali, Pongal, Christmas, and corporate events. Premium paper, foil stamping, and embossing options. Minimum 10 cards." />
+        <meta property="og:title" content="Greeting Card Printing — Sai Meera" />
+        <meta property="og:description" content="Beautiful cards for every occasion — birthdays, Tamil festivals, corporate events, and personal milestones." />
+      </Helmet>
       {/* Hero */}
       <section className="greet-hero">
         <div className="greet-hero-label">// GREETING CARD PRINTING</div>

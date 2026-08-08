@@ -1,70 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PRINT_SERVICES_MENU } from '../../data/categories';
 import './Navbar.css';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setServicesOpen(false);
   }, [location.pathname]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : 'unset';
+    return () => { document.body.style.overflow = 'unset'; };
   }, [mobileMenuOpen]);
 
-  const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+  const isActive = (path) => {
+    if (path === '/') return location.pathname === '/' && !location.hash;
+    return location.pathname.startsWith(path);
+  };
 
-  // Main sections (Replacing 'Legacy' with 'Home')
+  // Check if any Print Services route is active (for dropdown trigger highlight)
+  const isServicesActive = PRINT_SERVICES_MENU.some((group) =>
+    group.items.some((item) => location.pathname.startsWith(item.to))
+  );
+
   const mainLinks = [
     { name: 'Home', to: '/' },
     { name: 'Machines', to: '/#machines', hash: true },
-    { name: 'Services', to: '/#services', hash: true },
-    { name: 'Contact', to: '/contact', hash: false },
+    { name: 'Our Work', to: '/#services', hash: true },
   ];
-
-  // Product/Service page links
-  const pageLinks = [
-    { name: 'Invitations', to: '/invitations' },
-    { name: 'Flex Banners', to: '/flex-banners' },
-    { name: 'Greeting Cards', to: '/greeting-cards' },
-  ];
-
-  // Combine links for the mobile menu stagger
-  const allLinks = [...mainLinks, ...pageLinks];
-
-  // Determine active state for the pill animation
-  const isActive = (path, hash) => {
-    if (hash) {
-      return location.pathname === '/' && location.hash === hash;
-    }
-    // If it's home (and no hash), it's active only if on '/' exactly and no hash is present
-    if (path === '/') {
-      return location.pathname === '/' && !location.hash;
-    }
-    return location.pathname === path;
-  };
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -74,30 +65,24 @@ const Navbar = () => {
           <span className="logo-sub">INDUSTRIAL PRINTING</span>
         </Link>
 
-        {/* Desktop Nav - Floating Glass Pill */}
+        {/* ── Desktop Nav ── */}
         <div className="desktop-nav-container">
+          {/* Static links */}
           {mainLinks.map((link) => {
-            const active = isActive(link.to, link.hash ? link.to.substring(1) : false);
+            const active = isActive(link.to);
             return (
               <React.Fragment key={link.name}>
                 {link.hash ? (
-                  <a href={link.to} className={`nav-link ${active ? 'active' : ''} magnetic`}>
-                    {active && (
-                      <motion.div
-                        layoutId="active-pill"
-                        className="nav-active-pill"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
+                  <a href={link.to} className={`nav-link ${active ? 'active' : ''}`}>
                     <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
                   </a>
                 ) : (
-                  <NavLink to={link.to} className={`nav-link ${active ? 'active' : ''} magnetic`}>
+                  <NavLink to={link.to} className={`nav-link ${active ? 'active' : ''}`}>
                     {active && (
                       <motion.div
                         layoutId="active-pill"
                         className="nav-active-pill"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
                     <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
@@ -106,58 +91,135 @@ const Navbar = () => {
               </React.Fragment>
             );
           })}
-          {/* Subtle separator */}
-          <div style={{ width: 1, background: 'var(--glass-border)', margin: '8px 12px' }} />
-          {pageLinks.map((link) => {
-            const active = isActive(link.to, false);
-            return (
-              <NavLink key={link.name} to={link.to} className={`nav-link ${active ? 'active' : ''} magnetic`}>
-                {active && (
-                  <motion.div
-                    layoutId="active-pill"
-                    className="nav-active-pill"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-                <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
-              </NavLink>
-            );
-          })}
+
+          {/* Divider */}
+          <div className="nav-divider" />
+
+          {/* ── Print Services Mega-Menu Trigger ── */}
+          <div
+            className={`nav-services-trigger ${isServicesActive ? 'active' : ''} ${servicesOpen ? 'open' : ''}`}
+            ref={servicesRef}
+          >
+            <button
+              className="nav-link nav-services-btn"
+              onClick={() => setServicesOpen((v) => !v)}
+              aria-expanded={servicesOpen}
+              aria-haspopup="true"
+            >
+              {isServicesActive && (
+                <motion.div
+                  layoutId="active-pill"
+                  className="nav-active-pill"
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                Print Services
+                <motion.span
+                  animate={{ rotate: servicesOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  style={{ display: 'flex', lineHeight: 0 }}
+                >
+                  <ChevronDown size={14} strokeWidth={2.5} />
+                </motion.span>
+              </span>
+            </button>
+
+            {/* ── Mega-Menu Dropdown ── */}
+            <AnimatePresence>
+              {servicesOpen && (
+                <motion.div
+                  className="nav-mega-menu"
+                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <div className="mega-menu-inner">
+                    {PRINT_SERVICES_MENU.map((group) => (
+                      <div key={group.group} className="mega-menu-group">
+                        <div className="mega-menu-group-label">{group.group}</div>
+                        {group.items.map((item) => {
+                          const itemActive = location.pathname === item.to || location.pathname.startsWith(item.to + '/');
+                          return (
+                            <NavLink
+                              key={item.to}
+                              to={item.to}
+                              className={`mega-menu-item ${itemActive ? 'mega-active' : ''}`}
+                              onClick={() => setServicesOpen(false)}
+                            >
+                              <span className="mega-item-name">{item.name}</span>
+                              <span className="mega-item-desc">{item.desc}</span>
+                            </NavLink>
+                          );
+                        })}
+                      </div>
+                    ))}
+
+                    {/* Bottom CTA strip */}
+                    <div className="mega-menu-cta-strip">
+                      <span className="mega-cta-text">Need a custom quote?</span>
+                      <Link
+                        to="/contact"
+                        className="mega-cta-btn"
+                        onClick={() => setServicesOpen(false)}
+                      >
+                        Contact Us →
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Contact link */}
+          <NavLink
+            to="/contact"
+            className={`nav-link nav-contact-btn ${isActive('/contact') ? 'active' : ''}`}
+          >
+            <span style={{ position: 'relative', zIndex: 2 }}>Contact</span>
+          </NavLink>
         </div>
 
-        {/* Mobile Menu Toggle Button */}
-        <button className="mobile-menu-btn magnetic" onClick={toggleMenu} aria-label="Toggle menu">
+        {/* Mobile Menu Toggle */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
           <motion.div
             animate={{ rotate: mobileMenuOpen ? 90 : 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.div>
         </button>
       </div>
 
-      {/* Cinematic Mobile Menu Overlay */}
+      {/* ── Mobile Menu Overlay ── */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             className="mobile-nav-overlay"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20, transition: { delay: 0.2, duration: 0.2 } }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            exit={{ opacity: 0, y: -20, transition: { delay: 0.15, duration: 0.2 } }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            {allLinks.map((link, i) => (
+            {/* Static links */}
+            {mainLinks.map((link, i) => (
               <motion.div
                 key={link.name}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
-                transition={{ delay: i * 0.05 + 0.1, duration: 0.3, ease: "easeOut" }}
+                transition={{ delay: i * 0.05 + 0.1, duration: 0.28 }}
               >
                 {link.hash ? (
                   <a
                     href={link.to}
-                    className={`mobile-nav-link ${isActive(link.to, link.to.substring(1)) ? 'active' : ''}`}
+                    className="mobile-nav-link"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -165,7 +227,7 @@ const Navbar = () => {
                 ) : (
                   <NavLink
                     to={link.to}
-                    className={`mobile-nav-link ${isActive(link.to, false) ? 'active' : ''}`}
+                    className={`mobile-nav-link ${isActive(link.to) ? 'active' : ''}`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
@@ -173,6 +235,44 @@ const Navbar = () => {
                 )}
               </motion.div>
             ))}
+
+            {/* Print Services section in mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: mainLinks.length * 0.05 + 0.1, duration: 0.28 }}
+            >
+              <div className="mobile-nav-group-label">Print Services</div>
+              {PRINT_SERVICES_MENU.map((group) =>
+                group.items.map((item, gi) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    className={`mobile-nav-link mobile-nav-sublink ${location.pathname.startsWith(item.to) ? 'active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </NavLink>
+                ))
+              )}
+            </motion.div>
+
+            {/* Contact */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: mainLinks.length * 0.05 + 0.25, duration: 0.28 }}
+            >
+              <NavLink
+                to="/contact"
+                className="mobile-nav-link mobile-nav-contact"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </NavLink>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

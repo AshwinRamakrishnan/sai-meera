@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Store, PartyPopper, Car, Presentation, Eye, Megaphone, CheckCircle, Shield, Zap, Wrench, Phone } from 'lucide-react';
 import './FlexBannersPage.css';
 
@@ -22,6 +23,12 @@ const FlexBannersPage = () => {
 
   return (
     <div className="flex-page">
+      <Helmet>
+        <title>Flex Banner & Vinyl Printing — Sai Meera</title>
+        <meta name="description" content="Large format eco-solvent flex and vinyl printing in Chennai. Shop boards, event banners, vehicle wraps, hoardings, and one-way vision. UV-resistant, same-day printing available." />
+        <meta property="og:title" content="Flex Banner Printing — Sai Meera" />
+        <meta property="og:description" content="Eye-catching outdoor advertising that withstands sun, rain, and wind. Industrial-grade eco-solvent inks for maximum longevity." />
+      </Helmet>
       {/* Hero */}
       <section className="flex-hero">
         <div className="flex-hero-label">// LARGE FORMAT PRINTING</div>
