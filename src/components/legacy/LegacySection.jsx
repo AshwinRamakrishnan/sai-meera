@@ -2,23 +2,31 @@ import React, { useRef, useEffect } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import './LegacySection.css';
 
+import { animate } from 'framer-motion';
+
 const AnimatedCounter = ({ value, duration = 3, delay = 0, suffix = "" }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const spring = useSpring(0, { duration: duration * 1000, bounce: 0 });
-  const displayValue = useTransform(spring, (current) => 
-    Math.round(current) + suffix
-  );
+  const [displayValue, setDisplayValue] = React.useState(0);
 
   useEffect(() => {
     if (isInView) {
-      setTimeout(() => {
-        spring.set(value);
+      const timeout = setTimeout(() => {
+        animate(0, value, {
+          duration: duration,
+          ease: "easeOut",
+          onUpdate: (latest) => setDisplayValue(latest)
+        });
       }, delay * 1000);
+      return () => clearTimeout(timeout);
     }
-  }, [isInView, spring, value, delay]);
+  }, [isInView, value, duration, delay]);
 
-  return <motion.span ref={ref}>{displayValue}</motion.span>;
+  const formattedValue = React.useMemo(() => {
+    return Math.round(displayValue) + suffix;
+  }, [displayValue, suffix]);
+
+  return <motion.span ref={ref}>{formattedValue}</motion.span>;
 };
 
 const LegacySection = () => {
@@ -58,19 +66,25 @@ const LegacySection = () => {
           animate={isInView ? "visible" : "hidden"}
         >
           {/* Main Story Card */}
-          <motion.div className="legacy-bento-card bento-story" variants={itemVariants}>
-            <h3 className="bento-title">The Name That Never Changed</h3>
-            <p className="bento-text">
-              Through three different ownerships spanning religious and cultural lines — from its Christian founder, to a Muslim custodian, to its current Hindu proprietor — the name 'Sai Meera' has endured. It's not just a brand; it's a testament to the trust each owner placed in the legacy of the machines and the community they served.
-            </p>
+          <motion.div className="legacy-split-card" variants={itemVariants}>
+            <div className="legacy-split-image" style={{ backgroundImage: 'url("/src/assets/printing_ink_rollers.jpg")' }} />
+            <div className="legacy-split-content">
+              <h3 className="bento-title">The Name That Never Changed</h3>
+              <p className="bento-text">
+                Through three different ownerships spanning religious and cultural lines — from its Christian founder, to a Muslim custodian, to its current Hindu proprietor — the name 'Sai Meera' has endured. It's not just a brand; it's a testament to the trust each owner placed in the legacy of the machines and the community they served.
+              </p>
+            </div>
           </motion.div>
 
           {/* Faith System Card */}
-          <motion.div className="legacy-bento-card bento-faith" variants={itemVariants}>
-            <h3 className="bento-title">Universal Trust</h3>
-            <p className="bento-text">
-              We operate under the philosophy that true craftsmanship transcends boundaries. Our shop floor has seen prayers from multiple faiths, all united by a singular dedication to the art of printing.
-            </p>
+          <motion.div className="legacy-split-card reverse" variants={itemVariants}>
+            <div className="legacy-split-image" style={{ backgroundImage: 'url("/src/assets/offset_printing_plates.jpg")' }} />
+            <div className="legacy-split-content">
+              <h3 className="bento-title">Universal Trust</h3>
+              <p className="bento-text">
+                We operate under the philosophy that true craftsmanship transcends boundaries. Our shop floor has seen prayers from multiple faiths, all united by a singular dedication to the art of printing.
+              </p>
+            </div>
           </motion.div>
 
           {/* Stats Card */}

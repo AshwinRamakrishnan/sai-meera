@@ -37,7 +37,7 @@
   --text-accent: var(--cyan);
   
   /* Typography - Fluid clamping */
-  --font-display: 'Outfit', sans-serif;
+  --font-display: 'Lora', serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
@@ -102,9 +102,14 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--bg-primary);
+  background: var(--bg-primary) !important;
   color: var(--text-primary);
   line-height: 1.6;
+  min-height: 100vh;
+}
+
+#root {
+  background: var(--bg-primary);
   min-height: 100vh;
 }
 

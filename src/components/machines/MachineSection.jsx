@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, Suspense, useMemo } from 'react';
-import { useScroll, useInView } from 'framer-motion';
+import { useScroll, useInView, useTransform, motion } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import './MachineSection.css';
 import SharedLighting from '../../scenes/SharedLighting';
@@ -33,6 +33,20 @@ function ModelLoadNotifier({ onLoaded }) {
   return null;
 }
 
+const ConsoleLine = ({ line, index, scrollYProgress, totalLines }) => {
+  const displayTransform = useTransform(scrollYProgress, (v) => {
+    const visible = Math.floor(v * (totalLines + 1));
+    return index <= visible ? 'block' : 'none';
+  });
+  const isHighlight = /READY|RUNNING|LOADED|ENGAGED|CALIBRATED|PRINTING|RENDERING/i.test(line);
+  return (
+    <motion.div className="consoleLine" style={{ display: displayTransform }}>
+      <span className="prefix">▸</span>
+      {isHighlight ? <span className="highlight">{line}</span> : line}
+    </motion.div>
+  );
+};
+
 const MachineSection = React.memo(function MachineSection({
   id,
   machineNumber,
@@ -52,11 +66,9 @@ const MachineSection = React.memo(function MachineSection({
 
   // ─── scrollRatio as a REF (no React re-render on scroll) ───
   const scrollRatioRef = useRef(0);
-  // Separate state only for the HUD overlay (UI updates at lower frequency)
-  const [hudRatio, setHudRatio] = useState(0);
 
-  // ─── 1. LAZY MOUNT (Mount Canvas slightly before it enters view) ───
-  const hasMountedCanvas = useInView(sectionRef, { once: true, margin: "300px" });
+  // ─── 1. LAZY MOUNT (Mount Canvas early before it enters view) ───
+  const hasMountedCanvas = useInView(sectionRef, { once: true, margin: "1000px" });
 
   // ─── 2. PAUSE RENDER LOOP (Pause when completely out of view) ───
   const isRenderingActive = useInView(sectionRef, { margin: "100px" });
@@ -64,23 +76,23 @@ const MachineSection = React.memo(function MachineSection({
   // ─── 3. LOAD NOTIFIER (Fade out placeholder when 3D assets are ready) ───
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // ─── Scroll tracking: write to ref (instant), throttle HUD updates ───
+  // ─── Scroll tracking: write to ref (instant), no React re-renders ───
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
 
   useEffect(() => {
-    let rafId;
-    const unsub = scrollYProgress.on('change', (latest) => {
-      // Write to ref INSTANTLY — no React delay
+    return scrollYProgress.on('change', (latest) => {
+      // Write to ref INSTANTLY — no React delay for 3D bridge
       scrollRatioRef.current = latest;
-      // Throttle HUD DOM updates via rAF (smooth but not every pixel)
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => setHudRatio(latest));
     });
-    return () => { unsub(); cancelAnimationFrame(rafId); };
   }, [scrollYProgress]);
+
+  // ─── HUD Motion Transforms (zero React state updates) ───
+  const statusTransform = useTransform(scrollYProgress, (v) => v < 0.1 ? 'STANDBY' : v < 0.85 ? 'OPERATING' : 'COMPLETE');
+  const meterWidthTransform = useTransform(scrollYProgress, (v) => `${Math.round(v * 100)}%`);
+  const meterTextTransform = useTransform(scrollYProgress, (v) => `Print Progress: ${Math.round(v * 100)}%`);
 
   // ─── Derived values ───
   const r3fAccent = useMemo(() => {
@@ -89,10 +101,6 @@ const MachineSection = React.memo(function MachineSection({
     if (accentColor === 'var(--gold)') return '#f5a623';
     return '#00d4ff';
   }, [accentColor]);
-
-  const status = hudRatio < 0.1 ? 'STANDBY' : hudRatio < 0.85 ? 'OPERATING' : 'COMPLETE';
-  const visibleLines = Math.floor(hudRatio * consoleLines.length);
-  const meterPct = Math.round(hudRatio * 100);
 
   return (
     <section id={id} ref={sectionRef} className="machineSection" style={{ '--accent-color': accentColor }}>
@@ -111,7 +119,7 @@ const MachineSection = React.memo(function MachineSection({
           {hasMountedCanvas && (
             <Canvas
               frameloop={isRenderingActive ? 'always' : 'demand'}
-              dpr={[1, Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.0 : 1.5)]}
+              dpr={[1, Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.25 : 1.5)]}
               gl={{
                 antialias: window.innerWidth >= 768,
                 toneMapping: 6, // ACESFilmicToneMapping
@@ -148,7 +156,7 @@ const MachineSection = React.memo(function MachineSection({
           <div className="statusIndicator">
             <div className="statusDot" />
             <span className="statusText">
-              MACHINE {machineNumber} · <span className="statusValue">{status}</span>
+              MACHINE {machineNumber} · <motion.span className="statusValue">{statusTransform}</motion.span>
             </span>
           </div>
 
@@ -167,9 +175,9 @@ const MachineSection = React.memo(function MachineSection({
             </div>
 
             <div className="meterContainer">
-              <div className="meterLabel">Print Progress: {meterPct}%</div>
+              <motion.div className="meterLabel">{meterTextTransform}</motion.div>
               <div className="meterTrack">
-                <div className="meterFill" style={{ width: `${meterPct}%` }} />
+                <motion.div className="meterFill" style={{ width: meterWidthTransform }} />
               </div>
             </div>
           </div>
@@ -179,19 +187,15 @@ const MachineSection = React.memo(function MachineSection({
             <div className="consolePanel">
               <div className="consoleScanline" />
               <div className="consoleTitle">LIVE CONSOLE</div>
-              {consoleLines.slice(0, visibleLines).map((line, i) => {
-                const isHighlight = /READY|RUNNING|LOADED|ENGAGED|CALIBRATED|PRINTING|RENDERING/i.test(line);
-                return (
-                  <div key={i} className="consoleLine">
-                    <span className="prefix">▸</span>
-                    {isHighlight ? (
-                      <span className="highlight">{line}</span>
-                    ) : (
-                      line
-                    )}
-                  </div>
-                );
-              })}
+              {consoleLines.map((line, i) => (
+                <ConsoleLine 
+                  key={i} 
+                  line={line} 
+                  index={i} 
+                  scrollYProgress={scrollYProgress} 
+                  totalLines={consoleLines.length} 
+                />
+              ))}
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
+  overflow-x: hidden; /* Prevent mobile horizontal scrolling */
 }
 
 .ps-section::before {
@@ -60,11 +61,13 @@
 
 .ps-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 5rem);
+  font-size: clamp(2rem, 8vw, 5rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  text-wrap: balance;
+  overflow-wrap: break-word; /* Prevent long words from clipping */
 }
 
 /* 3D UI Window */
@@ -86,8 +89,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 500px;
+  aspect-ratio: 16 / 9; /* Responsive height */
+  min-height: 300px;
+  max-height: 600px;
   transform: translateZ(20px);
+  width: 100%; /* Force fit container */
 }
 
 .ps-menubar {
@@ -273,9 +279,19 @@
 }
 
 @media (max-width: 768px) {
+  .ps-title {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    padding: 0 1rem;
+  }
+  .menu-items {
+    display: none;
+  }
   .ps-window {
     height: auto;
     min-height: 400px;
+  }
+  .ps-menubar {
+    padding: 6px 12px;
   }
   .ps-main {
     flex-direction: column;
@@ -287,19 +303,29 @@
     border-bottom: 1px solid #111;
     overflow-x: auto;
     padding: 8px;
+    gap: 4px;
   }
   .tool-icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     flex-shrink: 0;
   }
   .ps-workspace {
-    min-height: 250px;
+    min-height: 200px;
     padding: 20px;
   }
   .ps-panels {
     width: 100%;
     border-left: none;
     border-top: 1px solid #111;
+  }
+  .caps-grid {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .cap-card {
+    width: 100%;
+    justify-content: flex-start;
+    padding: var(--space-3) var(--space-4);
   }
 }

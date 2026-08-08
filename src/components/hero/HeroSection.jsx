@@ -1,27 +1,34 @@
 import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
 import BackgroundGrid from './BackgroundGrid';
-import HeroParticles from './HeroParticles';
 import { FaArrowRight } from 'react-icons/fa';
 import './HeroSection.css';
+
+import { animate } from 'framer-motion';
 
 const AnimatedCounter = ({ value, duration = 3, delay = 1, decimals = 0 }) => {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
-  const spring = useSpring(0, { duration: duration * 1000, bounce: 0 });
-  const displayValue = useTransform(spring, (current) => 
-    current.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-  );
+  const [displayValue, setDisplayValue] = React.useState(0);
 
   useEffect(() => {
     if (isInView) {
-      setTimeout(() => {
-        spring.set(value);
+      const timeout = setTimeout(() => {
+        animate(0, value, {
+          duration: duration,
+          ease: "easeOut",
+          onUpdate: (latest) => setDisplayValue(latest)
+        });
       }, delay * 1000);
+      return () => clearTimeout(timeout);
     }
-  }, [isInView, spring, value, delay]);
+  }, [isInView, value, duration, delay]);
 
-  return <motion.span ref={ref}>{displayValue}</motion.span>;
+  const formattedValue = React.useMemo(() => {
+    return displayValue.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }, [displayValue, decimals]);
+
+  return <motion.span ref={ref}>{formattedValue}</motion.span>;
 };
 
 const HeroSection = () => {
@@ -57,7 +64,6 @@ const HeroSection = () => {
   return (
     <section className="hero-section">
       <BackgroundGrid />
-      <HeroParticles />
       
       {/* Subtle Aurora Glow */}
       <div className="hero-glow hero-glow-cyan" />
@@ -91,25 +97,21 @@ const HeroSection = () => {
           </motion.p>
           
           <motion.div className="hero-cta-group" variants={textRevealVariants}>
-            <a href="#machines" className="hero-btn-primary magnetic">
-              Launch Production <FaArrowRight size={20} />
+            <a href="#legacy" className="hero-btn-primary magnetic">
+              Explore Our Legacy <FaArrowRight size={20} />
             </a>
-            <a href="#legacy" className="hero-btn-secondary magnetic">
-              Explore Legacy
+            <a href="#services" className="hero-btn-secondary magnetic">
+              View Our Work
             </a>
           </motion.div>
-        </motion.div>
-        
-        <motion.div 
-          className="hero-stats-wrapper"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="hero-stats-glass-card">
-            <div className="hero-stats-grid">
-              {stats.map((stat, index) => (
-                <div key={index} className="hero-stat-item">
+          
+          <motion.div 
+            className="hero-stats-inline"
+            variants={textRevealVariants}
+          >
+            {stats.map((stat, index) => (
+              <React.Fragment key={index}>
+                <div className="hero-stat-inline-item">
                   <div className="hero-stat-value">
                     <AnimatedCounter 
                       value={stat.value} 
@@ -121,9 +123,10 @@ const HeroSection = () => {
                   </div>
                   <div className="hero-stat-label">{stat.label}</div>
                 </div>
-              ))}
-            </div>
-          </div>
+                {index < stats.length - 1 && <div className="hero-stat-divider" />}
+              </React.Fragment>
+            ))}
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

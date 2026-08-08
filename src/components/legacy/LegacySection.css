@@ -98,12 +98,40 @@
   transform: translateY(-4px);
 }
 
-/* Specific Grid Placements */
-.bento-story { grid-column: span 12; }
-@media (min-width: 1024px) { .bento-story { grid-column: span 8; } }
+/* Split Layout Cards */
+.legacy-split-card {
+  grid-column: span 12;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
 
-.bento-faith { grid-column: span 12; }
-@media (min-width: 1024px) { .bento-faith { grid-column: span 4; } }
+@media (min-width: 768px) {
+  .legacy-split-card {
+    flex-direction: row;
+  }
+  .legacy-split-card.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.legacy-split-image {
+  flex: 1;
+  min-height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+
+.legacy-split-content {
+  flex: 1;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .bento-stats { grid-column: span 12; }
 @media (min-width: 1024px) { .bento-stats { grid-column: span 4; } }
@@ -129,28 +157,7 @@
   color: var(--text-secondary);
 }
 
-/* Custom visual flair for cards */
-.bento-story::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: radial-gradient(circle at top right, var(--gold-glow), transparent 70%);
-  pointer-events: none;
-}
 
-.bento-faith::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: radial-gradient(circle at bottom left, var(--cyan-glow), transparent 70%);
-  pointer-events: none;
-}
 
 /* Timeline specific */
 .timeline-list {

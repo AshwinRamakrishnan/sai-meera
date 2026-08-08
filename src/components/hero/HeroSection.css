@@ -198,61 +198,34 @@
   border-color: var(--glass-border-strong);
 }
 
-/* Right Side - Glass Stats Card */
-.hero-stats-wrapper {
-  flex: 0 1 400px;
-  width: 100%;
+
+/* ── Inline Stats (replaces glass card) ── */
+.hero-stats-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+  flex-wrap: wrap;
 }
 
-.hero-stats-glass-card {
-  background: var(--glass-bg-card);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Subtle corner highlight */
-.hero-stats-glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent 40%);
-  pointer-events: none;
-}
-
-.hero-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-8) var(--space-4);
-}
-
-.hero-stat-item {
+.hero-stat-inline-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  align-items: center;
+  gap: var(--space-1);
 }
 
 .hero-stat-value {
   font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  font-weight: 700;
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  color: var(--text-primary);
   line-height: 1;
-  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .hero-stat-label {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;

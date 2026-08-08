@@ -53,9 +53,11 @@ const Navbar = () => {
     group.items.some((item) => location.pathname.startsWith(item.to))
   );
 
-  const mainLinks = [
+  const leftLinks = [
     { name: 'Home', to: '/' },
-    { name: 'Machines', to: '/#machines', hash: true },
+  ];
+  
+  const rightLinks = [
     { name: 'Our Work', to: '/#services', hash: true },
   ];
 
@@ -69,8 +71,8 @@ const Navbar = () => {
 
         {/* ── Desktop Nav ── */}
         <div className="desktop-nav-container">
-          {/* Static links */}
-          {mainLinks.map((link) => {
+          {/* Left links */}
+          {leftLinks.map((link) => {
             const active = isActive(link.to);
             return (
               <React.Fragment key={link.name}>
@@ -94,9 +96,6 @@ const Navbar = () => {
             );
           })}
 
-          {/* Divider */}
-          <div className="nav-divider" />
-
             {/* ── Print Services Mega-Menu Trigger ── */}
           <div
             className={`nav-services-trigger ${isServicesActive ? 'active' : ''} ${servicesOpen ? 'open' : ''}`}
@@ -116,7 +115,7 @@ const Navbar = () => {
                 />
               )}
               <span style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                Print Services
+                Products
                 <motion.span
                   animate={{ rotate: servicesOpen ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
@@ -203,6 +202,31 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
+          {/* Right links */}
+          {rightLinks.map((link) => {
+            const active = isActive(link.to);
+            return (
+              <React.Fragment key={link.name}>
+                {link.hash ? (
+                  <a href={link.to} className={`nav-link ${active ? 'active' : ''}`}>
+                    <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
+                  </a>
+                ) : (
+                  <NavLink to={link.to} className={`nav-link ${active ? 'active' : ''}`}>
+                    {active && (
+                      <motion.div
+                        layoutId="active-pill"
+                        className="nav-active-pill"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
+                  </NavLink>
+                )}
+              </React.Fragment>
+            );
+          })}
+
           {/* Contact link */}
           <NavLink
             to="/contact"
@@ -237,8 +261,8 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20, transition: { delay: 0.15, duration: 0.2 } }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            {/* Static links */}
-            {mainLinks.map((link, i) => (
+            {/* Left links */}
+            {leftLinks.map((link, i) => (
               <motion.div
                 key={link.name}
                 initial={{ opacity: 0, y: 16 }}
@@ -266,14 +290,14 @@ const Navbar = () => {
               </motion.div>
             ))}
 
-            {/* Print Services section in mobile */}
+            {/* Products section in mobile */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ delay: mainLinks.length * 0.05 + 0.1, duration: 0.28 }}
+              transition={{ delay: leftLinks.length * 0.05 + 0.1, duration: 0.28 }}
             >
-              <div className="mobile-nav-group-label">Print Services</div>
+              <div className="mobile-nav-group-label">Products</div>
               {PRINT_SERVICES_MENU.map((group) => (
                 <div key={group.group} className="mobile-nav-accordion-group">
                   <button 
@@ -314,12 +338,41 @@ const Navbar = () => {
               ))}
             </motion.div>
 
+            {/* Right links */}
+            {rightLinks.map((link, i) => (
+              <motion.div
+                key={link.name}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ delay: (leftLinks.length + 1) * 0.05 + i * 0.05 + 0.1, duration: 0.28 }}
+              >
+                {link.hash ? (
+                  <a
+                    href={link.to}
+                    className="mobile-nav-link"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <NavLink
+                    to={link.to}
+                    className={`mobile-nav-link ${isActive(link.to) ? 'active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </NavLink>
+                )}
+              </motion.div>
+            ))}
+
             {/* Contact */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ delay: mainLinks.length * 0.05 + 0.25, duration: 0.28 }}
+              transition={{ delay: (leftLinks.length + rightLinks.length + 1) * 0.05 + 0.1, duration: 0.28 }}
             >
               <NavLink
                 to="/contact"
