@@ -2,9 +2,25 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.39.3';
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://sai-meera.web.app',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
+
+const ipHits = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = ipHits.get(ip);
+  if (!record || now > record.resetAt) {
+    ipHits.set(ip, { count: 1, resetAt: now + 60000 }); // 60 seconds window
+    return false; // not limited
+  }
+  if (record.count >= 10) { // max 10 requests per minute per IP
+    return true; // limited
+  }
+  record.count++;
+  return false;
+}
 
 const PRICING_TABLE: Record<string, { name: string; tiers: Record<string, { price: number; minQty: number; unit: string }> }> = {
   'hindu-wedding': { name: 'Hindu Wedding Invitations', tiers: { 'Classic': { price: 8, minQty: 50, unit: 'card' }, 'Premium': { price: 18, minQty: 50, unit: 'card' }, 'Luxury': { price: 35, minQty: 100, unit: 'card' } } },
@@ -39,6 +55,14 @@ const PRICING_TABLE: Record<string, { name: string; tiers: Record<string, { pric
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
+  }
+
+  const clientIp = req.headers.get('x-forwarded-for') || 'unknown';
+  if (checkRateLimit(clientIp)) {
+    return new Response(JSON.stringify({ error: 'Too many requests. Please try again later.' }), {
+      status: 429,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
   }
 
   if (req.method !== 'POST') {
