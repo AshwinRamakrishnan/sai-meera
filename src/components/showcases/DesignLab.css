@@ -1,0 +1,120 @@
+/* DesignLab — 3-column editorial layout */
+.dl-section {
+  padding: clamp(5rem, 8vw, 7rem) 0;
+  background: var(--bg-primary);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.dl-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .dl-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .dl-container {
+    grid-template-columns: 1.2fr 1.5fr 1fr;
+    gap: 4rem;
+  }
+}
+
+/* Col 1: Text */
+.dl-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dl-gold-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.dl-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.dl-body {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.dl-link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+  margin-top: 0.5rem;
+}
+
+.dl-link:hover { opacity: 0.7; }
+
+/* Col 2: Image */
+.dl-image-col {
+  width: 100%;
+  overflow: hidden;
+}
+
+.dl-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  filter: brightness(0.75);
+  display: block;
+}
+
+/* Col 3: Capabilities */
+.dl-caps-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dl-cap-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 1.5rem;
+}
+
+.dl-cap-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dl-cap-icon {
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.dl-cap-label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}

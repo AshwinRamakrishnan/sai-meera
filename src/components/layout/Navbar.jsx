@@ -19,14 +19,12 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menus on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesOpen(false);
     setMobileExpandedGroup(null);
   }, [location.pathname]);
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (servicesRef.current && !servicesRef.current.contains(e.target)) {
@@ -37,7 +35,6 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -48,68 +45,50 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
-  // Check if any Print Services route is active (for dropdown trigger highlight)
   const isServicesActive = PRINT_SERVICES_MENU.some((group) =>
     group.items.some((item) => location.pathname.startsWith(item.to))
   );
-
-  const leftLinks = [
-    { name: 'Home', to: '/' },
-  ];
-  
-  const rightLinks = [
-    { name: 'Our Work', to: '/#services', hash: true },
-  ];
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={() => setMobileMenuOpen(false)}>
           <span className="logo-main">Sai Meera</span>
-          <span className="logo-sub">INDUSTRIAL PRINTING</span>
+          <span className="logo-sub">Industrial Printing</span>
         </Link>
 
         {/* ── Desktop Nav ── */}
         <div className="desktop-nav-container">
-          {/* Left links */}
-          {leftLinks.map((link) => {
-            const active = isActive(link.to);
-            return (
-              <React.Fragment key={link.name}>
-                {link.hash ? (
-                  <a href={link.to} className={`nav-link ${active ? 'active' : ''}`}>
-                    <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
-                  </a>
-                ) : (
-                  <NavLink to={link.to} className={`nav-link ${active ? 'active' : ''}`}>
-                    {active && (
-                      <motion.div
-                        layoutId="active-pill"
-                        className="nav-active-pill"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                    <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
-                  </NavLink>
+          {/* Home */}
+          <NavLink to="/" end className={({ isActive: a }) => `nav-link ${a ? 'active' : ''}`}>
+            {({ isActive: a }) => (
+              <>
+                {a && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="nav-active-pill"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
                 )}
-              </React.Fragment>
-            );
-          })}
+                <span style={{ position: 'relative', zIndex: 2 }}>Home</span>
+              </>
+            )}
+          </NavLink>
 
-            {/* ── Print Services Mega-Menu Trigger ── */}
+          {/* Products mega-menu */}
           <div
             className={`nav-services-trigger ${isServicesActive ? 'active' : ''} ${servicesOpen ? 'open' : ''}`}
             ref={servicesRef}
           >
             <button
-              className="nav-link nav-services-btn"
+              className={`nav-link nav-services-btn ${isServicesActive ? 'active' : ''}`}
               onClick={() => setServicesOpen((v) => !v)}
               aria-expanded={servicesOpen}
               aria-haspopup="true"
             >
               {isServicesActive && (
                 <motion.div
-                  layoutId="active-pill"
+                  layoutId="nav-underline"
                   className="nav-active-pill"
                   transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                 />
@@ -126,14 +105,13 @@ const Navbar = () => {
               </span>
             </button>
 
-            {/* ── 4-Column Mega-Menu Dropdown ── */}
             <AnimatePresence>
               {servicesOpen && (
                 <motion.div
                   className="nav-mega-menu"
-                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="mega-menu-inner">
@@ -144,10 +122,7 @@ const Navbar = () => {
                             className="mega-menu-group-label"
                             style={{ '--group-accent': group.accentColor }}
                           >
-                            <span
-                              className="mega-group-dot"
-                              style={{ background: group.accentColor }}
-                            />
+                            <span className="mega-group-dot" style={{ background: group.accentColor }} />
                             {group.group}
                           </div>
                           {group.items.map((item) => {
@@ -178,21 +153,11 @@ const Navbar = () => {
                         </div>
                       ))}
                     </div>
-
-                    {/* Bottom CTA strip */}
                     <div className="mega-menu-cta-strip">
-                      <Link
-                        to="/products"
-                        className="mega-cta-browse"
-                        onClick={() => setServicesOpen(false)}
-                      >
+                      <Link to="/products" className="mega-cta-browse" onClick={() => setServicesOpen(false)}>
                         Browse full catalogue →
                       </Link>
-                      <Link
-                        to="/contact"
-                        className="mega-cta-btn"
-                        onClick={() => setServicesOpen(false)}
-                      >
+                      <Link to="/contact" className="mega-cta-btn" onClick={() => setServicesOpen(false)}>
                         Get a Quote
                       </Link>
                     </div>
@@ -202,38 +167,32 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
-          {/* Right links */}
-          {rightLinks.map((link) => {
-            const active = isActive(link.to);
-            return (
-              <React.Fragment key={link.name}>
-                {link.hash ? (
-                  <a href={link.to} className={`nav-link ${active ? 'active' : ''}`}>
-                    <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
-                  </a>
-                ) : (
-                  <NavLink to={link.to} className={`nav-link ${active ? 'active' : ''}`}>
-                    {active && (
-                      <motion.div
-                        layoutId="active-pill"
-                        className="nav-active-pill"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                    <span style={{ position: 'relative', zIndex: 2 }}>{link.name}</span>
-                  </NavLink>
-                )}
-              </React.Fragment>
-            );
-          })}
+          {/* Our Work */}
+          <a href="/#machines-strip" className="nav-link">
+            <span style={{ position: 'relative', zIndex: 2 }}>Our Work</span>
+          </a>
 
-          {/* Contact link */}
+          {/* Contact */}
           <NavLink
             to="/contact"
-            className={`nav-link nav-contact-btn ${isActive('/contact') ? 'active' : ''}`}
+            className={({ isActive: a }) => `nav-link ${a ? 'active' : ''}`}
           >
-            <span style={{ position: 'relative', zIndex: 2 }}>Contact</span>
+            {({ isActive: a }) => (
+              <>
+                {a && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="nav-active-pill"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span style={{ position: 'relative', zIndex: 2 }}>Contact</span>
+              </>
+            )}
           </NavLink>
+
+          {/* GET A QUOTE button */}
+          <Link to="/contact" className="nav-quote-btn">Get a Quote</Link>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -261,54 +220,18 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20, transition: { delay: 0.15, duration: 0.2 } }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
-            {/* Left links */}
-            {leftLinks.map((link, i) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ delay: i * 0.05 + 0.1, duration: 0.28 }}
-              >
-                {link.hash ? (
-                  <a
-                    href={link.to}
-                    className="mobile-nav-link"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <NavLink
-                    to={link.to}
-                    className={`mobile-nav-link ${isActive(link.to) ? 'active' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </NavLink>
-                )}
-              </motion.div>
-            ))}
+            <NavLink to="/" end className={({ isActive: a }) => `mobile-nav-link ${a ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Home</NavLink>
 
-            {/* Products section in mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: leftLinks.length * 0.05 + 0.1, duration: 0.28 }}
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <div className="mobile-nav-group-label">Products</div>
               {PRINT_SERVICES_MENU.map((group) => (
                 <div key={group.group} className="mobile-nav-accordion-group">
-                  <button 
+                  <button
                     className="mobile-nav-accordion-btn"
                     onClick={() => setMobileExpandedGroup(prev => prev === group.group ? null : group.group)}
                   >
                     <span style={{ color: group.accentColor }}>{group.group}</span>
-                    <motion.div
-                      animate={{ rotate: mobileExpandedGroup === group.group ? 180 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <motion.div animate={{ rotate: mobileExpandedGroup === group.group ? 180 : 0 }} transition={{ duration: 0.2 }}>
                       <ChevronDown size={18} />
                     </motion.div>
                   </button>
@@ -338,50 +261,8 @@ const Navbar = () => {
               ))}
             </motion.div>
 
-            {/* Right links */}
-            {rightLinks.map((link, i) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ delay: (leftLinks.length + 1) * 0.05 + i * 0.05 + 0.1, duration: 0.28 }}
-              >
-                {link.hash ? (
-                  <a
-                    href={link.to}
-                    className="mobile-nav-link"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <NavLink
-                    to={link.to}
-                    className={`mobile-nav-link ${isActive(link.to) ? 'active' : ''}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </NavLink>
-                )}
-              </motion.div>
-            ))}
-
-            {/* Contact */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: (leftLinks.length + rightLinks.length + 1) * 0.05 + 0.1, duration: 0.28 }}
-            >
-              <NavLink
-                to="/contact"
-                className="mobile-nav-link mobile-nav-contact"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Contact
-              </NavLink>
-            </motion.div>
+            <a href="/#machines-strip" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Our Work</a>
+            <NavLink to="/contact" className="mobile-nav-link mobile-nav-contact" onClick={() => setMobileMenuOpen(false)}>Get a Quote</NavLink>
           </motion.div>
         )}
       </AnimatePresence>

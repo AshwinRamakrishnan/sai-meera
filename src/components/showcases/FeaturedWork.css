@@ -1,0 +1,220 @@
+/* FeaturedWork — 50/50 split invitation showcase */
+.fw-section {
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+.fw-split {
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+}
+
+@media (min-width: 768px) {
+  .fw-split {
+    flex-direction: row;
+    min-height: 650px;
+  }
+}
+
+/* Panels */
+.fw-panel {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 3rem;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+/* Left panel (dark green) */
+.fw-panel-dark {
+  background: #1a2e1a;
+}
+
+/* Right panel (cream ivory) */
+.fw-panel-light {
+  background: #f5f0e8;
+}
+
+/* Invitation card (dark) */
+.fw-invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.fw-invite-border {
+  position: absolute;
+  inset: -2rem;
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  pointer-events: none;
+}
+
+.fw-invite-script {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1.1;
+}
+
+.fw-invite-weds {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(201, 162, 39, 0.6);
+}
+
+.fw-invite-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: rgba(201, 162, 39, 0.5);
+  margin-top: 0.5rem;
+}
+
+/* Light invite overrides */
+.fw-invite-dark-text {
+  color: #3a2e1a !important;
+}
+
+.fw-invite-date-dark {
+  color: rgba(58, 46, 26, 0.5) !important;
+}
+
+.fw-invite-initials {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  color: rgba(58, 46, 26, 0.4);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.fw-ampersand {
+  font-style: italic;
+}
+
+/* Floral corner decorations */
+.fw-floral-corner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+}
+
+.fw-floral-tl {
+  top: 1rem;
+  left: 1rem;
+  border-top: 2px solid #3a2e1a;
+  border-left: 2px solid #3a2e1a;
+}
+
+.fw-floral-br {
+  bottom: 1rem;
+  right: 1rem;
+  border-bottom: 2px solid #3a2e1a;
+  border-right: 2px solid #3a2e1a;
+}
+
+/* Overlay text block (right panel, positioned toward left edge) */
+.fw-overlay-text {
+  position: absolute;
+  left: -30%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  background: var(--bg-primary);
+  padding: 2rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 1200px) {
+  .fw-overlay-text {
+    left: -10%;
+    width: 240px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fw-overlay-text {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding: 0 0 2rem;
+    order: -1;
+  }
+}
+
+.fw-slide-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.fw-overlay-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.fw-overlay-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.fw-overlay-link {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.fw-overlay-link:hover { opacity: 0.7; }
+
+/* Arrow buttons */
+.fw-arrow {
+  position: absolute;
+  bottom: 1.5rem;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background var(--transition-fast);
+  z-index: 5;
+}
+
+.fw-arrow:hover { background: rgba(255,255,255,0.15); }
+.fw-arrow-left { left: 1.5rem; }
+.fw-arrow-right { right: 1.5rem; }

@@ -1,134 +1,84 @@
-import React, { useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
-import BackgroundGrid from './BackgroundGrid';
-import { FaArrowRight } from 'react-icons/fa';
+﻿import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import './HeroSection.css';
 
-import { animate } from 'framer-motion';
-
-const AnimatedCounter = ({ value, duration = 3, delay = 1, decimals = 0 }) => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const [displayValue, setDisplayValue] = React.useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      const timeout = setTimeout(() => {
-        animate(0, value, {
-          duration: duration,
-          ease: "easeOut",
-          onUpdate: (latest) => setDisplayValue(latest)
-        });
-      }, delay * 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [isInView, value, duration, delay]);
-
-  const formattedValue = React.useMemo(() => {
-    return displayValue.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }, [displayValue, decimals]);
-
-  return <motion.span ref={ref}>{formattedValue}</motion.span>;
-};
-
 const HeroSection = () => {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
-
-  const stats = [
-    { value: 1962, suffix: '', label: 'Founded' },
-    { value: 60, suffix: '+', label: 'Years Legacy' },
-    { value: 3.2, suffix: 'm', label: 'Print Width', decimals: 1 },
-    { value: 1440, suffix: '', label: 'DPI Precision' }
-  ];
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-    }
-  };
-
-  const textRevealVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      rotateX: 0,
-      transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } // Apple-style spring
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.12, delayChildren: 0.1 } }
   };
 
   return (
-    <section className="hero-section">
-      <BackgroundGrid />
-      
-      {/* Subtle Aurora Glow */}
-      <div className="hero-glow hero-glow-cyan" />
-      <div className="hero-glow hero-glow-gold" />
-      
-      <motion.div 
-        className="hero-content-wrapper"
-        style={{ y: y1, opacity }}
-      >
-        <motion.div 
-          className="hero-main-content"
+    <section className="hero-section" id="home">
+      <div className="hero-grid">
+        {/* Left: Text Content */}
+        <motion.div
+          className="hero-text-col"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="hero-label-pill" variants={textRevealVariants}>
-            <span className="pulse-dot" /> INDUSTRIAL PRINTING EXCELLENCE
+          {/* EST. 1962 label */}
+          <motion.div className="hero-est-label" variants={itemVariants}>
+            <span className="hero-est-rule" />
+            EST. 1962
           </motion.div>
-          
-          <div className="hero-heading-container">
-            <motion.h1 className="hero-heading" variants={textRevealVariants}>
-              Sai Meera
-            </motion.h1>
-            <motion.h1 className="hero-heading hero-heading-accent" variants={textRevealVariants}>
-              Legacy Printing.
-            </motion.h1>
-          </div>
-          
-          <motion.p className="hero-description" variants={textRevealVariants}>
-            A 60+ year industrial printing institution built on heritage, craftsmanship, and cinematic precision. From traditional offset to large-format flex — every machine tells a story.
+
+          {/* Two-tone headline */}
+          <motion.h1 className="hero-heading" variants={itemVariants}>
+            <span className="hero-heading-white">PRINTING THAT</span>
+            <span className="hero-heading-gold">LEAVES A MARK.</span>
+          </motion.h1>
+
+          {/* Description */}
+          <motion.p className="hero-description" variants={itemVariants}>
+            From premium invitations to large-format industrial production — precision printed for businesses, brands and celebrations.
           </motion.p>
-          
-          <motion.div className="hero-cta-group" variants={textRevealVariants}>
-            <a href="#legacy" className="hero-btn-primary magnetic">
-              Explore Our Legacy <FaArrowRight size={20} />
+
+          {/* CTA Buttons */}
+          <motion.div className="hero-cta-row" variants={itemVariants}>
+            <a href="#machines-strip" className="hero-btn-primary">
+              EXPLORE OUR WORK <span className="hero-btn-arrow">→</span>
             </a>
-            <a href="#services" className="hero-btn-secondary magnetic">
-              View Our Work
-            </a>
+            <Link to="/contact" className="hero-btn-outline">
+              GET A QUOTE
+            </Link>
           </motion.div>
-          
-          <motion.div 
-            className="hero-stats-inline"
-            variants={textRevealVariants}
-          >
-            {stats.map((stat, index) => (
-              <React.Fragment key={index}>
-                <div className="hero-stat-inline-item">
-                  <div className="hero-stat-value">
-                    <AnimatedCounter 
-                      value={stat.value} 
-                      duration={3} 
-                      delay={1}
-                      decimals={stat.decimals || 0}
-                    />
-                    {stat.suffix}
-                  </div>
-                  <div className="hero-stat-label">{stat.label}</div>
-                </div>
-                {index < stats.length - 1 && <div className="hero-stat-divider" />}
-              </React.Fragment>
-            ))}
+
+          {/* Stats strip */}
+          <motion.div className="hero-stats-strip" variants={itemVariants}>
+            <span className="hero-stat">EST. 1962</span>
+            <span className="hero-stat-dot">•</span>
+            <span className="hero-stat">60+ YEARS OF CRAFT</span>
+            <span className="hero-stat-dot">•</span>
+            <span className="hero-stat">3.2M PRINT WIDTH</span>
+            <span className="hero-stat-dot">•</span>
+            <span className="hero-stat">1440 DPI PRECISION</span>
           </motion.div>
         </motion.div>
-      </motion.div>
+
+        {/* Right: Machine Image */}
+        <motion.div
+          className="hero-image-col"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        >
+          {/* TODO: Replace with high-res client-supplied flex printer / offset press photo */}
+          <img
+            src="/src/assets/offset_printing_plates.jpg"
+            alt="Industrial offset printing press at Sai Meera"
+            className="hero-machine-img"
+          />
+          <div className="hero-image-fade" />
+        </motion.div>
+      </div>
     </section>
   );
 };

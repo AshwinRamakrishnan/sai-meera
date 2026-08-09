@@ -1,70 +1,50 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import HeroSection from '../components/hero/HeroSection';
-import LegacySection from '../components/legacy/LegacySection';
-import MachineSection from '../components/machines/MachineSection';
-import WeddingInvite from '../components/showcases/WeddingInvite';
-import FlexBanner from '../components/showcases/FlexBanner';
-import PhotoshopUI from '../components/showcases/PhotoshopUI';
-import PhotoFrames from '../components/showcases/PhotoFrames';
-import BusinessCards from '../components/showcases/BusinessCards';
-import ServicesGrid from '../components/showcases/ServicesGrid';
-import ContactSection from '../components/contact/ContactSection';
+
+// Sections in reference-image order
+import HeroSection      from '../components/hero/HeroSection';
+import LegacySection    from '../components/legacy/LegacySection';
+import MachinesStrip    from '../components/machines/MachinesStrip';
+import WhatWePrint      from '../components/showcases/WhatWePrint';
+import FeaturedWork     from '../components/showcases/FeaturedWork';
+import GalleryStrip     from '../components/showcases/GalleryStrip';
+import DesignLab        from '../components/showcases/DesignLab';
+import CtaBanner        from '../components/ui/CtaBanner';
+import ContactSection   from '../components/contact/ContactSection';
+
+// LOCKED: 3D machine scenes — DO NOT MODIFY
+import MachineSection   from '../components/machines/MachineSection';
+import OffsetPress      from '../scenes/OffsetPress';
+import FlexPrinter      from '../scenes/FlexPrinter';
+import PhotoshopStation from '../scenes/PhotoshopStation';
+import HydraulicCutter  from '../scenes/HydraulicCutter';
+
 import { useScrollChoreography } from '../hooks/useScrollChoreography';
 
-// 3D Scene Components
-import OffsetPress from '../scenes/OffsetPress';
-import FlexPrinter from '../scenes/FlexPrinter';
-import PhotoshopStation from '../scenes/PhotoshopStation';
-import HydraulicCutter from '../scenes/HydraulicCutter';
-
 export default function HomePage() {
-  // Phase 5: GSAP ScrollTrigger choreography (HUD entrances, dividers, showcases)
   useScrollChoreography();
 
   return (
     <>
       <Helmet>
-        <title>Sai Meera | Industrial Printing Excellence</title>
-        <meta name="description" content="A 60+ year industrial printing institution built on heritage, craftsmanship, and cinematic precision." />
-        <meta name="keywords" content="industrial printing, offset press, flex banner, premium invitations, chennai printing" />
+        <title>Sai Meera | Industrial Printing Excellence — Chennai</title>
+        <meta name="description" content="Sai Meera: 60+ years of industrial printing in Chennai. Premium invitations, offset printing, large-format flex banners, and corporate stationery." />
+        <meta name="keywords" content="industrial printing chennai, offset press, flex banner, premium invitations, wedding cards printing" />
       </Helmet>
+
+      {/* 1. Hero */}
       <HeroSection />
-      <div className="gold-divider" />
+
+      {/* 2. Legacy / About */}
       <LegacySection />
-      <div className="gold-divider" />
 
-      {/* Machine 02: Offset Press */}
-      <MachineSection 
-        id="offset-sec"
-        machineNumber="02"
-        machineName="Industrial Offset Printing Press"
-        serialNumber="OS-SM74-6C"
-        description="6-unit CTP press with aluminium plates. 15,000 sheets/hour for cards, brochures, and premium packaging."
-        specs={[
-          { label: 'B1 Sheet', value: 'Format' },
-          { label: '15K sph', value: 'Speed' },
-          { label: '6-Color+UV', value: 'Output' },
-          { label: 'Pantone', value: 'Color' }
-        ]}
-        accentColor="var(--orange)"
-        sceneComponent={OffsetPress}
-        customLighting={true}
-        cameraPosition={[7.5, 5, 10]}
-        cameraFov={42}
-        consoleLines={[
-          'PRESS: HeidelBerg SM74',
-          'UNITS: 6 (CMYK+2 Spot)',
-          'INKING: RUNNING',
-          'LOCKS: Torque Loaded',
-          'SPEED: 12,000 sph',
-          'PLATES: CTP Aluminium',
-          'STATUS: RUNNING ■'
-        ]}
-      />
-      <WeddingInvite />
-      <div className="gold-divider" />
+      {/* 3. Machines Summary Strip */}
+      <MachinesStrip />
 
+      {/* 4. What We Print */}
+      <WhatWePrint />
+
+      {/* ── LOCKED: 3D Interactive Machine Showcases ── */}
       {/* Machine 01: Flex Printer */}
       <MachineSection
         id="flex-sec"
@@ -91,8 +71,35 @@ export default function HomePage() {
           'STATUS: PRINTING...'
         ]}
       />
-      <FlexBanner />
-      <div className="gold-divider" />
+
+      {/* Machine 02: Offset Press */}
+      <MachineSection
+        id="offset-sec"
+        machineNumber="02"
+        machineName="Industrial Offset Printing Press"
+        serialNumber="OS-SM74-6C"
+        description="6-unit CTP press with aluminium plates. 15,000 sheets/hour for cards, brochures, and premium packaging."
+        specs={[
+          { label: 'B1 Sheet', value: 'Format' },
+          { label: '15K sph', value: 'Speed' },
+          { label: '6-Color+UV', value: 'Output' },
+          { label: 'Pantone', value: 'Color' }
+        ]}
+        accentColor="var(--orange)"
+        sceneComponent={OffsetPress}
+        customLighting={true}
+        cameraPosition={[7.5, 5, 10]}
+        cameraFov={42}
+        consoleLines={[
+          'PRESS: HeidelBerg SM74',
+          'UNITS: 6 (CMYK+2 Spot)',
+          'INKING: RUNNING',
+          'LOCKS: Torque Loaded',
+          'SPEED: 12,000 sph',
+          'PLATES: CTP Aluminium',
+          'STATUS: RUNNING ■'
+        ]}
+      />
 
       {/* Machine 03: Photoshop Workstation */}
       <MachineSection
@@ -120,8 +127,6 @@ export default function HomePage() {
           'STATUS: RENDERING...'
         ]}
       />
-      <PhotoshopUI />
-      <div className="gold-divider" />
 
       {/* Machine 04: Hydraulic Cutter */}
       <MachineSection
@@ -149,14 +154,21 @@ export default function HomePage() {
           'STATUS: READY ■'
         ]}
       />
-      <div className="gold-divider" />
+      {/* ── END LOCKED SECTION ── */}
 
-      <PhotoFrames />
-      <div className="gold-divider" />
-      <BusinessCards />
-      <div className="gold-divider" />
-      <ServicesGrid />
-      <div className="gold-divider" />
+      {/* 5. Featured Work (invitation split) */}
+      <FeaturedWork />
+
+      {/* 6. Gallery Strip */}
+      <GalleryStrip />
+
+      {/* 7. Design Lab */}
+      <DesignLab />
+
+      {/* 8. CTA Banner */}
+      <CtaBanner />
+
+      {/* 9. Contact */}
       <ContactSection />
     </>
   );

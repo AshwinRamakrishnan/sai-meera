@@ -1,0 +1,113 @@
+/* GalleryStrip */
+.gs-section {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: #0e0c0a;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.gs-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.gs-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gs-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.gs-subtext {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  margin-top: 0.4rem;
+}
+
+.gs-arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.gs-arrow {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.gs-arrow:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.gs-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.gs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .gs-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gs-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gs-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.gs-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) brightness(0.75);
+  transition: filter var(--transition-medium), transform var(--transition-medium);
+}
+
+.gs-card:hover .gs-card-img {
+  filter: grayscale(0%) brightness(0.9);
+  transform: scale(1.04);
+}
+
+.gs-card-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  text-align: center;
+}
