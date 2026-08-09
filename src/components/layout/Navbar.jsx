@@ -230,7 +230,7 @@ const Navbar = () => {
                     className="mobile-nav-accordion-btn"
                     onClick={() => setMobileExpandedGroup(prev => prev === group.group ? null : group.group)}
                   >
-                    <span style={{ color: group.accentColor }}>{group.group}</span>
+                    <span style={{ color: 'var(--text-primary)' }}>{group.group}</span>
                     <motion.div animate={{ rotate: mobileExpandedGroup === group.group ? 180 : 0 }} transition={{ duration: 0.2 }}>
                       <ChevronDown size={18} />
                     </motion.div>
@@ -262,6 +262,7 @@ const Navbar = () => {
             </motion.div>
 
             <a href="/#machines-strip" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Our Work</a>
+            <NavLink to="/contact" className={({ isActive: a }) => `mobile-nav-link ${a ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Contact</NavLink>
             <NavLink to="/contact" className="mobile-nav-link mobile-nav-contact" onClick={() => setMobileMenuOpen(false)}>Get a Quote</NavLink>
           </motion.div>
         )}
