@@ -67,14 +67,19 @@ const MachineSection = React.memo(function MachineSection({
   // ─── scrollRatio as a REF (no React re-render on scroll) ───
   const scrollRatioRef = useRef(0);
 
-  // ─── 1. LAZY MOUNT (Mount Canvas early before it enters view) ───
-  const hasMountedCanvas = useInView(sectionRef, { once: true, margin: "1000px" });
+  // ─── 1. MOUNT/UNMOUNT CANVAS (Only when near view to save WebGL memory) ───
+  const hasMountedCanvas = useInView(sectionRef, { margin: "300px" });
 
   // ─── 2. PAUSE RENDER LOOP (Pause when completely out of view) ───
-  const isRenderingActive = useInView(sectionRef, { margin: "100px" });
+  const isRenderingActive = useInView(sectionRef, { margin: "0px" });
 
   // ─── 3. LOAD NOTIFIER (Fade out placeholder when 3D assets are ready) ───
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // Reset loading state if canvas unmounts so it shows loading again when scrolling back
+  useEffect(() => {
+    if (!hasMountedCanvas) setIsLoaded(false);
+  }, [hasMountedCanvas]);
 
   // ─── Scroll tracking: write to ref (instant), no React re-renders ───
   const { scrollYProgress } = useScroll({
