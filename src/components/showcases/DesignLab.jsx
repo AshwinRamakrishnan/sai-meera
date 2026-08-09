@@ -4,6 +4,7 @@ import {
   MousePointer2, Brush, Target, Printer, MonitorUp
 } from 'lucide-react';
 import './DesignLab.css';
+import designLabImg from '../../assets/design_lab_setup.jpg';
 
 const capabilities = [
   { icon: <MousePointer2 size={16} />, label: 'Selection & Masking' },
@@ -57,7 +58,7 @@ const DesignLab = () => {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
           <img
-            src="/images/design_lab_setup.jpg"
+            src={designLabImg}
             alt="Design workstation at Sai Meera"
             className="dl-image"
           />

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './FeaturedWork.css';
+import imgInviteDark from '../../assets/invite_dark_green.jpg';
+import imgInviteLight from '../../assets/invite_cream_floral.jpg';
 
 // TODO: Replace with real printed invitation sample photos from client
 const slides = [
@@ -32,7 +34,7 @@ const FeaturedWork = () => {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="fw-invite-image">
-            <img src="/images/invite_dark_green.jpg" alt="Dark green wedding invitation" style={{ width: '100%', maxWidth: '280px', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
+            <img src={imgInviteDark} alt="Dark green wedding invitation" style={{ width: '100%', maxWidth: '280px', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
           </div>
           {/* Prev arrow */}
           <button
@@ -63,7 +65,7 @@ const FeaturedWork = () => {
           </div>
 
           <div className="fw-invite-image" style={{ zIndex: 2 }}>
-            <img src="/images/invite_cream_floral.jpg" alt="Cream floral wedding invitation" style={{ width: '100%', maxWidth: '280px', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }} />
+            <img src={imgInviteLight} alt="Cream floral wedding invitation" style={{ width: '100%', maxWidth: '280px', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }} />
           </div>
 
           {/* Next arrow */}

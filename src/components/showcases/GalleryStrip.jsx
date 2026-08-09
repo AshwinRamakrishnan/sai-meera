@@ -2,13 +2,20 @@ import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './GalleryStrip.css';
 
+import imgInvites from '../../assets/gallery_invitations.jpg';
+import imgCards from '../../assets/gallery_business_cards.jpg';
+import imgBanners from '../../assets/gallery_flex_banner.jpg';
+import imgGreetings from '../../assets/gallery_greeting_cards.jpg';
+import imgBrochures from '../../assets/machine_offset_press.jpg';
+import imgStationery from '../../assets/invite_dark_green.jpg';
+
 const items = [
-  { label: 'Wedding Invitations', img: '/images/gallery_invitations.jpg' },
-  { label: 'Business Cards',      img: '/images/gallery_business_cards.jpg' },
-  { label: 'Flex & Banners',      img: '/images/gallery_flex_banner.jpg' },
-  { label: 'Greeting Cards',      img: '/images/gallery_greeting_cards.jpg' },
-  { label: 'Brochures',           img: '/images/machine_offset_press.jpg' },
-  { label: 'Stationery',          img: '/images/invite_dark_green.jpg' },
+  { label: 'Wedding Invitations', img: imgInvites },
+  { label: 'Business Cards',      img: imgCards },
+  { label: 'Flex & Banners',      img: imgBanners },
+  { label: 'Greeting Cards',      img: imgGreetings },
+  { label: 'Brochures',           img: imgBrochures },
+  { label: 'Stationery',          img: imgStationery },
 ];
 
 const VISIBLE = 4;

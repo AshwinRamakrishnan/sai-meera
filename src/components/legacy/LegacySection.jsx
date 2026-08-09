@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Award, Cpu, Star } from 'lucide-react';
 import './LegacySection.css';
+import legacyImg from '../../assets/legacy_workshop.jpg';
 
 const features = [
   {
@@ -50,7 +51,7 @@ const LegacySection = () => {
             {/* TODO: Replace with real archival B&W workshop photograph from client */}
             <div
               className="legacy-photo"
-              style={{ backgroundImage: 'url("/images/legacy_workshop.jpg")' }}
+              style={{ backgroundImage: `url(${legacyImg})` }}
             >
               <div className="legacy-photo-overlay" />
               <p className="legacy-photo-caption"><em>Our beginning. Our foundation.</em></p>
