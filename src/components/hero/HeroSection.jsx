@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './HeroSection.css';
@@ -72,7 +72,7 @@ const HeroSection = () => {
         >
           {/* TODO: Replace with high-res client-supplied flex printer / offset press photo */}
           <img
-            src="/src/assets/offset_printing_plates.jpg"
+            src="/src/assets/hero_printing_press.jpg"
             alt="Industrial offset printing press at Sai Meera"
             className="hero-machine-img"
           />

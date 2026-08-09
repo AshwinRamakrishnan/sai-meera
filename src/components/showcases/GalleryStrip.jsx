@@ -2,14 +2,13 @@ import React, { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './GalleryStrip.css';
 
-// TODO: Replace all images with real portfolio photography from client
 const items = [
-  { label: 'Wedding Invitations', img: '/src/assets/printing_ink_rollers.jpg' },
-  { label: 'Business Cards',      img: '/src/assets/offset_printing_plates.jpg' },
-  { label: 'Flex & Banners',      img: '/src/assets/printing_ink_rollers.jpg' },
-  { label: 'Greeting Cards',      img: '/src/assets/offset_printing_plates.jpg' },
-  { label: 'Brochures',           img: '/src/assets/printing_ink_rollers.jpg' },
-  { label: 'Stationery',          img: '/src/assets/offset_printing_plates.jpg' },
+  { label: 'Wedding Invitations', img: '/src/assets/gallery_invitations.jpg' },
+  { label: 'Business Cards',      img: '/src/assets/gallery_business_cards.jpg' },
+  { label: 'Flex & Banners',      img: '/src/assets/gallery_flex_banner.jpg' },
+  { label: 'Greeting Cards',      img: '/src/assets/gallery_greeting_cards.jpg' },
+  { label: 'Brochures',           img: '/src/assets/machine_offset_press.jpg' },
+  { label: 'Stationery',          img: '/src/assets/invite_dark_green.jpg' },
 ];
 
 const VISIBLE = 4;

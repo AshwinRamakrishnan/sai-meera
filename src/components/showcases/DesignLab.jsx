@@ -56,9 +56,8 @@ const DesignLab = () => {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
-          {/* TODO: Replace with client's real studio/workstation photo */}
           <img
-            src="/src/assets/offset_printing_plates.jpg"
+            src="/src/assets/design_lab_setup.jpg"
             alt="Design workstation at Sai Meera"
             className="dl-image"
           />

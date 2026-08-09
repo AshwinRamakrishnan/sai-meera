@@ -31,13 +31,8 @@ const FeaturedWork = () => {
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="fw-invite fw-invite-dark">
-            {/* TODO: replace with actual invitation mockup image */}
-            <div className="fw-invite-border" />
-            <p className="fw-invite-script">{slide.leftText.bride}</p>
-            <p className="fw-invite-weds">weds</p>
-            <p className="fw-invite-script">{slide.leftText.groom}</p>
-            <p className="fw-invite-date">{slide.leftText.date}</p>
+          <div className="fw-invite-image">
+            <img src="/src/assets/invite_dark_green.jpg" alt="Dark green wedding invitation" style={{ width: '100%', maxWidth: '280px', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} />
           </div>
           {/* Prev arrow */}
           <button
@@ -67,17 +62,8 @@ const FeaturedWork = () => {
             <a href="/category/wedding-invitations" className="fw-overlay-link">VIEW INVITATIONS →</a>
           </div>
 
-          <div className="fw-invite fw-invite-light">
-            {/* TODO: replace with real cream invitation mockup */}
-            <div className="fw-floral-corner fw-floral-tl" />
-            <div className="fw-floral-corner fw-floral-br" />
-            <p className="fw-invite-initials">
-              {slide.rightText.bride[0]} <span className="fw-ampersand">&</span> {slide.rightText.groom[0]}
-            </p>
-            <p className="fw-invite-script fw-invite-dark-text">{slide.rightText.bride}</p>
-            <p className="fw-invite-weds fw-invite-dark-text">&amp;</p>
-            <p className="fw-invite-script fw-invite-dark-text">{slide.rightText.groom}</p>
-            <p className="fw-invite-date fw-invite-date-dark">{slide.rightText.date}</p>
+          <div className="fw-invite-image" style={{ zIndex: 2 }}>
+            <img src="/src/assets/invite_cream_floral.jpg" alt="Cream floral wedding invitation" style={{ width: '100%', maxWidth: '280px', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }} />
           </div>
 
           {/* Next arrow */}

@@ -50,7 +50,7 @@ const LegacySection = () => {
             {/* TODO: Replace with real archival B&W workshop photograph from client */}
             <div
               className="legacy-photo"
-              style={{ backgroundImage: 'url("/src/assets/printing_ink_rollers.jpg")' }}
+              style={{ backgroundImage: 'url("/src/assets/legacy_workshop.jpg")' }}
             >
               <div className="legacy-photo-overlay" />
               <p className="legacy-photo-caption"><em>Our beginning. Our foundation.</em></p>
