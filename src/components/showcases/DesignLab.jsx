@@ -57,7 +57,7 @@ const DesignLab = () => {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         >
           <img
-            src="/src/assets/design_lab_setup.jpg"
+            src="/images/design_lab_setup.jpg"
             alt="Design workstation at Sai Meera"
             className="dl-image"
           />

@@ -72,7 +72,7 @@ const HeroSection = () => {
         >
           {/* TODO: Replace with high-res client-supplied flex printer / offset press photo */}
           <img
-            src="/src/assets/hero_printing_press.jpg"
+            src="/images/hero_printing_press.jpg"
             alt="Industrial offset printing press at Sai Meera"
             className="hero-machine-img"
           />

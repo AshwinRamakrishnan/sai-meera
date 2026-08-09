@@ -3,12 +3,12 @@ import { motion, useInView } from 'framer-motion';
 import './GalleryStrip.css';
 
 const items = [
-  { label: 'Wedding Invitations', img: '/src/assets/gallery_invitations.jpg' },
-  { label: 'Business Cards',      img: '/src/assets/gallery_business_cards.jpg' },
-  { label: 'Flex & Banners',      img: '/src/assets/gallery_flex_banner.jpg' },
-  { label: 'Greeting Cards',      img: '/src/assets/gallery_greeting_cards.jpg' },
-  { label: 'Brochures',           img: '/src/assets/machine_offset_press.jpg' },
-  { label: 'Stationery',          img: '/src/assets/invite_dark_green.jpg' },
+  { label: 'Wedding Invitations', img: '/images/gallery_invitations.jpg' },
+  { label: 'Business Cards',      img: '/images/gallery_business_cards.jpg' },
+  { label: 'Flex & Banners',      img: '/images/gallery_flex_banner.jpg' },
+  { label: 'Greeting Cards',      img: '/images/gallery_greeting_cards.jpg' },
+  { label: 'Brochures',           img: '/images/machine_offset_press.jpg' },
+  { label: 'Stationery',          img: '/images/invite_dark_green.jpg' },
 ];
 
 const VISIBLE = 4;

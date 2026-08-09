@@ -9,7 +9,7 @@ const machines = [
     name: 'Large Format Eco-Solvent Flex Printer',
     specs: '3200mm | 1440 DPI | 80 sqm/hr',
     anchor: '#flex-sec',
-    img: '/src/assets/machine_flex_printer.jpg'
+    img: '/images/machine_flex_printer.jpg'
   },
   {
     num: '02',
@@ -17,7 +17,7 @@ const machines = [
     name: 'Industrial Offset Printing Machine',
     specs: '6 Color | 15K sheets/hr | Pantone',
     anchor: '#offset-sec',
-    img: '/src/assets/machine_offset_press.jpg'
+    img: '/images/machine_offset_press.jpg'
   },
   {
     num: '03',
@@ -25,7 +25,7 @@ const machines = [
     name: 'Hydraulic Paper Cutting Machine',
     specs: '920mm | Hydraulic | Precise Cut',
     anchor: '#cutter-sec',
-    img: '/src/assets/machine_paper_cutter.jpg'
+    img: '/images/machine_paper_cutter.jpg'
   },
   {
     num: '04',
@@ -33,7 +33,7 @@ const machines = [
     name: 'Photoshop Editing Workstation',
     specs: 'Dual Monitor | Color Accurate',
     anchor: '#ps-sec',
-    img: '/src/assets/machine_workstation.jpg'
+    img: '/images/machine_workstation.jpg'
   }
 ];
 
