@@ -38,6 +38,10 @@ create policy "Deny all public inserts on enquiries" on public.enquiries for ins
 create policy "Deny all public updates on enquiries" on public.enquiries for update using (false);
 create policy "Deny all public deletes on enquiries" on public.enquiries for delete using (false);
 
+-- Allow authenticated (admin) users to select and update enquiries
+create policy "Allow authenticated reads on enquiries" on public.enquiries for select using (lower(auth.jwt() ->> 'email') = 'ashwinkalai2k@gmail.com');
+create policy "Allow authenticated updates on enquiries" on public.enquiries for update using (lower(auth.jwt() ->> 'email') = 'ashwinkalai2k@gmail.com');
+
 create policy "Deny all public access to rate limits" on public.rate_limits for all using (false);
 
 -- 4. Storage Bucket Setup
@@ -75,3 +79,7 @@ create table public.orders (
 
 alter table public.orders enable row level security;
 create policy "Deny all public access to orders" on public.orders for all using (false);
+
+-- Allow authenticated (admin) users to select and update orders
+create policy "Allow authenticated reads on orders" on public.orders for select using (lower(auth.jwt() ->> 'email') = 'ashwinkalai2k@gmail.com');
+create policy "Allow authenticated updates on orders" on public.orders for update using (lower(auth.jwt() ->> 'email') = 'ashwinkalai2k@gmail.com');

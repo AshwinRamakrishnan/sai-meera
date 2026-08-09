@@ -53,7 +53,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}>
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={() => setMobileMenuOpen(false)}>
-          <span className="logo-main">Sai Meera</span>
+          <span className="logo-main">SAI MEERA DIGITAL DESIGN</span>
           <span className="logo-sub">Industrial Printing</span>
         </Link>
 

@@ -12,8 +12,8 @@ const Footer = () => {
       <div className="footer-container">
         {/* Brand & Newsletter */}
         <div className="footer-brand">
-          <h2>Sai Meera</h2>
-          <p>World-class industrial printing solutions. Precision, speed, and uncompromising quality for every scale.</p>
+          <h2>SAI MEERA DIGITAL DESIGN</h2>
+          <p>World-class digital design and industrial printing solutions. Precision, speed, and uncompromising quality for every scale.</p>
           
           <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
             <input 
@@ -50,7 +50,7 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <div className="footer-copy">
-          &copy; {new Date().getFullYear()} Sai Meera Industrial Printing. All rights reserved.
+          &copy; {new Date().getFullYear()} SAI MEERA DIGITAL DESIGN. All rights reserved.
         </div>
         
         <div className="footer-social">

@@ -9,6 +9,7 @@ import WhatWePrint      from '../components/showcases/WhatWePrint';
 import FeaturedWork     from '../components/showcases/FeaturedWork';
 import GalleryStrip     from '../components/showcases/GalleryStrip';
 import DesignLab        from '../components/showcases/DesignLab';
+import TrustQuality    from '../components/showcases/TrustQuality';
 import CtaBanner        from '../components/ui/CtaBanner';
 import ContactSection   from '../components/contact/ContactSection';
 
@@ -27,8 +28,8 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title>Sai Meera | Industrial Printing Excellence — Chennai</title>
-        <meta name="description" content="Sai Meera: 60+ years of industrial printing in Chennai. Premium invitations, offset printing, large-format flex banners, and corporate stationery." />
+        <title>SAI MEERA DIGITAL DESIGN | Industrial Printing Excellence — Kumbakonam</title>
+        <meta name="description" content="SAI MEERA DIGITAL DESIGN: 60+ years of industrial printing in Kumbakonam. Premium invitations, offset printing, large-format flex banners, and corporate stationery." />
         <meta name="keywords" content="industrial printing chennai, offset press, flex banner, premium invitations, wedding cards printing" />
       </Helmet>
 
@@ -140,7 +141,10 @@ export default function HomePage() {
       {/* 7. Design Lab */}
       <DesignLab />
 
-      {/* 8. CTA Banner */}
+      {/* 8. Trust / Quality */}
+      <TrustQuality />
+
+      {/* 9. CTA Banner */}
       <CtaBanner />
 
       {/* 9. Contact */}

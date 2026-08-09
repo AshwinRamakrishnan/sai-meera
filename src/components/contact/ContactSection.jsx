@@ -82,7 +82,7 @@ const ContactSection = () => {
               </div>
               <div className="info-content">
                 <span className="info-label">Location</span>
-                <span className="info-value">Triplicane, Chennai</span>
+                <span className="info-value">Kumbakonam, Tamil Nadu</span>
               </div>
             </motion.div>
 
@@ -92,7 +92,7 @@ const ContactSection = () => {
               </div>
               <div className="info-content">
                 <span className="info-label">Email</span>
-                <span className="info-value">print@saimeera.in</span>
+                <span className="info-value">saimeeradd@gmail.com</span>
               </div>
             </motion.div>
 

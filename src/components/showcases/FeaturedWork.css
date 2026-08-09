@@ -1,220 +1,165 @@
-/* FeaturedWork — 50/50 split invitation showcase */
-.fw-section {
-  background: var(--bg-primary);
+.fw3d-section {
+  width: 100%;
+  padding: 6rem 2rem;
+  background: var(--bg-primary, #0c0a09);
+  color: #fff;
   overflow: hidden;
 }
 
-.fw-split {
-  display: flex;
-  flex-direction: column;
-  min-height: 600px;
+.fw3d-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
 }
 
-@media (min-width: 768px) {
-  .fw-split {
-    flex-direction: row;
-    min-height: 650px;
+@media (min-width: 900px) {
+  .fw3d-container {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Panels */
-.fw-panel {
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 3rem;
-  overflow: hidden;
-  min-height: 400px;
-}
-
-/* Left panel (dark green) */
-.fw-panel-dark {
-  background: #1a2e1a;
-}
-
-/* Right panel (cream ivory) */
-.fw-panel-light {
-  background: #f5f0e8;
-}
-
-/* Invitation card (dark) */
-.fw-invite {
+/* Info Panel */
+.fw3d-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  position: relative;
-  z-index: 2;
-  text-align: center;
+  gap: 1.25rem;
 }
 
-.fw-invite-border {
-  position: absolute;
-  inset: -2rem;
-  border: 1px solid rgba(201, 162, 39, 0.25);
-  pointer-events: none;
-}
-
-.fw-invite-script {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-style: italic;
-  font-weight: 600;
-  color: var(--gold);
-  line-height: 1.1;
-}
-
-.fw-invite-weds {
-  font-family: var(--font-mono);
+.fw3d-eyebrow {
+  font-family: var(--font-mono, monospace);
   font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
+  color: var(--gold, #d4af37);
   text-transform: uppercase;
-  color: rgba(201, 162, 39, 0.6);
 }
 
-.fw-invite-date {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  color: rgba(201, 162, 39, 0.5);
+.fw3d-heading {
+  font-family: var(--font-display, serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.fw3d-meta {
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold, #d4af37);
+  margin: 0.5rem 0;
+}
+
+.fw3d-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--gold, #d4af37);
+}
+
+.fw3d-card-title {
+  font-family: var(--font-display, serif);
+  font-size: 1.3rem;
+  margin-top: 0.2rem;
+}
+
+.fw3d-names {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.fw3d-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.fw3d-cta {
+  display: inline-flex;
   margin-top: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--gold, #d4af37);
+  text-decoration: none;
+  transition: transform 0.2s ease;
 }
 
-/* Light invite overrides */
-.fw-invite-dark-text {
-  color: #3a2e1a !important;
+.fw3d-cta:hover {
+  transform: translateX(6px);
 }
 
-.fw-invite-date-dark {
-  color: rgba(58, 46, 26, 0.5) !important;
-}
-
-.fw-invite-initials {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: 0.3em;
-  color: rgba(58, 46, 26, 0.4);
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.fw-ampersand {
-  font-style: italic;
-}
-
-/* Floral corner decorations */
-.fw-floral-corner {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  opacity: 0.3;
-}
-
-.fw-floral-tl {
-  top: 1rem;
-  left: 1rem;
-  border-top: 2px solid #3a2e1a;
-  border-left: 2px solid #3a2e1a;
-}
-
-.fw-floral-br {
-  bottom: 1rem;
-  right: 1rem;
-  border-bottom: 2px solid #3a2e1a;
-  border-right: 2px solid #3a2e1a;
-}
-
-/* Overlay text block (right panel, positioned toward left edge) */
-.fw-overlay-text {
-  position: absolute;
-  left: -30%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 280px;
-  background: var(--bg-primary);
-  padding: 2rem;
-  z-index: 10;
+/* Stack Visual */
+.fw3d-stack-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-
-@media (max-width: 1200px) {
-  .fw-overlay-text {
-    left: -10%;
-    width: 240px;
-  }
-}
-
-@media (max-width: 767px) {
-  .fw-overlay-text {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    width: 100%;
-    background: transparent;
-    box-shadow: none;
-    padding: 0 0 2rem;
-    order: -1;
-  }
-}
-
-.fw-slide-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-}
-
-.fw-overlay-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.2;
-}
-
-.fw-overlay-desc {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-}
-
-.fw-overlay-link {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
-}
-
-.fw-overlay-link:hover { opacity: 0.7; }
-
-/* Arrow buttons */
-.fw-arrow {
-  position: absolute;
-  bottom: 1.5rem;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: var(--text-primary);
-  width: 40px;
-  height: 40px;
-  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background var(--transition-fast);
-  z-index: 5;
+  padding: 2rem 0;
 }
 
-.fw-arrow:hover { background: rgba(255,255,255,0.15); }
-.fw-arrow-left { left: 1.5rem; }
-.fw-arrow-right { right: 1.5rem; }
+.fw3d-deck {
+  position: relative;
+  width: 280px;
+  height: 400px;
+  perspective: 1000px;
+}
+
+@media (min-width: 500px) {
+  .fw3d-deck {
+    width: 320px;
+    height: 460px;
+  }
+}
+
+.fw3d-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #141414;
+}
+
+.fw3d-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fw3d-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
+  pointer-events: none;
+}
+
+/* Foil Shine Glare */
+.fw3d-foil-glare {
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(212, 175, 55, 0.15) 48%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 52%
+  );
+  pointer-events: none;
+}
+
+.fw3d-hint {
+  margin-top: 2rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+}

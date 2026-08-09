@@ -3,8 +3,8 @@ import { motion, useInView } from 'framer-motion';
 import './GalleryStrip.css';
 
 import imgInvites from '../../assets/gallery_invitations.jpg';
-import imgCards from '../../assets/gallery_business_cards.jpg';
-import imgBanners from '../../assets/gallery_flex_banner.jpg';
+import imgCards from '../../assets/gallery_business_cards.png';
+import imgBanners from '../../assets/gallery_flex_banner.png';
 import imgGreetings from '../../assets/gallery_greeting_cards.jpg';
 import imgBrochures from '../../assets/machine_offset_press.jpg';
 import imgStationery from '../../assets/invite_dark_green.jpg';

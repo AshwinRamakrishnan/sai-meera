@@ -1,120 +1,17 @@
-/* DesignLab — 3-column editorial layout */
-.dl-section {
-  padding: clamp(5rem, 8vw, 7rem) 0;
-  background: var(--bg-primary);
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.dl-container {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 3rem);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: center;
-}
-
-@media (min-width: 768px) {
-  .dl-container {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-  }
-}
-
-@media (min-width: 1100px) {
-  .dl-container {
-    grid-template-columns: 1.2fr 1.5fr 1fr;
-    gap: 4rem;
-  }
-}
-
-/* Col 1: Text */
-.dl-text-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.dl-gold-label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-
-.dl-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--text-primary);
-}
-
-.dl-body {
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.75;
-}
-
-.dl-link {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
-  margin-top: 0.5rem;
-}
-
+.dl-section { padding: clamp(5rem, 9vw, 8rem) 0; background: var(--bg-primary); }
+.dl-container { max-width: var(--content-max-width); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); display: grid; grid-template-columns: 1fr; gap: 3.5rem; align-items: center; }
+@media (min-width: 900px) { .dl-container { grid-template-columns: 7fr 5fr; gap: 5rem; } }
+.dl-image-col { position: relative; }
+.dl-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; filter: brightness(0.85); }
+.dl-image-caption { margin-top: 0.75rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-tertiary); text-align: center; }
+.dl-text-col { display: flex; flex-direction: column; gap: 1.25rem; }
+.dl-eyebrow { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 0.75rem; }
+.dl-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); opacity: 0.5; }
+.dl-heading { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.1; color: var(--text-primary); letter-spacing: -0.015em; }
+.dl-body { font-family: var(--font-body); font-size: 0.92rem; color: var(--text-secondary); line-height: 1.8; max-width: 420px; }
+.dl-caps { list-style: none; display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.25rem; margin-top: 0.25rem; }
+.dl-cap-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.dl-cap-icon { color: var(--gold); flex-shrink: 0; }
+.dl-cap-label { font-family: var(--font-body); font-size: 0.86rem; color: var(--text-secondary); }
+.dl-link { display: inline-flex; align-items: center; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; text-transform: uppercase; transition: opacity 0.2s; margin-top: 0.5rem; }
 .dl-link:hover { opacity: 0.7; }
-
-/* Col 2: Image */
-.dl-image-col {
-  width: 100%;
-  overflow: hidden;
-}
-
-.dl-image {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  filter: brightness(0.75);
-  display: block;
-}
-
-/* Col 3: Capabilities */
-.dl-caps-col {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.dl-cap-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding-bottom: 1.5rem;
-}
-
-.dl-cap-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.dl-cap-icon {
-  color: var(--gold);
-  flex-shrink: 0;
-}
-
-.dl-cap-label {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}

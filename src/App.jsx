@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense, useEffect } from 'react';
+import { useState, lazy, Suspense, useEffect, useCallback } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { useLenis } from './hooks/useLenis';
@@ -17,6 +17,7 @@ const ProductsPage         = lazy(() => import('./pages/ProductsPage'));
 const FlexBannersPage      = lazy(() => import('./pages/FlexBannersPage'));
 const GreetingCardsPage    = lazy(() => import('./pages/GreetingCardsPage'));
 const ContactPage          = lazy(() => import('./pages/ContactPage'));
+const AdminDashboard       = lazy(() => import('./pages/admin/AdminDashboard'));
 
 // Page loading fallback
 function PageLoader() {
@@ -47,6 +48,7 @@ function PageLoader() {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  console.log('App render. isLoading:', isLoading);
   const location = useLocation();
   const lenis = useLenis();
 
@@ -64,9 +66,14 @@ function App() {
     }
   }, [location, lenis]);
 
+  const handleLoadComplete = useCallback(() => {
+    console.log('onLoadComplete fired from Preloader callback!');
+    setIsLoading(false);
+  }, []);
+
   return (
     <MotionConfig reducedMotion="user">
-      <Preloader isLoading={isLoading} onLoadComplete={() => setIsLoading(false)} />
+      <Preloader isLoading={isLoading} onLoadComplete={handleLoadComplete} />
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
@@ -78,6 +85,7 @@ function App() {
             <Route path="/products"        element={<ProductsPage />} />
             <Route path="/products/:slug"  element={<CategoryPage />} />
             <Route path="/contact"         element={<ContactPage />} />
+            <Route path="/admin"           element={<AdminDashboard />} />
 
             {/* ── Legacy page routes (redirect to canonical) ── */}
             <Route path="/flex-banners"   element={<Navigate to="/products/flex-banner" replace />} />

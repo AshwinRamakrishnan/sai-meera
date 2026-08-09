@@ -1,105 +1,82 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import './MachinesStrip.css';
-
 import imgFlex from '../../assets/machine_flex_printer.jpg';
 import imgOffset from '../../assets/machine_offset_press.jpg';
 import imgCutter from '../../assets/machine_paper_cutter.jpg';
-import imgWorkstation from '../../assets/machine_workstation.jpg';
 
 const machines = [
   {
     num: '01',
     model: 'FX-3200 PRO',
     name: 'Large Format Eco-Solvent Flex Printer',
-    specs: '3200mm | 1440 DPI | 80 sqm/hr',
+    specs: '3200 mm · 1440 DPI · 80 sqm/hr',
     anchor: '#flex-sec',
-    img: imgFlex
+    img: imgFlex,
   },
   {
     num: '02',
     model: 'OS-SM74-6C',
-    name: 'Industrial Offset Printing Machine',
-    specs: '6 Color | 15K sheets/hr | Pantone',
+    name: 'Industrial Offset Printing Press',
+    specs: '6-Colour · 15K sheets/hr · Pantone',
     anchor: '#offset-sec',
-    img: imgOffset
+    img: imgOffset,
   },
   {
     num: '03',
-    model: 'SM-HC130',
-    name: 'Hydraulic Paper Cutting Machine',
-    specs: '920mm | Hydraulic | Precise Cut',
+    model: 'HC-920-PRO',
+    name: 'Hydraulic Guillotine Cutter',
+    specs: '920 mm · ±0.1 mm · Hydraulic Drive',
     anchor: '#cutter-sec',
-    img: imgCutter
+    img: imgCutter,
   },
-  {
-    num: '04',
-    model: 'PS-EDIT PRO',
-    name: 'Photoshop Editing Workstation',
-    specs: 'Dual Monitor | Color Accurate',
-    anchor: '#ps-sec',
-    img: imgWorkstation
-  }
 ];
 
 const MachinesStrip = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-8%' });
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-  };
-
   return (
-    <section className="machines-strip" id="machines-strip">
-      <div className="ms-container" ref={ref}>
-
-        {/* Header row */}
+    <section className="ms-section" id="machines-strip" ref={ref}>
+      <div className="ms-container">
         <motion.div
           className="ms-header"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="ms-header-left">
-            <span className="ms-gold-label">OUR MACHINES</span>
+          <div>
+            <span className="ms-eyebrow">OUR MACHINES</span>
             <h2 className="ms-heading">
-              Powering Precision.<br />Delivering Excellence.
+              Precision Engineering.<br />Interactive 3D Showcase.
             </h2>
           </div>
-          <a href="#offset-sec" className="ms-view-all">VIEW ALL MACHINES →</a>
+          <p className="ms-subtext">Scroll down to interact with our industrial machines in full 3D.</p>
         </motion.div>
-
-        {/* Cards row */}
-        <motion.div
-          className="ms-cards"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }}
-        >
-          {machines.map((m) => (
+        <div className="ms-cards">
+          {machines.map((m, i) => (
             <motion.a
               key={m.num}
               href={m.anchor}
               className="ms-card"
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 28 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.75, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="ms-card-img-wrap">
-                {/* TODO: Replace with real machine thumbnail photos from client */}
                 <img src={m.img} alt={m.name} className="ms-card-img" />
                 <div className="ms-card-img-overlay" />
+                <span className="ms-card-num">{m.num}</span>
               </div>
               <div className="ms-card-body">
-                <span className="ms-card-num">{m.num}</span>
                 <span className="ms-card-model">{m.model}</span>
                 <p className="ms-card-name">{m.name}</p>
                 <p className="ms-card-specs">{m.specs}</p>
+                <span className="ms-card-explore">VIEW IN 3D →</span>
               </div>
             </motion.a>
           ))}
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );

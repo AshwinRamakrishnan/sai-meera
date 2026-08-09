@@ -608,8 +608,7 @@ const ContactPage = () => {
               </div>
               <div className="card-content">
                 <h3>Office Location</h3>
-                {/* TODO: Replace with real address */}
-                <p>Triplicane, Chennai, Tamil Nadu</p>
+                <p>Thukkampalayam St, Karna Kollai Agraharam, Valayapettai Agraharam, Kumbakonam, Tamil Nadu 612001</p>
               </div>
             </div>
             <div className="info-card">
@@ -618,8 +617,7 @@ const ContactPage = () => {
               </div>
               <div className="card-content">
                 <h3>Direct Lines</h3>
-                {/* TODO: Replace with real phone numbers */}
-                <p>Sales: +91 98765 43210<br />Support: +91 98765 43211</p>
+                <p>Phone: +91 95970 72660</p>
               </div>
             </div>
             <div className="info-card">
@@ -628,8 +626,7 @@ const ContactPage = () => {
               </div>
               <div className="card-content">
                 <h3>Email Us</h3>
-                {/* TODO: Replace with real email addresses */}
-                <p>print@saimeera.in<br />quotes@saimeera.in</p>
+                <p><a href="mailto:saimeeradd@gmail.com" style={{color: 'inherit', textDecoration: 'none'}}>saimeeradd@gmail.com</a></p>
               </div>
             </div>
 
@@ -644,9 +641,21 @@ const ContactPage = () => {
               </div>
             </div>
 
-            <div className="map-placeholder">
-              <div className="map-text">Interactive Map Here</div>
+            <div className="map-wrapper" style={{ borderRadius: '12px', overflow: 'hidden', height: '250px', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <iframe
+                src="https://maps.google.com/maps?q=Sai%20Meera%20Digital%20Design,%20Kumbakonam&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Sai Meera Digital Design Location"
+              ></iframe>
             </div>
+            <a href="https://maps.app.goo.gl/79SY4jFrrAU4GH388" target="_blank" rel="noopener noreferrer" style={{ display: 'block', textAlign: 'center', marginTop: '1rem', color: 'var(--gold)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '500' }}>
+              Open in Google Maps App
+            </a>
           </div>
         </div>
       </section>
