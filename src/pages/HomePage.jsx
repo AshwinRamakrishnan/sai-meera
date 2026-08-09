@@ -16,7 +16,7 @@ import ContactSection   from '../components/contact/ContactSection';
 import MachineSection   from '../components/machines/MachineSection';
 import OffsetPress      from '../scenes/OffsetPress';
 import FlexPrinter      from '../scenes/FlexPrinter';
-import PhotoshopStation from '../scenes/PhotoshopStation';
+
 import HydraulicCutter  from '../scenes/HydraulicCutter';
 
 import { useScrollChoreography } from '../hooks/useScrollChoreography';
@@ -101,32 +101,7 @@ export default function HomePage() {
         ]}
       />
 
-      {/* Machine 03: Photoshop Workstation */}
-      <MachineSection
-        id="ps-sec"
-        machineNumber="03"
-        machineName="Photoshop Editing Workstation"
-        serialNumber="WS-CINTIQ-PRO-24"
-        description="Professional design workstation with dual monitors, Wacom Cintiq tablet, and RTX 4090 for real-time rendering."
-        specs={[
-          { label: 'Intel i9', value: 'CPU' },
-          { label: '128 GB', value: 'RAM' },
-          { label: 'RTX 4090', value: 'GPU' },
-          { label: 'Pro Display', value: 'Monitor' }
-        ]}
-        accentColor="var(--green)"
-        sceneComponent={PhotoshopStation}
-        cameraPosition={[0, 4.8, 8]}
-        cameraFov={42}
-        consoleLines={[
-          'DISPLAY: Adobe RGB (1998)',
-          'RENDER: RTX 4090 Active',
-          'WACOM: Cintiq Pro 24',
-          'RAM: 96GB / 128GB',
-          'SCRATCH: 2TB NVMe',
-          'STATUS: RENDERING...'
-        ]}
-      />
+            {/* PhotoshopStation removed per design - replaced with Design Lab static image elsewhere */}
 
       {/* Machine 04: Hydraulic Cutter */}
       <MachineSection

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './HeroSection.css';
-import heroImg from '../../assets/hero_printing_press.jpg';
+import heroImg from '../../assets/hero.png';
 
 const HeroSection = () => {
   const itemVariants = {
