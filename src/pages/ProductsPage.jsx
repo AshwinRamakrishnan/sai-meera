@@ -75,13 +75,13 @@ export default function ProductsPage() {
   return (
     <div className="products-page">
       <Helmet>
-        <title>All Print Services — Sai Meera Printing</title>
+        <title>All Printing Services & Products | SAI MEERA DIGITAL DESIGN</title>
         <meta
           name="description"
-          content="Browse all 29 printing services at Sai Meera — invitations, flex banners, visiting cards, bill books, certificates, greeting cards, and more. Premium printing in Chennai."
+          content="Explore our wide range of industrial, commercial, and personal printing products in Kumbakonam. Invitations, flex banners, business cards, and more."
         />
-        <meta property="og:title" content="All Print Services — Sai Meera Printing" />
-        <meta property="og:description" content="29 premium printing categories — invitations, banners, cards, and business print. Chennai's trusted printing partner." />
+        <meta property="og:title" content="All Printing Services & Products | SAI MEERA DIGITAL DESIGN" />
+        <meta property="og:description" content="Explore our wide range of industrial, commercial, and personal printing products in Kumbakonam." />
       </Helmet>
 
       {/* Hero */}

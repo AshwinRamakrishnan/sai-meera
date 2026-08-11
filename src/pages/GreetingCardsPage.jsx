@@ -32,10 +32,10 @@ const GreetingCardsPage = () => {
   return (
     <div className="greet-page">
       <Helmet>
-        <title>Greeting Card Printing — Sai Meera</title>
-        <meta name="description" content="Custom greeting card printing for birthdays, Diwali, Pongal, Christmas, and corporate events. Premium paper, foil stamping, and embossing options. Minimum 10 cards." />
-        <meta property="og:title" content="Greeting Card Printing — Sai Meera" />
-        <meta property="og:description" content="Beautiful cards for every occasion — birthdays, Tamil festivals, corporate events, and personal milestones." />
+        <title>Premium Wedding & Greeting Cards | SAI MEERA DIGITAL DESIGN</title>
+        <meta name="description" content="Custom designed luxury wedding invitations, business cards, and greeting cards printed with precision in Kumbakonam." />
+        <meta property="og:title" content="Premium Wedding & Greeting Cards | SAI MEERA DIGITAL DESIGN" />
+        <meta property="og:description" content="Custom designed luxury wedding invitations, business cards, and greeting cards printed with precision in Kumbakonam." />
       </Helmet>
       {/* Hero */}
       <section className="greet-hero">
@@ -106,7 +106,7 @@ const GreetingCardsPage = () => {
         <Link to="/contact" className="greet-cta-btn">
           <Phone size={16} /> Get Started Today
         </Link>
-        <span className="greet-phone">+91 98765 43210</span>
+        <span className="greet-phone">+91 95970 72660</span>
       </section>
     </div>
   );

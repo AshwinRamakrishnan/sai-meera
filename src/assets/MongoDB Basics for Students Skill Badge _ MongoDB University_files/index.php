@@ -1,0 +1,1 @@
+window.dpmPixels[0].updateUserVariable({"dpmUserId":"019fec20-64f8-7b56-8f9e-47a46bb471d3","country_code":"356","city":"","requestUUID":"019fec20-64f8-7dcf-99b8-73921c6a33a9","latitude":"21.9974","ipAddress":"223.236.155.221","appnexusId":"NA","dma":"","sessionId":"019fec20-64f8-7e27-80cd-768dd03a04a0","longitude":"79.0011"});

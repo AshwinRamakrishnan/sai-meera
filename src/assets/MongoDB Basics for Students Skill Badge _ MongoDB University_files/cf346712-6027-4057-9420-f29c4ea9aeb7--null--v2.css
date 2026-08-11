@@ -1,0 +1,28 @@
+
+
+      :root {
+        --font: Euclid Circular A;
+        --alt-font: MongoDB Value Serif;
+        --accent-color: #00684a;
+        --secondary-color: #00ed64;
+        --link-color: #00684a;
+        --accent-highlight-color: #004f38;
+        --accent-highlight-background-color: #b5ffea;
+        --accent-tinted-color-70: #b3d2c9;
+        --accent-tinted-color-80: #cce1db;
+        --accent-tinted-color-90: #e6f0ed;
+        --accent-contrast-color: #fff;
+        --accent-contrast-tinted-background-color: #b3b3b3;
+        --accent-hover-color: #009b6e;
+        --secondary-hover-color: #00ba4e;
+        --secondary-contrast-color: #111;
+        --link-hover-color: #00ce93;
+      }
+      
+body { background: url('https://d36ai2hkxl16us.cloudfront.net/thoughtindustries/image/upload/v1/course-uploads/ae62dcd7-abdc-4e90-a570-83eccba49043/kyicjuw4iifp-19.png'); background-attachment: fixed; background-size: cover; }
+.company__logo {text-indent: 100%;white-space: nowrap;overflow: hidden;background: url('https://d36ai2hkxl16us.cloudfront.net/thoughtindustries/image/upload/a_exif,c_fit,t_ti_company_logo_v4/v1/course-uploads/ae62dcd7-abdc-4e90-a570-83eccba49043/z6ikeeqjyf8v-UniversityLogo.png') no-repeat center left;background-size: contain;} .company__logo span.h4 {visibility: hidden;}
+.learner__sidebar{ display: none;}
+.learner__container__toggle{ display: none;}
+.learner__content{height: 100%;
+            width: 100%;}
+.assignment__submission{ display: none;}

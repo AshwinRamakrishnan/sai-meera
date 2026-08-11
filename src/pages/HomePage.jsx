@@ -31,6 +31,48 @@ export default function HomePage() {
         <title>SAI MEERA DIGITAL DESIGN | Industrial Printing Excellence — Kumbakonam</title>
         <meta name="description" content="SAI MEERA DIGITAL DESIGN: 60+ years of industrial printing in Kumbakonam. Premium invitations, offset printing, large-format flex banners, and corporate stationery." />
         <meta name="keywords" content="industrial printing chennai, offset press, flex banner, premium invitations, wedding cards printing" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "PrintShop",
+              "name": "Sai Meera Digital Design",
+              "image": "https://sai-meera.web.app/src/assets/hero_printing_press.png",
+              "@id": "https://sai-meera.web.app/",
+              "url": "https://sai-meera.web.app/",
+              "telephone": "+919597072660",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "60, Thukkampalayam St, Karna Kollai Agraharam",
+                "addressLocality": "Kumbakonam",
+                "addressRegion": "Tamil Nadu",
+                "postalCode": "612001",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 10.9602,
+                "longitude": 79.3845
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "09:00",
+                "closes": "20:00"
+              },
+              "sameAs": [
+                "https://sai-meera.web.app/"
+              ]
+            }
+          `}
+        </script>
       </Helmet>
 
       {/* 1. Hero */}

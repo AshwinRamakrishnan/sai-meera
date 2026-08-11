@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sai-meera.web.app/sitemap.xml

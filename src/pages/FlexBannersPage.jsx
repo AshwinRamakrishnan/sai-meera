@@ -24,10 +24,10 @@ const FlexBannersPage = () => {
   return (
     <div className="flex-page">
       <Helmet>
-        <title>Flex Banner & Vinyl Printing — Sai Meera</title>
-        <meta name="description" content="Large format eco-solvent flex and vinyl printing in Chennai. Shop boards, event banners, vehicle wraps, hoardings, and one-way vision. UV-resistant, same-day printing available." />
-        <meta property="og:title" content="Flex Banner Printing — Sai Meera" />
-        <meta property="og:description" content="Eye-catching outdoor advertising that withstands sun, rain, and wind. Industrial-grade eco-solvent inks for maximum longevity." />
+        <title>Large Format Flex Banners & Signboards | SAI MEERA DIGITAL DESIGN</title>
+        <meta name="description" content="High-quality, weather-resistant flex banners, backlit boards, and vinyl printing for your business advertising needs in Kumbakonam." />
+        <meta property="og:title" content="Large Format Flex Banners & Signboards | SAI MEERA DIGITAL DESIGN" />
+        <meta property="og:description" content="High-quality, weather-resistant flex banners, backlit boards, and vinyl printing for your business advertising needs in Kumbakonam." />
       </Helmet>
       {/* Hero */}
       <section className="flex-hero">
@@ -118,7 +118,7 @@ const FlexBannersPage = () => {
         <Link to="/contact" className="flex-cta-btn">
           <Phone size={16} /> Contact Us Today
         </Link>
-        <span className="flex-phone">+91 98765 43210</span>
+        <span className="flex-phone">+91 95970 72660</span>
       </section>
     </div>
   );

@@ -283,10 +283,10 @@ const ContactPage = () => {
   return (
     <div className="contact-container">
       <Helmet>
-        <title>Contact Us — Sai Meera Printing</title>
-        <meta name="description" content="Get in touch with Sai Meera for a free quote on offset printing, flex banners, invitations, greeting cards, or photoshop editing services in Chennai." />
-        <meta property="og:title" content="Contact Sai Meera Printing" />
-        <meta property="og:description" content="Reach out for a free quote on premium printing services — invitations, banners, cards, and more." />
+        <title>Contact Us | SAI MEERA DIGITAL DESIGN Kumbakonam</title>
+        <meta name="description" content="Get in touch for custom quotes, bulk orders, and industrial printing services in Kumbakonam." />
+        <meta property="og:title" content="Contact Us | SAI MEERA DIGITAL DESIGN" />
+        <meta property="og:description" content="Get in touch for custom quotes, bulk orders, and industrial printing services in Kumbakonam." />
       </Helmet>
       <section className="contact-hero">
         <h1 className="contact-title">Get in Touch</h1>
@@ -608,7 +608,7 @@ const ContactPage = () => {
               </div>
               <div className="card-content">
                 <h3>Office Location</h3>
-                <p>Thukkampalayam St, Karna Kollai Agraharam, Valayapettai Agraharam, Kumbakonam, Tamil Nadu 612001</p>
+                <p>60, Thukkampalayam St, Karna Kollai Agraharam, Kumbakonam, Tamil Nadu 612001</p>
               </div>
             </div>
             <div className="info-card">
@@ -643,7 +643,7 @@ const ContactPage = () => {
 
             <div className="map-wrapper" style={{ borderRadius: '12px', overflow: 'hidden', height: '250px', border: '1px solid rgba(255,255,255,0.1)' }}>
               <iframe
-                src="https://maps.google.com/maps?q=Sai%20Meera%20Digital%20Design,%20Kumbakonam&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=60%2C+Thukkampalayam+St%2C+Karna+Kollai+Agraharam%2C+Kumbakonam%2C+Tamil+Nadu+612001&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

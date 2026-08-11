@@ -183,9 +183,9 @@ export default function CategoryPage() {
     >
       {/* ── SEO ── */}
       <Helmet>
-        <title>{cat.name} — Sai Meera Printing</title>
+        <title>{cat.name} | SAI MEERA DIGITAL DESIGN</title>
         <meta name="description" content={cat.description} />
-        <meta property="og:title" content={`${cat.name} — Sai Meera Printing`} />
+        <meta property="og:title" content={`${cat.name} | SAI MEERA DIGITAL DESIGN`} />
         <meta property="og:description" content={cat.description} />
       </Helmet>
 

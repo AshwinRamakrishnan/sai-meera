@@ -82,7 +82,7 @@ const ContactSection = () => {
               </div>
               <div className="info-content">
                 <span className="info-label">Location</span>
-                <span className="info-value">Kumbakonam, Tamil Nadu</span>
+                <span className="info-value">60, Thukkampalayam St, Kumbakonam</span>
               </div>
             </motion.div>
 

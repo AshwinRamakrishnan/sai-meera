@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<!-- saved from url=(0178)https://scorpion.caveon.com/take/?launch_token=.eJwFwckRwCAIAMBeeIcZlEOoJZMHiPZfQnZfMJWW0YrklCgUiZHceLv1OMdwUnjgZk0vXZ7eUhpWexZzph3TNS98P9f8E6o.anni1g.D1EqeRQkDF32rm3L9LBsCuxv_XM -->
+<html translate="no"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style>
+    
+    <title>Skill Badge: MongoDB Basics for Students </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="https://caveon-public.s3.amazonaws.com/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://caveon-public.s3.amazonaws.com/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://caveon-public.s3.amazonaws.com/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://caveon-public.s3.amazonaws.com/favicons/manifest.json">
+    <link rel="mask-icon" href="https://caveon-public.s3.amazonaws.com/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="https://caveon-public.s3.amazonaws.com/favicons/favicon.ico">
+    <meta name="msapplication-config" content="https://caveon-public.s3.amazonaws.com/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="SEI Take">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./katex.min.css">
+    <link rel="stylesheet" href="./css">
+    <link rel="stylesheet" href="./pdf_viewer.css">
+<link type="text/css" rel="stylesheet" href="./main.2006ea3053e0c84634d7.css">
+  <style type="text/css">.__react_component_tooltip {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 13px;
+  left: -999em;
+  opacity: 0;
+  padding: 8px 21px;
+  position: fixed;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  top: -999em;
+  visibility: hidden;
+  z-index: 999;
+}
+.__react_component_tooltip.allow_hover, .__react_component_tooltip.allow_click {
+  pointer-events: auto;
+}
+.__react_component_tooltip:before, .__react_component_tooltip:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.__react_component_tooltip.show {
+  opacity: 0.9;
+  margin-top: 0px;
+  margin-left: 0px;
+  visibility: visible;
+}
+.__react_component_tooltip.type-dark {
+  color: #fff;
+  background-color: #222;
+}
+.__react_component_tooltip.type-dark.place-top:after {
+  border-top-color: #222;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-dark.place-bottom:after {
+  border-bottom-color: #222;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-dark.place-left:after {
+  border-left-color: #222;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-dark.place-right:after {
+  border-right-color: #222;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-dark.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-success {
+  color: #fff;
+  background-color: #8DC572;
+}
+.__react_component_tooltip.type-success.place-top:after {
+  border-top-color: #8DC572;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-success.place-bottom:after {
+  border-bottom-color: #8DC572;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-success.place-left:after {
+  border-left-color: #8DC572;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-success.place-right:after {
+  border-right-color: #8DC572;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-success.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning {
+  color: #fff;
+  background-color: #F0AD4E;
+}
+.__react_component_tooltip.type-warning.place-top:after {
+  border-top-color: #F0AD4E;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-warning.place-bottom:after {
+  border-bottom-color: #F0AD4E;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-warning.place-left:after {
+  border-left-color: #F0AD4E;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-warning.place-right:after {
+  border-right-color: #F0AD4E;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-warning.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-error {
+  color: #fff;
+  background-color: #BE6464;
+}
+.__react_component_tooltip.type-error.place-top:after {
+  border-top-color: #BE6464;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-error.place-bottom:after {
+  border-bottom-color: #BE6464;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-error.place-left:after {
+  border-left-color: #BE6464;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-error.place-right:after {
+  border-right-color: #BE6464;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-error.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-info {
+  color: #fff;
+  background-color: #337AB7;
+}
+.__react_component_tooltip.type-info.place-top:after {
+  border-top-color: #337AB7;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-info.place-bottom:after {
+  border-bottom-color: #337AB7;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-info.place-left:after {
+  border-left-color: #337AB7;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-info.place-right:after {
+  border-right-color: #337AB7;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-info.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-light {
+  color: #222;
+  background-color: #fff;
+}
+.__react_component_tooltip.type-light.place-top:after {
+  border-top-color: #fff;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-light.place-bottom:after {
+  border-bottom-color: #fff;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-light.place-left:after {
+  border-left-color: #fff;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-light.place-right:after {
+  border-right-color: #fff;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-light.border {
+  border: 1px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-top:before {
+  border-top: 8px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-bottom:before {
+  border-bottom: 8px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-left:before {
+  border-left: 8px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-right:before {
+  border-right: 8px solid #222;
+}
+.__react_component_tooltip.place-top {
+  margin-top: -10px;
+}
+.__react_component_tooltip.place-top:before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+}
+.__react_component_tooltip.place-top:after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -8px;
+}
+.__react_component_tooltip.place-bottom {
+  margin-top: 10px;
+}
+.__react_component_tooltip.place-bottom:before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: -8px;
+  left: 50%;
+  margin-left: -10px;
+}
+.__react_component_tooltip.place-bottom:after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  top: -6px;
+  left: 50%;
+  margin-left: -8px;
+}
+.__react_component_tooltip.place-left {
+  margin-left: -10px;
+}
+.__react_component_tooltip.place-left:before {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  right: -8px;
+  top: 50%;
+  margin-top: -5px;
+}
+.__react_component_tooltip.place-left:after {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  right: -6px;
+  top: 50%;
+  margin-top: -4px;
+}
+.__react_component_tooltip.place-right {
+  margin-left: 10px;
+}
+.__react_component_tooltip.place-right:before {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  left: -8px;
+  top: 50%;
+  margin-top: -5px;
+}
+.__react_component_tooltip.place-right:after {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  left: -6px;
+  top: 50%;
+  margin-top: -4px;
+}
+.__react_component_tooltip .multi-line {
+  display: block;
+  padding: 2px 0px;
+  text-align: center;
+}</style><style data-jss="" data-meta="MuiTouchRipple">
+.jss84 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  position: absolute;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.jss85 {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+}
+.jss86 {
+  opacity: 0.3;
+  transform: scale(1);
+  animation: mui-ripple-enter 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: $mui-ripple-enter;
+}
+.jss87 {
+  animation-duration: 200ms;
+}
+.jss88 {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  display: block;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.jss89 {
+  opacity: 0;
+  animation: mui-ripple-exit 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: $mui-ripple-exit;
+}
+.jss90 {
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: mui-ripple-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
+  animation-name: $mui-ripple-pulsate;
+}
+@-webkit-keyframes mui-ripple-enter {
+  0% {
+    opacity: 0.1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes mui-ripple-exit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes mui-ripple-pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style><style data-jss="" data-meta="MuiButtonBase">
+.jss64 {
+  color: inherit;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  outline: none;
+  padding: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  justify-content: center;
+  -moz-appearance: none;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.jss64::-moz-focus-inner {
+  border-style: none;
+}
+.jss64.jss65 {
+  cursor: default;
+  pointer-events: none;
+}
+</style><style data-jss="" data-meta="MuiButton">
+.jss38 {
+  color: rgba(0, 0, 0, 0.87);
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  line-height: 1.75;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+}
+.jss38:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.jss38.jss58 {
+  color: rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .jss38:hover {
+    background-color: transparent;
+  }
+}
+.jss38:hover.jss58 {
+  background-color: transparent;
+}
+.jss39 {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+}
+.jss40 {
+  padding: 6px 8px;
+}
+.jss41 {
+  color: #333;
+}
+.jss41:hover {
+  background-color: rgba(51, 51, 51, 0.08);
+}
+@media (hover: none) {
+  .jss41:hover {
+    background-color: transparent;
+  }
+}
+.jss42 {
+  color: #3c6583;
+}
+.jss42:hover {
+  background-color: rgba(60, 101, 131, 0.08);
+}
+@media (hover: none) {
+  .jss42:hover {
+    background-color: transparent;
+  }
+}
+.jss46 {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: 5px 16px;
+}
+.jss46.jss58 {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+.jss47 {
+  color: #333;
+  border: 1px solid rgba(51, 51, 51, 0.5);
+}
+.jss47:hover {
+  border: 1px solid #333;
+  background-color: rgba(51, 51, 51, 0.08);
+}
+@media (hover: none) {
+  .jss47:hover {
+    background-color: transparent;
+  }
+}
+.jss48 {
+  color: #3c6583;
+  border: 1px solid rgba(60, 101, 131, 0.5);
+}
+.jss48:hover {
+  border: 1px solid #3c6583;
+  background-color: rgba(60, 101, 131, 0.08);
+}
+.jss48.jss58 {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .jss48:hover {
+    background-color: transparent;
+  }
+}
+.jss49 {
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12);
+  background-color: #e0e0e0;
+}
+.jss49.jss57 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.jss49:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.jss49.jss58 {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.jss49:hover {
+  background-color: #d5d5d5;
+}
+@media (hover: none) {
+  .jss49:hover {
+    background-color: #e0e0e0;
+  }
+}
+.jss49:hover.jss58 {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.jss50 {
+  color: #fff;
+  background-color: #333;
+}
+.jss50:hover {
+  background-color: rgb(35, 35, 35);
+}
+@media (hover: none) {
+  .jss50:hover {
+    background-color: #333;
+  }
+}
+.jss51 {
+  color: #fff;
+  background-color: #3c6583;
+}
+.jss51:hover {
+  background-color: rgb(42, 70, 91);
+}
+@media (hover: none) {
+  .jss51:hover {
+    background-color: #3c6583;
+  }
+}
+.jss55 {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  min-width: 0;
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+  border-radius: 50%;
+}
+.jss55:active {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);
+}
+.jss56 {
+  width: auto;
+  height: 48px;
+  padding: 0 16px;
+  min-width: 48px;
+  border-radius: 24px;
+}
+.jss59 {
+  color: inherit;
+  border-color: currentColor;
+}
+.jss60 {
+  width: 40px;
+  height: 40px;
+}
+.jss61 {
+  padding: 4px 8px;
+  min-width: 64px;
+  font-size: 0.8125rem;
+}
+.jss62 {
+  padding: 8px 24px;
+  font-size: 0.9375rem;
+}
+.jss63 {
+  width: 100%;
+}
+</style><style data-jss="" data-meta="MuiPaper">
+.jss11 {
+  background-color: #fff;
+}
+.jss12 {
+  border-radius: 4px;
+}
+.jss13 {
+  box-shadow: none;
+}
+.jss14 {
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+.jss15 {
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12);
+}
+.jss16 {
+  box-shadow: 0px 1px 8px 0px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 3px 3px -2px rgba(0,0,0,0.12);
+}
+.jss17 {
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+.jss18 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12);
+}
+.jss19 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.jss20 {
+  box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12);
+}
+.jss21 {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.jss22 {
+  box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12);
+}
+.jss23 {
+  box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12);
+}
+.jss24 {
+  box-shadow: 0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12);
+}
+.jss25 {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);
+}
+.jss26 {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12);
+}
+.jss27 {
+  box-shadow: 0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12);
+}
+.jss28 {
+  box-shadow: 0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12);
+}
+.jss29 {
+  box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12);
+}
+.jss30 {
+  box-shadow: 0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12);
+}
+.jss31 {
+  box-shadow: 0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12);
+}
+.jss32 {
+  box-shadow: 0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12);
+}
+.jss33 {
+  box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12);
+}
+.jss34 {
+  box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12);
+}
+.jss35 {
+  box-shadow: 0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12);
+}
+.jss36 {
+  box-shadow: 0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12);
+}
+.jss37 {
+  box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12);
+}
+</style></head>
+  <body style="background-color: rgb(230, 240, 237);">
+    <div id="App" class="App"><template shadowrootmode="open"><style data-jss="" data-meta="MuiTouchRipple">
+.jss84 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  position: absolute;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.jss85 {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+}
+.jss86 {
+  opacity: 0.3;
+  transform: scale(1);
+  animation: mui-ripple-enter 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: $mui-ripple-enter;
+}
+.jss87 {
+  animation-duration: 200ms;
+}
+.jss88 {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  display: block;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.jss89 {
+  opacity: 0;
+  animation: mui-ripple-exit 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: $mui-ripple-exit;
+}
+.jss90 {
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: mui-ripple-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
+  animation-name: $mui-ripple-pulsate;
+}
+@-webkit-keyframes mui-ripple-enter {
+  0% {
+    opacity: 0.1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes mui-ripple-exit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes mui-ripple-pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style><style data-jss="" data-meta="MuiCircularProgress">
+.jss74 {
+  display: inline-block;
+  line-height: 1;
+}
+.jss75 {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.jss76 {
+  animation: mui-progress-circular-rotate 1.4s linear infinite;
+  animation-name: $mui-progress-circular-rotate;
+}
+.jss77 {
+  color: #333;
+}
+.jss78 {
+  color: #3c6583;
+}
+.jss80 {
+  stroke: currentColor;
+}
+.jss81 {
+  transition: stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.jss82 {
+  animation: mui-progress-circular-dash 1.4s ease-in-out infinite;
+  animation-name: $mui-progress-circular-dash;
+  stroke-dasharray: 80px, 200px;
+  stroke-dashoffset: 0px;
+}
+@-webkit-keyframes mui-progress-circular-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes mui-progress-circular-dash {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0px;
+  }
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+}
+.jss83 {
+  animation: none;
+}
+</style><style data-jss="" data-meta="MuiTouchRipple">
+.jss67 {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  position: absolute;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.jss68 {
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  position: absolute;
+}
+.jss69 {
+  opacity: 0.3;
+  transform: scale(1);
+  animation: mui-ripple-enter 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: $mui-ripple-enter;
+}
+.jss70 {
+  animation-duration: 200ms;
+}
+.jss71 {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  display: block;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.jss72 {
+  opacity: 0;
+  animation: mui-ripple-exit 550ms cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: $mui-ripple-exit;
+}
+.jss73 {
+  top: 0;
+  left: 0;
+  position: absolute;
+  animation: mui-ripple-pulsate 2500ms cubic-bezier(0.4, 0, 0.2, 1) 200ms infinite;
+  animation-name: $mui-ripple-pulsate;
+}
+@-webkit-keyframes mui-ripple-enter {
+  0% {
+    opacity: 0.1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes mui-ripple-exit {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes mui-ripple-pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style><style data-jss="" data-meta="MuiButtonBase">
+.jss64 {
+  color: inherit;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  outline: none;
+  padding: 0;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  border-radius: 0;
+  vertical-align: middle;
+  justify-content: center;
+  -moz-appearance: none;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.jss64::-moz-focus-inner {
+  border-style: none;
+}
+.jss64.jss65 {
+  cursor: default;
+  pointer-events: none;
+}
+</style><style data-jss="" data-meta="MuiButton">
+.jss38 {
+  color: rgba(0, 0, 0, 0.87);
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  line-height: 1.75;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+}
+.jss38:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.jss38.jss58 {
+  color: rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .jss38:hover {
+    background-color: transparent;
+  }
+}
+.jss38:hover.jss58 {
+  background-color: transparent;
+}
+.jss39 {
+  width: 100%;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+}
+.jss40 {
+  padding: 6px 8px;
+}
+.jss41 {
+  color: #333;
+}
+.jss41:hover {
+  background-color: rgba(51, 51, 51, 0.08);
+}
+@media (hover: none) {
+  .jss41:hover {
+    background-color: transparent;
+  }
+}
+.jss42 {
+  color: #3c6583;
+}
+.jss42:hover {
+  background-color: rgba(60, 101, 131, 0.08);
+}
+@media (hover: none) {
+  .jss42:hover {
+    background-color: transparent;
+  }
+}
+.jss46 {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  padding: 5px 16px;
+}
+.jss46.jss58 {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+.jss47 {
+  color: #333;
+  border: 1px solid rgba(51, 51, 51, 0.5);
+}
+.jss47:hover {
+  border: 1px solid #333;
+  background-color: rgba(51, 51, 51, 0.08);
+}
+@media (hover: none) {
+  .jss47:hover {
+    background-color: transparent;
+  }
+}
+.jss48 {
+  color: #3c6583;
+  border: 1px solid rgba(60, 101, 131, 0.5);
+}
+.jss48:hover {
+  border: 1px solid #3c6583;
+  background-color: rgba(60, 101, 131, 0.08);
+}
+.jss48.jss58 {
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+@media (hover: none) {
+  .jss48:hover {
+    background-color: transparent;
+  }
+}
+.jss49 {
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12);
+  background-color: #e0e0e0;
+}
+.jss49.jss57 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.jss49:active {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.jss49.jss58 {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.jss49:hover {
+  background-color: #d5d5d5;
+}
+@media (hover: none) {
+  .jss49:hover {
+    background-color: #e0e0e0;
+  }
+}
+.jss49:hover.jss58 {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+.jss50 {
+  color: #fff;
+  background-color: #333;
+}
+.jss50:hover {
+  background-color: rgb(35, 35, 35);
+}
+@media (hover: none) {
+  .jss50:hover {
+    background-color: #333;
+  }
+}
+.jss51 {
+  color: #fff;
+  background-color: #3c6583;
+}
+.jss51:hover {
+  background-color: rgb(42, 70, 91);
+}
+@media (hover: none) {
+  .jss51:hover {
+    background-color: #3c6583;
+  }
+}
+.jss55 {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  min-width: 0;
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+  border-radius: 50%;
+}
+.jss55:active {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);
+}
+.jss56 {
+  width: auto;
+  height: 48px;
+  padding: 0 16px;
+  min-width: 48px;
+  border-radius: 24px;
+}
+.jss59 {
+  color: inherit;
+  border-color: currentColor;
+}
+.jss60 {
+  width: 40px;
+  height: 40px;
+}
+.jss61 {
+  padding: 4px 8px;
+  min-width: 64px;
+  font-size: 0.8125rem;
+}
+.jss62 {
+  padding: 8px 24px;
+  font-size: 0.9375rem;
+}
+.jss63 {
+  width: 100%;
+}
+</style><style data-jss="" data-meta="MuiPaper">
+.jss11 {
+  background-color: #fff;
+}
+.jss12 {
+  border-radius: 4px;
+}
+.jss13 {
+  box-shadow: none;
+}
+.jss14 {
+  box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 2px 1px -1px rgba(0,0,0,0.12);
+}
+.jss15 {
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 3px 1px -2px rgba(0,0,0,0.12);
+}
+.jss16 {
+  box-shadow: 0px 1px 8px 0px rgba(0,0,0,0.2),0px 3px 4px 0px rgba(0,0,0,0.14),0px 3px 3px -2px rgba(0,0,0,0.12);
+}
+.jss17 {
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+.jss18 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 5px 8px 0px rgba(0,0,0,0.14),0px 1px 14px 0px rgba(0,0,0,0.12);
+}
+.jss19 {
+  box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2),0px 6px 10px 0px rgba(0,0,0,0.14),0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+.jss20 {
+  box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2),0px 7px 10px 1px rgba(0,0,0,0.14),0px 2px 16px 1px rgba(0,0,0,0.12);
+}
+.jss21 {
+  box-shadow: 0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12);
+}
+.jss22 {
+  box-shadow: 0px 5px 6px -3px rgba(0,0,0,0.2),0px 9px 12px 1px rgba(0,0,0,0.14),0px 3px 16px 2px rgba(0,0,0,0.12);
+}
+.jss23 {
+  box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.2),0px 10px 14px 1px rgba(0,0,0,0.14),0px 4px 18px 3px rgba(0,0,0,0.12);
+}
+.jss24 {
+  box-shadow: 0px 6px 7px -4px rgba(0,0,0,0.2),0px 11px 15px 1px rgba(0,0,0,0.14),0px 4px 20px 3px rgba(0,0,0,0.12);
+}
+.jss25 {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 12px 17px 2px rgba(0,0,0,0.14),0px 5px 22px 4px rgba(0,0,0,0.12);
+}
+.jss26 {
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.2),0px 13px 19px 2px rgba(0,0,0,0.14),0px 5px 24px 4px rgba(0,0,0,0.12);
+}
+.jss27 {
+  box-shadow: 0px 7px 9px -4px rgba(0,0,0,0.2),0px 14px 21px 2px rgba(0,0,0,0.14),0px 5px 26px 4px rgba(0,0,0,0.12);
+}
+.jss28 {
+  box-shadow: 0px 8px 9px -5px rgba(0,0,0,0.2),0px 15px 22px 2px rgba(0,0,0,0.14),0px 6px 28px 5px rgba(0,0,0,0.12);
+}
+.jss29 {
+  box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2),0px 16px 24px 2px rgba(0,0,0,0.14),0px 6px 30px 5px rgba(0,0,0,0.12);
+}
+.jss30 {
+  box-shadow: 0px 8px 11px -5px rgba(0,0,0,0.2),0px 17px 26px 2px rgba(0,0,0,0.14),0px 6px 32px 5px rgba(0,0,0,0.12);
+}
+.jss31 {
+  box-shadow: 0px 9px 11px -5px rgba(0,0,0,0.2),0px 18px 28px 2px rgba(0,0,0,0.14),0px 7px 34px 6px rgba(0,0,0,0.12);
+}
+.jss32 {
+  box-shadow: 0px 9px 12px -6px rgba(0,0,0,0.2),0px 19px 29px 2px rgba(0,0,0,0.14),0px 7px 36px 6px rgba(0,0,0,0.12);
+}
+.jss33 {
+  box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 20px 31px 3px rgba(0,0,0,0.14),0px 8px 38px 7px rgba(0,0,0,0.12);
+}
+.jss34 {
+  box-shadow: 0px 10px 13px -6px rgba(0,0,0,0.2),0px 21px 33px 3px rgba(0,0,0,0.14),0px 8px 40px 7px rgba(0,0,0,0.12);
+}
+.jss35 {
+  box-shadow: 0px 10px 14px -6px rgba(0,0,0,0.2),0px 22px 35px 3px rgba(0,0,0,0.14),0px 8px 42px 7px rgba(0,0,0,0.12);
+}
+.jss36 {
+  box-shadow: 0px 11px 14px -7px rgba(0,0,0,0.2),0px 23px 36px 3px rgba(0,0,0,0.14),0px 9px 44px 8px rgba(0,0,0,0.12);
+}
+.jss37 {
+  box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2),0px 24px 38px 3px rgba(0,0,0,0.14),0px 9px 46px 8px rgba(0,0,0,0.12);
+}
+</style><style class="vjs-styles-defaults">
+      .video-js {
+        width: 300px;
+        height: 150px;
+      }
+
+      .vjs-fluid {
+        padding-top: 56.25%
+      }
+    </style><style type="text/css">.__react_component_tooltip {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 13px;
+  left: -999em;
+  opacity: 0;
+  padding: 8px 21px;
+  position: fixed;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  top: -999em;
+  visibility: hidden;
+  z-index: 999;
+}
+.__react_component_tooltip.allow_hover, .__react_component_tooltip.allow_click {
+  pointer-events: auto;
+}
+.__react_component_tooltip:before, .__react_component_tooltip:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.__react_component_tooltip.show {
+  opacity: 0.9;
+  margin-top: 0px;
+  margin-left: 0px;
+  visibility: visible;
+}
+.__react_component_tooltip.type-dark {
+  color: #fff;
+  background-color: #222;
+}
+.__react_component_tooltip.type-dark.place-top:after {
+  border-top-color: #222;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-dark.place-bottom:after {
+  border-bottom-color: #222;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-dark.place-left:after {
+  border-left-color: #222;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-dark.place-right:after {
+  border-right-color: #222;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-dark.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-dark.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-success {
+  color: #fff;
+  background-color: #8DC572;
+}
+.__react_component_tooltip.type-success.place-top:after {
+  border-top-color: #8DC572;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-success.place-bottom:after {
+  border-bottom-color: #8DC572;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-success.place-left:after {
+  border-left-color: #8DC572;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-success.place-right:after {
+  border-right-color: #8DC572;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-success.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-success.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning {
+  color: #fff;
+  background-color: #F0AD4E;
+}
+.__react_component_tooltip.type-warning.place-top:after {
+  border-top-color: #F0AD4E;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-warning.place-bottom:after {
+  border-bottom-color: #F0AD4E;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-warning.place-left:after {
+  border-left-color: #F0AD4E;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-warning.place-right:after {
+  border-right-color: #F0AD4E;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-warning.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-warning.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-error {
+  color: #fff;
+  background-color: #BE6464;
+}
+.__react_component_tooltip.type-error.place-top:after {
+  border-top-color: #BE6464;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-error.place-bottom:after {
+  border-bottom-color: #BE6464;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-error.place-left:after {
+  border-left-color: #BE6464;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-error.place-right:after {
+  border-right-color: #BE6464;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-error.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-error.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-info {
+  color: #fff;
+  background-color: #337AB7;
+}
+.__react_component_tooltip.type-info.place-top:after {
+  border-top-color: #337AB7;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-info.place-bottom:after {
+  border-bottom-color: #337AB7;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-info.place-left:after {
+  border-left-color: #337AB7;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-info.place-right:after {
+  border-right-color: #337AB7;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-info.border {
+  border: 1px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-top:before {
+  border-top: 8px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-bottom:before {
+  border-bottom: 8px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-left:before {
+  border-left: 8px solid #fff;
+}
+.__react_component_tooltip.type-info.border.place-right:before {
+  border-right: 8px solid #fff;
+}
+.__react_component_tooltip.type-light {
+  color: #222;
+  background-color: #fff;
+}
+.__react_component_tooltip.type-light.place-top:after {
+  border-top-color: #fff;
+  border-top-style: solid;
+  border-top-width: 6px;
+}
+.__react_component_tooltip.type-light.place-bottom:after {
+  border-bottom-color: #fff;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+}
+.__react_component_tooltip.type-light.place-left:after {
+  border-left-color: #fff;
+  border-left-style: solid;
+  border-left-width: 6px;
+}
+.__react_component_tooltip.type-light.place-right:after {
+  border-right-color: #fff;
+  border-right-style: solid;
+  border-right-width: 6px;
+}
+.__react_component_tooltip.type-light.border {
+  border: 1px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-top:before {
+  border-top: 8px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-bottom:before {
+  border-bottom: 8px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-left:before {
+  border-left: 8px solid #222;
+}
+.__react_component_tooltip.type-light.border.place-right:before {
+  border-right: 8px solid #222;
+}
+.__react_component_tooltip.place-top {
+  margin-top: -10px;
+}
+.__react_component_tooltip.place-top:before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  bottom: -8px;
+  left: 50%;
+  margin-left: -10px;
+}
+.__react_component_tooltip.place-top:after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  bottom: -6px;
+  left: 50%;
+  margin-left: -8px;
+}
+.__react_component_tooltip.place-bottom {
+  margin-top: 10px;
+}
+.__react_component_tooltip.place-bottom:before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top: -8px;
+  left: 50%;
+  margin-left: -10px;
+}
+.__react_component_tooltip.place-bottom:after {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  top: -6px;
+  left: 50%;
+  margin-left: -8px;
+}
+.__react_component_tooltip.place-left {
+  margin-left: -10px;
+}
+.__react_component_tooltip.place-left:before {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  right: -8px;
+  top: 50%;
+  margin-top: -5px;
+}
+.__react_component_tooltip.place-left:after {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  right: -6px;
+  top: 50%;
+  margin-top: -4px;
+}
+.__react_component_tooltip.place-right {
+  margin-left: 10px;
+}
+.__react_component_tooltip.place-right:before {
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  left: -8px;
+  top: 50%;
+  margin-top: -5px;
+}
+.__react_component_tooltip.place-right:after {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  left: -6px;
+  top: 50%;
+  margin-top: -4px;
+}
+.__react_component_tooltip .multi-line {
+  display: block;
+  padding: 2px 0px;
+  text-align: center;
+}</style><style data-jss="" data-meta="MuiCircularProgress">
+.jss1 {
+  display: inline-block;
+  line-height: 1;
+}
+.jss2 {
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.jss3 {
+  animation: mui-progress-circular-rotate 1.4s linear infinite;
+  animation-name: $mui-progress-circular-rotate;
+}
+.jss4 {
+  color: #333;
+}
+.jss5 {
+  color: #3c6583;
+}
+.jss7 {
+  stroke: currentColor;
+}
+.jss8 {
+  transition: stroke-dashoffset 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+.jss9 {
+  animation: mui-progress-circular-dash 1.4s ease-in-out infinite;
+  animation-name: $mui-progress-circular-dash;
+  stroke-dasharray: 80px, 200px;
+  stroke-dashoffset: 0px;
+}
+@-webkit-keyframes mui-progress-circular-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes mui-progress-circular-dash {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0px;
+  }
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+}
+.jss10 {
+  animation: none;
+}
+</style><link rel="stylesheet" href="./katex.min.css"><link rel="stylesheet" href="./css"><link rel="stylesheet" href="./pdf_viewer.css"><link type="text/css" rel="stylesheet" href="./main.2006ea3053e0c84634d7.css"><div class="fullHeight"><div class="fullHeight" style="direction: ltr;"><section class="progress___UwWBD " style="background-color: rgb(2, 104, 75); border-bottom-color: rgba(255, 255, 255, 0.25);"><div class="column1___22Xrq"></div><div class="column2___3hqJ8"><img class="brandingImage___165Ff" alt="logo" src="https://sei-prod.s3.amazonaws.com/organizations/992944ff-cd12-45ad-92ed-3c2ab364ffcd/MongoDBLogo.png">Skill Badge: MongoDB Basics for Students  &nbsp;&nbsp;<div style="display: none;">More info here, link to exam instuctions, or section instructions.</div></div></section><section id="content" class="wrap___2SpJ-" style="overflow: visible;"><div id="Dock" class="collapsed___2OBUq dock___1emRQ"><article class="down___3hGw9 overlay___3Yef0" style="z-index: 2147483647;"><div class="jss11 jss15 jss12 content___l372h"><h1 class="h1___3Zmk-">Content Hidden</h1><p class="p___21qey">Your exam is still active. Click back into this window and release all keys to continue.</p></div></article><div class="fill___3-dfK" style="background: rgb(2, 104, 75);"><div class="dockContent___2u3Gs" style="border-right-width: medium; border-right-style: none; border-right-color: currentcolor;"><div class="visible___3DnQv hidden___3CRiQ"><div class="dockHead___3xZm1"><div class="dockTitle___2NBnV"><img class="brandingImage___1igkv" alt="logo" src="https://sei-prod.s3.amazonaws.com/organizations/992944ff-cd12-45ad-92ed-3c2ab364ffcd/MongoDBLogo.png"><div class="examName___2ouLw">Skill Badge: MongoDB Basics for Students </div></div><div class="buttonGroup___1eacj"><button class="dockHeadButton___3RqCU undefined" style="background: rgb(2, 104, 75);">Contents</button><button class="dockHeadButton___3RqCU undefined" style="background: rgb(2, 104, 75);">Settings <i class="iconCog___1PrFu"></i></button></div></div><div class="timer___2ANBf hide___1Gy3n"><button class="sectionTime___3-dap"><div class="pie___3b7xF" style="background: conic-gradient(rgb(255, 255, 255) 94.69%, rgba(51, 51, 51, 0) 0deg);"></div><div class="countdown___dVQNX"><h5 style="text-transform: capitalize;">Exam Timer</h5><h3>  56m 49s</h3></div></button></div><div class="hidden___3CRiQ"><div class="widgetHeader___33_AO" style="background: rgb(2, 104, 75);"><span>Calculator</span><div><button class="widgetHeaderButtonBig___3cBjZ"><i class="iconWindowRestore___1Tl91"></i></button><button class="widgetHeaderButtonSmall___1Ty4h"><i class="iconResizeFull___3e1ZF"></i></button></div></div><div class="hidden___3CRiQ disableResizing___2xPO7"><div class="openContent___167Pd react-draggable" style="position: absolute; user-select: auto; touch-action: none; width: 600px; height: 600px; display: none; top: 0px; left: 0px; cursor: auto; visibility: visible; box-shadow: rgba(51, 51, 51, 0.5) 2px 2px 10px; max-width: 9.0072e+15px; max-height: 9.0072e+15px; box-sizing: border-box;"><div style="background: rgb(2, 104, 75); display: flex; flex-direction: column; height: 100%; border: 1px solid rgba(255, 255, 255, 0.125); overflow-y: scroll;"><div class="title___1Lq3n hidden___3CRiQ" style="background: rgba(0, 0, 0, 0.565);">Calculator<div class="flex___6F4Bs"><button class="windowButtonHideSmall___30pBY undefined" style="background: rgb(2, 104, 75);"><i class="iconColumns___1K8HP"></i></button><button class="windowButtonHideSmall___30pBY undefined" style="background: rgb(2, 104, 75);"><i class="iconResizeFull___3e1ZF"></i></button><button class="windowButton___1QE3K undefined" style="background: rgb(2, 104, 75);">x</button></div></div><div class="calculatorContainer___tv4g7" alt="calculator"><div class="displayClass___3ohKt" alt="Calculator Display"><span></span></div><div class="buttonContainer___1O4sg"><button type="button" name="button" class="primaryButton___1teh6" alt="Clear all entries">AC</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Clear entry">CE</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Divide">/</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Multiply">*</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Seven">7</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Eight">8</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Nine">9</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Subtract">-</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Four">4</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Five">5</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Six">6</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Add">+</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="One">1</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Two">2</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Three">3</button><button type="button" name="button" class="primaryButton___1teh6 zeroButton___KVxVN undefined">0</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Decimal">.</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Equals">=</button></div></div></div><span><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; top: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; right: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; bottom: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; left: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; top: -10px; cursor: ne-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; bottom: -10px; cursor: se-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; bottom: -10px; cursor: sw-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; top: -10px; cursor: nw-resize;"></div></span></div><div class="__resizable_base__" style="width: 100%; height: 100%; position: absolute; transform: scale(0, 0); left: 0px; flex: 0 1 0%;"></div></div></div><div class="widget___1DIcy widgetActive___3eTQk"><div class="widgetHeader___33_AO" style="background: rgb(2, 104, 75);"><span>Notepad</span><div><button class="widgetHeaderButtonBig___3cBjZ"><i class="iconWindowRestore___1Tl91"></i></button><button class="widgetHeaderButtonSmall___1Ty4h"><i class="iconResizeFull___3e1ZF"></i></button></div></div><div class="shown___jmIUe disableResizing___2xPO7"><div class="openContent___167Pd react-draggable" style="position: absolute; user-select: auto; touch-action: none; width: 600px; height: 600px; display: block; top: 0px; left: 0px; cursor: auto; visibility: hidden; box-shadow: rgba(51, 51, 51, 0.5) 2px 2px 10px; max-width: 9.0072e+15px; max-height: 9.0072e+15px; box-sizing: border-box; transform: translate(0px, 0px);"><div style="background: rgb(2, 104, 75); display: flex; flex-direction: column; height: 100%; border: 1px solid rgba(255, 255, 255, 0.125); overflow-y: scroll;"><div class="title___1Lq3n hidden___3CRiQ" style="background: rgba(0, 0, 0, 0.565);">Notepad<div class="flex___6F4Bs"><button class="windowButtonHideSmall___30pBY undefined" style="background: rgb(2, 104, 75);"><i class="iconColumns___1K8HP"></i></button><button class="windowButtonHideSmall___30pBY undefined" style="background: rgb(2, 104, 75);"><i class="iconResizeFull___3e1ZF"></i></button><button class="windowButton___1QE3K undefined" style="background: rgb(2, 104, 75);">x</button></div></div><div class="notepadContainer___X2ePD" alt="notepad"><textarea class="notepad___2re3H" rows="15"></textarea></div></div><span><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; top: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; right: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; bottom: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; left: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; top: -10px; cursor: ne-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; bottom: -10px; cursor: se-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; bottom: -10px; cursor: sw-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; top: -10px; cursor: nw-resize;"></div></span></div><div class="__resizable_base__" style="width: 100%; height: 100%; position: absolute; transform: scale(0, 0); left: 0px; flex: 0 1 0%;"></div></div></div></div></div><div class="dockControls___2Q_Ia"><div class="dockControlsButtons___UiwCQ"><button class="dockControlButton___21kxj" title="Expand"><span class="expandIcon___2HMu7"></span></button><div class="timer___Qc3Ev show___ELxgb"><button class="sectionTime____czLn"><div class="pie___3dTTW" style="background: conic-gradient(rgb(255, 255, 255) 94.69%, rgba(51, 51, 51, 0) 0deg);"></div><div class="countdown___1BwSa" style="text-transform: capitalize;"><h5>Exam Timer</h5><h3>  56m 49s</h3></div></button></div><button class="dockControlButton___21kxj" title="Notepad">✎</button></div></div></div></div><span class="fillSpace___16W_s" id="exam-wrapper"><div class="Exam___1DIyt"><section class="wrap___3GQUk" style="min-height: 40px;"><div class="row___3U0fz" style="background-color: rgb(2, 104, 75); min-height: 42px;"><div class="topColumn1___346u1"><div class="topBar___226vg"><button class="jss64 jss38 jss49 jss50 jss52 jss53 menuBtn___1w-4k" tabindex="0" type="button"><span class="jss39"><i class="iconMenu___260ri"></i></span><span class="jss84"></span></button><button class="jss64 jss38 jss49 jss50 jss52 jss53 pagesBtn2___1Nkzu" tabindex="0" type="button"><span class="jss39"> <span class="pageNo___g0Z-N">Page:&nbsp;1 / 1</span></span><span class="jss84"></span></button><button class="jss64 jss38 jss49 jss52 flagBtn___2gFWt" tabindex="0" type="button" icon="[object Object]" labelposition="after" style="direction: ltr; background-color: transparent; color: rgb(255, 255, 255);"><span class="jss39">Flag this page</span><span class="jss84"></span></button></div></div></div><div></div></section><article class="unPaused___2OPW3 overlay___1JrC2" style="z-index: 2147483645;"><div class="jss11 jss15 jss12 content___CIK7L"><h1 class="h1___1w2Pc"><i class="iconPause___XALu4"></i>Exam Paused</h1><p class="p___416Gn">The exam timer is paused.</p></div></article><article class="down___3hGw9 overlay___3Yef0" style="z-index: 2147483647;"><div class="jss11 jss15 jss12 content___l372h"><h1 class="h1___3Zmk-">Content Hidden</h1><p class="p___21qey">Your exam is still active. Click back into this window and release all keys to continue.</p></div></article><div class="window___331lf react-draggable" style="position: fixed; user-select: auto; touch-action: none; width: auto; height: auto; display: none; top: 0px; left: 0px; cursor: auto; background-color: rgb(2, 104, 75); transform: translate(0px, 250px); max-width: 9.0072e+15px; max-height: 9.0072e+15px; min-width: 300px; box-sizing: border-box;"><div class="flexContainer___1W2n7"><div class="title___byS7i" style="background-color: rgb(2, 104, 75);">Calculator<button class="close___2VqIK" style="direction: ltr;">Hide</button></div><div class="calculatorContainer___tv4g7" alt="calculator"><div class="displayClass___3ohKt" alt="Calculator Display"><span></span></div><div class="buttonContainer___1O4sg"><button type="button" name="button" class="primaryButton___1teh6" alt="Clear all entries">AC</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Clear entry">CE</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Divide">/</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Multiply">*</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Seven">7</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Eight">8</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Nine">9</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Subtract">-</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Four">4</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Five">5</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Six">6</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Add">+</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="One">1</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Two">2</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Three">3</button><button type="button" name="button" class="primaryButton___1teh6 zeroButton___KVxVN undefined">0</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Decimal">.</button><button type="button" name="button" class="primaryButton___1teh6 undefined" alt="Equals">=</button></div></div></div><span><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; top: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; right: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; bottom: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; left: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; top: -10px; cursor: ne-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; bottom: -10px; cursor: se-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; bottom: -10px; cursor: sw-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; top: -10px; cursor: nw-resize;"></div></span></div><div class="window___LTbxT react-draggable" style="position: fixed; user-select: auto; touch-action: none; width: auto; height: auto; display: none; top: 0px; left: 0px; cursor: auto; background-color: rgb(2, 104, 75); transform: translate(0px, 250px); max-width: 9.0072e+15px; max-height: 9.0072e+15px; min-width: 300px; box-sizing: border-box;"><div class="flexContainer___PnHtp"><div class="title___1g5rd" style="background-color: rgb(2, 104, 75);">Notepad<button class="close___Vqkk1">Hide</button></div><div class="notepadContainer___X2ePD" alt="notepad"><textarea class="notepad___2re3H" rows="15"></textarea></div></div><span><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; top: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; right: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 100%; height: 10px; bottom: -5px; left: 0px; cursor: row-resize;"></div><div class="" style="position: absolute; user-select: none; width: 10px; height: 100%; top: 0px; left: -5px; cursor: col-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; top: -10px; cursor: ne-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; right: -10px; bottom: -10px; cursor: se-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; bottom: -10px; cursor: sw-resize;"></div><div class="" style="position: absolute; user-select: none; width: 20px; height: 20px; left: -10px; top: -10px; cursor: nw-resize;"></div></span></div><article class="notTimeExpired___3fhF4 overlay___3jFmI" style="z-index: 2147483647;"><div class="jss11 jss15 jss12 content___1QgDN"><h1 class="h1___2xnGy">Time Limit Reached</h1><p class="p___1eqNL">You have reached the time limit. To save your current work, click submit or wait for the page to autosubmit in 10 seconds.</p><div class="buttons___366f-"><button class="jss64 jss38 jss49 jss50 jss52 jss53" tabindex="0" type="button" style="direction: ltr;"><span class="jss39">Submit </span><span class="jss84"></span></button></div></div></article><section style="margin-bottom: 0px;"><div class="item___1bEeC null" style="display: block;"><span><div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">1.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>What is the role of a Database Management System (DBMS)?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 15f5cbe0-dca3-4ae6-9c41-a20e86599ed0" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 15f5cbe0-dca3-4ae6-9c41-a20e86599ed0" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 15f5cbe0-dca3-4ae6-9c41-a20e86599ed0"><div><div><p>To provide a user interface for frontend applications</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 18351415-c5cf-4a4c-a352-d9c40d587a5d" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 18351415-c5cf-4a4c-a352-d9c40d587a5d" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 18351415-c5cf-4a4c-a352-d9c40d587a5d"><div><div><p>To enforce data protocols in the database</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 6d1a3925-5c42-4651-9101-5b0b1613bc45" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 6d1a3925-5c42-4651-9101-5b0b1613bc45" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 6d1a3925-5c42-4651-9101-5b0b1613bc45"><div><div><p>To design the schema and data model</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption de4513c8-ac0e-42b0-88be-c6487d71b771" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption de4513c8-ac0e-42b0-88be-c6487d71b771" value="3" checked=""><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption de4513c8-ac0e-42b0-88be-c6487d71b771"><div><div><p>To store data in flat files</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 1 option.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">2.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>What is a main difference between SQL and NoSQL databases?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 51d45dff-7d32-4128-b108-ad732fb6b463" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 51d45dff-7d32-4128-b108-ad732fb6b463" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 51d45dff-7d32-4128-b108-ad732fb6b463"><div><div><p>SQL databases use a flexible schema, whereas NoSQL databases use a fixed schema.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 513e015d-2fcb-4dd9-be04-30e9f4125e39" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 513e015d-2fcb-4dd9-be04-30e9f4125e39" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 513e015d-2fcb-4dd9-be04-30e9f4125e39"><div><div><p>SQL databases are primarily used for social networking applications, whereas NoSQL databases are used for financial transactions.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption ff8f5188-ba73-4c0e-8737-1427428050bc" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption ff8f5188-ba73-4c0e-8737-1427428050bc" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption ff8f5188-ba73-4c0e-8737-1427428050bc"><div><div><p>SQL databases are designed for unstructured data, whereas NoSQL databases are designed for structured data.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 6a449874-cacc-4dd0-a67b-04247778b7b8" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 6a449874-cacc-4dd0-a67b-04247778b7b8" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 6a449874-cacc-4dd0-a67b-04247778b7b8"><div><div><p>SQL databases store data in tables with rows and columns, whereas NoSQL databases can use various structures like documents or key-value pairs.</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 1 option.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">3.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>What is the purpose of a schema in a database?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 8cf12ef7-050d-42d7-a6d5-6efd033dfe26" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 8cf12ef7-050d-42d7-a6d5-6efd033dfe26" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 8cf12ef7-050d-42d7-a6d5-6efd033dfe26"><div><div><p>To define the rules for how data is stored and organized</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 0cfc51f2-beea-4f2f-9e2d-465656dc0641" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 0cfc51f2-beea-4f2f-9e2d-465656dc0641" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 0cfc51f2-beea-4f2f-9e2d-465656dc0641"><div><div><p>To manage user permissions and security settings</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 887e9061-ab24-4a7a-b0df-542c78870c5e" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 887e9061-ab24-4a7a-b0df-542c78870c5e" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 887e9061-ab24-4a7a-b0df-542c78870c5e"><div><div><p>To optimize database performance and speed</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption f2a6a61e-7d94-4829-a595-96b367cf82ef" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption f2a6a61e-7d94-4829-a595-96b367cf82ef" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption f2a6a61e-7d94-4829-a595-96b367cf82ef"><div><div><p>To provide a user interface for database interaction</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 1 option.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">4.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>Which TWO files can be categorized as unstructured data?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 87b56700-5f48-450e-84fe-187b482ab7e8" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 87b56700-5f48-450e-84fe-187b482ab7e8" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 87b56700-5f48-450e-84fe-187b482ab7e8"><div><div><p>A JSON file containing user profiles</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 9b643769-6a84-4296-b131-4d4d3e1d6ffa" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 9b643769-6a84-4296-b131-4d4d3e1d6ffa" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 9b643769-6a84-4296-b131-4d4d3e1d6ffa"><div><div><p>A spreadsheet file with sales data</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption ce64d3ee-a166-4d19-8b20-335f67a4b1e7" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption ce64d3ee-a166-4d19-8b20-335f67a4b1e7" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption ce64d3ee-a166-4d19-8b20-335f67a4b1e7"><div><div><p>A video file of a product demonstration</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 14f17d50-bc6f-4cf8-8615-d20b07481851" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 14f17d50-bc6f-4cf8-8615-d20b07481851" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 14f17d50-bc6f-4cf8-8615-d20b07481851"><div><div><p>An XML file with configuration settings</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 017b0fb8-0867-477a-8d29-7614f7b1dec1" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 017b0fb8-0867-477a-8d29-7614f7b1dec1" value="4"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 017b0fb8-0867-477a-8d29-7614f7b1dec1"><div><div><p>An image file of a product</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 2 options.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">5.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>What is the hierarchy of MongoDB components from smallest to largest?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 4af8575f-183d-4d3b-960c-33bc46fd458d" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 4af8575f-183d-4d3b-960c-33bc46fd458d" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 4af8575f-183d-4d3b-960c-33bc46fd458d"><div><div><p>Node &gt; Document &gt; Collection &gt; Database &gt; Cluster</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 055bdf6e-d6e9-47c4-b37c-6039150d1d4e" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 055bdf6e-d6e9-47c4-b37c-6039150d1d4e" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 055bdf6e-d6e9-47c4-b37c-6039150d1d4e"><div><div><p>Document &gt; Collection &gt; Database &gt; Node &gt; Cluster</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 8c288728-e88a-432e-ada6-5989f1d1bdf1" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 8c288728-e88a-432e-ada6-5989f1d1bdf1" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 8c288728-e88a-432e-ada6-5989f1d1bdf1"><div><div><p>Collection &gt; Document &gt; Node &gt; Database &gt; Cluster</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 3c99d8e2-1011-4687-801b-65b1682d14b7" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 3c99d8e2-1011-4687-801b-65b1682d14b7" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 3c99d8e2-1011-4687-801b-65b1682d14b7"><div><div><p>Document &gt; Node &gt; Collection &gt; Database &gt; Cluster</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 1 option.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">6.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>A developer is working with MongoDB and needs to store user information in a document. The document will store data about users, including their name, age, and status.</p>
+<p>What syntax should the developer use for the MongoDB document?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 832d1e3d-96f9-4600-b39b-e4716ce8a24b" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 832d1e3d-96f9-4600-b39b-e4716ce8a24b" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 832d1e3d-96f9-4600-b39b-e4716ce8a24b"><div><div><p>{ name: "John", age: "30", status: "active" }</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 00dd840c-5976-4cfb-b476-c20fa73bacea" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 00dd840c-5976-4cfb-b476-c20fa73bacea" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 00dd840c-5976-4cfb-b476-c20fa73bacea"><div><div><p>[ "name": "John", "age": 30, "status": "active" ]</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 0ea03809-0155-4a68-94a9-1b1ce1e24455" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 0ea03809-0155-4a68-94a9-1b1ce1e24455" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 0ea03809-0155-4a68-94a9-1b1ce1e24455"><div><div><p>{ "name": "John", "age": 30, "status": "active" }</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 047e43a6-9fcf-4d07-a7e5-d1254e425b28" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 047e43a6-9fcf-4d07-a7e5-d1254e425b28" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 047e43a6-9fcf-4d07-a7e5-d1254e425b28"><div><div><p>[ name: "John", age: 30, status: "active" ]</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 1 option.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">7.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>What term is equivalent to horizontal scaling?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 2c951285-6462-44d0-8b21-0b7615e6b17f" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 2c951285-6462-44d0-8b21-0b7615e6b17f" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 2c951285-6462-44d0-8b21-0b7615e6b17f"><div><div><p>Cloud Provisioning</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption a81a17ac-01a4-43a4-835a-194872ec7468" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption a81a17ac-01a4-43a4-835a-194872ec7468" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption a81a17ac-01a4-43a4-835a-194872ec7468"><div><div><p>Replication</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption acb40d59-e2f5-4eb6-bdf6-6bbf6bb58a35" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption acb40d59-e2f5-4eb6-bdf6-6bbf6bb58a35" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption acb40d59-e2f5-4eb6-bdf6-6bbf6bb58a35"><div><div><p>Indexing</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 4dac1b07-1b80-4d65-a19c-957d0778711b" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="radio" id="itemOption 4dac1b07-1b80-4d65-a19c-957d0778711b" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 4dac1b07-1b80-4d65-a19c-957d0778711b"><div><div><p>Sharding</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 1 option.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">8.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>A developer is setting up a MongoDB instance for a critical application.</p>
+<p>What are the TWO benefits of using a replica set in this scenario?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 40ac16d4-4d20-45a5-ab89-b5e88df3f181" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 40ac16d4-4d20-45a5-ab89-b5e88df3f181" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 40ac16d4-4d20-45a5-ab89-b5e88df3f181"><div><div><p>Replica sets allow for horizontal scaling by distributing data across multiple nodes.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption d66c9507-bdb4-48ac-8e27-d1e0326693fe" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption d66c9507-bdb4-48ac-8e27-d1e0326693fe" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption d66c9507-bdb4-48ac-8e27-d1e0326693fe"><div><div><p>Replica sets provide automatic failover to maintain availability during node failures.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 68fb4595-e848-4d97-a38e-c29ed8226ac7" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 68fb4595-e848-4d97-a38e-c29ed8226ac7" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 68fb4595-e848-4d97-a38e-c29ed8226ac7"><div><div><p>Replica sets enable sharding to improve query performance.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 5d81d39a-bf3c-4380-87b0-b8629e0685a1" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 5d81d39a-bf3c-4380-87b0-b8629e0685a1" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 5d81d39a-bf3c-4380-87b0-b8629e0685a1"><div><div><p>Replica sets ensure data consistency across distributed nodes.</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 3b525b2a-648b-48d6-9d61-d07cd1cc5be6" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 3b525b2a-648b-48d6-9d61-d07cd1cc5be6" value="4"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 3b525b2a-648b-48d6-9d61-d07cd1cc5be6"><div><div><p>Replica sets simplify the database architecture and hardware requirements.</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 2 options.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">9.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>According to the CAP Theorem, which THREE elements are affected by the tradeoffs within a distributed system?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption 1b36b9ad-9393-4b9e-b6f4-f95a3baf0f9c" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 1b36b9ad-9393-4b9e-b6f4-f95a3baf0f9c" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 1b36b9ad-9393-4b9e-b6f4-f95a3baf0f9c"><div><div><p>Consistency</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption b21cab96-257c-44f1-a510-adcc5dae4223" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption b21cab96-257c-44f1-a510-adcc5dae4223" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption b21cab96-257c-44f1-a510-adcc5dae4223"><div><div><p>Capacity</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption f4b0207a-833e-4b6b-aabf-6f0ecd71392f" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption f4b0207a-833e-4b6b-aabf-6f0ecd71392f" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption f4b0207a-833e-4b6b-aabf-6f0ecd71392f"><div><div><p>Accuracy</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption a3dfea07-dc34-4a0d-9896-dbb9500b837f" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption a3dfea07-dc34-4a0d-9896-dbb9500b837f" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption a3dfea07-dc34-4a0d-9896-dbb9500b837f"><div><div><p>Availability</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption e6c9ddc4-b6e4-4df2-a912-46aaf94c8500" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption e6c9ddc4-b6e4-4df2-a912-46aaf94c8500" value="4"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption e6c9ddc4-b6e4-4df2-a912-46aaf94c8500"><div><div><p>Partition Tolerance</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 844d4971-a841-4c52-9655-3cb0066f4e2c" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 844d4971-a841-4c52-9655-3cb0066f4e2c" value="5"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 844d4971-a841-4c52-9655-3cb0066f4e2c"><div><div><p>Persistence</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 3 options.</p></div></div></div></div><div><div class="jss11 jss15 jss12 itemDetail___8Q4VQ" style="background-image: url(&quot;data:image/svg+xml;base64,CiAgICA8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MDAgMzM5IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgMzM5OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CiAgICAgIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+CiAgICAgICAgLnN0MHtmaWxsOnJnYmEoMTI3LCAyMzgsIDI1NSwgMC4wMjUpOyBmb250LWZhbWlseTonQXJpYWwnO2ZvbnQtc2l6ZTo3MnB4O2ZvbnQtd2VpZ2h0OmJvbGQ7IGxldHRlci1zcGFjaW5nOiAwLjFlbX0KICAgICAgPC9zdHlsZT4KICAgICAgPHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSAxNyA2Ny41NTEzKSI+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjAiIGNsYXNzPSJzdDAiPjY1NGQ0MWQ1PC90c3Bhbj4KICAgICAgICA8dHNwYW4geD0iMCIgeT0iODYuNCIgY2xhc3M9InN0MCI+LTA4MGEtNDA5YTwvdHNwYW4+CiAgICAgICAgPHRzcGFuIHg9IjAiIHk9IjE3Mi44IiBjbGFzcz0ic3QwIj4tOWEzZC1mZGQ8L3RzcGFuPgogICAgICAgIDx0c3BhbiB4PSIwIiB5PSIyNTkuMiIgY2xhc3M9InN0MCI+NWU4MzkxODA1PC90c3Bhbj4KICAgICAgPC90ZXh0PgogICAgPC9zdmc+&quot;);"><div></div><div class="mcWrap___3scuR"><p class="number___26tl3">10.</p><div class="wrapper___khg4h"><div class="stem___3sajW markDownContent"><div><div><p>A database administrator is considering moving from a self-managed database system to a fully-managed Database as a Service (DBaaS), such as MongoDB Atlas. The administrator wants to focus more on application development rather than database maintenance.</p>
+<p>What are TWO benefits of using a fully-managed DBaaS in this scenario?</p>
+</div></div></div><div class="Divider___1U1p9" style="background: linear-gradient(to right, rgb(225, 225, 225) 0%, rgb(225, 225, 225) 5.62963%, rgb(238, 238, 238) 5.62963%, rgb(238, 238, 238) 7.62963%, rgb(225, 225, 225) 7.62963%, rgb(225, 225, 225) 16.0741%, rgb(238, 238, 238) 16.0741%, rgb(238, 238, 238) 18.0741%, rgb(225, 225, 225) 18.0741%, rgb(225, 225, 225) 23.7037%, rgb(238, 238, 238) 23.7037%, rgb(238, 238, 238) 25.7037%, rgb(225, 225, 225) 25.7037%, rgb(225, 225, 225) 34.1481%, rgb(238, 238, 238) 34.1481%, rgb(238, 238, 238) 36.1481%, rgb(225, 225, 225) 36.1481%, rgb(225, 225, 225) 38.963%, rgb(238, 238, 238) 38.963%, rgb(238, 238, 238) 40.963%, rgb(225, 225, 225) 40.963%, rgb(225, 225, 225) 46.5926%, rgb(238, 238, 238) 46.5926%, rgb(238, 238, 238) 48.5926%, rgb(225, 225, 225) 48.5926%, rgb(225, 225, 225) 54.2222%, rgb(238, 238, 238) 54.2222%, rgb(238, 238, 238) 56.2222%, rgb(225, 225, 225) 56.2222%, rgb(225, 225, 225) 61.8519%, rgb(238, 238, 238) 61.8519%, rgb(238, 238, 238) 63.8519%, rgb(225, 225, 225) 63.8519%, rgb(225, 225, 225) 72.2963%, rgb(238, 238, 238) 72.2963%, rgb(238, 238, 238) 74.2963%, rgb(225, 225, 225) 74.2963%, rgb(225, 225, 225) 79.9259%, rgb(238, 238, 238) 79.9259%, rgb(238, 238, 238) 81.9259%, rgb(225, 225, 225) 81.9259%, rgb(225, 225, 225) 84.7407%, rgb(238, 238, 238) 84.7407%, rgb(238, 238, 238) 86.7407%, rgb(225, 225, 225) 86.7407%, rgb(225, 225, 225) 95.1852%, rgb(238, 238, 238) 95.1852%, rgb(238, 238, 238) 97.1852%, rgb(225, 225, 225) 97.1852%, rgb(225, 225, 225) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 102%);"></div><ul class="options___3sFF1"><li class="li___2jMl1"><label for="itemOption bf98eef7-c71a-4238-b5c5-f2ffc7fe6769" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption bf98eef7-c71a-4238-b5c5-f2ffc7fe6769" value="0"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption bf98eef7-c71a-4238-b5c5-f2ffc7fe6769"><div><div><p>Full control over hardware and software configurations</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption ee10ed95-075d-430e-ac27-479937c1bd1f" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption ee10ed95-075d-430e-ac27-479937c1bd1f" value="1"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption ee10ed95-075d-430e-ac27-479937c1bd1f"><div><div><p>Automatic handling of operational tasks, such as upgrades and backups</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption 35502bd6-978b-43ff-9837-a94613154cae" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption 35502bd6-978b-43ff-9837-a94613154cae" value="2"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption 35502bd6-978b-43ff-9837-a94613154cae"><div><div><p>Reduced need for manual security updates and maintenance</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption b383dc9b-a135-43b8-9aac-3ef991488f8d" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption b383dc9b-a135-43b8-9aac-3ef991488f8d" value="3"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption b383dc9b-a135-43b8-9aac-3ef991488f8d"><div><div><p>Ability to host the database on personal servers</p>
+</div></div></div><br class="clearBoth"></label></li><li class="li___2jMl1"><label for="itemOption deea73e5-27eb-4c67-8059-36f615d26db9" class="mcOptionSet___2L_TW"><input class="mcOption___I0W3t" type="checkbox" id="itemOption deea73e5-27eb-4c67-8059-36f615d26db9" value="4"><div class="inlineMd___2v6Hg undefined markDownContent" id="itemOption deea73e5-27eb-4c67-8059-36f615d26db9"><div><div><p>Ability to use replica sets and sharding</p>
+</div></div></div><br class="clearBoth"></label></li></ul><br class="clearBoth"><p class="mcInstructions___2mroj" style="direction: ltr;">Choose 2 options.</p></div></div></div></div></div></span></div><div class="bottomButtons___1JwaT"><div><div class="row___3U0fz"> <div class="column3___380sb"><button class="jss64 jss38 jss49 jss51 jss52 jss54 undefined undefined" tabindex="0" type="button" style="direction: ltr; color: rgb(255, 255, 255); margin-left: 2%; font-size: 0.8em; white-space: nowrap; background-color: rgb(2, 104, 75);"><span class="jss39">Submit Exam</span><span class="jss84"></span></button></div></div> </div></div><div></div><div style="height: 0px;"></div></section><div class="__resizable_base__" style="width: 100%; height: 100%; position: absolute; transform: scale(0, 0); left: 0px; flex: 0 1 0%;"></div></div><section style="display: none;"><div><h3 class="h3___1MabC">Last Suspicious Event</h3><p class="p___26YIZ">Modified Key Pressed: ctrl / NaN </p></div><details open=""><summary class="summary___glasR">All Suspicious Events</summary><ul><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Windows/Command Left</li><li class="li___uBLwW">Modified Key Pressed: command/windows / NaN</li><li class="li___uBLwW">Print Screen Key Pressed</li><li class="li___uBLwW">Modifier Key Pressed: Ctrl</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modifier Key Pressed: Ctrl</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li><li class="li___uBLwW">Modified Key Pressed: ctrl / NaN</li></ul></details></section></span></section></div></div><style id="disallowTextSelect" type="text/css">html, body {<br>      -webkit-touch-callout: none;<br>      -webkit-user-select: none;<br>      -khtml-user-select: none;<br>      -moz-user-select: none;<br>      -ms-user-select: none;<br>      user-select: none;<br>    }</style></template></div>
+    <script>
+      window.pdfjsReady = new Promise((resolve) => {
+        window.resolvePdfjs = resolve
+      })
+    </script>
+    <script type="module">
+      import * as pdfjs from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.2.67/legacy/build/pdf.min.mjs'
+
+      pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.2.67/legacy/build/pdf.worker.min.mjs'
+
+      window.pdfjs = pdfjs
+
+      window.resolvePdfjs()
+    </script>
+<script src="./app.2006ea3053e0c84634d7.js.download"></script>
+    <script src="./observer.js.download" type="module"></script>
+  
+
+</body></html>
