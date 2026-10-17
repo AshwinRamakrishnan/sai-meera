@@ -1,60 +1,93 @@
 import React from 'react';
-import HeroSection from '../components/hero/HeroSection';
-import LegacySection from '../components/legacy/LegacySection';
-import MachineSection from '../components/machines/MachineSection';
-import WeddingInvite from '../components/showcases/WeddingInvite';
-import FlexBanner from '../components/showcases/FlexBanner';
-import PhotoshopUI from '../components/showcases/PhotoshopUI';
-import PhotoFrames from '../components/showcases/PhotoFrames';
-import BusinessCards from '../components/showcases/BusinessCards';
-import ServicesGrid from '../components/showcases/ServicesGrid';
-import ContactSection from '../components/contact/ContactSection';
+import { Helmet } from 'react-helmet-async';
 
-// 3D Scene Components
-import OffsetPress from '../scenes/OffsetPress';
-import FlexPrinter from '../scenes/FlexPrinter';
-import PhotoshopStation from '../scenes/PhotoshopStation';
-import HydraulicCutter from '../scenes/HydraulicCutter';
+// Sections in reference-image order
+import HeroSection      from '../components/hero/HeroSection';
+import LegacySection    from '../components/legacy/LegacySection';
+import MachinesStrip    from '../components/machines/MachinesStrip';
+import WhatWePrint      from '../components/showcases/WhatWePrint';
+import FeaturedWork     from '../components/showcases/FeaturedWork';
+import GalleryStrip     from '../components/showcases/GalleryStrip';
+import DesignLab        from '../components/showcases/DesignLab';
+import TrustQuality    from '../components/showcases/TrustQuality';
+import CtaBanner        from '../components/ui/CtaBanner';
+import ContactSection   from '../components/contact/ContactSection';
+
+// LOCKED: 3D machine scenes — DO NOT MODIFY
+import MachineSection   from '../components/machines/MachineSection';
+import OffsetPress      from '../scenes/OffsetPress';
+import FlexPrinter      from '../scenes/FlexPrinter';
+
+import HydraulicCutter  from '../scenes/HydraulicCutter';
+
+import { useScrollChoreography } from '../hooks/useScrollChoreography';
 
 export default function HomePage() {
+  useScrollChoreography();
+
   return (
     <>
+      <Helmet>
+        <title>SAI MEERA DIGITAL DESIGN | Industrial Printing Excellence — Kumbakonam</title>
+        <meta name="description" content="SAI MEERA DIGITAL DESIGN: 60+ years of industrial printing in Kumbakonam. Premium invitations, offset printing, large-format flex banners, and corporate stationery." />
+        <meta name="keywords" content="industrial printing chennai, offset press, flex banner, premium invitations, wedding cards printing" />
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "PrintShop",
+              "name": "Sai Meera Digital Design",
+              "image": "https://sai-meera.web.app/src/assets/hero_printing_press.png",
+              "@id": "https://sai-meera.web.app/",
+              "url": "https://sai-meera.web.app/",
+              "telephone": "+919597072660",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "60, Thukkampalayam St, Karna Kollai Agraharam",
+                "addressLocality": "Kumbakonam",
+                "addressRegion": "Tamil Nadu",
+                "postalCode": "612001",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 10.9602,
+                "longitude": 79.3845
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "09:00",
+                "closes": "20:00"
+              },
+              "sameAs": [
+                "https://sai-meera.web.app/"
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
+
+      {/* 1. Hero */}
       <HeroSection />
-      <div className="gold-divider" />
+
+      {/* 2. Legacy / About */}
       <LegacySection />
-      <div className="gold-divider" />
 
-      {/* Machine 02: Offset Press */}
-      <MachineSection 
-        id="offset-sec"
-        machineNumber="02"
-        machineName="Industrial Offset Printing Press"
-        serialNumber="OS-SM74-6C"
-        description="6-unit CTP press with aluminium plates. 15,000 sheets/hour for cards, brochures, and premium packaging."
-        specs={[
-          { label: 'B1 Sheet', value: 'Format' },
-          { label: '15K sph', value: 'Speed' },
-          { label: '6-Color+UV', value: 'Output' },
-          { label: 'Pantone', value: 'Color' }
-        ]}
-        accentColor="var(--orange)"
-        sceneComponent={OffsetPress}
-        customLighting={true}
-        cameraPosition={[7.5, 5, 10]}
-        cameraFov={42}
-        consoleLines={[
-          'PRESS: HeidelBerg SM74',
-          'UNITS: 6 (CMYK+2 Spot)',
-          'INKING: RUNNING',
-          'LOCKS: Torque Loaded',
-          'SPEED: 12,000 sph',
-          'PLATES: CTP Aluminium',
-          'STATUS: RUNNING ■'
-        ]}
-      />
-      <WeddingInvite />
-      <div className="gold-divider" />
+      {/* 3. Machines Summary Strip */}
+      <MachinesStrip />
 
+      {/* 4. What We Print */}
+      <WhatWePrint />
+
+      {/* ── LOCKED: 3D Interactive Machine Showcases ── */}
       {/* Machine 01: Flex Printer */}
       <MachineSection
         id="flex-sec"
@@ -81,37 +114,37 @@ export default function HomePage() {
           'STATUS: PRINTING...'
         ]}
       />
-      <FlexBanner />
-      <div className="gold-divider" />
 
-      {/* Machine 03: Photoshop Workstation */}
+      {/* Machine 02: Offset Press */}
       <MachineSection
-        id="ps-sec"
-        machineNumber="03"
-        machineName="Photoshop Editing Workstation"
-        serialNumber="WS-CINTIQ-PRO-24"
-        description="Professional design workstation with dual monitors, Wacom Cintiq tablet, and RTX 4090 for real-time rendering."
+        id="offset-sec"
+        machineNumber="02"
+        machineName="Industrial Offset Printing Press"
+        serialNumber="OS-SM74-6C"
+        description="6-unit CTP press with aluminium plates. 15,000 sheets/hour for cards, brochures, and premium packaging."
         specs={[
-          { label: 'Intel i9', value: 'CPU' },
-          { label: '128 GB', value: 'RAM' },
-          { label: 'RTX 4090', value: 'GPU' },
-          { label: 'Pro Display', value: 'Monitor' }
+          { label: 'B1 Sheet', value: 'Format' },
+          { label: '15K sph', value: 'Speed' },
+          { label: '6-Color+UV', value: 'Output' },
+          { label: 'Pantone', value: 'Color' }
         ]}
-        accentColor="var(--green)"
-        sceneComponent={PhotoshopStation}
-        cameraPosition={[0, 4.8, 8]}
+        accentColor="var(--orange)"
+        sceneComponent={OffsetPress}
+        customLighting={true}
+        cameraPosition={[7.5, 5, 10]}
         cameraFov={42}
         consoleLines={[
-          'DISPLAY: Adobe RGB (1998)',
-          'RENDER: RTX 4090 Active',
-          'WACOM: Cintiq Pro 24',
-          'RAM: 96GB / 128GB',
-          'SCRATCH: 2TB NVMe',
-          'STATUS: RENDERING...'
+          'PRESS: HeidelBerg SM74',
+          'UNITS: 6 (CMYK+2 Spot)',
+          'INKING: RUNNING',
+          'LOCKS: Torque Loaded',
+          'SPEED: 12,000 sph',
+          'PLATES: CTP Aluminium',
+          'STATUS: RUNNING ■'
         ]}
       />
-      <PhotoshopUI />
-      <div className="gold-divider" />
+
+            {/* PhotoshopStation removed per design - replaced with Design Lab static image elsewhere */}
 
       {/* Machine 04: Hydraulic Cutter */}
       <MachineSection
@@ -139,14 +172,24 @@ export default function HomePage() {
           'STATUS: READY ■'
         ]}
       />
-      <div className="gold-divider" />
+      {/* ── END LOCKED SECTION ── */}
 
-      <PhotoFrames />
-      <div className="gold-divider" />
-      <BusinessCards />
-      <div className="gold-divider" />
-      <ServicesGrid />
-      <div className="gold-divider" />
+      {/* 5. Featured Work (invitation split) */}
+      <FeaturedWork />
+
+      {/* 6. Gallery Strip */}
+      <GalleryStrip />
+
+      {/* 7. Design Lab */}
+      <DesignLab />
+
+      {/* 8. Trust / Quality */}
+      <TrustQuality />
+
+      {/* 9. CTA Banner */}
+      <CtaBanner />
+
+      {/* 9. Contact */}
       <ContactSection />
     </>
   );

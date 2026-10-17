@@ -1,0 +1,698 @@
+/* =========================================================
+   SAI MEERA — INTERACTIVE LIVING DESIGN LAB
+   ========================================================= */
+
+.dl-section {
+  position: relative;
+  padding: clamp(5.5rem, 9vw, 8.5rem) 0;
+  background: #0a0a0f;
+  overflow: hidden;
+}
+
+/* Ambient Radial Purple & Gold Spotlight behind the Workstation */
+.dl-ambient-spotlight {
+  position: absolute;
+  top: 15%;
+  left: 18%;
+  width: clamp(500px, 55vw, 850px);
+  height: clamp(400px, 45vw, 650px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(147, 51, 234, 0.12) 0%,
+    rgba(212, 175, 55, 0.08) 38%,
+    rgba(10, 10, 15, 0) 72%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.dl-container {
+  max-width: var(--content-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .dl-container {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(3rem, 5vw, 5.5rem);
+  }
+}
+
+/* =========================================================
+   LEFT COLUMN: LIVING WORKSTATION STAGE
+   ========================================================= */
+
+.dl-image-col {
+  position: relative;
+  width: 100%;
+}
+
+.dl-stage-wrapper {
+  position: relative;
+  width: 100%;
+  cursor: default;
+  perspective: 1200px;
+}
+
+.dl-stage-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+  background: #0d0c0a;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.85),
+    0 0 45px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(212, 168, 67, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dl-stage-wrapper.is-hovered .dl-stage-inner {
+  border-color: rgba(212, 175, 55, 0.32);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.95),
+    0 0 55px rgba(168, 85, 247, 0.16),
+    0 0 30px rgba(212, 175, 55, 0.12),
+    inset 0 1px 0 rgba(212, 168, 67, 0.4);
+}
+
+/* Base Workstation Photography */
+.dl-base-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92) contrast(1.04);
+}
+
+/* ─────────────────────────────────────────────────────────
+   1. ILLUMINATED WALL BRANDING STUDIO LIGHTING
+   ───────────────────────────────────────────────────────── */
+
+.dl-wall-brand-zone {
+  position: absolute;
+  left: 34.83%;
+  top: 4.10%;
+  width: 23.76%;
+  height: 25.88%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Soft Violet Ambient Backlight behind 'S' */
+.dl-glow-violet {
+  position: absolute;
+  top: 6%;
+  left: 12%;
+  width: 44%;
+  height: 58%;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.58) 0%,
+    rgba(139, 92, 246, 0.24) 48%,
+    transparent 78%
+  );
+  filter: blur(14px);
+  mix-blend-mode: screen;
+  animation: dlGlowViolet 6.5s ease-in-out infinite alternate;
+}
+
+@keyframes dlGlowViolet {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.06);
+  }
+}
+
+/* Soft Gold Ambient Backlight behind 'M' */
+.dl-glow-gold {
+  position: absolute;
+  top: 6%;
+  right: 12%;
+  width: 44%;
+  height: 58%;
+  background: radial-gradient(
+    circle,
+    rgba(245, 158, 11, 0.54) 0%,
+    rgba(212, 168, 67, 0.22) 48%,
+    transparent 78%
+  );
+  filter: blur(14px);
+  mix-blend-mode: screen;
+  animation: dlGlowGold 6.5s ease-in-out infinite alternate 1.2s;
+}
+
+@keyframes dlGlowGold {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.06);
+  }
+}
+
+/* Periodic Specular Light Sweep across the Wall Letters */
+.dl-brand-sweep {
+  position: absolute;
+  inset: -10%;
+  background: linear-gradient(
+    115deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.16) 48%,
+    rgba(212, 175, 55, 0.28) 52%,
+    transparent 64%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  animation: dlBrandSweep 9s ease-in-out infinite;
+}
+
+@keyframes dlBrandSweep {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  24% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   2. MONITOR SCREENS: PIXEL-CLIPPED DYNAMIC OVERLAYS
+   ───────────────────────────────────────────────────────── */
+
+.dl-monitor-screen {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Left Monitor Screen Position (247 / 1536, 352 / 1024) */
+.dl-screen-left {
+  left: 16.08%;
+  top: 34.38%;
+  width: 36.65%;
+  height: 31.25%;
+}
+
+/* Right Monitor Screen Position (824 / 1536, 352 / 1024) */
+.dl-screen-right {
+  left: 53.65%;
+  top: 34.38%;
+  width: 33.85%;
+  height: 31.25%;
+}
+
+/* Monitor Glass Sheen & LCD Pixel Finish */
+.dl-screen-glass {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 0.06) 70%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── LEFT MONITOR CONTENT: Graphic Design Prepress Workflow ── */
+.dl-screen-base-left {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+.dl-canvas-overlay {
+  position: absolute;
+  left: 12.1%;
+  top: 11.9%;
+  width: 65.7%;
+  height: 81.25%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.dl-canvas-art {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  animation: dlCanvasBreathe 18s ease-in-out infinite alternate;
+}
+
+@keyframes dlCanvasBreathe {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.014) translate3d(0.4%, -0.3%, 0);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+}
+
+/* CMYK Color Proof Calibration Indicator */
+.dl-cmyk-proof-indicator {
+  position: absolute;
+  bottom: 8.5%;
+  left: 14.5%;
+  width: 34%;
+  height: 5.5%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 255, 0.38) 0%,
+    rgba(255, 0, 255, 0.38) 32%,
+    rgba(255, 255, 0, 0.38) 64%,
+    rgba(212, 175, 55, 0.45) 100%
+  );
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  animation: dlProofGlow 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes dlProofGlow {
+  0% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 0.75;
+  }
+}
+
+/* ── RIGHT MONITOR CONTENT: Cinematic Landscape Pan & Sunlight ── */
+.dl-landscape-track {
+  position: absolute;
+  inset: -2% -9%;
+  width: 118%;
+  height: 104%;
+}
+
+.dl-landscape-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: dlLandscapePan 30s ease-in-out infinite alternate;
+}
+
+@keyframes dlLandscapePan {
+  0% {
+    transform: translate3d(-3.5%, 0, 0) scale(1.02);
+  }
+  50% {
+    transform: translate3d(3.5%, 0, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(-3.5%, 0, 0) scale(1.02);
+  }
+}
+
+/* Golden Hour Sunlight Shimmer on the Lake */
+.dl-water-shimmer {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 65% 38% at 48% 66%,
+    rgba(255, 225, 150, 0.24) 0%,
+    rgba(212, 175, 55, 0.1) 42%,
+    transparent 75%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: dlWaterShimmer 8s ease-in-out infinite alternate;
+}
+
+@keyframes dlWaterShimmer {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 0.65;
+    transform: scale(1.04);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   3. CURSOR AMBIENT SPOT & ARCHIVAL ACCENTS
+   ───────────────────────────────────────────────────────── */
+
+.dl-cursor-ambient-spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.dl-stage-wrapper.is-hovered .dl-cursor-ambient-spot {
+  opacity: 1;
+}
+
+/* Archival Gold Corner Brackets */
+.dl-frame-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.7;
+}
+
+.dl-bracket-tl {
+  top: 8px;
+  left: 8px;
+  border-top: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+}
+
+.dl-bracket-tr {
+  top: 8px;
+  right: 8px;
+  border-top: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+}
+
+.dl-bracket-bl {
+  bottom: 8px;
+  left: 8px;
+  border-bottom: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+}
+
+.dl-bracket-br {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+}
+
+/* Subtle Stage Vignette */
+.dl-stage-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 40px rgba(10, 10, 15, 0.6);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Status Caption Pill */
+.dl-image-caption {
+  margin-top: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.8rem;
+  background: rgba(14, 12, 10, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dl-caption-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: dlStatusPulse 2.5s infinite;
+}
+
+@keyframes dlStatusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+.dl-caption-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* =========================================================
+   RIGHT COLUMN: EDITORIAL NARRATIVE & FEATURE LIST
+   ========================================================= */
+
+.dl-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dl-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.dl-eyebrow-line {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.65;
+}
+
+.dl-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.dl-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.2vw, 3.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.dl-body {
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 440px;
+  margin: 0;
+}
+
+/* Feature Capabilities List */
+.dl-caps {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.25rem;
+}
+
+.dl-cap-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.dl-cap-item:hover {
+  background: rgba(20, 18, 16, 0.55);
+  border-color: rgba(212, 175, 55, 0.2);
+  transform: translateX(4px);
+}
+
+.dl-cap-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(14, 12, 10, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.dl-cap-item:hover .dl-cap-icon-box {
+  background: var(--gold);
+  color: #0e0c0a;
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+}
+
+.dl-cap-label {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  font-weight: 450;
+  letter-spacing: -0.005em;
+  transition: color 0.25s ease;
+}
+
+.dl-cap-item:hover .dl-cap-label {
+  color: #fff;
+}
+
+/* Call to Action Link */
+.dl-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  transition: color 0.25s ease, border-color 0.25s ease;
+  margin-top: 0.5rem;
+}
+
+.dl-link-arrow {
+  transition: transform 0.25s ease;
+}
+
+.dl-link:hover {
+  color: #fff;
+  border-color: var(--gold);
+}
+
+.dl-link:hover .dl-link-arrow {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .dl-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .dl-body {
+    max-width: 100%;
+  }
+
+  .dl-caps {
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dl-section {
+    padding: clamp(4rem, 8vw, 5rem) 0;
+  }
+
+  .dl-stage-inner {
+    border-radius: 4px;
+  }
+
+  .dl-image-caption {
+    font-size: 0.55rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .dl-heading {
+    font-size: 1.85rem;
+  }
+
+  .dl-body {
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .dl-cap-item {
+    padding: 0.5rem 0.4rem;
+  }
+
+  .dl-cap-label {
+    font-size: 0.82rem;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY: PREFERS REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-landscape-media,
+  .dl-water-shimmer,
+  .dl-canvas-art,
+  .dl-cmyk-proof-indicator,
+  .dl-glow-violet,
+  .dl-glow-gold,
+  .dl-brand-sweep,
+  .dl-caption-pulse {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .dl-stage-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+}

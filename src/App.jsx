@@ -1,21 +1,24 @@
-import { useState, lazy, Suspense, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { useState, lazy, Suspense, useEffect, useCallback } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import { useLenis } from './hooks/useLenis';
 import Preloader from './components/layout/Preloader';
 import Navbar from './components/layout/Navbar';
 import ScrollProgress from './components/layout/ScrollProgress';
 import CustomCursor from './components/layout/CustomCursor';
 import Footer from './components/layout/Footer';
+import ChatAssistant from './components/ChatAssistant';
 
 import './App.css';
 
 // Lazy-load pages for code-splitting
-const HomePage = lazy(() => import('./pages/HomePage'));
-const InvitationsPage = lazy(() => import('./pages/InvitationsPage'));
-const FlexBannersPage = lazy(() => import('./pages/FlexBannersPage'));
-const GreetingCardsPage = lazy(() => import('./pages/GreetingCardsPage'));
-
-const ContactPage = lazy(() => import('./pages/ContactPage'));
+const HomePage             = lazy(() => import('./pages/HomePage'));
+const CategoryPage         = lazy(() => import('./pages/CategoryPage'));
+const ProductsPage         = lazy(() => import('./pages/ProductsPage'));
+const FlexBannersPage      = lazy(() => import('./pages/FlexBannersPage'));
+const GreetingCardsPage    = lazy(() => import('./pages/GreetingCardsPage'));
+const ContactPage          = lazy(() => import('./pages/ContactPage'));
+const AdminDashboard       = lazy(() => import('./pages/admin/AdminDashboard'));
 
 // Page loading fallback
 function PageLoader() {
@@ -34,7 +37,7 @@ function PageLoader() {
         border: '1px solid rgba(255,255,255,0.08)',
         borderRadius: '16px',
         color: 'rgba(240,237,232,0.7)',
-        fontFamily: "'JetBrains Mono', monospace",
+        fontFamily: "'Times New Roman', Times, serif",
         fontSize: '0.85rem',
         letterSpacing: '0.1em',
       }}>
@@ -46,13 +49,13 @@ function PageLoader() {
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  console.log('App render. isLoading:', isLoading);
   const location = useLocation();
   const lenis = useLenis();
 
   // Scroll to hash on route change
   useEffect(() => {
     if (location.hash && lenis) {
-      // Small delay to ensure the page is rendered (especially after Suspense)
       setTimeout(() => {
         const target = document.querySelector(location.hash);
         if (target) {
@@ -60,30 +63,51 @@ function App() {
         }
       }, 100);
     } else if (location.pathname !== '/' && lenis) {
-      // Scroll to top when navigating to a new page without a hash
       lenis.scrollTo(0, { immediate: true });
     }
   }, [location, lenis]);
 
+  const handleLoadComplete = useCallback(() => {
+    console.log('onLoadComplete fired from Preloader callback!');
+    setIsLoading(false);
+  }, []);
+
   return (
-    <>
-      <Preloader isLoading={isLoading} onLoadComplete={() => setIsLoading(false)} />
+    <MotionConfig reducedMotion="user">
+      <Preloader isLoading={isLoading} onLoadComplete={handleLoadComplete} />
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Suspense fallback={<PageLoader />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/invitations" element={<InvitationsPage />} />
-            <Route path="/flex-banners" element={<FlexBannersPage />} />
-            <Route path="/greeting-cards" element={<GreetingCardsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            {/* ── Canonical routes ── */}
+            <Route path="/"                element={<HomePage />} />
+            <Route path="/products"        element={<ProductsPage />} />
+            <Route path="/products/:slug"  element={<CategoryPage />} />
+            <Route path="/contact"         element={<ContactPage />} />
+            <Route path="/admin"           element={<AdminDashboard />} />
+
+            {/* ── Legacy page routes (redirect to canonical) ── */}
+            <Route path="/flex-banners"   element={<Navigate to="/products/flex-banner" replace />} />
+            <Route path="/greeting-cards" element={<Navigate to="/products/greeting-card" replace />} />
+
+            {/* ── Phase 2 invitation routes (backward compat redirects) ── */}
+            <Route path="/invitations"              element={<Navigate to="/products?group=invitations" replace />} />
+            <Route path="/invitations/wedding"      element={<Navigate to="/products/hindu-wedding" replace />} />
+            <Route path="/invitations/engagement"   element={<Navigate to="/products/engagement" replace />} />
+            <Route path="/invitations/baby-shower"  element={<Navigate to="/products/baby-shower" replace />} />
+            <Route path="/invitations/valaikaapu"   element={<Navigate to="/products/baby-shower" replace />} />
+            <Route path="/products/valaikaapu"      element={<Navigate to="/products/baby-shower" replace />} />
+
+            {/* ── Catch-all: unknown routes → catalogue ── */}
+            <Route path="*" element={<Navigate to="/products" replace />} />
           </Routes>
         </Suspense>
       </main>
       <Footer />
-    </>
+      <ChatAssistant />
+    </MotionConfig>
   );
 }
 

@@ -1,0 +1,217 @@
+/* =========================================================================
+   CINEMATIC CENTRAL VERTICAL LIGHT BEAM — PURE GOLD & OBSIDIAN
+   Section 2 (immediately below Flex & Banners Hero)
+   Matches Flex & Banners Gold Reference:
+     - Pure obsidian background
+     - Warm radiant golden ambient glow (Zero purple)
+     - Luminous central vertical beam with champagne-white spine
+     - Central bloom behind cards
+   ========================================================================= */
+
+.flex-section-beam-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  background-color: #0A0A0F;
+}
+
+/* 1. Deep Black-to-Warm Obsidian Ambient Canvas */
+.flex-beam-ambient-canvas {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 50%, #161109 0%, #0E0C07 45%, #0A0A0F 100%),
+    linear-gradient(180deg, #0A0A0F 0%, #140E06 50%, #0A0A0F 100%);
+}
+
+/* 2. Soft Warm Golden Ambient Glow (Lower & Middle Aura) */
+.flex-beam-gold-aura {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 95% 75% at 50% 65%,
+    rgba(212, 175, 55, 0.28) 0%,
+    rgba(184, 134, 11, 0.18) 35%,
+    rgba(110, 80, 10, 0.08) 60%,
+    transparent 85%
+  );
+  animation: goldAuraBreathe 11s ease-in-out infinite alternate;
+}
+
+/* 3. Golden Corona Diffusion Field */
+.flex-beam-gold-corona {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 75% 55% at 50% 48%,
+    rgba(245, 230, 168, 0.25) 0%,
+    rgba(212, 175, 55, 0.16) 30%,
+    rgba(139, 111, 43, 0.06) 55%,
+    transparent 80%
+  );
+  animation: goldCoronaBreathe 9s ease-in-out infinite alternate;
+}
+
+/* 4. Bright Central Vertical Light Beam / Column */
+.flex-beam-vertical-column {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(260px, 36vw, 480px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: beamColumnBreathe 7s ease-in-out infinite alternate;
+}
+
+/* Core intense specular champagne spine */
+.flex-beam-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(245, 230, 168, 0.45) 10%,
+    rgba(255, 255, 255, 0.98) 40%,
+    rgba(255, 248, 220, 0.95) 60%,
+    rgba(245, 230, 168, 0.5) 82%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.95),
+    0 0 65px rgba(245, 230, 168, 0.8),
+    0 0 110px rgba(212, 175, 55, 0.55),
+    0 0 160px rgba(184, 134, 11, 0.35);
+  filter: blur(1.5px);
+}
+
+/* Soft diffused flare cone */
+.flex-beam-flare-cone {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 240px 920px at 50% 50%,
+    rgba(255, 250, 235, 0.6) 0%,
+    rgba(245, 230, 168, 0.38) 25%,
+    rgba(212, 175, 55, 0.22) 48%,
+    rgba(139, 111, 43, 0.1) 70%,
+    transparent 85%
+  );
+}
+
+/* 5. Central Ethereal Origin Spotlight Bloom */
+.flex-beam-center-bloom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(280px, 36vw, 480px);
+  height: clamp(280px, 36vw, 480px);
+  background: radial-gradient(
+    circle closest-side,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 245, 215, 0.5) 25%,
+    rgba(245, 230, 168, 0.32) 48%,
+    rgba(212, 175, 55, 0.18) 70%,
+    transparent 90%
+  );
+  border-radius: 50%;
+  filter: blur(25px);
+  mix-blend-mode: screen;
+}
+
+/* 6. Subtle Floor Grounding Shadow */
+.flex-beam-floor-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(10, 10, 15, 0.45) 50%,
+    #0A0A0F 100%
+  );
+  z-index: 1;
+}
+
+/* ── Keyframe Animations ── */
+
+@keyframes goldAuraBreathe {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes goldCoronaBreathe {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes beamColumnBreathe {
+  0% {
+    opacity: 0.88;
+    transform: translateX(-50%) scaleX(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1.06);
+  }
+  100% {
+    opacity: 0.88;
+    transform: translateX(-50%) scaleX(0.96);
+  }
+}
+
+/* ── Mobile responsiveness ── */
+@media (max-width: 768px) {
+  .flex-beam-vertical-column {
+    width: 220px;
+  }
+  .flex-beam-center-bloom {
+    width: 220px;
+    height: 220px;
+  }
+  .flex-beam-gold-aura {
+    opacity: 0.85;
+  }
+}
+
+/* ── Reduced motion compliance ── */
+@media (prefers-reduced-motion: reduce) {
+  .flex-beam-gold-aura,
+  .flex-beam-gold-corona,
+  .flex-beam-vertical-column {
+    animation: none !important;
+  }
+}

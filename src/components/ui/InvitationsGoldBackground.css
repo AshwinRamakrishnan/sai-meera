@@ -1,0 +1,81 @@
+/* =========================================================
+   QRONOS-EXACT 3D GOLD FILAMENT VORTEX BACKGROUND
+   Exclusively active on Invitations & Ceremony product pages
+   Brand Palette:
+     - Deep Black: #000000
+     - Primary Metallic Gold: #D4AF37
+     - Champagne Highlight: #F5E6A8
+     - Deep Bronze Shadow: #5B4513
+   ========================================================= */
+
+/* Container: Positioned absolute behind the hero/content inside .cat-page */
+.cat-invitations-gold-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: clamp(750px, 92vh, 1050px);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #000000;
+}
+
+/* 3D WebGL Filament Canvas */
+.cat-invitations-gold-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  pointer-events: none;
+}
+
+/* Ambient gold radial lighting across waist, top and luminous bottom floor */
+.qronos-gold-vortex-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+    radial-gradient(circle 600px at 50% 30%, rgba(245, 230, 168, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 95% 45% at 50% 88%, rgba(212, 175, 55, 0.16) 0%, rgba(212, 175, 55, 0.04) 50%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Bottom seamless fade to black strictly at the boundary transition */
+.qronos-gold-bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.15) 45%,
+    rgba(10, 10, 15, 0.65) 75%,
+    #0A0A0F 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .cat-invitations-gold-bg {
+    height: clamp(620px, 86vh, 850px);
+  }
+
+  .qronos-gold-bottom-fade {
+    height: 180px;
+  }
+}
+
+/* Reduced motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  .cat-invitations-gold-bg {
+    animation: none !important;
+  }
+}

@@ -8,7 +8,7 @@
 
 .section-label {
   color: var(--cyan, #00d4ff);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -23,7 +23,7 @@
 }
 
 .section-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   line-height: 1.1;
@@ -35,7 +35,7 @@
 }
 
 .section-subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.6);
   max-width: 600px;

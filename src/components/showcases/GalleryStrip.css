@@ -1,0 +1,519 @@
+/* =========================================================
+   FRAMED PERFECTION — INTERACTIVE TILTED IMAGE GALLERY
+   ========================================================= */
+
+.gs-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(5rem, 8vw, 7.5rem) 0 clamp(4rem, 6vw, 6rem);
+  background: #0a0a0f;
+  color: var(--text-primary, #f0ede8);
+  overflow: hidden;
+  box-sizing: border-box;
+  outline: none;
+}
+
+/* =========================================================
+   1. AMBIENT BACKGROUND & LIGHTING
+   ========================================================= */
+
+/* Paper grain noise overlay */
+.gs-paper-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+/* Centered Radial Gold Spotlight behind the Tilted Gallery */
+.gs-ambient-spotlight {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(550px, 65vw, 950px);
+  height: clamp(450px, 50vw, 700px);
+  background: radial-gradient(
+    ellipse 75% 55% at 50% 50%,
+    rgba(212, 175, 55, 0.12) 0%,
+    rgba(212, 175, 55, 0.035) 45%,
+    rgba(10, 10, 15, 0) 75%
+  );
+  filter: blur(55px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gs-section.is-in-view .gs-ambient-spotlight {
+  opacity: 1;
+}
+
+/* =========================================================
+   2. SECTION HEADER
+   ========================================================= */
+
+.gs-container {
+  max-width: var(--content-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.gs-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.gs-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.gs-eyebrow-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.gs-eyebrow-line {
+  width: 22px;
+  height: 1px;
+  background: var(--gold, #d4af37);
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+}
+
+.gs-eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--gold, #d4af37);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.gs-heading {
+  font-family: var(--font-display, serif);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary, #f7f4ee);
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+
+.gs-subtext {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.88rem;
+  color: rgba(240, 237, 232, 0.7);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+/* Controls */
+.gs-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.gs-ctrl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(18, 16, 14, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  color: var(--gold, #d4af37);
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.gs-ctrl-btn:hover {
+  background: var(--gold, #d4af37);
+  color: #0a0a0f;
+  border-color: var(--gold, #d4af37);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+  transform: translateY(-1px);
+}
+
+.gs-ctrl-btn.is-paused {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--gold, #d4af37);
+  color: #ffffff;
+}
+
+.gs-ctrl-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   3. TILTED GALLERY STAGE & EDGE FADES
+   ========================================================= */
+
+.gs-stage-viewport {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  padding: 3rem 0 4.5rem;
+  box-sizing: border-box;
+  /* Dual-sided seamless edge fade masks */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 14%,
+    black 86%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 14%,
+    black 86%,
+    transparent 100%
+  );
+}
+
+/* Fallback side vignettes for browsers with partial mask support */
+.gs-edge-vignette {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(80px, 12vw, 180px);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gs-edge-left {
+  left: 0;
+  background: linear-gradient(to right, #0a0a0f 0%, rgba(10, 10, 15, 0.8) 40%, transparent 100%);
+}
+
+.gs-edge-right {
+  right: 0;
+  background: linear-gradient(to left, #0a0a0f 0%, rgba(10, 10, 15, 0.8) 40%, transparent 100%);
+}
+
+/* =========================================================
+   4. 3D TILTED CANVAS & ROWS
+   ========================================================= */
+
+.gs-tilted-canvas {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2vw, 2rem);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.gs-row-track {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.gs-marquee-strip {
+  display: flex;
+  gap: clamp(1.25rem, 2vw, 2rem);
+  width: max-content;
+  will-change: transform;
+}
+
+/* Marquee continuous animations with alternating directions */
+.gs-strip-left {
+  animation: gsMarqueeLeft 42s linear infinite;
+}
+
+.gs-strip-right {
+  animation: gsMarqueeRight 36s linear infinite;
+}
+
+.gs-strip-left-slow {
+  animation: gsMarqueeLeft 48s linear infinite;
+}
+
+@keyframes gsMarqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes gsMarqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Pause marquee on hover or when paused */
+.gs-marquee-strip:hover,
+.gs-marquee-strip.is-paused {
+  animation-play-state: paused;
+}
+
+/* =========================================================
+   5. IMAGE TILES & ARCHIVAL CRAFTSMANSHIP
+   ========================================================= */
+
+.gs-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: clamp(260px, 22vw, 340px);
+  aspect-ratio: 16 / 11;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #141210;
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  outline: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(0, 0, 0, 0.6);
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.gs-tile:hover {
+  transform: scale(1.06) translateZ(32px);
+  border-color: rgba(212, 175, 55, 0.7);
+  box-shadow:
+    0 24px 55px rgba(0, 0, 0, 0.92),
+    0 0 35px rgba(212, 175, 55, 0.28);
+  z-index: 20;
+}
+
+.gs-tile:focus-visible {
+  outline: 2px solid var(--gold, #d4af37);
+  outline-offset: 4px;
+}
+
+/* Real Portfolio Image */
+.gs-tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92) contrast(1.06);
+  transition: filter 0.35s ease, transform 0.5s ease;
+}
+
+.gs-tile:hover .gs-tile-img {
+  filter: brightness(1.02) contrast(1.08);
+  transform: scale(1.04);
+}
+
+/* Lighting overlay */
+.gs-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 15, 0.15) 0%,
+    transparent 45%,
+    rgba(10, 10, 15, 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+/* Archival Gold Corner Brackets */
+.gs-tile-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(212, 175, 55, 0.65);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.gs-corner-tl {
+  top: 7px;
+  left: 7px;
+  border-width: 1px 0 0 1px;
+}
+
+.gs-corner-tr {
+  top: 7px;
+  right: 7px;
+  border-width: 1px 1px 0 0;
+}
+
+.gs-corner-bl {
+  bottom: 7px;
+  left: 7px;
+  border-width: 0 0 1px 1px;
+}
+
+.gs-corner-br {
+  bottom: 7px;
+  right: 7px;
+  border-width: 0 1px 1px 0;
+}
+
+.gs-tile:hover .gs-tile-corner {
+  border-color: var(--gold, #d4af37);
+}
+
+/* Micro-badge tag pill */
+.gs-tile-badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.65rem;
+  background: rgba(14, 12, 10, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  z-index: 6;
+}
+
+.gs-badge-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold, #d4af37);
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.9);
+}
+
+.gs-badge-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary, #f7f4ee);
+}
+
+/* Bottom title footer */
+.gs-tile-footer {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.gs-tile-title {
+  font-family: var(--font-display, serif);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #f7f4ee;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  white-space: normal;
+  display: block;
+}
+
+/* =========================================================
+   6. ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-marquee-strip {
+    animation: none !important;
+  }
+
+  .gs-tilted-canvas {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   7. RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================= */
+
+@media (max-width: 959px) {
+  .gs-row-desktop-only {
+    display: none;
+  }
+
+  .gs-stage-viewport {
+    padding: 2rem 0 3rem;
+  }
+
+  .gs-tile {
+    width: clamp(230px, 32vw, 290px);
+  }
+}
+
+@media (max-width: 639px) {
+  .gs-section {
+    padding: 4.25rem 0 3.5rem;
+  }
+
+  .gs-header {
+    margin-bottom: 2rem;
+  }
+
+  .gs-stage-viewport {
+    padding: 1.5rem 0 2.5rem;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+  }
+
+  .gs-tile {
+    width: clamp(200px, 60vw, 240px);
+  }
+
+  .gs-tile-title {
+    font-size: 0.85rem;
+  }
+}

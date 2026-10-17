@@ -1,0 +1,2499 @@
+/* CategoryPage.css
+ * Three design modes: data-tone="festive" | "professional" | "respectful"
+ * Tamil design system classes from tamil-design.css are applied in the JSX.
+ */
+
+/* ── Root ── */
+.cat-page {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding-top: 80px;
+  position: relative;
+}
+
+/* =========================================================
+   PREMIUM ANIMATED GOLD BACKGROUND — INVITATIONS & CEREMONIES
+   Active strictly on product pages where group === 'invitations'
+   ========================================================= */
+
+.cat-page.is-invitations-category {
+  position: relative;
+  overflow-x: hidden;
+  background-color: #000000;
+}
+
+/* Ensure all page content sits cleanly above the animated background */
+.cat-page.is-invitations-category > *:not(.cat-invitations-gold-bg) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Invitations category inherits master Royal Luxury Gold styling */
+
+/* ──────────────────────────────────────────────────────────
+   1. TEXT VISIBILITY & OBSIDIAN TEXT-PROTECTION VIGNETTE
+   Subtle radial obsidian gradient behind hero text without
+   placing an opaque card or box around the content.
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-invitations-category .cat-hero {
+  position: relative;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 75% 58% at 50% 50%,
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.55) 42%,
+    rgba(0, 0, 0, 0.22) 68%,
+    transparent 88%
+  );
+}
+
+/* Ensure children float with crystal-clear stacking */
+.cat-page.is-invitations-category .cat-hero > * {
+  position: relative;
+  z-index: 4;
+}
+
+/* Suppress muddy kolam radial blotches and yellow grid dots on Invitations pages */
+.cat-page.is-invitations-category .kolam-hero-bg::before,
+.cat-page.is-invitations-category .kolam-hero-bg::after {
+  display: none !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   2. ROYAL HEADING TYPOGRAPHY
+   Commanding scale, Playfair Display editorial serif,
+   high-contrast metallic champagne-gold fill, multi-layered halo.
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-invitations-category .cat-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4.85rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+  margin-bottom: 0.85rem;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #FDE8A8 45%,
+    #E6C875 70%,
+    #C59B27 90%,
+    #A07B20 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.98))
+          drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95))
+          drop-shadow(0 0 40px rgba(0, 0, 0, 0.90));
+}
+
+@media (max-width: 480px) {
+  .cat-page.is-invitations-category .cat-hero-title {
+    font-size: clamp(2rem, 8.5vw, 2.85rem);
+    line-height: 1.15;
+  }
+}
+
+/* Override default gold-shimmer animation on invitations headings to prevent muddy brown wash */
+.cat-page.is-invitations-category .cat-hero-title.gold-shimmer {
+  animation: none !important;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #FDE8A8 45%,
+    #E6C875 70%,
+    #C59B27 90%,
+    #A07B20 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   3. SUBTITLES, LABELS, AND BADGES
+   Crisp, luminous champagne gold, high contrast, delicate pill.
+   ────────────────────────────────────────────────────────── */
+
+/* Hero badge */
+.cat-page.is-invitations-category .cat-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.4rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 230, 168, 0.42);
+  background: rgba(18, 15, 12, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #F8ECD1;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.75), 0 0 25px rgba(212, 175, 55, 0.14);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+/* Suppress dated dashed rings on invitations badge */
+.cat-page.is-invitations-category .cat-hero-label.kolam-ring::before,
+.cat-page.is-invitations-category .cat-hero-label.kolam-ring::after {
+  display: none !important;
+}
+
+/* Hero subtitle */
+.cat-page.is-invitations-category .cat-hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.82rem, 1.1vw, 0.96rem);
+  font-weight: 600;
+  color: #F5E6A8 !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1.35rem;
+  opacity: 1 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.98), 0 0 22px rgba(0, 0, 0, 0.95);
+}
+
+/* ──────────────────────────────────────────────────────────
+   4. BODY DESCRIPTIONS
+   Soft ivory text, line-height 1.82, max-width 700px.
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-invitations-category .cat-hero-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1.02rem, 1.22vw, 1.18rem);
+  line-height: 1.82;
+  color: #E8E5DF !important;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.75rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 0 24px rgba(0, 0, 0, 0.92);
+}
+
+/* ──────────────────────────────────────────────────────────
+   5. BREADCRUMBS
+   Razor-sharp legibility with active product in subtle gold.
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-invitations-category .cat-breadcrumb {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: transparent;
+}
+
+.cat-page.is-invitations-category .cat-breadcrumb a {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cat-page.is-invitations-category .cat-breadcrumb a:hover {
+  color: #F5E6A8;
+}
+
+.cat-page.is-invitations-category .cat-breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.cat-page.is-invitations-category .cat-breadcrumb-current {
+  color: #F5E6A8;
+  font-weight: 600;
+  text-shadow: 0 0 14px rgba(245, 230, 168, 0.35);
+}
+
+/* ──────────────────────────────────────────────────────────
+   6. DIGNIFIED / RESPECTFUL TONE GUARD
+   For solemn categories (e.g. Funeral & Memorial Stationery),
+   preserve serene silver-white and soft ivory tones (no festive gold).
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-invitations-category[data-tone='respectful'] .cat-hero-title {
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F6F6F8 30%,
+    #E2E1E6 65%,
+    #B8B6BD 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.98))
+          drop-shadow(0 6px 20px rgba(0, 0, 0, 0.95));
+}
+
+.cat-page.is-invitations-category[data-tone='respectful'] .cat-hero-subtitle {
+  color: #D4D4D8 !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.98);
+}
+
+.cat-page.is-invitations-category[data-tone='respectful'] .cat-hero-label {
+  background: rgba(24, 24, 28, 0.85) !important;
+  border-color: rgba(220, 220, 230, 0.35) !important;
+  color: #E4E4E7 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7) !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+.cat-page.is-invitations-category[data-tone='respectful'] .cat-hero-desc {
+  color: #DFDFE2 !important;
+}
+
+.cat-page.is-invitations-category[data-tone='respectful'] .cat-breadcrumb-current {
+  color: #E4E4E7 !important;
+  text-shadow: none !important;
+}
+
+/* =========================================================
+   NEXACORE ROYAL GOLD LIGHT EXPERIENCE — FLEX & BANNERS
+   Active strictly on product pages where group === 'flex'
+   ========================================================= */
+
+.cat-page.is-flex-category {
+  position: relative;
+  overflow-x: hidden;
+  background-color: #0A0A0F;
+}
+
+/* Ensure navbar & global elements remain pristine */
+.cat-page.is-flex-category > *:not(.flex-hero-fan-container):not(.flex-section-beam-container) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ──────────────────────────────────────────────────────────
+   SECTION 1 — HERO: ROYAL GOLD FAN LIGHT EFFECT & TYPOGRAPHY
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-flex-category .cat-hero {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: #0A0A0F;
+}
+
+.cat-page.is-flex-category .cat-hero > *:not(.flex-hero-fan-container) {
+  position: relative;
+  z-index: 4;
+}
+
+.cat-page.is-flex-category .flex-hero-fan-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Suppress default kolam pseudo-element background blotches */
+.cat-page.is-flex-category .kolam-hero-bg::before,
+.cat-page.is-flex-category .kolam-hero-bg::after {
+  display: none !important;
+}
+
+/* Hero Badge / Pill */
+.cat-page.is-flex-category .cat-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.45rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(245, 230, 168, 0.38);
+  background: rgba(15, 12, 20, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #F8ECD1;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.75), 0 0 25px rgba(212, 175, 55, 0.16);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+.cat-page.is-flex-category .cat-hero-label.kolam-ring::before,
+.cat-page.is-flex-category .cat-hero-label.kolam-ring::after {
+  display: none !important;
+}
+
+/* Hero Title — Commanding Scale, Playfair Display Editorial, Metallic Gold Fill */
+.cat-page.is-flex-category .cat-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4.85rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+  margin-bottom: 0.85rem;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #FDE8A8 45%,
+    #E6C875 70%,
+    #C59B27 90%,
+    #A07B20 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.98))
+          drop-shadow(0 6px 22px rgba(0, 0, 0, 0.95))
+          drop-shadow(0 0 42px rgba(0, 0, 0, 0.90));
+}
+
+@media (max-width: 480px) {
+  .cat-page.is-flex-category .cat-hero-title {
+    font-size: clamp(2rem, 8.5vw, 2.85rem);
+    line-height: 1.15;
+  }
+}
+
+.cat-page.is-flex-category .cat-hero-title.gold-shimmer {
+  animation: none !important;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #FDE8A8 45%,
+    #E6C875 70%,
+    #C59B27 90%,
+    #A07B20 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Hero Subtitle */
+.cat-page.is-flex-category .cat-hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.82rem, 1.1vw, 0.96rem);
+  font-weight: 600;
+  color: #F5E6A8 !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1.35rem;
+  opacity: 1 !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.98), 0 0 22px rgba(0, 0, 0, 0.95);
+}
+
+/* Hero Description */
+.cat-page.is-flex-category .cat-hero-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1.02rem, 1.22vw, 1.18rem);
+  line-height: 1.82;
+  color: #E8E5DF !important;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.75rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.98), 0 0 24px rgba(0, 0, 0, 0.92);
+}
+
+/* Hero Action Buttons */
+.cat-page.is-flex-category .cat-cta-primary-btn {
+  background: linear-gradient(135deg, #FDE8A8 0%, #D4AF37 50%, #B8860B 100%) !important;
+  color: #0A0A0F !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(255, 235, 170, 0.6) !important;
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35), 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.28s var(--ease-out) !important;
+}
+
+.cat-page.is-flex-category .cat-cta-primary-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 32px rgba(212, 175, 55, 0.5), 0 0 20px rgba(245, 230, 168, 0.4) !important;
+  filter: brightness(1.06) !important;
+}
+
+.cat-page.is-flex-category .cat-hero-cta-ghost {
+  border-color: rgba(245, 230, 168, 0.3) !important;
+  color: #E8E5DF !important;
+  background: rgba(15, 12, 20, 0.5) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.cat-page.is-flex-category .cat-hero-cta-ghost:hover {
+  border-color: #F5E6A8 !important;
+  color: #FFF !important;
+  background: rgba(212, 175, 55, 0.12) !important;
+}
+
+/* Breadcrumb on Flex pages */
+.cat-page.is-flex-category .cat-breadcrumb {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: transparent;
+}
+
+.cat-page.is-flex-category .cat-breadcrumb a {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cat-page.is-flex-category .cat-breadcrumb a:hover {
+  color: #F5E6A8;
+}
+
+.cat-page.is-flex-category .cat-breadcrumb-sep {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.cat-page.is-flex-category .cat-breadcrumb-current {
+  color: #F5E6A8;
+  font-weight: 600;
+  text-shadow: 0 0 14px rgba(245, 230, 168, 0.35);
+}
+
+/* ──────────────────────────────────────────────────────────
+   SECTION 2 — STYLES: CENTRAL LIGHT BEAM & NEXACORE CARDS
+   ────────────────────────────────────────────────────────── */
+
+.cat-page.is-flex-category .flex-styles-section-nexacore {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-top: clamp(5rem, 9vw, 8rem);
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore > *:not(.flex-section-beam-container) {
+  position: relative;
+  z-index: 3;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.cat-page.is-flex-category .flex-section-beam-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Section Header Typography */
+.cat-page.is-flex-category .flex-styles-section-nexacore .temple-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(22, 18, 12, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7), 0 0 15px rgba(212, 175, 55, 0.15);
+  margin-bottom: 0.85rem;
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .temple-label-text {
+  color: #F8ECD1;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.25);
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-section-sub {
+  color: #D4D0C8;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  max-width: 620px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  margin-bottom: 3.5rem;
+}
+
+/* NexaCore Style Cards — Deep obsidian charcoal surfaces, subtle depth, refined gold edges & soft lighting */
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card {
+  position: relative;
+  background: linear-gradient(
+    175deg,
+    rgba(28, 22, 14, 0.96) 0%,
+    rgba(18, 14, 9, 0.97) 50%,
+    rgba(10, 8, 6, 0.99) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-top: 1px solid rgba(255, 253, 240, 0.75);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.85rem;
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.16),
+              0 20px 48px rgba(0, 0, 0, 0.88),
+              0 0 32px rgba(212, 175, 55, 0.12),
+              inset 0 1px 0 rgba(255, 253, 240, 0.16);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.35s var(--ease-out),
+              border-color 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out);
+  overflow: hidden;
+}
+
+/* Top specular hairline streak */
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.75) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+/* Soft ambient gold top-lighting aura */
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 90px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(245, 230, 168, 0.16) 0%,
+    transparent 75%
+  );
+  pointer-events: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transition: opacity 0.35s ease;
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 230, 168, 0.65);
+  border-top-color: rgba(255, 253, 240, 0.95);
+  box-shadow: 0 0 0 1px rgba(245, 230, 168, 0.35),
+              0 28px 60px rgba(0, 0, 0, 0.92),
+              0 0 40px rgba(212, 175, 55, 0.28),
+              0 0 20px rgba(245, 230, 168, 0.16);
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card:hover::before {
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.98) 50%,
+    transparent 100%
+  );
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card:hover::after {
+  opacity: 1;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(245, 230, 168, 0.25) 0%,
+    transparent 80%
+  );
+}
+
+/* Placeholder photo container — elevated depth and clear distinction */
+.cat-page.is-flex-category .flex-styles-section-nexacore .tamil-placeholder {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 17, 12, 0.85) 0%,
+    rgba(13, 10, 7, 0.92) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.65), 0 4px 16px rgba(0, 0, 0, 0.45);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 1.5rem;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-card:hover .tamil-placeholder {
+  border-color: rgba(245, 230, 168, 0.55);
+  background: linear-gradient(
+    180deg,
+    rgba(28, 22, 14, 0.92) 0%,
+    rgba(18, 14, 9, 0.96) 100%
+  );
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.18);
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .tamil-placeholder-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .tamil-placeholder-text {
+  color: #F8ECD1;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-top: 0.5rem;
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .tamil-placeholder-sub {
+  color: rgba(212, 208, 200, 0.6);
+  font-size: var(--text-xs);
+}
+
+/* Card Title */
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-top: 0.25rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Card Description */
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-desc {
+  color: #CFCBC4;
+  font-size: 0.94rem;
+  line-height: 1.68;
+}
+
+/* Card Specs */
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-spec {
+  color: #E2DFD8;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  gap: 0.6rem;
+}
+
+.cat-page.is-flex-category .flex-styles-section-nexacore .cat-style-spec::before {
+  background: #D4AF37;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.65);
+}
+
+/* Flex category inherits master Royal Luxury Gold styling for pricing and process */
+
+/* =========================================================================
+   HORIZONX CARDS & STATIONERY — ROYAL GOLD SECTION & CARD ENHANCEMENTS
+   ========================================================================= */
+
+/* Hero Text & Accents on Cards & Stationery pages */
+.cat-page.is-cards-category .cat-hero.cards-hero-horizonx {
+  background-color: #07060A;
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-page.is-cards-category .cat-hero-title {
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 40px rgba(212, 175, 55, 0.35);
+}
+
+.cat-page.is-cards-category .cat-hero-subtitle {
+  color: #F5E6A8;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+.cat-page.is-cards-category .cat-hero-label {
+  background: rgba(22, 18, 12, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  color: #F8ECD1;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.15);
+}
+
+.cat-page.is-cards-category .cat-hero-desc {
+  color: #D4D0C8;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+}
+
+/* HorizonX Section 2 Header for Cards & Stationery */
+.cat-page.is-cards-category .cards-styles-section-horizonx {
+  position: relative;
+  background-color: #07060A;
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.25);
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-section-sub {
+  color: #D4D0C8;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  max-width: 620px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  margin-bottom: 3.5rem;
+}
+
+/* HorizonX Style Cards — Deep obsidian charcoal surfaces, subtle depth, refined gold edges & soft lighting */
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card {
+  position: relative;
+  background: linear-gradient(
+    175deg,
+    rgba(28, 22, 14, 0.96) 0%,
+    rgba(18, 14, 9, 0.97) 50%,
+    rgba(10, 8, 6, 0.99) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-top: 1px solid rgba(255, 253, 240, 0.75);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.85rem;
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.16),
+              0 20px 48px rgba(0, 0, 0, 0.88),
+              0 0 32px rgba(212, 175, 55, 0.12),
+              inset 0 1px 0 rgba(255, 253, 240, 0.16);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.35s var(--ease-out),
+              border-color 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out);
+  overflow: hidden;
+}
+
+/* Top specular hairline streak */
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.75) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+/* Soft ambient gold top-lighting aura */
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 90px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(245, 230, 168, 0.16) 0%,
+    transparent 75%
+  );
+  pointer-events: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transition: opacity 0.35s ease;
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 230, 168, 0.65);
+  border-top-color: rgba(255, 253, 240, 0.95);
+  box-shadow: 0 0 0 1px rgba(245, 230, 168, 0.35),
+              0 28px 60px rgba(0, 0, 0, 0.92),
+              0 0 40px rgba(212, 175, 55, 0.28),
+              0 0 20px rgba(245, 230, 168, 0.16);
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card:hover::before {
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.98) 50%,
+    transparent 100%
+  );
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card:hover::after {
+  opacity: 1;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(245, 230, 168, 0.25) 0%,
+    transparent 80%
+  );
+}
+
+/* Placeholder photo container */
+.cat-page.is-cards-category .cards-styles-section-horizonx .tamil-placeholder {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 17, 12, 0.85) 0%,
+    rgba(13, 10, 7, 0.92) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.65), 0 4px 16px rgba(0, 0, 0, 0.45);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 1.5rem;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-card:hover .tamil-placeholder {
+  border-color: rgba(245, 230, 168, 0.55);
+  background: linear-gradient(
+    180deg,
+    rgba(28, 22, 14, 0.92) 0%,
+    rgba(18, 14, 9, 0.96) 100%
+  );
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.18);
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .tamil-placeholder-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .tamil-placeholder-text {
+  color: #F8ECD1;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-top: 0.5rem;
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .tamil-placeholder-sub {
+  color: rgba(212, 208, 200, 0.6);
+  font-size: var(--text-xs);
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-top: 0.25rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-desc {
+  color: #CFCBC4;
+  font-size: 0.94rem;
+  line-height: 1.68;
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-spec {
+  color: #E2DFD8;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  gap: 0.6rem;
+}
+
+.cat-page.is-cards-category .cards-styles-section-horizonx .cat-style-spec::before {
+  background: #F5E6A8;
+  box-shadow: 0 0 8px rgba(245, 230, 168, 0.75);
+}
+
+/* Cards category inherits master Royal Luxury Gold styling for pricing and process */
+
+/* =========================================================================
+   BUSINESS & INSTITUTIONAL — HORIZONX DIGITAL WAVE FIELD HERO & STYLES
+   Reference: https://horizonx.so/explore/digital-wave-field-hero
+   Palette: Base #0A0A0F, Primary Gold #D4AF37, Champagne #F5E6A8, Bronze #8B6F2B
+   ========================================================================= */
+
+/* Hero Text & Accents on Business & Institutional pages */
+.cat-page.is-business-category {
+  background-color: #0A0A0F;
+}
+
+/* Suppress default kolam pseudo-element background blotches on Business pages */
+.cat-page.is-business-category .kolam-hero-bg::before,
+.cat-page.is-business-category .kolam-hero-bg::after {
+  display: none !important;
+}
+
+.cat-page.is-business-category .cat-hero.business-hero-wavefield {
+  background-color: #0A0A0F;
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cat-page.is-business-category .cat-hero > .biz-wave-field-container {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+}
+
+.cat-page.is-business-category .cat-hero > *:not(.biz-wave-field-container) {
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+.cat-page.is-business-category .cat-hero-title {
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.98), 0 0 40px rgba(212, 175, 55, 0.35);
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #F5E6A8 45%,
+    #D4AF37 75%,
+    #B38F26 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cat-page.is-business-category .cat-hero-subtitle {
+  color: #F5E6A8;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+.cat-page.is-business-category .cat-hero-label {
+  background: rgba(14, 12, 9, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.36);
+  color: #F8ECD1;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.16);
+}
+
+.cat-page.is-business-category .cat-hero-desc {
+  color: #D4D0C8;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+  max-width: 660px;
+}
+
+.cat-page.is-business-category .cat-hero-cta.cat-cta-primary-btn {
+  background: linear-gradient(135deg, #F5E6A8 0%, #D4AF37 50%, #B38F26 100%);
+  color: #0A0A0F;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35), 0 0 0 1px rgba(245, 230, 168, 0.5);
+}
+
+.cat-page.is-business-category .cat-hero-cta-ghost {
+  background: rgba(18, 15, 12, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #F5E6A8;
+}
+
+.cat-page.is-business-category .cat-hero-cta-ghost:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: #F5E6A8;
+}
+
+/* Digital Wave Field Section 2 Header for Business & Institutional */
+.cat-page.is-business-category .business-styles-section-wavefield {
+  position: relative;
+  background-color: #0A0A0F;
+}
+
+.cat-page.is-business-category .business-styles-section-wavefield .cat-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.25);
+}
+
+.cat-page.is-business-category .business-styles-section-wavefield .cat-section-sub {
+  color: #D4D0C8;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.7;
+  max-width: 620px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  margin-bottom: 3.5rem;
+}
+
+/* Business & Institutional category inherits master Royal Luxury Gold card, pricing, and process styling */
+
+/* ── Breadcrumb ── */
+.cat-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem clamp(1.5rem, 5vw, 4rem);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  border-bottom: 1px solid var(--glass-border);
+  position: relative;
+  z-index: 10;
+}
+
+.cat-breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.cat-breadcrumb a:hover     { color: var(--cat-accent, var(--gold)); }
+.cat-breadcrumb-sep         { opacity: 0.35; }
+.cat-breadcrumb-current     { color: var(--cat-accent, var(--gold)); }
+
+/* ── Political Disclaimer Banner ── */
+.cat-disclaimer {
+  margin: 0 clamp(1.5rem, 5vw, 4rem) 0;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 200, 0, 0.22);
+  background: rgba(255, 200, 0, 0.05);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  margin-top: 1rem;
+}
+
+.cat-disclaimer-icon { flex-shrink: 0; font-size: 1rem; margin-top: 0.1rem; }
+
+/* ── Hero ── */
+.cat-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(8rem, 16vw, 14rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+  overflow: hidden;
+}
+
+/* All children above the generated bg pseudos */
+.cat-hero > * { position: relative; z-index: 2; }
+
+/* Hero label badge */
+.cat-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--cat-accent, var(--gold)) 30%, transparent);
+  background: color-mix(in srgb, var(--cat-accent, var(--gold)) 7%, transparent);
+  color: var(--cat-accent, var(--gold));
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+/* Hero title */
+.cat-hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.75rem;
+}
+
+/* When gold-shimmer is applied, the gradient handles colour */
+.cat-page:not([data-tone='festive']) .cat-hero-title {
+  color: var(--text-primary);
+}
+
+.cat-hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--cat-accent, var(--gold));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  opacity: 0.85;
+}
+
+.cat-hero-desc {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+/* Hero CTA row */
+.cat-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cat-cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2.4rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FFFDF0 0%, #F5E6A8 25%, #D4AF37 70%, #B38F26 100%) !important;
+  color: #0A0A0F !important;
+  font-size: var(--text-sm);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: none;
+  transition: transform 0.25s var(--ease-out), filter 0.25s, box-shadow 0.25s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 28px rgba(212, 175, 55, 0.38);
+}
+
+.cat-cta-primary-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 38px rgba(212, 175, 55, 0.55);
+}
+
+.cat-hero-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.95rem 1.85rem;
+  border-radius: 9999px;
+  background: rgba(18, 14, 10, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #F8ECD1;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+
+.cat-hero-cta-ghost:hover {
+  border-color: rgba(245, 230, 168, 0.75);
+  background: rgba(28, 22, 15, 0.9);
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Respectful hero adjustments */
+.cat-page[data-tone='respectful'] .cat-hero-title {
+  font-weight: 500;
+  font-size: var(--text-4xl);
+  color: var(--text-secondary);
+}
+
+.cat-page[data-tone='respectful'] .cat-cta-primary-btn {
+  background: transparent;
+  border: 1px solid rgba(138, 138, 154, 0.5);
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.cat-page[data-tone='respectful'] .cat-cta-primary-btn:hover {
+  background: rgba(138, 138, 154, 0.1);
+  filter: none;
+}
+
+/* ── Toran strip below hero (festive) ── */
+.cat-toran-strip {
+  position: relative;
+  height: 56px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.cat-toran-strip .toran-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+}
+
+/* ── Section wrapper ── */
+.cat-section {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+}
+
+.cat-section-pricing { padding-top: clamp(2rem, 4vw, 4rem); }
+.cat-section-process  { padding-top: clamp(2rem, 4vw, 4rem); }
+
+/* ── Section Header Typography & Label ── */
+.cat-section-label-wrap {
+  margin-bottom: 0.85rem;
+}
+
+.cat-section .temple-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(22, 18, 12, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7), 0 0 16px rgba(212, 175, 55, 0.14);
+}
+
+.cat-section .temple-label::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 1.1em;
+  background: linear-gradient(to bottom, #F5E6A8, #D4AF37);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.cat-section .temple-label-text {
+  color: #F8ECD1;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cat-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.25);
+}
+
+.cat-page[data-tone='respectful'] .cat-section-title {
+  font-weight: 500;
+  color: #E2E1E6;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95);
+}
+
+.cat-section-sub {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: #D4D0C8;
+  max-width: 620px;
+  line-height: 1.7;
+  margin-bottom: 3.25rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+/* ── Ornamental divider wrapper ── */
+.cat-divider-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+/* ── Section 1: Styles Grid & Cards (Royal Luxury Gold across all pages) ── */
+.cat-styles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.cat-style-card {
+  position: relative;
+  background: linear-gradient(
+    175deg,
+    rgba(28, 22, 14, 0.95) 0%,
+    rgba(18, 14, 9, 0.97) 50%,
+    rgba(10, 8, 6, 0.99) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  border-top: 1px solid rgba(255, 253, 240, 0.75);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.12),
+              0 20px 48px rgba(0, 0, 0, 0.88),
+              0 0 32px rgba(212, 175, 55, 0.1),
+              inset 0 1px 0 rgba(255, 253, 240, 0.14);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: transform 0.35s var(--ease-out),
+              border-color 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out);
+  overflow: hidden;
+}
+
+/* Specular top hairline reflection streak */
+.cat-style-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.75) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+/* Ambient warm gold top aura */
+.cat-style-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 90px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(245, 230, 168, 0.18) 0%,
+    transparent 75%
+  );
+  pointer-events: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  transition: opacity 0.35s ease;
+}
+
+.cat-page:not([data-tone='respectful']) .cat-style-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 230, 168, 0.65);
+  border-top-color: rgba(255, 253, 240, 0.98);
+  box-shadow: 0 0 0 1px rgba(245, 230, 168, 0.32),
+              0 28px 60px rgba(0, 0, 0, 0.92),
+              0 0 42px rgba(212, 175, 55, 0.28),
+              0 0 20px rgba(245, 230, 168, 0.15);
+}
+
+.cat-page:not([data-tone='respectful']) .cat-style-card:hover::before {
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.98) 50%,
+    transparent 100%
+  );
+}
+
+.cat-page:not([data-tone='respectful']) .cat-style-card:hover::after {
+  opacity: 1;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(245, 230, 168, 0.25) 0%,
+    transparent 80%
+  );
+}
+
+.cat-page[data-tone='respectful'] .cat-style-card {
+  border-color: rgba(138, 138, 154, 0.35);
+  border-top-color: rgba(220, 220, 230, 0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.cat-page[data-tone='respectful'] .cat-style-card:hover {
+  border-color: rgba(180, 180, 200, 0.55);
+  transform: translateY(-6px);
+}
+
+/* Style card photo placeholder — rich obsidian mat with gold geometric borders */
+.cat-style-card .tamil-placeholder {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 17, 12, 0.9) 0%,
+    rgba(13, 10, 7, 0.95) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.45);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 1.5rem;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cat-style-card .tamil-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.cat-style-card:hover .tamil-placeholder {
+  border-color: rgba(245, 230, 168, 0.55);
+  background: linear-gradient(
+    180deg,
+    rgba(28, 22, 14, 0.94) 0%,
+    rgba(18, 14, 9, 0.97) 100%
+  );
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 22px rgba(212, 175, 55, 0.2);
+}
+
+.cat-style-card:hover .tamil-placeholder::after {
+  border-color: rgba(245, 230, 168, 0.35);
+}
+
+.cat-style-card .tamil-placeholder-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.5));
+}
+
+.cat-style-card .tamil-placeholder-text {
+  color: #F8ECD1;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  margin-top: 0.5rem;
+}
+
+.cat-style-card .tamil-placeholder-sub {
+  color: rgba(212, 208, 200, 0.65);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+}
+
+.cat-style-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-top: 0.25rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.cat-style-desc {
+  font-size: 0.94rem;
+  color: #CFCBC4;
+  line-height: 1.68;
+  flex: 1;
+}
+
+.cat-style-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.12);
+}
+
+.cat-style-spec {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #E2DFD8;
+}
+
+.cat-style-spec::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D4AF37;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.75);
+  flex-shrink: 0;
+}
+
+/* ── Section 2: Pricing Grid & Cards (Royal Luxury Gold across all pages) ── */
+.cat-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+.cat-pricing-card {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 19, 13, 0.94) 0%,
+    rgba(16, 12, 8, 0.98) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-top: 1px solid rgba(245, 230, 168, 0.45);
+  border-radius: var(--radius-lg);
+  padding: 2.35rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.8),
+              0 0 24px rgba(212, 175, 55, 0.08);
+  transition: transform 0.35s var(--ease-out),
+              border-color 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out);
+  overflow: hidden;
+}
+
+/* Specular top hairline reflection */
+.cat-pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.65) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+.cat-page:not([data-tone='respectful']) .cat-pricing-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 230, 168, 0.55);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.92),
+              0 0 38px rgba(212, 175, 55, 0.22);
+}
+
+.cat-page:not([data-tone='respectful']) .cat-pricing-card:hover::before {
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.95) 50%,
+    transparent 100%
+  );
+}
+
+/* Most popular card — highlighted gold halo */
+.cat-pricing-card.popular {
+  background: linear-gradient(
+    180deg,
+    rgba(32, 25, 16, 0.96) 0%,
+    rgba(18, 14, 9, 0.99) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-top: 1px solid rgba(255, 253, 240, 0.85);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.22),
+              0 28px 64px rgba(0, 0, 0, 0.92),
+              0 0 45px rgba(212, 175, 55, 0.25);
+}
+
+/* Gold sweep line at top of popular card */
+.cat-pricing-card.popular::before {
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #FFFDF0 25%,
+    #F5E6A8 50%,
+    #D4AF37 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(245, 230, 168, 0.8);
+}
+
+.cat-popular-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 1.05rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FFFDF0 0%, #F5E6A8 30%, #D4AF37 75%, #B38F26 100%) !important;
+  color: #0A0A0F !important;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  margin-bottom: 0.35rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), 0 0 16px rgba(212, 175, 55, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.cat-pricing-name {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.cat-pricing-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.cat-pricing-price {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #F5E6A8 48%,
+    #D4AF37 82%,
+    #AA8220 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.95))
+          drop-shadow(0 0 20px rgba(212, 175, 55, 0.22));
+}
+
+.cat-page:not([data-tone='festive']) .cat-pricing-price {
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #FFF8E7 20%,
+    #F5E6A8 48%,
+    #D4AF37 82%,
+    #AA8220 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+.cat-page[data-tone='respectful'] .cat-pricing-price {
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F6F6F8 40%,
+    #D8D6DF 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.95));
+}
+
+.cat-pricing-unit {
+  font-size: var(--text-sm);
+  color: #D4D0C8;
+  font-weight: 500;
+}
+
+.cat-pricing-minqty {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #A09D95;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.cat-pricing-features {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.16);
+  padding-top: 1.15rem;
+}
+
+.cat-pricing-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  font-size: 0.92rem;
+  color: #E2DFD8;
+}
+
+.cat-pricing-feature:last-child {
+  border-bottom: none;
+}
+
+.cat-feature-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D4AF37 !important;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.75);
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+/* ── Section 4: Process Grid & Steps (Royal Luxury Gold across all pages) ── */
+.cat-process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+.cat-process-step {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 19, 13, 0.94) 0%,
+    rgba(16, 12, 8, 0.98) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-top: 1px solid rgba(245, 230, 168, 0.45);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.75),
+              0 0 24px rgba(212, 175, 55, 0.08);
+  transition: transform 0.35s var(--ease-out),
+              border-color 0.35s var(--ease-out),
+              box-shadow 0.35s var(--ease-out);
+  overflow: hidden;
+}
+
+/* Specular top hairline reflection */
+.cat-process-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.65) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: all 0.35s ease;
+  z-index: 2;
+}
+
+.cat-page:not([data-tone='respectful']) .cat-process-step:hover {
+  transform: translateY(-8px);
+  border-color: rgba(245, 230, 168, 0.55);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.9),
+              0 0 35px rgba(212, 175, 55, 0.22);
+}
+
+.cat-page:not([data-tone='respectful']) .cat-process-step:hover::before {
+  left: 5%;
+  right: 5%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 253, 240, 0.95) 50%,
+    transparent 100%
+  );
+}
+
+.cat-page[data-tone='respectful'] .cat-process-step {
+  border-color: rgba(138, 138, 154, 0.3);
+  border-top-color: rgba(220, 220, 230, 0.45);
+}
+
+.cat-step-num {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 7vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 240, 0.7) 0%,
+    rgba(245, 230, 168, 0.48) 32%,
+    rgba(212, 175, 55, 0.3) 70%,
+    rgba(139, 111, 43, 0.12) 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  margin-bottom: 0.35rem;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.85));
+}
+
+.cat-page[data-tone='respectful'] .cat-step-num {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(180, 180, 200, 0.2) 60%,
+    rgba(138, 138, 154, 0.08) 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+.cat-step-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.cat-step-desc {
+  font-size: 0.94rem;
+  color: #CFCBC4;
+  line-height: 1.68;
+}
+
+/* ── Section 5: CTA Banner (Royal Luxury Gold across all pages) ── */
+.cat-cta {
+  margin: 0 clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    180deg,
+    rgba(26, 20, 14, 0.96) 0%,
+    rgba(16, 12, 8, 0.98) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-top: 1px solid rgba(255, 253, 240, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.92),
+              0 0 45px rgba(212, 175, 55, 0.16);
+  overflow: hidden;
+  position: relative;
+}
+
+.cat-cta-respectful {
+  border-color: rgba(138, 138, 154, 0.35);
+  border-top-color: rgba(220, 220, 230, 0.5);
+  background: linear-gradient(180deg, rgba(22, 22, 26, 0.95) 0%, rgba(14, 14, 18, 0.98) 100%);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9);
+}
+
+/* Ambient radial gold glow behind CTA content */
+.cat-page:not([data-tone='respectful']) .cat-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 260px;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(212, 175, 55, 0.18) 0%,
+    rgba(245, 230, 168, 0.06) 50%,
+    transparent 75%
+  );
+  pointer-events: none;
+}
+
+.cat-cta-toran {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  z-index: 1;
+}
+
+.cat-cta-inner {
+  padding: clamp(3.5rem, 7vw, 5.5rem) clamp(2rem, 5vw, 4rem);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.cat-cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin-bottom: 0.85rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.98), 0 0 35px rgba(212, 175, 55, 0.28);
+}
+
+.cat-page[data-tone='respectful'] .cat-cta-title {
+  font-weight: 500;
+  color: #E2E1E6;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.98);
+}
+
+.cat-cta-sub {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: #D4D0C8;
+  margin-bottom: 2.75rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.cat-cta-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Primary CTA Button — Royal Gold across all pages */
+.cat-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FFFDF0 0%, #F5E6A8 25%, #D4AF37 70%, #B38F26 100%) !important;
+  color: #0A0A0F !important;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: none;
+  transition: transform 0.25s var(--ease-out), filter 0.25s, box-shadow 0.25s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 28px rgba(212, 175, 55, 0.4);
+}
+
+.cat-cta-primary:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 38px rgba(212, 175, 55, 0.6);
+}
+
+.cat-page[data-tone='respectful'] .cat-cta-primary {
+  background: transparent !important;
+  border: 1px solid rgba(138, 138, 154, 0.5);
+  color: #E2E1E6 !important;
+  box-shadow: none;
+}
+
+.cat-page[data-tone='respectful'] .cat-cta-primary:hover {
+  background: rgba(138, 138, 154, 0.15) !important;
+  border-color: rgba(200, 200, 220, 0.7);
+}
+
+/* Secondary CTA Button — Obsidian glass with refined gold hairline */
+.cat-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
+  background: rgba(18, 14, 10, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  color: #F8ECD1;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
+}
+
+.cat-cta-secondary:hover {
+  border-color: rgba(245, 230, 168, 0.8);
+  background: rgba(28, 22, 15, 0.95);
+  color: #FFFFFF;
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.25);
+}
+
+/* ── Section 3: Order Online / Payment Section (Royal Luxury Gold across all pages) ── */
+.cat-payment-container {
+  max-width: 620px;
+  margin: 0 auto;
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 19, 13, 0.95) 0%,
+    rgba(14, 11, 8, 0.98) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-top: 1px solid rgba(255, 253, 240, 0.75);
+  border-radius: var(--radius-xl);
+  padding: 2.75rem 2.25rem;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9),
+              0 0 35px rgba(212, 175, 55, 0.14);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.cat-payment-title {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.25);
+}
+
+.cat-payment-controls {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .cat-payment-controls {
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+}
+
+.cat-payment-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cat-payment-group label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: #F8ECD1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.cat-payment-select,
+.cat-payment-input {
+  width: 100%;
+  background: rgba(10, 8, 6, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.15rem;
+  color: #F8ECD1;
+  font-size: var(--text-sm);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.cat-payment-select:focus,
+.cat-payment-input:focus {
+  outline: none;
+  border-color: #F5E6A8;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+}
+
+.cat-payment-select option {
+  background: #14110E;
+  color: #F8ECD1;
+}
+
+.cat-payment-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.35rem 1.5rem;
+  background: rgba(18, 14, 9, 0.85);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  margin-bottom: 0.5rem;
+}
+
+.cat-summary-label {
+  font-size: 0.95rem;
+  color: #D4D0C8;
+  font-weight: 500;
+}
+
+.cat-summary-val {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(
+    180deg,
+    #FFFFFF 0%,
+    #F5E6A8 40%,
+    #D4AF37 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
+}
+
+.cat-payment-container .cat-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #FFFDF0 0%, #F5E6A8 25%, #D4AF37 70%, #B38F26 100%) !important;
+  color: #0A0A0F !important;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  letter-spacing: 0.05em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 28px rgba(212, 175, 55, 0.4);
+  transition: transform 0.25s var(--ease-out), filter 0.25s, box-shadow 0.25s;
+}
+
+.cat-payment-container .cat-hero-cta:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8), 0 0 38px rgba(212, 175, 55, 0.6);
+}
+
+.cat-payment-error {
+  margin-top: 1rem;
+  padding: 0.85rem 1.15rem;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  border-radius: var(--radius-sm);
+  color: #fca5a5;
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.cat-payment-success-box {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.cat-success-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(212, 175, 55, 0.15);
+  color: #F5E6A8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+.cat-payment-success-box h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.cat-payment-success-box p {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+/* ── Fast Checkout Modal (Royal Luxury Gold) ── */
+.cat-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.cat-modal-content {
+  background: linear-gradient(
+    180deg,
+    rgba(24, 19, 13, 0.98) 0%,
+    rgba(14, 11, 8, 0.99) 100%
+  );
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-top: 1px solid rgba(255, 253, 240, 0.75);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.95), 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+.cat-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.cat-modal-sub {
+  font-size: var(--text-sm);
+  color: #D4D0C8;
+  margin-bottom: 1.5rem;
+}
+
+.cat-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cat-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cat-form-group label {
+  font-size: var(--text-sm);
+  color: #F8ECD1;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cat-form-group input {
+  width: 100%;
+  background: rgba(10, 8, 6, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  color: #F8ECD1;
+  font-size: var(--text-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cat-form-group input:focus {
+  outline: none;
+  border-color: #F5E6A8;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.3);
+}
+
+.cat-modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.cat-modal-cancel {
+  flex: 1;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(18, 14, 10, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #F8ECD1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.cat-modal-cancel:hover {
+  background: rgba(28, 22, 15, 0.95);
+  border-color: rgba(245, 230, 168, 0.6);
+}
+
+.cat-modal-submit {
+  flex: 1;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #FFFDF0 0%, #F5E6A8 25%, #D4AF37 70%, #B38F26 100%) !important;
+  border: none;
+  color: #0A0A0F !important;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.35);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.cat-modal-submit:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+.cat-modal-submit:disabled,
+.cat-modal-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── 404 Not Found ── */
+.cat-notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 4rem 2rem;
+}
+
+.cat-notfound-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cat-notfound-sub { color: var(--text-secondary); }
+
+.cat-notfound-link {
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--glass-border-strong);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  transition: border-color 0.2s;
+}
+
+.cat-notfound-link:hover { border-color: var(--gold); }
+
+/* ── Upload section ── */
+.cat-upload-section { padding-top: clamp(2rem, 4vw, 4rem); }
+
+.cat-upload-wrap {
+  max-width: 640px;
+}
+
+/* ── Responsive ──
+   3-tier: desktop (>1024) → tablet (480–768) → mobile (<480)
+
+   Note: auto-fit grids already collapse gracefully via minmax().
+   These breakpoints handle edge cases + font adjustments.
+*/
+
+/* ── Laptop / tablet (max 1024px) ── */
+@media (max-width: 1024px) {
+  .cat-styles-grid  { grid-template-columns: repeat(2, 1fr); }
+  .cat-process-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Tablet (max 768px) ── */
+@media (max-width: 768px) {
+  .cat-hero-title       { font-size: var(--text-4xl); }
+  .cat-hero-actions     { flex-direction: column; align-items: center; width: 100%; }
+  .cat-hero-actions > * { width: 100%; max-width: 360px; justify-content: center; }
+
+  .cat-styles-grid      { grid-template-columns: 1fr; }
+  .cat-pricing-grid     { grid-template-columns: 1fr; }
+  .cat-process-grid     { grid-template-columns: repeat(2, 1fr); }
+
+  .cat-cta              { margin: 0 1rem 3rem; }
+
+  .cat-upload-wrap      { max-width: 100%; }
+}
+
+/* ── Mobile (max 480px) ── */
+@media (max-width: 480px) {
+  /* Hero */
+  .cat-hero             { padding: 7rem 1rem 3rem; }
+  .cat-hero-title       { font-size: clamp(1.75rem, 9vw, 2.5rem); letter-spacing: -0.015em; }
+  .cat-hero-label       { font-size: 0.6rem; padding: 0.3rem 0.9rem; }
+  .cat-hero-desc        { font-size: 0.9rem; }
+
+  /* Grids: all 1-col on phone */
+  .cat-styles-grid,
+  .cat-pricing-grid,
+  .cat-process-grid     { grid-template-columns: 1fr; }
+
+  /* Section padding tighter */
+  .cat-section          { padding: 2.5rem 1rem; }
+  .cat-section-title    { font-size: clamp(1.5rem, 7vw, 2rem); }
+
+  /* Divider simplified */
+  .cat-divider-wrap     { padding: 0 1rem; }
+
+  /* CTA banner */
+  .cat-cta              { margin: 0 0.75rem 2.5rem; }
+  .cat-cta-inner        { padding: 2rem 1.25rem; }
+  .cat-cta-btns         { flex-direction: column; }
+  .cat-cta-btns > *     { width: 100%; justify-content: center; }
+
+  /* Pricing: full card width, price smaller */
+  .cat-pricing-price    { font-size: clamp(1.75rem, 8vw, 2.25rem); }
+
+  /* Breadcrumb: wrap gracefully */
+  .cat-breadcrumb       { flex-wrap: wrap; gap: 0.25rem; }
+
+  /* Disclaimer */
+  .cat-disclaimer       { margin: 0.75rem 0.75rem 0; }
+}
+
+/* ── prefers-reduced-motion ──
+   Suppresses all animations/transitions site-wide on this page.
+   The 'respectful' tone already disables framer-motion animations in JSX;
+   this CSS layer ensures CSS animations and transitions are also off.
+*/
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all transitions */
+  .cat-style-card,
+  .cat-pricing-card,
+  .cat-process-step,
+  .cat-cta-primary,
+  .cat-cta-secondary,
+  .cat-hero-cta-ghost,
+  .cat-cta-primary-btn  { transition: none !important; }
+
+  /* Disable hover transforms */
+  .cat-page:not([data-tone='respectful']) .cat-style-card:hover,
+  .cat-page:not([data-tone='respectful']) .cat-pricing-card:hover,
+  .cat-cta-primary:hover,
+  .cat-cta-primary-btn:hover { transform: none !important; }
+
+  /* Suppress gold shimmer animation */
+  .gold-shimmer {
+    animation: none !important;
+    background: var(--tamil-gold) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+}

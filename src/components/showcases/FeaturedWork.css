@@ -1,0 +1,719 @@
+/* =========================================================
+   FEATURED SHOWCASE — PREMIUM CINEMATIC PRINT GALLERY
+   ========================================================= */
+
+.fw3d-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(5.5rem, 8.5vw, 8rem) clamp(1.5rem, 5vw, 3rem);
+  background: #0a0a0f;
+  color: var(--text-primary, #f0ede8);
+  overflow: hidden;
+  box-sizing: border-box;
+  outline: none;
+  scroll-margin-top: 100px;
+}
+
+/* =========================================================
+   1. CINEMATIC STUDIO BACKGROUND ELEMENTS
+   ========================================================= */
+
+/* Print-inspired paper grain texture overlay (Pure SVG Data URI - zero HTTP requests) */
+.fw3d-paper-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+/* Layered studio background gradients */
+.fw3d-bg-ambient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 75% 50%, rgba(20, 18, 16, 0.8) 0%, rgba(10, 10, 15, 0.95) 75%),
+    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.025) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Radial Gold Spotlight behind the invitation card stack */
+.fw3d-radial-spotlight {
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  transform: translate(-50%, -50%);
+  width: clamp(450px, 45vw, 700px);
+  height: clamp(450px, 45vw, 700px);
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.12) 0%,
+    rgba(212, 175, 55, 0.045) 35%,
+    rgba(10, 10, 15, 0) 70%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fw3d-section.is-in-view .fw3d-radial-spotlight {
+  opacity: 1;
+}
+
+/* Restrained light sweep moving gently across the background at long intervals */
+.fw3d-bg-sweep {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    115deg,
+    transparent 42%,
+    rgba(212, 175, 55, 0.018) 48%,
+    rgba(255, 255, 255, 0.035) 50%,
+    rgba(212, 175, 55, 0.018) 52%,
+    transparent 58%
+  );
+  pointer-events: none;
+  z-index: 2;
+  animation: fwBgSweep 18s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes fwBgSweep {
+  0% {
+    transform: translate(-30%, -30%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  45% {
+    transform: translate(25%, 25%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(25%, 25%);
+    opacity: 0;
+  }
+}
+
+/* Drifting, heavily blurred gold light particles */
+.fw3d-particles-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.fw3d-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.fw3d-particle-1 {
+  top: 25%;
+  left: 65%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+  filter: blur(40px);
+  animation: fwDrift1 16s ease-in-out infinite alternate;
+}
+
+.fw3d-particle-2 {
+  top: 60%;
+  left: 80%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+  filter: blur(45px);
+  animation: fwDrift2 22s ease-in-out infinite alternate;
+}
+
+.fw3d-particle-3 {
+  top: 35%;
+  left: 15%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+  filter: blur(35px);
+  animation: fwDrift3 19s ease-in-out infinite alternate;
+}
+
+.fw3d-particle-4 {
+  top: 75%;
+  left: 30%;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
+  filter: blur(45px);
+  animation: fwDrift4 24s ease-in-out infinite alternate;
+}
+
+@keyframes fwDrift1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, 25px) scale(1.08); }
+  100% { transform: translate(25px, -20px) scale(0.95); }
+}
+
+@keyframes fwDrift2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(35px, -30px) scale(0.92); }
+  100% { transform: translate(-20px, 25px) scale(1.05); }
+}
+
+@keyframes fwDrift3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 35px) scale(1.06); }
+  100% { transform: translate(-25px, -15px) scale(0.96); }
+}
+
+@keyframes fwDrift4 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30px, -25px) scale(1.05); }
+  100% { transform: translate(20px, 20px) scale(0.94); }
+}
+
+/* =========================================================
+   2. MAIN TWO-COLUMN CONTAINER LAYOUT
+   ========================================================= */
+
+.fw3d-container {
+  position: relative;
+  max-width: var(--content-max-width, 1240px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(3rem, 6vw, 5.5rem);
+  align-items: center;
+  z-index: 5;
+}
+
+@media (min-width: 960px) {
+  .fw3d-container {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+/* =========================================================
+   3. LEFT COLUMN: EDITORIAL TYPOGRAPHY & DETAILS
+   ========================================================= */
+
+.fw3d-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 540px;
+}
+
+/* Eyebrow */
+.fw3d-eyebrow-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.fw3d-eyebrow-accent {
+  width: 24px;
+  height: 1px;
+  background: var(--gold, #d4af37);
+  box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
+}
+
+.fw3d-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--gold, #d4af37);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Editorial Headline */
+.fw3d-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.35rem, 4.4vw, 3.6rem);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  color: var(--text-primary, #f7f4ee);
+  margin: 0;
+}
+
+/* Active Design Meta Container */
+.fw3d-meta-container {
+  position: relative;
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.35rem 0;
+}
+
+.fw3d-meta {
+  position: relative;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--gold, #d4af37);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Subtle light glow on left accent border */
+.fw3d-meta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold, #d4af37), rgba(255, 255, 255, 0.9), var(--gold, #d4af37));
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+
+.fw3d-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fw3d-badge-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold, #d4af37);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.9);
+}
+
+.fw3d-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--gold, #d4af37);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.fw3d-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.55rem);
+  color: var(--text-primary, #f7f4ee);
+  letter-spacing: -0.01em;
+  margin: 0;
+  font-weight: 600;
+}
+
+.fw3d-names {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: rgba(240, 237, 232, 0.65);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Descriptive Content */
+.fw3d-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: rgba(240, 237, 232, 0.72);
+  line-height: 1.65;
+  max-width: 460px;
+  margin: 0;
+}
+
+/* Explore Link Row */
+.fw3d-cta-row {
+  margin-top: 0.5rem;
+}
+
+.fw3d-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--gold, #d4af37);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  transition: all 0.25s ease;
+}
+
+.fw3d-cta-arrow {
+  transition: transform 0.25s ease;
+}
+
+.fw3d-cta:hover {
+  border-color: var(--gold, #d4af37);
+  color: #ffffff;
+}
+
+.fw3d-cta:hover .fw3d-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   4. RIGHT COLUMN: INTERACTIVE INVITATION CARD STACK
+   ========================================================= */
+
+.fw3d-stack-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 1.5rem 0;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Ambient glow directly behind cards to separate from graphite backdrop */
+.fw3d-deck-glow {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(340px, 35vw, 440px);
+  height: clamp(440px, 45vw, 560px);
+  background: radial-gradient(
+    circle at center,
+    rgba(212, 175, 55, 0.14) 0%,
+    rgba(212, 175, 55, 0.035) 45%,
+    transparent 72%
+  );
+  filter: blur(35px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 3D Deck Container */
+.fw3d-deck {
+  position: relative;
+  width: 290px;
+  height: 415px;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  z-index: 3;
+  animation: fwDeckFloat 6.5s ease-in-out infinite;
+}
+
+@media (min-width: 520px) {
+  .fw3d-deck {
+    width: 330px;
+    height: 475px;
+  }
+}
+
+/* Gentle floating motion limited to a few pixels */
+@keyframes fwDeckFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0.4deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* Pause float on deck hover */
+.fw3d-deck.is-deck-hovered {
+  animation-play-state: paused;
+}
+
+/* =========================================================
+   5. REALISTIC PHYSICAL CARD CRAFTSMANSHIP
+   ========================================================= */
+
+.fw3d-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #141210;
+  /* Multi-stage realistic physical shadows */
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 20px 45px -10px rgba(0, 0, 0, 0.78),
+    0 40px 80px -20px rgba(0, 0, 0, 0.92),
+    0 0 35px rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  outline: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* Active top card emphasis */
+.fw3d-card.is-top-card {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.55),
+    0 24px 55px -10px rgba(0, 0, 0, 0.85),
+    0 50px 95px -20px rgba(0, 0, 0, 0.95),
+    0 0 45px rgba(212, 175, 55, 0.12);
+}
+
+.fw3d-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Archival Gold Corner Brackets for physical craft framing */
+.fw3d-card-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(212, 175, 55, 0.75);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 6;
+  transition: opacity 0.3s ease;
+}
+
+.fw3d-corner-tl {
+  top: 8px;
+  left: 8px;
+  border-width: 1px 0 0 1px;
+}
+
+.fw3d-corner-tr {
+  top: 8px;
+  right: 8px;
+  border-width: 1px 1px 0 0;
+}
+
+.fw3d-corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 1px 1px;
+}
+
+.fw3d-corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 1px 1px 0;
+}
+
+/* Surface Foil Shine Glare */
+.fw3d-foil-glare {
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    120deg,
+    transparent 38%,
+    rgba(212, 175, 55, 0.14) 46%,
+    rgba(255, 255, 255, 0.24) 50%,
+    rgba(212, 175, 55, 0.14) 54%,
+    transparent 62%
+  );
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.6;
+  transform: translateX(-40%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.fw3d-card:hover .fw3d-foil-glare {
+  transform: translateX(40%);
+  opacity: 0.9;
+}
+
+/* Realistic card bottom lighting overlay */
+.fw3d-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(14, 12, 10, 0.45) 85%,
+    rgba(10, 10, 15, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* =========================================================
+   6. CONTROLS BAR & INTERACTION CUES
+   ========================================================= */
+
+.fw3d-controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.75rem, 3vw, 2.25rem);
+  z-index: 5;
+}
+
+/* Counter Pill */
+.fw3d-counter-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.45rem 0.85rem;
+  background: rgba(18, 16, 14, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-mono);
+}
+
+.fw3d-counter-current {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold, #d4af37);
+  line-height: 1;
+}
+
+.fw3d-counter-divider {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.fw3d-counter-total {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Interactive Hint Pill */
+.fw3d-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  background: rgba(18, 16, 14, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.fw3d-hint-icon {
+  color: var(--gold, #d4af37);
+  transition: transform 0.4s ease;
+}
+
+.fw3d-hint-text {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.75);
+  font-weight: 600;
+}
+
+.fw3d-stack-wrapper:hover .fw3d-hint-pill {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--gold, #d4af37);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.25);
+}
+
+.fw3d-stack-wrapper:hover .fw3d-hint-icon {
+  transform: rotate(180deg);
+}
+
+.fw3d-stack-wrapper:hover .fw3d-hint-text {
+  color: #ffffff;
+}
+
+.fw3d-stack-wrapper:focus-visible {
+  outline: 2px solid var(--gold, #d4af37);
+  outline-offset: 8px;
+  border-radius: 16px;
+}
+
+/* =========================================================
+   7. ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .fw3d-bg-sweep,
+  .fw3d-particle-1,
+  .fw3d-particle-2,
+  .fw3d-particle-3,
+  .fw3d-particle-4,
+  .fw3d-deck {
+    animation: none !important;
+  }
+
+  .fw3d-foil-glare {
+    transition: none !important;
+  }
+}
+
+/* =========================================================
+   8. RESPONSIVE REFINEMENTS
+   ========================================================= */
+
+@media (max-width: 959px) {
+  .fw3d-info {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .fw3d-eyebrow-row {
+    justify-content: center;
+  }
+
+  .fw3d-meta-container {
+    align-items: center;
+  }
+
+  .fw3d-meta {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--gold, #d4af37);
+    padding-top: 0.75rem;
+    align-items: center;
+  }
+
+  .fw3d-meta::before {
+    display: none;
+  }
+
+  .fw3d-desc {
+    max-width: 520px;
+  }
+
+  .fw3d-radial-spotlight {
+    left: 50%;
+    top: 65%;
+  }
+}
+
+@media (max-width: 639px) {
+  .fw3d-section {
+    padding: 4.5rem 1.25rem 3.5rem;
+  }
+
+  .fw3d-deck {
+    width: 260px;
+    height: 375px;
+  }
+
+  .fw3d-deck-glow {
+    width: 280px;
+    height: 390px;
+  }
+
+  .fw3d-controls-bar {
+    margin-top: 1.25rem;
+  }
+}

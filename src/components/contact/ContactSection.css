@@ -1,153 +1,581 @@
+/* =========================================================
+   SAI MEERA — SECTION B & SECTION C: CONTACT EXPERIENCE
+   Interactive Contact Actions + Refined Information Tiles
+   ========================================================= */
+
 .contact-section {
   position: relative;
-  padding: 8rem 2rem;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  padding: clamp(5.5rem, 9vw, 8.5rem) 0;
+  background: #090807;
   overflow: hidden;
 }
 
+/* ─────────────────────────────────────────────────────────
+   1. BACKGROUND LIGHTING & SPOTLIGHTS
+   ───────────────────────────────────────────────────────── */
+
+.contact-bg-spotlight {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(550px, 70vw, 950px);
+  height: clamp(350px, 45vw, 550px);
+  background: radial-gradient(
+    ellipse 65% 50% at 50% 50%,
+    rgba(212, 175, 55, 0.09) 0%,
+    rgba(168, 85, 247, 0.04) 45%,
+    transparent 75%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  animation: contactGlowDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes contactGlowDrift {
+  0% {
+    transform: translate(-52%, -48%) scale(0.96);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-48%, -52%) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.contact-bg-radial-grid {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(9, 8, 7, 0.2) 0%,
+    rgba(9, 8, 7, 0.85) 65%,
+    #090807 100%
+  );
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   2. SECTION B: HEADING & ANIMATED ACCENT
+   ───────────────────────────────────────────────────────── */
+
 .contact-container {
-  max-width: 1200px;
+  position: relative;
+  z-index: 2;
+  max-width: var(--content-max-width, 1280px);
   margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .contact-header {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.contact-label {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--cyan);
-  font-size: 0.9rem;
-  letter-spacing: 0.1em;
-  margin-bottom: 1rem;
+.contact-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.contact-eyebrow-dash {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold, #d4af37);
+  opacity: 0.75;
+}
+
+.contact-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold, #d4af37);
+  font-weight: 600;
 }
 
 .contact-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 600;
   line-height: 1.1;
-  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  color: #f5f1e8;
+  margin-bottom: 0.9rem;
 }
+
+/* Thin Animated Gold Accent Line below Heading */
+.contact-header-accent-line {
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold, #d4af37) 50%,
+    transparent 100%
+  );
+  border-radius: 1px;
+  margin-top: 0.2rem;
+}
+
+/* ─────────────────────────────────────────────────────────
+   3. MAIN DARK-GLASS CONTACT EXPERIENCE CARD
+   ───────────────────────────────────────────────────────── */
 
 .contact-glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 24px;
-  padding: 4rem;
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  background: rgba(16, 14, 11, 0.78);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 8px;
+  padding: clamp(2.2rem, 5vw, 3.5rem) clamp(1.8rem, 4.5vw, 3.2rem);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 30px 70px rgba(0, 0, 0, 0.55),
+    0 0 50px rgba(212, 175, 55, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: clamp(2rem, 4vw, 2.75rem);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.contact-glass-card.is-hovered {
+  border-color: rgba(212, 175, 55, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 34px 80px rgba(0, 0, 0, 0.65),
+    0 0 60px rgba(212, 175, 55, 0.07);
+}
+
+/* Corner Framing Brackets */
+.contact-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.contact-corner-tl {
+  top: 10px;
+  left: 10px;
+  border-top: 1.5px solid var(--gold, #d4af37);
+  border-left: 1.5px solid var(--gold, #d4af37);
+}
+
+.contact-corner-br {
+  bottom: 10px;
+  right: 10px;
+  border-bottom: 1.5px solid var(--gold, #d4af37);
+  border-right: 1.5px solid var(--gold, #d4af37);
+}
+
+/* Cursor Interactive Spotlight */
+.contact-card-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────────────────
+   4. SECTION B: INTERACTIVE ACTIONS (WHATSAPP & UPLOAD)
+   ───────────────────────────────────────────────────────── */
+
 .contact-ctas {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .cta-button {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 2.5rem;
-  border-radius: 12px;
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  gap: 1.1rem;
+  padding: 1.15rem 1.6rem;
+  border-radius: 6px;
   text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              filter 0.25s ease;
 }
 
-.whatsapp-btn {
-  background-color: #25D366;
-  color: #ffffff;
-  border: none;
-}
-
-.whatsapp-btn:hover {
-  background-color: #1ebd5a;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
-}
-
-.upload-btn {
-  background-color: transparent;
-  color: var(--cyan);
-  border: 2px solid var(--cyan);
-}
-
-.upload-btn:hover {
-  background-color: rgba(0, 212, 255, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0, 212, 255, 0.1);
-}
-
-.contact-info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  padding-top: 4rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-}
-
-.info-icon {
+.cta-btn-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(245, 166, 35, 0.1);
-  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
 }
 
-.info-content {
+.cta-btn-text-wrap {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+
+.cta-btn-main {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.cta-btn-sub {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  opacity: 0.85;
+  line-height: 1.2;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 10px 24px rgba(34, 197, 94, 0.26);
+}
+
+.wa-icon-wrap {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 14px 34px rgba(34, 197, 94, 0.42);
+}
+
+.whatsapp-btn:hover .wa-icon {
+  animation: waBounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes waBounce {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15) rotate(-6deg); }
+}
+
+/* Upload Design Button */
+.upload-btn {
+  background: rgba(245, 241, 232, 0.06);
+  color: #f5f1e8;
+  border-color: rgba(212, 175, 55, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.upload-icon-wrap {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--gold, #d4af37);
+}
+
+.cta-btn-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.2) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.upload-btn:hover {
+  transform: translateY(-3px);
+  background: rgba(245, 241, 232, 0.09);
+  border-color: rgba(212, 175, 55, 0.48);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 14px 32px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(212, 175, 55, 0.12);
+}
+
+.upload-btn:hover .cta-btn-shimmer {
+  left: 170%;
+}
+
+.upload-btn:hover .upload-icon {
+  transform: translateY(-2px);
+}
+
+/* ─────────────────────────────────────────────────────────
+   5. GOLD DECORATIVE INNER DIVIDER
+   ───────────────────────────────────────────────────────── */
+
+.contact-card-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  opacity: 0.55;
+  margin: -0.25rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+.divider-gem {
+  width: 6px;
+  height: 6px;
+  background: var(--gold, #d4af37);
+  transform: rotate(45deg);
+  opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────────────────
+   6. SECTION C: THREE ELEGANT CONTACT TILES
+   ───────────────────────────────────────────────────────── */
+
+.contact-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-tile {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.15rem;
+  padding: 1.4rem 1.25rem;
+  background: rgba(255, 255, 255, 0.018);
+  border: 1px solid rgba(212, 175, 55, 0.11);
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.contact-tile-link {
+  cursor: pointer;
+}
+
+.contact-tile-link:hover,
+.contact-tile.hours-tile:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(212, 175, 55, 0.06);
+}
+
+/* Icon Box */
+.tile-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  background: rgba(212, 175, 55, 0.07);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold, #d4af37);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.contact-tile:hover .tile-icon-box {
+  background: rgba(212, 175, 55, 0.14);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+/* Content */
+.tile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0; /* Prevents overflow */
+  flex: 1;
+}
+
+.tile-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
-.info-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
+.tile-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--gold, #d4af37);
+  font-weight: 600;
+  opacity: 0.9;
 }
 
-.info-value {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  color: var(--text-secondary);
+.tile-ext-arrow {
+  color: rgba(212, 175, 55, 0.55);
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-@media (max-width: 900px) {
-  .contact-glass-card {
-    padding: 2rem;
-  }
-  
-  .contact-info-grid {
+.contact-tile:hover .tile-ext-arrow {
+  transform: translate(2px, -2px);
+  color: var(--gold, #d4af37);
+}
+
+.tile-value {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: #f5f1e8;
+  line-height: 1.45;
+  margin: 0;
+  word-break: break-word;
+}
+
+.email-value {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+}
+
+.tile-action-hint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: rgba(240, 237, 232, 0.5);
+  margin-top: 0.25rem;
+  transition: color 0.2s ease;
+}
+
+.contact-tile:hover .tile-action-hint {
+  color: var(--gold, #d4af37);
+}
+
+.tile-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(240, 237, 232, 0.5);
+  margin-top: 0.15rem;
+}
+
+.tile-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+/* Individual Tile Icon Hover Animations */
+.location-tile:hover .pin-icon {
+  animation: pinBounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pinBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+.email-tile:hover .mail-icon {
+  animation: mailTilt 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes mailTilt {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-8deg) scale(1.08); }
+}
+
+.hours-tile:hover .clock-icon {
+  animation: clockTick 1.2s ease-in-out infinite;
+}
+
+@keyframes clockTick {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ─────────────────────────────────────────────────────────
+   7. RESPONSIVE BREAKPOINTS
+   ───────────────────────────────────────────────────────── */
+
+@media (max-width: 950px) {
+  .contact-tiles-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 1rem;
   }
-  
+}
+
+@media (max-width: 680px) {
+  .contact-section {
+    padding: clamp(4rem, 10vw, 5.5rem) 0;
+  }
+
+  .contact-glass-card {
+    padding: 1.75rem 1.25rem;
+    gap: 1.75rem;
+  }
+
+  .contact-ctas {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
   .cta-button {
     width: 100%;
-    justify-content: center;
+    padding: 1.05rem 1.25rem;
+  }
+
+  .contact-tile {
+    padding: 1.2rem 1.1rem;
   }
 }

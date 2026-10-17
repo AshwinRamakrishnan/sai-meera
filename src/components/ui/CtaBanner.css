@@ -1,0 +1,319 @@
+/* =========================================================
+   SAI MEERA — SECTION A: "HAVE A PROJECT IN MIND?"
+   Cinematic Luxury Print Studio Project CTA
+   ========================================================= */
+
+.cta-banner {
+  position: relative;
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: #0c0a08;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 175, 55, 0.16);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+}
+
+/* Authentic Printing Plates Texture Overlay with Subtle Entry Zoom */
+.cta-banner-bg-img {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.12;
+  filter: grayscale(90%) contrast(1.15) brightness(0.65);
+  pointer-events: none;
+  transform: scale(1.0);
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
+}
+
+.cta-banner-bg-img.is-active {
+  transform: scale(1.03);
+  opacity: 0.15;
+}
+
+/* Faint Purple-and-Gold Ambient Glow */
+.cta-banner-glow {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: clamp(500px, 60vw, 850px);
+  height: 380px;
+  background: radial-gradient(
+    ellipse 65% 50% at 50% 50%,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(168, 85, 247, 0.05) 45%,
+    transparent 75%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+/* Vignette Dark Overlays */
+.cta-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(12, 10, 8, 0.45) 0%,
+    rgba(12, 10, 8, 0.88) 70%,
+    #0c0a08 100%
+  );
+  pointer-events: none;
+}
+
+/* Moving Golden Light Sweep along Border Rail */
+.cta-border-sweep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.05) 20%,
+    rgba(212, 175, 55, 0.8) 50%,
+    rgba(255, 245, 200, 0.95) 52%,
+    rgba(212, 175, 55, 0.8) 54%,
+    rgba(212, 175, 55, 0.05) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  opacity: 0.75;
+  pointer-events: none;
+  animation: ctaBorderSweep 10s ease-in-out infinite;
+}
+
+@keyframes ctaBorderSweep {
+  0% {
+    background-position: -150% 0;
+  }
+  50% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+/* Main Container */
+.cta-banner-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--content-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+/* Left Editorial Column */
+.cta-banner-left {
+  flex: 1;
+  max-width: 680px;
+}
+
+.cta-banner-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+
+.cta-eyebrow-dash {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold, #d4af37);
+  opacity: 0.75;
+}
+
+.cta-banner-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold, #d4af37);
+  font-weight: 600;
+}
+
+.cta-eyebrow-sparkle {
+  color: var(--gold, #d4af37);
+  opacity: 0.75;
+}
+
+.cta-banner-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.12;
+  color: #f5f1e8;
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+}
+
+.cta-heading-accent {
+  color: var(--gold, #d4af37);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.cta-banner-sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: rgba(240, 237, 232, 0.75);
+  line-height: 1.65;
+  max-width: 540px;
+}
+
+/* Right Actions Column */
+.cta-banner-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.15rem;
+  flex-shrink: 0;
+}
+
+/* Refined Gold Surface CTA Button */
+.cta-banner-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.1rem 2.4rem;
+  background: linear-gradient(135deg, #e5c158 0%, #d4af37 50%, #b89326 100%);
+  color: #0d0b09;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.4) inset,
+    0 8px 24px rgba(212, 175, 55, 0.28);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.25s ease;
+}
+
+.cta-btn-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.cta-banner-btn:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.05);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 14px 34px rgba(212, 175, 55, 0.42);
+}
+
+.cta-banner-btn:hover .cta-btn-shimmer {
+  left: 180%;
+}
+
+.cta-btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-btn-icon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-banner-btn:hover .cta-btn-icon {
+  transform: translateX(5px);
+}
+
+/* Secondary Action: Call Directly */
+.cta-banner-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 232, 0.65);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.cta-phone-icon {
+  color: var(--gold, #d4af37);
+  transition: transform 0.2s ease;
+}
+
+.cta-banner-phone:hover {
+  color: var(--gold, #d4af37);
+  transform: translateX(2px);
+}
+
+.cta-banner-phone:hover .cta-phone-icon {
+  transform: scale(1.15);
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE ADAPTATIONS
+   ───────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .cta-banner-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.25rem;
+  }
+
+  .cta-banner-left {
+    max-width: 100%;
+  }
+
+  .cta-banner-right {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .cta-banner {
+    padding: clamp(3.75rem, 10vw, 5rem) 0;
+  }
+
+  .cta-banner-right {
+    width: 100%;
+  }
+
+  .cta-banner-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1.05rem 1.75rem;
+  }
+
+  .cta-banner-phone {
+    justify-content: center;
+    width: 100%;
+  }
+}

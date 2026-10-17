@@ -1,0 +1,729 @@
+/* =========================================================
+   WHAT WE PRINT — CINEMATIC SPOTLIGHT SLIDER
+   ========================================================= */
+
+.wwp-section {
+  position: relative;
+  padding: clamp(5rem, 8vw, 7.5rem) 0;
+  background: #0a0a0f;
+  overflow: hidden;
+  outline: none;
+}
+
+.wwp-container {
+  max-width: var(--content-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER ROW
+   ========================================================= */
+
+.wwp-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: clamp(2.5rem, 4.5vw, 3.5rem);
+}
+
+.wwp-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.wwp-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.45rem;
+}
+
+.wwp-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.wwp-explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.35);
+  transition: border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+.wwp-explore-arrow {
+  transition: transform 0.25s ease;
+}
+
+.wwp-explore-link:hover {
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.wwp-explore-link:hover .wwp-explore-arrow {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   CINEMATIC SPOTLIGHT STAGE (ASYMMETRICAL LAYOUT)
+   ========================================================= */
+
+.wwp-spotlight-stage {
+  display: grid;
+  grid-template-columns: 1.18fr 0.82fr;
+  gap: clamp(2.5rem, 4vw, 4rem);
+  align-items: center;
+  position: relative;
+  touch-action: pan-y;
+}
+
+/* ── LEFT WING: Large Photography Frame ── */
+.wwp-visual-wing {
+  position: relative;
+  width: 100%;
+}
+
+.wwp-image-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  min-height: 420px;
+  background: #0d0c0a;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(212, 168, 67, 0.2);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  box-sizing: border-box;
+}
+
+.wwp-image-frame.is-hovered {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.9),
+    0 0 50px rgba(212, 175, 55, 0.16),
+    inset 0 1px 0 rgba(212, 168, 67, 0.45);
+}
+
+/* Dynamic Specular Gold Foil Sheen tracking Cursor */
+.wwp-cursor-specular {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.wwp-cursor-specular.is-active {
+  opacity: 1;
+}
+
+/* Interactive Drag Cue Pill on Cursor Hover */
+.wwp-drag-cue {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(14, 12, 10, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  z-index: 9;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wwp-drag-cue.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.wwp-drag-cue-icon {
+  color: var(--gold);
+}
+
+.wwp-drag-cue-text {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+/* Archival Gold Corner Brackets */
+.wwp-frame-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 10;
+  transition: border-color 0.3s ease;
+}
+
+.wwp-corner-tl {
+  top: 8px;
+  left: 8px;
+  border-top: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+}
+
+.wwp-corner-tr {
+  top: 8px;
+  right: 8px;
+  border-top: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+}
+
+.wwp-corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-bottom: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+}
+
+.wwp-corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+}
+
+/* Layer Stack for Crossfade Transitions */
+.wwp-image-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wwp-image-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92) contrast(1.08);
+}
+
+.wwp-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 15, 0.2) 0%,
+    transparent 40%,
+    rgba(10, 10, 15, 0.6) 85%,
+    rgba(10, 10, 15, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+/* Restrained Gold Light Sweep on Slide Change */
+.wwp-light-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(212, 168, 67, 0.18) 50%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 5;
+  animation: wwpSweep 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wwpSweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+/* Live Category Badge on Image */
+.wwp-image-badge {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(14, 12, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 162, 39, 0.35);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 8;
+}
+
+.wwp-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(212, 168, 67, 0.9);
+  flex-shrink: 0;
+}
+
+.wwp-badge-text {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   RIGHT WING: EDITORIAL NARRATIVE & CONTROLS
+   ========================================================= */
+
+.wwp-narrative-wing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: clamp(0.5rem, 1.5vw, 1.5rem);
+  min-height: 400px;
+}
+
+/* Meta Bar: Minimal Progress Counter & Prev/Next Buttons */
+.wwp-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 1.75rem;
+}
+
+.wwp-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  min-width: 4.8rem;
+  overflow: hidden;
+}
+
+.wwp-counter-current {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  display: inline-block;
+}
+
+.wwp-counter-divider {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.wwp-counter-total {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.wwp-nav-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.wwp-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(20, 18, 16, 0.7);
+  border: 1px solid rgba(201, 162, 39, 0.32);
+  color: var(--gold);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.wwp-nav-btn:hover {
+  background: var(--gold);
+  color: #0e0c0a;
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(212, 168, 67, 0.4);
+  transform: translateY(-1px);
+}
+
+.wwp-nav-btn:active {
+  transform: translateY(0);
+}
+
+.wwp-nav-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Narrative Body */
+.wwp-narrative-body {
+  position: relative;
+  min-height: 290px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wwp-narrative-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.wwp-narrative-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(212, 168, 67, 0.9);
+}
+
+.wwp-kicker-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.wwp-narrative-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 600;
+  color: #f7f4ee;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.wwp-narrative-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: rgba(240, 237, 232, 0.72);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 500px;
+}
+
+/* Specification Pills */
+.wwp-narrative-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.wwp-spec-pill {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: rgba(240, 237, 232, 0.8);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  padding: 0.28rem 0.65rem;
+  border-radius: 3px;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.wwp-spec-pill:hover {
+  border-color: rgba(201, 162, 39, 0.55);
+  color: #ffffff;
+}
+
+/* Action CTA */
+.wwp-narrative-cta {
+  margin-top: 0.65rem;
+}
+
+.wwp-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1.6rem;
+  border: 1px solid var(--gold);
+  background: rgba(201, 162, 39, 0.06);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.wwp-cta-icon {
+  transition: transform 0.25s ease;
+}
+
+.wwp-cta-btn:hover {
+  background: var(--gold);
+  color: #0e0c0a;
+  box-shadow: 0 0 20px rgba(212, 168, 67, 0.35);
+}
+
+.wwp-cta-btn:hover .wwp-cta-icon {
+  transform: translateX(4px);
+}
+
+/* =========================================================
+   BOTTOM INTERACTIVE 4-CATEGORY PROGRESS BAR TRACK
+   ========================================================= */
+
+.wwp-track-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.wwp-track-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  transition: opacity 0.25s ease;
+}
+
+.wwp-tab-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.wwp-tab-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(240, 237, 232, 0.35);
+  transition: color 0.25s ease;
+}
+
+.wwp-tab-name {
+  font-family: var(--font-display);
+  font-size: clamp(0.88rem, 1.1vw, 1.05rem);
+  font-weight: 500;
+  color: rgba(240, 237, 232, 0.55);
+  letter-spacing: -0.01em;
+  transition: color 0.25s ease;
+}
+
+.wwp-track-tab:hover .wwp-tab-name {
+  color: rgba(240, 237, 232, 0.85);
+}
+
+.wwp-track-tab.is-active .wwp-tab-num {
+  color: var(--gold);
+}
+
+.wwp-track-tab.is-active .wwp-tab-name {
+  color: #f7f4ee;
+  font-weight: 600;
+}
+
+.wwp-track-tab:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Continuous Progress Rail */
+.wwp-tab-progress-rail {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.wwp-tab-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(212, 168, 67, 0.6);
+}
+
+.wwp-tab-progress-fill.animating {
+  animation: wwpProgressBar linear forwards;
+}
+
+@keyframes wwpProgressBar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .wwp-spotlight-stage {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .wwp-image-frame {
+    aspect-ratio: 16 / 10;
+    min-height: 360px;
+  }
+
+  .wwp-narrative-wing {
+    padding-left: 0;
+    min-height: auto;
+  }
+
+  .wwp-narrative-body {
+    min-height: auto;
+  }
+
+  .wwp-track-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .wwp-section {
+    padding: clamp(3.5rem, 7vw, 4.5rem) 0;
+  }
+
+  .wwp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .wwp-image-frame {
+    aspect-ratio: 4 / 3;
+    min-height: 260px;
+  }
+
+  .wwp-image-badge {
+    bottom: 0.85rem;
+    left: 0.85rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .wwp-badge-text {
+    font-size: 0.52rem;
+  }
+
+  .wwp-meta-bar {
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .wwp-counter-current {
+    font-size: 1.35rem;
+  }
+
+  .wwp-narrative-title {
+    font-size: 1.65rem;
+  }
+
+  .wwp-narrative-desc {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .wwp-track-bar {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+  }
+
+  .wwp-tab-name {
+    font-size: 0.82rem;
+  }
+}
+
+/* =========================================================
+   PREFERS REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .wwp-image-media,
+  .wwp-image-layer,
+  .wwp-narrative-content,
+  .wwp-tab-progress-fill,
+  .wwp-light-sweep,
+  .wwp-cta-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

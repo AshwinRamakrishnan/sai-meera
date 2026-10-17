@@ -1,0 +1,625 @@
+/* =========================================================
+   SAI MEERA — CINEMATIC HERITAGE SECTION (TRUST & QUALITY)
+   "WHY CHOOSE SAI MEERA — Built on Craft. Delivered with Pride."
+   ========================================================= */
+
+.tq-section {
+  position: relative;
+  padding: clamp(5.5rem, 9.5vw, 9rem) 0;
+  background: #0a0a0f;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────
+   1. LAYERED CINEMATIC INDUSTRIAL PRINTING BACKGROUND
+   ───────────────────────────────────────────────────────── */
+
+/* Background Image with Slow Subtle Zoom on Viewport Entry */
+.tq-bg {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  filter: grayscale(85%) contrast(1.15) brightness(0.85);
+  pointer-events: none;
+  transform: scale(1.0);
+  transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.5s ease;
+}
+
+.tq-bg.is-active {
+  transform: scale(1.04);
+  opacity: 0.15;
+}
+
+/* Soft Golden Light Source Drifting across Printing Machinery */
+.tq-bg-gold-light {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: clamp(500px, 60vw, 850px);
+  height: clamp(350px, 45vw, 600px);
+  background: radial-gradient(
+    ellipse 60% 45% at 50% 50%,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(212, 175, 55, 0.03) 45%,
+    transparent 75%
+  );
+  filter: blur(40px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: tqMachineryLight 24s ease-in-out infinite alternate;
+}
+
+@keyframes tqMachineryLight {
+  0% {
+    transform: translate3d(-6%, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(6%, 4%, 0);
+    opacity: 0.6;
+  }
+}
+
+/* Dark Atmospheric Studio Vignette */
+.tq-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 40%,
+    rgba(10, 10, 15, 0.4) 0%,
+    rgba(10, 10, 15, 0.85) 60%,
+    #0a0a0f 100%
+  );
+  pointer-events: none;
+}
+
+/* Secondary Purple-Gold Ambient Glow on Outer Edges */
+.tq-bg-ambient-glow {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 500px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.06) 0%,
+    rgba(212, 175, 55, 0.04) 40%,
+    transparent 70%
+  );
+  filter: blur(45px);
+  pointer-events: none;
+}
+
+/* =========================================================
+   2. CONTAINER & EDITORIAL HEADING REVEAL
+   ========================================================= */
+
+.tq-container {
+  position: relative;
+  z-index: 2;
+  max-width: var(--content-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+
+.tq-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: clamp(2.75rem, 5vw, 4rem);
+  position: relative;
+}
+
+.tq-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+.tq-eyebrow-dash {
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+.tq-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.tq-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.14;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.tq-heading-line-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+.tq-heading-line {
+  display: inline-block;
+}
+
+/* Restrained Golden Light Sweep Across Heading upon Entry */
+.tq-heading-sweep {
+  position: absolute;
+  inset: -15% -20%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 48%,
+    rgba(212, 175, 55, 0.3) 52%,
+    transparent 65%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.tq-heading-sweep.is-active {
+  animation: tqHeadingSweep 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.4s;
+}
+
+@keyframes tqHeadingSweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.85;
+  }
+  60% {
+    transform: translateX(120%);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   3. FOUR INTERACTIVE HERITAGE CARDS
+   ========================================================= */
+
+.tq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .tq-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tq-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.tq-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.6rem, 2.8vw, 2.25rem);
+  background: rgba(14, 12, 10, 0.76);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 8px;
+  min-height: 270px;
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(212, 168, 67, 0.16);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.tq-card.is-hovered {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.88),
+    0 0 35px rgba(212, 175, 55, 0.14),
+    0 0 15px rgba(139, 92, 246, 0.08),
+    inset 0 1px 0 rgba(212, 168, 67, 0.4);
+}
+
+/* Archival Gold Corner Accents */
+.tq-card-corner {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.65;
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.tq-card.is-hovered .tq-card-corner {
+  opacity: 1;
+  border-color: #ffd700;
+}
+
+.tq-corner-tl {
+  top: 7px;
+  left: 7px;
+  border-top: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+}
+
+.tq-corner-br {
+  bottom: 7px;
+  right: 7px;
+  border-bottom: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+}
+
+/* Faint Golden Pointer Spotlight Following Cursor */
+.tq-card-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.tq-card.is-hovered .tq-card-spotlight {
+  opacity: 1;
+}
+
+/* Top Row: Icon & Serial Badge */
+.tq-card-top {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+
+/* Premium Icon Container */
+.tq-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 19, 16, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 10px;
+  color: var(--gold);
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.tq-card.is-hovered .tq-icon {
+  background: var(--gold);
+  color: #0e0c0a;
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.45);
+}
+
+/* Serial Badge */
+.tq-card-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.tq-card-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(212, 175, 55, 0.7);
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.tq-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  margin-top: 0.3rem;
+  transition: color 0.3s ease;
+}
+
+.tq-card.is-hovered .tq-card-tag {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Content Area */
+.tq-card-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.tq-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.3rem);
+  font-weight: 600;
+  color: #f7f4ee;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.tq-card.is-hovered .tq-title {
+  color: #fff;
+}
+
+.tq-desc {
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  color: var(--text-secondary);
+  line-height: 1.68;
+  margin: 0;
+}
+
+/* Bottom Gold Edge Accent */
+.tq-card-bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.45) 50%,
+    transparent 100%
+  );
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.tq-card.is-hovered .tq-card-bottom-line {
+  opacity: 1;
+}
+
+/* =========================================================
+   4. LIVING ICON HOVER ANIMATIONS
+   ========================================================= */
+
+/* 1. Clock: Subtle Rhythmic Ticking Rotation */
+.tq-icon-clock svg {
+  transform-origin: center center;
+  transition: transform 0.25s ease;
+}
+
+.tq-card:hover .tq-icon-clock svg {
+  animation: tqClockTick 2.2s ease-in-out infinite;
+}
+
+@keyframes tqClockTick {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-14deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* 2. Cog: Slow Restrained Mechanical Rotation */
+.tq-icon-cog svg {
+  transform-origin: center center;
+  transition: transform 0.25s ease;
+}
+
+.tq-card:hover .tq-icon-cog svg {
+  animation: tqCogSpin 3.5s linear infinite;
+}
+
+@keyframes tqCogSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+/* 3. Leaf: Gentle Floating & Flutter */
+.tq-icon-leaf svg {
+  transform-origin: center bottom;
+  transition: transform 0.25s ease;
+}
+
+.tq-card:hover .tq-icon-leaf svg {
+  animation: tqLeafFloat 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes tqLeafFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(6deg);
+  }
+  100% {
+    transform: translateY(-5px) rotate(-4deg);
+  }
+}
+
+/* 4. Package: Small Perspective Lift */
+.tq-icon-package svg {
+  transform-origin: center center;
+  transition: transform 0.25s ease;
+}
+
+.tq-card:hover .tq-icon-package svg {
+  animation: tqPackageLift 2s ease-in-out infinite alternate;
+}
+
+@keyframes tqPackageLift {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.08);
+  }
+}
+
+/* =========================================================
+   5. HERITAGE GOLD LIGHT TRAIL ACROSS LOWER EDGE
+   ========================================================= */
+
+.tq-gold-trail-rail {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  margin-top: clamp(2rem, 3.5vw, 3rem);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.tq-gold-trail-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.8) 50%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+  opacity: 0;
+}
+
+.tq-gold-trail-glow.is-active {
+  animation: tqGoldTrailTravel 8s ease-in-out infinite alternate;
+}
+
+@keyframes tqGoldTrailTravel {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(400%);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   6. RESPONSIVE DESIGN & ACCESSIBILITY
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .tq-card {
+    min-height: 240px;
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .tq-section {
+    padding: clamp(4rem, 8vw, 5rem) 0;
+  }
+
+  .tq-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .tq-card {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+
+  .tq-card-top {
+    margin-bottom: 1.25rem;
+  }
+
+  .tq-title {
+    font-size: 1.15rem;
+  }
+
+  .tq-desc {
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .tq-bg,
+  .tq-bg-gold-light,
+  .tq-heading-sweep,
+  .tq-gold-trail-glow,
+  .tq-icon-clock svg,
+  .tq-icon-cog svg,
+  .tq-icon-leaf svg,
+  .tq-icon-package svg {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .tq-card {
+    transform: none !important;
+    transition: none !important;
+  }
+}

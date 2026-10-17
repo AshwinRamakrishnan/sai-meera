@@ -25,16 +25,16 @@ export default function FlexBannerOutput({ scrollRatio = 0 }) {
     
     // Add decorative elements
     tctx.fillStyle = '#00e5ff';
-    tctx.font = 'bold 42px Arial';
+    tctx.font = 'bold 42px "Times New Roman", Times, serif';
     tctx.textAlign = 'center';
     tctx.fillText('GRAND OPENING', 256, 90);
     
     tctx.fillStyle = '#ff006e';
-    tctx.font = 'bold 28px Arial';
+    tctx.font = 'bold 28px "Times New Roman", Times, serif';
     tctx.fillText('★ MEGA EVENT ★', 256, 140);
     
     tctx.fillStyle = '#ffe600';
-    tctx.font = '18px Arial';
+    tctx.font = '18px "Times New Roman", Times, serif';
     tctx.fillText('Saturday · 15 June · 10 AM', 256, 190);
     
     // CMYK accent bars

@@ -1,91 +1,199 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import BackgroundGrid from './BackgroundGrid';
-import HeroParticles from './HeroParticles';
+import { Link } from 'react-router-dom';
 import './HeroSection.css';
+import heroImg from '../../assets/hero_printing_press.png';
+import HeroParticles from './HeroParticles';
 
 const HeroSection = () => {
-  const stats = [
-    { value: '1962', label: 'Founded' },
-    { value: '60+', label: 'Years Legacy' },
-    { value: '3.2m', label: 'Print Width' },
-    { value: '1440', label: 'DPI Precision' }
-  ];
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.8, ease: [0.21, 1.11, 0.81, 0.99] }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { duration: 1, ease: 'easeOut', delay: 0.6 }
-    }
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
   };
 
   return (
     <section className="hero-section">
-      <BackgroundGrid />
+      {/* Cinematic Golden Ambient Lighting Backdrop */}
+      <div className="hero-ambient-glow" aria-hidden="true" />
+
+      {/* Floating Gold Particles System */}
       <HeroParticles />
-      
-      <div className="hero-content-wrapper">
-        <motion.div 
-          className="hero-left"
+
+      <div className="hero-grid">
+
+        {/* =========================================
+            LEFT — TEXT CONTENT
+           ========================================= */}
+
+        <motion.div
+          className="hero-text-col"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div className="hero-label" variants={itemVariants}>
-            // INDUSTRIAL PRINTING EXCELLENCE
+
+          {/* EST. 1962 */}
+          <motion.div
+            className="hero-est-label"
+            variants={itemVariants}
+          >
+            <span className="hero-est-rule"></span>
+            <span>EST. 1962</span>
           </motion.div>
-          
-          <motion.h1 className="hero-heading" variants={itemVariants}>
-            <span className="hero-heading-line1">Sai Meera</span>
-            <span className="hero-heading-line2">Legacy Printing</span>
+
+
+          {/* HERO HEADLINE */}
+          <motion.h1
+            className="hero-heading"
+            variants={itemVariants}
+          >
+            <span className="hero-heading-white">
+              PRINTING
+            </span>
+
+            <span className="hero-heading-white">
+              THAT
+            </span>
+
+            <span className="hero-heading-gold">
+              LEAVES A
+            </span>
+
+            <span className="hero-heading-gold">
+              MARK.
+            </span>
           </motion.h1>
-          
-          <motion.p className="hero-description" variants={itemVariants}>
-            A 60+ year industrial printing institution built on heritage, craftsmanship, and cinematic precision. From traditional offset to large-format flex — every machine tells a story.
+
+
+          {/* DESCRIPTION */}
+          <motion.p
+            className="hero-description"
+            variants={itemVariants}
+          >
+            From premium invitations to large-format industrial
+            production — precision printed for businesses, brands
+            and celebrations.
           </motion.p>
-          
-          <motion.div className="hero-cta-group" variants={itemVariants}>
-            <button className="hero-btn hero-btn-outline">Explore Legacy</button>
-            <button className="hero-btn hero-btn-filled">Launch Production</button>
+
+
+          {/* CTA BUTTONS */}
+          <motion.div
+            className="hero-cta-row"
+            variants={itemVariants}
+          >
+
+            <a
+              href="#machines-strip"
+              className="hero-btn-primary"
+            >
+              EXPLORE OUR WORK
+              <span className="hero-btn-arrow">→</span>
+            </a>
+
+            <Link
+              to="/contact"
+              className="hero-btn-outline"
+            >
+              GET A QUOTE
+            </Link>
+
           </motion.div>
+
+
+          {/* STATS */}
+          <motion.div
+            className="hero-stats-strip"
+            variants={itemVariants}
+          >
+
+            <span className="hero-stat">
+              EST. 1962
+            </span>
+
+            <span className="hero-stat-dot">
+              •
+            </span>
+
+            <span className="hero-stat">
+              60+ YEARS OF CRAFT
+            </span>
+
+            <span className="hero-stat-dot">
+              •
+            </span>
+
+            <span className="hero-stat">
+              3.2M PRINT WIDTH
+            </span>
+
+            <span className="hero-stat-dot">
+              •
+            </span>
+
+            <span className="hero-stat">
+              1440 DPI PRECISION
+            </span>
+
+          </motion.div>
+
         </motion.div>
-        
-        <motion.div 
-          className="hero-right"
-          variants={cardVariants}
-          initial="hidden"
-          animate="visible"
+
+
+        {/* =========================================
+            RIGHT — MACHINE IMAGE
+           ========================================= */}
+
+        <motion.div
+          className="hero-image-col"
+          initial={{
+            opacity: 0,
+            x: 40,
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+          }}
+          transition={{
+            duration: 1.2,
+            ease: [0.16, 1, 0.3, 1],
+            delay: 0.3,
+          }}
         >
-          <div className="hero-stats-card">
-            <div className="hero-stats-grid">
-              {stats.map((stat, index) => (
-                <div key={index} className="hero-stat-item">
-                  <div className="hero-stat-value">{stat.value}</div>
-                  <div className="hero-stat-label">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Subtle cinematic golden backlight aura & glint */}
+          <div className="hero-machine-aura" aria-hidden="true" />
+          <div className="hero-machine-sparkle" aria-hidden="true" />
+
+          <img
+            src={heroImg}
+            alt="Sai Meera Industrial Printing Machine"
+            className="hero-machine-img"
+          />
+
         </motion.div>
+
       </div>
     </section>
   );

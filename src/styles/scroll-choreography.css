@@ -1,0 +1,50 @@
+/**
+ * scroll-choreography.css
+ * Phase 5 — Initial states for GSAP ScrollTrigger animation targets.
+ *
+ * Elements that will be animated in by useScrollChoreography start invisible.
+ * GSAP will set opacity:1 and reset transforms when the ScrollTrigger fires.
+ *
+ * IMPORTANT: These initial states are ONLY applied when JS is enabled and
+ * the element is in the DOM. The `will-change` hints avoid paint-on-scroll.
+ *
+ * prefers-reduced-motion: skips GSAP entirely (see useScrollChoreography),
+ * so we also reset these initial states here to avoid invisible elements.
+ */
+
+/* ── HUD overlay panels — start invisible, GSAP slides them in ── */
+.hudLeft,
+.hudRight,
+.statusIndicator,
+.badge {
+  will-change: transform, opacity;
+}
+
+/* ── Gold dividers — start collapsed, GSAP scales them in ── */
+.gold-divider {
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* ── Spec badges — GSAP staggers them in ── */
+.specBadge {
+  will-change: transform, opacity;
+}
+
+/* ────────────────────────────────────────────
+   prefers-reduced-motion safety net:
+   If GSAP was skipped, these elements must be
+   fully visible (GSAP won't animate them in).
+──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hudLeft,
+  .hudRight,
+  .statusIndicator,
+  .badge,
+  .specBadge,
+  .gold-divider {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}

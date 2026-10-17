@@ -1,0 +1,156 @@
+/* ==========================================================================
+   BUSINESS & INSTITUTIONAL — HORIZONX DIGITAL WAVE FIELD HERO CSS
+   Reference: https://horizonx.so/explore/digital-wave-field-hero
+   Palette: Base #0A0A0F, Primary Gold #D4AF37, Champagne #F5E6A8, Bronze #8B6F2B
+   ========================================================================== */
+
+.biz-wave-field-container {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  pointer-events: auto !important;
+  z-index: 1 !important;
+  background-color: #0a0a0f !important;
+  user-select: none;
+}
+
+/* ── Interactive 2D Canvas ── */
+.biz-wave-field-canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  z-index: 1;
+}
+
+/* ── Radial Obsidian Text Protection Vignette ── */
+.biz-wave-field-vignette {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 50%,
+    rgba(10, 10, 15, 0.72) 0%,
+    rgba(10, 10, 15, 0.38) 45%,
+    rgba(10, 10, 15, 0.05) 75%,
+    transparent 100%
+  );
+}
+
+/* ── Architectural Frame Corner Crosshairs (+) ── */
+.biz-frame-corner {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 300;
+  color: rgba(212, 175, 55, 0.45);
+}
+
+.biz-frame-corner--tl { top: 22px; left: 24px; }
+.biz-frame-corner--tr { top: 22px; right: 24px; }
+.biz-frame-corner--bl { bottom: 22px; left: 24px; }
+.biz-frame-corner--br { bottom: 22px; right: 24px; }
+
+/* ── Top Meta Bar ── */
+.biz-field-top-meta {
+  position: absolute;
+  top: 26px;
+  left: 48px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 4;
+  pointer-events: none;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(245, 230, 168, 0.6);
+  text-transform: uppercase;
+}
+
+.biz-meta-tag {
+  color: rgba(212, 175, 55, 0.85);
+  font-weight: 600;
+}
+
+/* ── Bottom Coordinates Strip ── */
+.biz-field-bottom-meta {
+  position: absolute;
+  bottom: 22px;
+  left: 48px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 4;
+  pointer-events: none;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(245, 230, 168, 0.5);
+  text-transform: uppercase;
+}
+
+.biz-meta-coords {
+  color: rgba(212, 175, 55, 0.75);
+}
+
+.biz-meta-hint {
+  color: rgba(240, 237, 232, 0.45);
+  font-style: italic;
+}
+
+.biz-meta-exp {
+  color: rgba(212, 175, 55, 0.65);
+}
+
+/* ── Responsive Mobile & Tablet Rules ── */
+@media (max-width: 768px) {
+  .biz-field-top-meta,
+  .biz-field-bottom-meta {
+    left: 20px;
+    right: 20px;
+    font-size: 9px;
+  }
+  .biz-meta-hint {
+    display: none;
+  }
+  .biz-frame-corner {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .biz-field-top-meta {
+    top: 14px;
+    left: 16px;
+    right: 16px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    justify-content: center;
+  }
+  .biz-field-bottom-meta {
+    bottom: 12px;
+    left: 16px;
+    right: 16px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    justify-content: center;
+  }
+  .biz-meta-exp {
+    display: none;
+  }
+}

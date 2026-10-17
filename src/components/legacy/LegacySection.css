@@ -1,68 +1,381 @@
+/* =========================================================
+   LEGACY SECTION — LIVING ARCHIVE (1962 TO TODAY)
+   ========================================================= */
+
 .legacy-section {
-  padding: 6rem 1rem;
-  background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(10, 10, 15, 0.95) 100%);
   position: relative;
+  padding: clamp(5rem, 10vw, 9rem) 0;
+  background: var(--bg-secondary);
   overflow: hidden;
 }
 
+/* Background texture image */
+.legacy-texture {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.07;
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+.legacy-texture-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, transparent 60%, var(--bg-secondary) 100%);
+  pointer-events: none;
+}
+
 .legacy-container {
-  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+  max-width: var(--content-max-width);
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-}
-
-.legacy-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.legacy-label {
-  display: block;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--cyan);
-  font-size: 0.875rem;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
-
-.legacy-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  color: white;
-  line-height: 1.2;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.legacy-content {
-  display: flex;
-  flex-direction: column;
-  gap: 6rem;
-}
-
-.legacy-middle-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
   align-items: center;
 }
 
-@media (min-width: 992px) {
-  .legacy-middle-row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+@media (min-width: 900px) {
+  .legacy-container {
+    grid-template-columns: 5fr 7fr;
+    gap: 5rem;
   }
-  
-  .legacy-experience {
-    flex: 1;
+}
+
+/* =========================================================
+   PHOTO COLUMN — ARCHIVAL LIVING FRAME
+   ========================================================= */
+
+.legacy-photo-col {
+  position: relative;
+}
+
+.legacy-photo-frame {
+  position: relative;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* 4 Delicate Archival Gold Corner Brackets */
+.legacy-corner-bracket {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.legacy-corner-tl {
+  top: 0;
+  left: 0;
+  border-top: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+  filter: drop-shadow(0 0 3px rgba(212, 168, 67, 0.4));
+}
+
+.legacy-corner-tr {
+  top: 0;
+  right: 0;
+  border-top: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+  filter: drop-shadow(0 0 3px rgba(212, 168, 67, 0.4));
+}
+
+.legacy-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1.5px solid var(--gold);
+  border-left: 1.5px solid var(--gold);
+  filter: drop-shadow(0 0 3px rgba(212, 168, 67, 0.4));
+}
+
+.legacy-corner-br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1.5px solid var(--gold);
+  border-right: 1.5px solid var(--gold);
+  filter: drop-shadow(0 0 3px rgba(212, 168, 67, 0.4));
+}
+
+/* Delicate Hairline Outer Frame */
+.legacy-frame-border {
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(201, 162, 39, 0.22);
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* Archival Photograph Container */
+.legacy-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  max-height: 560px;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(80%) contrast(1.1);
+  overflow: hidden;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+}
+
+.legacy-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 18, 16, 0.72) 0%,
+    rgba(20, 18, 16, 0.12) 60%,
+    transparent 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Subtle Slow Gold Specular Light Sweep across Photo */
+.legacy-photo-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 36%,
+    rgba(212, 168, 67, 0.03) 43%,
+    rgba(245, 215, 130, 0.15) 50%,
+    rgba(212, 168, 67, 0.03) 57%,
+    transparent 64%,
+    transparent 100%
+  );
+  transform: translateX(-160%);
+  animation: photoLightSweep 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 2s;
+}
+
+@keyframes photoLightSweep {
+  0% {
+    transform: translateX(-160%);
+    opacity: 0;
   }
-  
-  .legacy-core {
-    flex: 0 0 300px;
-    display: flex;
-    justify-content: center;
+  6% {
+    opacity: 1;
+  }
+  28% {
+    transform: translateX(160%);
+    opacity: 1;
+  }
+  29%, 100% {
+    transform: translateX(160%);
+    opacity: 0;
+  }
+}
+
+/* 1962 Founded Badge */
+.legacy-photo-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: rgba(14, 12, 10, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 162, 39, 0.42);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(212, 168, 67, 0.25);
+  padding: 0.75rem 1.15rem;
+  z-index: 5;
+}
+
+.lpb-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.lpb-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.18rem;
+}
+
+/* =========================================================
+   TEXT COLUMN
+   ========================================================= */
+
+.legacy-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.legacy-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.legacy-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.legacy-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.legacy-body {
+  font-family: var(--font-body);
+  font-size: clamp(0.92rem, 1.2vw, 1.02rem);
+  line-height: 1.85;
+  color: var(--text-secondary);
+  max-width: 500px;
+}
+
+/* =========================================================
+   THREE PILLARS — CONNECTING GOLD AXIS
+   ========================================================= */
+
+.legacy-pillars {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.65rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: 1.75rem;
+  padding-left: 1.5rem;
+}
+
+.legacy-pillar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Continuous Vertical Gold Accent Axis between pillars */
+.legacy-pillar:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 9px;
+  bottom: -1.65rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(212, 168, 67, 0.8) 0%,
+    rgba(212, 168, 67, 0.4) 50%,
+    rgba(212, 168, 67, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+.lp-indicator {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 0.35rem;
+}
+
+/* Small gold node pip on the vertical connecting axis */
+.lp-pip {
+  position: absolute;
+  left: -1.5rem;
+  top: 50%;
+  transform: translate(-3px, -50%);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 6px rgba(212, 168, 67, 0.7);
+}
+
+.lp-rule {
+  width: 26px;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0.85;
+}
+
+.lp-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 600;
+}
+
+.lp-desc {
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RESPONSIVE & ACCESSIBILITY
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .legacy-pillars {
+    gap: 1.35rem;
+    padding-left: 1.25rem;
+  }
+
+  .legacy-pillar:not(:last-child)::after {
+    left: -1.25rem;
+    bottom: -1.35rem;
+  }
+
+  .lp-pip {
+    left: -1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legacy-photo-shimmer {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .legacy-photo-col,
+  .legacy-photo,
+  .legacy-photo-badge,
+  .legacy-pillar {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
   }
 }
