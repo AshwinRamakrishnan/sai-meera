@@ -198,7 +198,7 @@ const ContactSection = () => {
                 </p>
                 <span className="tile-subtext">Sunday: Closed</span>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

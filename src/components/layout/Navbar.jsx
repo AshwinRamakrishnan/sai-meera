@@ -62,6 +62,10 @@ const Navbar = () => {
     group.items.some((item) => location.pathname.startsWith(item.to))
   );
 
+  const isServicesActive = PRINT_SERVICES_MENU.some((group) =>
+    group.items.some((item) => location.pathname.startsWith(item.to))
+  );
+
   return (
     <nav
       className={`navbar ${scrolled ? 'scrolled' : ''} ${mobileMenuOpen ? 'menu-open' : ''}`}

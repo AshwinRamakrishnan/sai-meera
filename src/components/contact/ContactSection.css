@@ -4,6 +4,8 @@
    ========================================================= */
 
 .contact-section {
+  padding: var(--space-32) var(--space-6);
+  background: var(--bg-primary);
   position: relative;
   padding: clamp(5.5rem, 9vw, 8.5rem) 0;
   background: #090807;

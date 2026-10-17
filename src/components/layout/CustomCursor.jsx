@@ -79,7 +79,44 @@ const CustomCursor = () => {
       document.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseout', onMouseOut);
     };
-  }, []);
+  }, [cursorX, cursorY]);
+
+  if (isTouch) return null;
+
+  // Variants for the outer ring
+  const ringVariants = {
+    default: {
+      width: 40,
+      height: 40,
+      x: "-50%",
+      y: "-50%",
+      backgroundColor: "transparent",
+      borderColor: "rgba(255, 255, 255, 0.4)",
+    },
+    hover: {
+      width: 60,
+      height: 60,
+      x: "-50%",
+      y: "-50%",
+      backgroundColor: "rgba(255, 255, 255, 1)",
+      borderColor: "transparent",
+      mixBlendMode: "difference"
+    }
+  };
+
+  // Variants for the inner dot
+  const dotVariants = {
+    default: {
+      x: "-50%",
+      y: "-50%",
+      opacity: 1
+    },
+    hover: {
+      x: "-50%",
+      y: "-50%",
+      opacity: 0 // Hide inner dot when hovering to let ring become solid
+    }
+  };
 
   if (isTouch) return null;
 

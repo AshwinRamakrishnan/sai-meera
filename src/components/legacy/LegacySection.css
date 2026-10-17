@@ -37,6 +37,14 @@
   grid-template-columns: 1fr;
   gap: 3.5rem;
   align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+  margin-top: 0.5rem;
 }
 
 @media (min-width: 900px) {
